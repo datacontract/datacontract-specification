@@ -65,7 +65,6 @@ tags:
 links:
   schema: https://catalog.example.com/search/search-queries
   catalog: https://catalog.example.com/search/search-queries
-  name: link
 custom:
   iamRole: serviceAccount:marketing-data-consumer@example-prod-data.iam.gserviceaccount.com
 ```
