@@ -15,7 +15,7 @@ Example
 dataContractSpecification: 0.0.1
 info:
   id: 640864de-83d4-4619-afba-ccea8037ed3a
-  status: accepted
+  status: approved
   startDate: 2023-04-01
   endDate:
   noticePeriod: P3M
