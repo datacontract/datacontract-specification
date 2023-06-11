@@ -47,7 +47,11 @@ schema:
         type: string
         format: date-time
       customer:
-        $ref: '#/components/schemas/Address'
+        $ref: '#/components/schemas/Customer'
+      line_items:
+        type: array
+        items:
+          $ref: '#/components/schemas/LineItems'        
 serviceLevelAgreements:
   intervalOfChange: Continuous streaming
   latency: < 60 seconds
