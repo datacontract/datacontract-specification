@@ -85,3 +85,7 @@ custom:
   iamRole: serviceAccount:marketing-data-consumer@example-prod-data.iam.gserviceaccount.com
 ```
 
+
+License
+---
+[MIT License](LICENSE)
