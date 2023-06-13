@@ -39,21 +39,35 @@ terms:
   usage: Max queries per minute: 10, Max data processing per day: 1 TiB
   limitations:
   costs: $500 per month
-schema:
-  Order:
-    type: table
-    properties:
-      order_id:
-        type: string
-      order_timestamp:
-        type: string
-        format: date-time
-      customer:
-        $ref: '#/components/schemas/Customer'
-      line_items:
-        type: array
-        items:
-          $ref: '#/components/schemas/LineItems'        
+model:
+  specification: dbt  # the format of the model specification: dbt, jsonschema, protobuf, paypal
+  description: The subset of the output port's data model that we agree to use
+  tables:
+    - name: orders
+      description: >
+        One record per order. Includes cancelled and deleted orders.
+      columns:
+        - name: order_id
+          type: string
+          description: Primary key of the orders table
+          tests:
+            - unique
+            - not_null
+        - name: order_timestamp
+          type: timestamptz
+          description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
+          tests:
+            - not_null
+    - name: line_items
+      description: >
+        The items that are part of an order
+      columns:
+        - name: lines_item_id
+          type: string
+          description: Primary key of the lines_item_id table
+        - name: order_id
+          type: string
+          description: Foreign key to the orders table
 serviceLevelAgreements:
   intervalOfChange: Continuous streaming
   latency: < 60 seconds
