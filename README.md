@@ -37,8 +37,8 @@ consumer:
 terms:
   purpose: "Funnel analysis to understand user behaviors throughout the customer journey and identify conversion problems."
   usage: "Max queries per minute: 10, Max data processing per day: 1 TiB"
-  billing: "$500 per month"
   limitations:
+  billing: "$500 per month"
 schema:
   specification: dbt_v2  # the format of the model specification: dbt, jsonschema, protobuf, paypal
   description: The subset of the output port's data model that we agree to use
