@@ -23,23 +23,23 @@ info:
   noticePeriod: P3M
   nextReassessmentDate: 2024-04-01
 provider:
-  teamId: 6409a881-90c9-4fbb-8c89-d629e7c45e90
+  teamId: checkout
   teamName: Checkout
-  dataProductId: 9be77c17-cda8-4b80-b6c6-cc00062b5686
+  dataProductId: orders
   dataProductName: Orders
-  outputPortId: a2197ee5-e0e9-45f8-b111-3138b59ad350
+  outputPortId: bigquery_orders_latest_pii_v1
   outputPortName: bigquery_orders_latest_pii_v1
 consumer:
-  teamId: 9c721368-a61f-4a0d-b729-d00e4629a425
+  teamId: marketing
   teamName: Marketing
-  dataProductId: 20e28cca-28a8-4991-88c6-64d443cbb797
+  dataProductId: funnel_analytics
   dataProductName: Funnel Analytics
 terms:
   purpose: Funnel analysis to understand user behaviors throughout the customer journey and identify conversion problems.
-  usage: Max queries per minute: 10, Max data processing per day: 1 TiB
+  usage: "Max queries per minute: 10, Max data processing per day: 1 TiB"
+  billing: $500 per month
   limitations:
-  costs: $500 per month
-model:
+schema:
   specification: dbt  # the format of the model specification: dbt, jsonschema, protobuf, paypal
   description: The subset of the output port's data model that we agree to use
   tables:
