@@ -35,14 +35,14 @@ consumer:
   dataProductId: funnel_analytics
   dataProductName: Funnel Analytics
 terms:
-  purpose: Funnel analysis to understand user behaviors throughout the customer journey and identify conversion problems.
+  purpose: "Funnel analysis to understand user behaviors throughout the customer journey and identify conversion problems."
   usage: "Max queries per minute: 10, Max data processing per day: 1 TiB"
-  billing: $500 per month
+  billing: "$500 per month"
   limitations:
 schema:
-  specification: dbt  # the format of the model specification: dbt, jsonschema, protobuf, paypal
+  specification: dbt_v2  # the format of the model specification: dbt, jsonschema, protobuf, paypal
   description: The subset of the output port's data model that we agree to use
-  tables:
+  models:
     - name: orders
       description: >
         One record per order. Includes cancelled and deleted orders.
