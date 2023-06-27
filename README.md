@@ -40,7 +40,8 @@ terms:
   limitations:
   billing: "$500 per month"
 schema:
-  specification: dbt_v2  # the format of the model specification: dbt, jsonschema, protobuf, paypal
+  specification: dbt  # the specification format: dbt, jsonschema, protobuf, paypal
+  version: 2          # the version of the specification
   description: The subset of the output port's data model that we agree to use
   models:
     - name: orders
