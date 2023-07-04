@@ -86,6 +86,9 @@ custom:
   iamRole: serviceAccount:marketing-data-consumer@example-prod-data.iam.gserviceaccount.com
 ```
 
+Tooling
+---
+- [Data Mesh Manager](https://www.datamesh-manager.com/) supports the data contract specification and allows the user to import or export data contracts using this specification. The lifecycle, including an approval flow, of those data contracts can be managed within the tool as well.
 
 License
 ---
