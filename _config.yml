@@ -1,2 +1,4 @@
+plugins:
+  - jekyll-sitemap
 name: Data Contract Specification
 title: null
