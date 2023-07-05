@@ -7,37 +7,53 @@ info:
   noticePeriod: P3M
   nextReassessmentDate: 2024-04-01
 provider:
-  teamId: 6409a881-90c9-4fbb-8c89-d629e7c45e90
+  teamId: checkout
   teamName: Checkout
-  dataProductId: 9be77c17-cda8-4b80-b6c6-cc00062b5686
+  dataProductId: orders
   dataProductName: Orders
-  outputPortId: a2197ee5-e0e9-45f8-b111-3138b59ad350
+  outputPortId: bigquery_orders_latest_pii_v1
   outputPortName: bigquery_orders_latest_pii_v1
 consumer:
-  teamId: 9c721368-a61f-4a0d-b729-d00e4629a425
+  teamId: marketing
   teamName: Marketing
-  dataProductId: 20e28cca-28a8-4991-88c6-64d443cbb797
+  dataProductId: funnel_analytics
   dataProductName: Funnel Analytics
 terms:
-  purpose: Funnel analysis to understand user behaviors throughout the customer journey and identify conversion problems.
-  usage: Max queries per minute: 10, Max data processing per day: 1 TiB
+  purpose: "Funnel analysis to understand user behaviors throughout the customer journey and identify conversion problems."
+  usage: "Max queries per minute: 10, Max data processing per day: 1 TiB"
   limitations:
-  costs: $500 per month
+  billing: "$500 per month"
 schema:
-  Order:
-    type: table
-    properties:
-      order_id:
-        type: string
-      order_timestamp:
-        type: string
-        format: date-time
-      customer:
-        $ref: '#/components/schemas/Customer'
-      line_items:
-        type: array
-        items:
-          $ref: '#/components/schemas/LineItems'        
+  type: dbt  # the specification format: dbt, jsonschema, protobuf, paypal
+  specification:
+    version: 2          # the version of the specification
+    description: The subset of the output port's data model that we agree to use
+    models:
+      - name: orders
+        description: >
+          One record per order. Includes cancelled and deleted orders.
+        columns:
+          - name: order_id
+            type: string
+            description: Primary key of the orders table
+            tests:
+              - unique
+              - not_null
+          - name: order_timestamp
+            type: timestamptz
+            description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
+            tests:
+              - not_null
+      - name: line_items
+        description: >
+          The items that are part of an order
+        columns:
+          - name: lines_item_id
+            type: string
+            description: Primary key of the lines_item_id table
+          - name: order_id
+            type: string
+            description: Foreign key to the orders table
 serviceLevelAgreements:
   intervalOfChange: Continuous streaming
   latency: < 60 seconds
@@ -47,7 +63,7 @@ serviceLevelAgreements:
   performance: Query all orders of last 12 months < 30 seconds
   dataVolume: 5,000-10,000 orders per day expected, ~50 KiB / order
 tags:
-- business-critical
+  - business-critical
 links:
   schema: https://catalog.example.com/search/search-queries
   catalog: https://catalog.example.com/search/search-queries
