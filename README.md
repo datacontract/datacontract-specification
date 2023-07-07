@@ -1,6 +1,6 @@
 # Data Contract Specification
 
-The Data Contract Specification is an open initiative to define a common data contract format for further automation and quality testing.
+The Data Contract Specification is an open initiative to define a common data contract format for further automation and quality testing. 
 
 The specification is based on [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html).
 
@@ -12,6 +12,8 @@ Version
 
 Example
 ---
+
+You can use this example as a data contract template for your own data contracts.
 
 ```yaml
 dataContractSpecification: 0.0.1
@@ -86,6 +88,10 @@ links:
 custom:
   iamRole: serviceAccount:marketing-data-consumer@example-prod-data.iam.gserviceaccount.com
 ```
+
+Template
+---
+We're currently working on providing a template to help you fill out the data contract specification. Stay tuned! 
 
 Tooling
 ---
