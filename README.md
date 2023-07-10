@@ -1,8 +1,13 @@
 # Data Contract Specification
 
-The Data Contract Specification is an open initiative to define a common data contract format for further automation and quality testing. It can be used on its own, or in combination with the [Data Product Specification](https://dataproduct-specification.com).
+The Data Contract Specification is an open initiative to define a common data contract format.
+It can be used on its own, or in combination with the [Data Product Specification](https://dataproduct-specification.com).
+
+A [data contract](https://www.datamesh-manager.com/learn/what-is-a-data-contract) is a formal agreement between two parties (the data product provider and the data product consumer) to use a data product. It specifies the guarantees about a provided data set, the purpose of data usage, and costs. Data contracts have a lifecycle to allow the evolution of data products, and they can be used to automate setting of permissions or monitoring data quality via tests.
 
 The specification is based on [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html).
+
+
 
 
 Version
