@@ -78,7 +78,7 @@ schema:
             type: string
             description: Foreign key to the orders table
 tags:
-- business-critical
+  - business-critical
 links:
   schema: https://catalog.example.com/search/search-queries
   catalog: https://catalog.example.com/search/search-queries
