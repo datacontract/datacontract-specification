@@ -47,7 +47,7 @@ terms:
   limitations:
   billing: "$500 per month"
 schema:
-  type: dbt  # the specification format: dbt, jsonschema, protobuf, paypal
+  type: dbt  # the specification format: dbt, bigquery, jsonschema, openapi, protobuf, paypal, custom
   specification:
     version: 2          # the version of the specification
     description: The subset of the output port's data model that we agree to use
@@ -74,17 +74,9 @@ schema:
           - name: lines_item_id
             type: string
             description: Primary key of the lines_item_id table
-          - name: order_id
+          - name: order_id`
             type: string
             description: Foreign key to the orders table
-serviceLevelAgreements:
-  intervalOfChange: Continuous streaming
-  latency: < 60 seconds
-  completeness: All orders since 2020-01-01T00:00:00Z
-  freshness: Near real time, max. 60 seconds delay
-  availability: 99.9%
-  performance: Query all orders of last 12 months < 30 seconds
-  dataVolume: 5,000-10,000 orders per day expected, ~50 KiB / order
 tags:
 - business-critical
 links:
@@ -94,9 +86,143 @@ custom:
   iamRole: serviceAccount:marketing-data-consumer@example-prod-data.iam.gserviceaccount.com
 ```
 
-Template
+Schema
 ---
-We're currently working on providing a template to help you fill out the data contract specification. Stay tuned! 
+
+### Data Contract Object
+
+This is the root document.
+
+| Field | Type                                                                | Description                                                                     |
+| ----- |---------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| dataContractSpecification | string                                                              | REQUIRED. Specifies the Data Contract Specification being used.                 |
+| info | [Info Object](#info-object)                                         | REQUIRED. Specifies the metadata of the data contract.                          |
+| provider | [Provider Object](#provider-object)                                 | REQUIRED. Specifies the data product provider                                   |
+| consumer | [Consumer Object](#consumer-object)                                 | REQUIRED. Specifies the data product consumer                                   |
+| terms | [Terms Object](#terms-object)                                       | REQUIRED. Specifies the terms and conditions of the data contract.              |
+| schema | [Schema Object](#schema-object)                                     | Specifies the data contract schema. The spcification supports different schemas. |
+| tags | [string]                                                            | Specifies the tags of the data contract.                                        |
+| links | [Links Object](#links-object)                                       | Specifies further links of the data contract.                                   |
+| custom | [Custom Object](#custom-object)                                     | Specifies custom fields of the data contract.                                   |
+
+### Info Object
+
+Metadata and life cycle information about the data contract.
+
+| Field | Type                                                                | Description                                                                                                                                     |
+| ----- |---------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| id | string                                                              | REQUIRED. The unique identifier of the data contract.                                                                                           |
+| status | string                                                           | The status of the data contract. Typical values are:                   `draft`, `requested`, `approved`, `rejected`, `canceled`                 |
+| startDate | string                                                       | The start date of the data contract. May be in the future.                                                                                      |
+| endDate | string                                                         | The end date of the data contract. Will be set, when a data contract is canceled.                                                               |
+| noticePeriod | string                                                  | The period of time that must be given by either party to terminate or modify the contract.                                                      |
+| nextReassessmentDate | string                                         | The date when the data contract will be reassessed by both parties to evaluate the frequency, value, feedback, and further ideas on data usage. |
+
+### Provider Object
+
+Information about the data product provider.
+
+| Field | Type                                                                | Description                                                                                                                                    |
+| ----- |---------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| teamId | string                                                              | REQUIRED. The unique identifier of the team that provides the data product.                                                                    |
+| teamName | string                                                            | The name of the team that provides the data product.                                                                                |
+| dataProductId | string                                                   | REQUIRED. The unique identifier of the data product.                                                                                            |
+| dataProductName | string                                                 | The name of the data product.                                                                                                                   |
+| outputPortId | string                                                     | REQUIRED. The unique identifier of the output port.                                                                          |
+| outputPortName | string                                                   | The name of the output port.                                                                                                                     |
+
+### Consumer Object
+
+Information about the data product consumer.
+
+| Field | Type                                                                | Description                                                                 |
+| ----- |---------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| teamId | string                                                              | REQUIRED. The unique identifier of the team that consumes the data product. |
+| teamName | string                                                            | The name of the team that consumes the data product.                        |
+| dataProductId | string                                                   | The unique identifier of the data product where the data is processed.      |
+| dataProductName | string                                                 | The name of the data product where the data is processed.                   |
+
+
+### Terms Object
+
+The terms and conditions of the data contract.
+
+| Field | Type                                                                                                                                          | Description                                                                                                                                  |
+| ----- |-----------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| purpose | string                                                                                                                                        | REQUIRED. The purpose describes the reason and the context on why the consumer wants to consume the data.                                    |
+| usage | string                                                                                                                                        | The usage describes the way the data is used, such as how often it is queried.                                                               |
+| limitations | string                                                                                                                                        | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may be used for.    |
+| billing | string                                                                                                                                        | The billing describes the pricing model for using the data product, such as whether it's free, having a monthly fee, or metered pay-per-use. |
+
+
+
+### Schema Object
+
+The schema of the data contract that the provider and consumer agree to use. 
+Can be a subset of the schema of the output port.
+As the type of the output port depends on the data platform, multiple schema specifications are supported.
+
+A schema may define a single table, a collection of tables as a dataset, or any arbitrary structure.
+
+Some schema types, such as `dbt`, also support defining tests and additional metadata.
+
+It is best practice to use a schema specification that can be directly imported to and exported from the data platform for automated data contract testing.
+
+
+| Field | Type                                                                                                   | Description                                                                                                                          |
+| ----- |--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| type | string                                                                                                 | REQUIRED. The type of the schema.<br> Typical values are: `dbt`, `bigquery`, `jsonschema`, `openapi`, `protobuf`, `paypal`, `custom` |
+| specification | [dbt Schema Object](#dbt-schema-object) \| [BigQuery Schema Object](#bigquery-schema-object) \| string | REQUIRED. The specification of the schema. The schema specification can be encoded as a string or as native yaml.                    |
+
+
+#### dbt Schema Object
+
+Example:
+
+```yaml
+version: 2
+models:
+  - name: "My Table"
+    description: "My description"
+    config:
+      materialized: table
+    columns:
+      - name: "My column"
+        data_type: text
+        description: "My description"
+        tests:
+          - dbt_expectations.expect_column_to_exist
+          - not_null
+```
+
+
+
+### Links Object
+
+Links can be added as key-value pairs.
+
+Example:
+
+```yaml
+links:
+  schema: https://schema.example.com/search/search-queries
+  catalog: https://catalog.example.com/search/search-queries
+```
+
+### Custom Object
+
+Custom information can be added as kay-value pairs.
+
+Example:
+
+```yaml
+custom:
+  iamRole: serviceAccount:marketing-data-consumer@example-prod-data.iam.gserviceaccount.com
+```
+
+
+
+
 
 Tooling
 ---
