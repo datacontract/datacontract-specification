@@ -1,11 +1,11 @@
 # Data Contract Specification
 
-The Data Contract Specification is an open initiative to define a common data contract format.
+The Data Contract Specification is an open initiative to define a common data contract format. Think of an [OpenAPI specification](https://www.openapis.org/), but for data.
 It can be used on its own, or in combination with the [Data Product Specification](https://dataproduct-specification.com).
 
 A [data contract](https://www.datamesh-manager.com/learn/what-is-a-data-contract) is a formal agreement between two parties (the data product provider and the data product consumer) to use a data product. It specifies the guarantees about a provided data set, the purpose of data usage, and costs. Data contracts have a lifecycle to allow the evolution of data products, and they can be used to automate setting of permissions or monitoring data quality via tests.
 
-The specification is based on [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html).
+The specification is inspired by [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html). It aims to be technology-agnostic.
 
 
 
@@ -24,11 +24,10 @@ You can use this example as a data contract template for your own data contracts
 dataContractSpecification: 0.0.1
 info:
   id: 640864de-83d4-4619-afba-ccea8037ed3a
+  purpose: "Funnel analysis to understand user behaviors throughout the customer journey and identify conversion problems."
   status: approved
   startDate: 2023-04-01
   endDate:
-  noticePeriod: P3M
-  nextReassessmentDate: 2024-04-01
 provider:
   teamId: checkout
   teamName: Checkout
@@ -42,10 +41,11 @@ consumer:
   dataProductId: funnel_analytics
   dataProductName: Funnel Analytics
 terms:
-  purpose: "Funnel analysis to understand user behaviors throughout the customer journey and identify conversion problems."
   usage: "Max queries per minute: 10, Max data processing per day: 1 TiB"
-  limitations:
+  limitations: "Data may not be used to contact customers directly."
   billing: "$500 per month"
+  noticePeriod: P3M
+  individualAgreements: ""
 schema:
   type: dbt  # the specification format: dbt, bigquery, jsonschema, openapi, protobuf, paypal, custom
   specification:
@@ -109,14 +109,13 @@ This is the root document.
 
 Metadata and life cycle information about the data contract.
 
-| Field | Type                                                                | Description                                                                                                                                     |
-| ----- |---------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| id | string                                                              | REQUIRED. The unique identifier of the data contract.                                                                                           |
-| status | string                                                           | The status of the data contract. Typical values are:                   `draft`, `requested`, `approved`, `rejected`, `canceled`                 |
-| startDate | string                                                       | The start date of the data contract. May be in the future.                                                                                      |
-| endDate | string                                                         | The end date of the data contract. Will be set, when a data contract is canceled.                                                               |
-| noticePeriod | string                                                  | The period of time that must be given by either party to terminate or modify the contract.                                                      |
-| nextReassessmentDate | string                                         | The date when the data contract will be reassessed by both parties to evaluate the frequency, value, feedback, and further ideas on data usage. |
+| Field | Type                                                                | Description                                                                                                                     |
+| ----- |---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| id | string                                                              | REQUIRED. The unique identifier of the data contract.                                                                           |
+| purpose | string                                                                                                                                        | The purpose describes the reason and the context on why the consumer wants to consume the data.                                 |
+| status | string                                                           | The status of the data contract. Typical values are:                   `draft`, `requested`, `approved`, `rejected`, `canceled` |
+| startDate | string                                                       | The start date of the data contract. May be in the future.                                                                      |
+| endDate | string                                                         | The end date of the data contract. Will be set, when a data contract is canceled.                                               |
 
 ### Provider Object
 
@@ -147,13 +146,13 @@ Information about the data product consumer.
 
 The terms and conditions of the data contract.
 
-| Field | Type                                                                                                                                          | Description                                                                                                                                  |
-| ----- |-----------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| purpose | string                                                                                                                                        | REQUIRED. The purpose describes the reason and the context on why the consumer wants to consume the data.                                    |
-| usage | string                                                                                                                                        | The usage describes the way the data is used, such as how often it is queried.                                                               |
-| limitations | string                                                                                                                                        | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may be used for.    |
-| billing | string                                                                                                                                        | The billing describes the pricing model for using the data product, such as whether it's free, having a monthly fee, or metered pay-per-use. |
-
+| Field                | Type   | Description                                                                                                                                                       |
+|----------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| usage                | string | The usage describes the way the data is used, such as how often it is queried.                                                                                    |
+| limitations          | string | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may be used for.                         |
+| billing              | string | The billing describes the pricing model for using the data product, such as whether it's free, having a monthly fee, or metered pay-per-use.                      |
+| noticePeriod         | string | The period of time that must be given by either party to terminate or modify the contract. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
+| individualAgreements | string | Any additional individual agreements between the provider and the consumer.                                                                                       |
 
 
 ### Schema Object
