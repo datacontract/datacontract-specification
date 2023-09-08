@@ -1,0 +1,73 @@
+<mxfile host="Electron" modified="2023-09-08T13:50:52.594Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="Y9j61UFXR4vMs9jo8IZR" version="21.6.8" type="device">
+  <diagram name="Page-1" id="rw52iN3RI7_N-30Trffw">
+    <mxGraphModel dx="1242" dy="878" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="P9Cuz6y3WnPzD-2V-0nz-7" value="" style="endArrow=oval;html=1;rounded=0;strokeWidth=3;endFill=1;endSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="P9Cuz6y3WnPzD-2V-0nz-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="303.5" y="243.5" as="sourcePoint" />
+            <mxPoint x="353.5" y="244" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="P9Cuz6y3WnPzD-2V-0nz-8" value="" style="endArrow=halfCircle;html=1;rounded=0;strokeWidth=3;endFill=0;endSize=12;" parent="1" source="P9Cuz6y3WnPzD-2V-0nz-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="503.5" y="240" as="sourcePoint" />
+            <mxPoint x="353.5" y="244" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wAe5mO1efpd-HIfeOpRS-3" value="&lt;b&gt;Output Port&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Verdana;" parent="1" vertex="1">
+          <mxGeometry x="311.5" y="260" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pzRm4fmMa1G69j8GTkhN-1" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="311.5" y="30" width="100" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="P9Cuz6y3WnPzD-2V-0nz-18" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;i&gt;defines interface&lt;/i&gt;&lt;/font&gt;" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" parent="pzRm4fmMa1G69j8GTkhN-1" source="P9Cuz6y3WnPzD-2V-0nz-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="44" y="190" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="P9Cuz6y3WnPzD-2V-0nz-9" value="" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.document;" parent="pzRm4fmMa1G69j8GTkhN-1" vertex="1">
+          <mxGeometry x="15.5" y="30" width="57" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="wAe5mO1efpd-HIfeOpRS-2" value="&lt;b&gt;Data Contract&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Verdana;" parent="pzRm4fmMa1G69j8GTkhN-1" vertex="1">
+          <mxGeometry x="-10" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pzRm4fmMa1G69j8GTkhN-2" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="593.5" y="180" width="170" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="P9Cuz6y3WnPzD-2V-0nz-10" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn0.iconfinder.com/data/icons/phosphor-thin-vol-3/256/hexagon-thin-128.png;sketch=1;curveFitting=1;jiggle=2;" parent="pzRm4fmMa1G69j8GTkhN-2" vertex="1">
+          <mxGeometry x="16" width="128" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="P9Cuz6y3WnPzD-2V-0nz-16" value="&lt;b&gt;Consuming Data Product&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Verdana;" parent="pzRm4fmMa1G69j8GTkhN-2" vertex="1">
+          <mxGeometry x="-5" y="120" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pzRm4fmMa1G69j8GTkhN-3" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="93.5" y="180" width="153" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="P9Cuz6y3WnPzD-2V-0nz-1" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn0.iconfinder.com/data/icons/phosphor-thin-vol-3/256/hexagon-thin-128.png;sketch=1;curveFitting=1;jiggle=2;" parent="pzRm4fmMa1G69j8GTkhN-3" vertex="1">
+          <mxGeometry x="10" width="128" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="P9Cuz6y3WnPzD-2V-0nz-15" value="&lt;b&gt;Providing Data Product&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Verdana;" parent="pzRm4fmMa1G69j8GTkhN-3" vertex="1">
+          <mxGeometry x="-7.5" y="120" width="163" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pzRm4fmMa1G69j8GTkhN-8" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="392.5" y="250" width="160" height="218" as="geometry" />
+        </mxCell>
+        <mxCell id="pzRm4fmMa1G69j8GTkhN-5" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;i&gt;defines usage&lt;/i&gt;&lt;/font&gt;" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="pzRm4fmMa1G69j8GTkhN-8" source="pzRm4fmMa1G69j8GTkhN-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="75" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pzRm4fmMa1G69j8GTkhN-6" value="" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.document;container=0;" vertex="1" parent="pzRm4fmMa1G69j8GTkhN-8">
+          <mxGeometry x="46.5" y="140" width="57" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="pzRm4fmMa1G69j8GTkhN-7" value="&lt;b&gt;Data Usage Agreement&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Verdana;" vertex="1" parent="pzRm4fmMa1G69j8GTkhN-8">
+          <mxGeometry x="-5" y="110" width="160" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -12,6 +12,8 @@ A data contract comes into play when data is exchanged between different teams o
 
 _Note: The term "data contract" thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. The term "contract" may be somewhat misleading, but it is how it is used in practice. The mutual agreement between data provider and data consumer is the "data usage agreement"._
 
+![data_contract_data_usage_agreement.drawio.png](images%2Fdata_contract_data_usage_agreement.drawio.png)
+
 The specification is inspired by [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html) and follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) conventions.
 
 
