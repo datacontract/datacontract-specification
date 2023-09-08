@@ -1,18 +1,20 @@
 # Data Contract Specification
 
-The Data Contract Specification is an open initiative to define a common data contract format. Think of an [OpenAPI specification](https://www.openapis.org/), but for data. 
+The Data Contract Specification is an open initiative to define a common data contract format. Think of an [OpenAPI specification](https://www.openapis.org/), but for data sets. 
 
-A data contract defines the terms, schema, semantics, and quality attributes for exchanging data between a data provider and their consumers.
-
-A data consumer concludes a Data Usage Agreement with the data provider based on a specific data contract version.
-
-A data contract comes into play when data is exchanged between different teams or organizational units, such as in a decentralized data mesh architecture. A formal data contract specification can act as the basis for automation, such as testing, monitoring, access control, and computational governance policies. A data contract can also be used as a collaboration tool for data providers and consumers to discuss requirements and make assumptions explicit.
+![data_contract_data_usage_agreement.drawio.png](images/data_contract_data_usage_agreement.drawio.png)
 
 
+A data contract defines the syntax, semantics, quality attributes, and terms of use for exchanging data between a data provider and their consumers. A data contract can be implemented by a data product's output port. Data contracts can also be used for the input port to specify the expectations of data dependencies .
 
-_Note: The term "data contract" thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. The term "contract" may be somewhat misleading, but it is how it is used in practice. The mutual agreement between data provider and data consumer is the "data usage agreement"._
+A data consumer concludes a _Data Usage Agreement_ with the data provider referring a specific data contract version. Data Usage Agreements have a defined lifecycle and help the data provider to track who accesses their data and for which purposes.
 
-![data_contract_data_usage_agreement.drawio.png](images%2Fdata_contract_data_usage_agreement.drawio.png)
+A data contract comes into play when data is exchanged between different teams or organizational units, such as in a decentralized data mesh architecture. A formal data contract specification, defined in YAML, can act as the basis for automation, testing, monitoring, access control, and computational governance policies. A data contract can also be used as a collaboration tool for data providers and consumers to discuss data requirements and make assumptions explicit.
+
+
+
+_Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. The term "contract" may be somewhat misleading, but it is how it is used in practice. The mutual agreement between data provider and data consumer is the "data usage agreement"._
+
 
 The specification is inspired by [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html) and follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) conventions.
 
@@ -151,7 +153,6 @@ This is the root document.
 | dataContractSpecification | string                                                              | REQUIRED. Specifies the Data Contract Specification being used.                 |
 | info | [Info Object](#info-object)                                         | REQUIRED. Specifies the metadata of the data contract.                          |
 | provider | [Provider Object](#provider-object)                                 | REQUIRED. Specifies the data product provider                                   |
-| consumer | [Consumer Object](#consumer-object)                                 | REQUIRED. Specifies the data product consumer                                   |
 | terms | [Terms Object](#terms-object)                                       | REQUIRED. Specifies the terms and conditions of the data contract.              |
 | schema | [Schema Object](#schema-object)                                     | Specifies the data contract schema. The spcification supports different schemas. |
 | tags | [string]                                                            | Specifies the tags of the data contract.                                        |
@@ -165,10 +166,7 @@ Metadata and life cycle information about the data contract.
 | Field | Type                                                                | Description                                                                                                                     |
 | ----- |---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | id | string                                                              | REQUIRED. The unique identifier of the data contract.                                                                           |
-| purpose | string                                                                                                                                        | The purpose describes the reason and the context on why the consumer wants to consume the data.                                 |
 | status | string                                                           | The status of the data contract. Typical values are:                   `draft`, `requested`, `approved`, `rejected`, `canceled` |
-| startDate | string                                                       | The start date of the data contract. May be in the future.                                                                      |
-| endDate | string                                                         | The end date of the data contract. Will be set, when a data contract is canceled.                                               |
 
 ### Provider Object
 
@@ -272,6 +270,14 @@ custom:
   iamRole: serviceAccount:marketing-data-consumer@example-prod-data.iam.gserviceaccount.com
 ```
 
+Data Usage Agreement
+===
+
+| Field | Type                                                                | Description                                                                 |
+| ----- |---------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| purpose | string                                                                                                                                        | The purpose describes the reason and the context on why the consumer wants to consume the data.                                 |
+| startDate | string                                                       | The start date of the data contract. May be in the future.                                                                      |
+| endDate | string                                                         | The end date of the data contract. Will be set, when a data contract is canceled.                                               |
 
 
 
