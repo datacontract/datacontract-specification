@@ -5,11 +5,13 @@ The Data Contract Specification is an open initiative to define a common data co
 ![data_contract_data_usage_agreement.drawio.png](images/data_contract_data_usage_agreement.drawio.png)
 
 
-A data contract defines the syntax, semantics, quality attributes, and terms of use for exchanging data between a data provider and their consumers. A data contract can be implemented by a data product's output port. Data contracts can also be used for the input port to specify the expectations of data dependencies .
+A _data contract_ defines the syntax, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. A data contract can be implemented by a data product's output port. Data contracts can also be used for the input port to specify the expectations of data dependencies.
 
-A data consumer concludes a _Data Usage Agreement_ with the data provider referring a specific data contract version. Data Usage Agreements have a defined lifecycle and help the data provider to track who accesses their data and for which purposes.
+A _data contract specification_ defines a YAML structure (that may also be rendered as JSON). It is data platform neutral, but existing well-known standards can be used to express schemas (e.g., JSON Schema, dbt models, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL Queries) to avoid unnecessary abstractions.
 
-A data contract comes into play when data is exchanged between different teams or organizational units, such as in a decentralized data mesh architecture. A formal data contract specification, defined in YAML, can act as the basis for automation, testing, monitoring, access control, and computational governance policies. A data contract can also be used as a collaboration tool for data providers and consumers to discuss data requirements and make assumptions explicit.
+A data consumer concludes a _data usage agreement_ with the data provider referring a specific data contract version. Data usage agreements have a defined lifecycle and help the data provider to track who accesses their data and for which purposes.
+
+Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). The formal data contract can act as the basis for automation, testing, monitoring, access control, and computational governance policies. A data contract can also be used as a collaboration tool for data providers and consumers to discuss data requirements and make assumptions explicit.
 
 
 
@@ -28,11 +30,10 @@ Version
 Example
 ---
 
-You can use this example as a data contract template for your own data contracts.
 
 ```yaml
 dataContractSpecification: 0.0.1
-id: 640864de-83d4-4619-afba-ccea8037ed3a
+id: https://demo.datamesh-manager.com/acme/datacontracts/orders-latest-npii/1.0.0
 info:
   title: Orders Latest NPII
   version: 1.0.0
@@ -52,6 +53,15 @@ provider: #TBD
 servers: # TBD
   - url: jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=MyBigQueryProject;OAuthType=1;
     description: Production
+#  production:
+#    host: https://www.googleapis.com/bigquery/v2
+#    project: acme_orders_prod
+#    database: orders
+#    dataset: bigquery_orders_latest_npii_v1
+#    description: RabbitMQ broker for the production environment.
+#    tags:
+#      - name: "env:production"
+#        description: "This environment is the live environment available for final users."
 terms:
   usage: >
     Data can be used for reports, analytics and machine learning use cases.
@@ -61,10 +71,10 @@ terms:
     Data may not be used to identify individual customers.
   quota: >
     Max data processing per day: 10 TiB
-  billing: # string or complex
+  billing: # TODO string or complex ?
     amount: 5000
     currency: USD
-    unit: month
+    unit: month  # Chrono units (month, day, second) or usage units (gigabyte, megabyte)
   noticePeriod: P3M
 schema:
   type: dbt  # the specification format: dbt, bigquery, jsonschema, avro, protobuf, sql, custom
@@ -87,6 +97,11 @@ schema:
             description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
             tests:
               - not_null
+          - name: order_total
+            data_type: integer
+            description: "Total amount of the order in the smallest monetary unit (e.g., cents)."
+            tests:
+              - not_null
       - name: line_items
         description: >
           The items that are part of an order
@@ -104,6 +119,35 @@ schema:
           - name: sku
             type: string
             description: The purchased article number
+examples:  # TBD samples, sampleData, examples
+  - type: csv
+    model: orders
+    data: |-
+      order_id,order_timestamp,order_total
+      "1001","2023-09-09T08:30:00Z",2500
+      "1002","2023-09-08T15:45:00Z",1800
+      "1003","2023-09-07T12:15:00Z",3200
+      "1004","2023-09-06T19:20:00Z",1500
+      "1005","2023-09-05T10:10:00Z",4200
+      "1006","2023-09-04T14:55:00Z",2800
+      "1007","2023-09-03T21:05:00Z",1900
+      "1008","2023-09-02T17:40:00Z",3600
+      "1009","2023-09-01T09:25:00Z",3100
+      "1010","2023-08-31T22:50:00Z",2700
+  - type: csv
+    model: line_items
+    data: |-
+      lines_item_id,order_id,sku
+      "1","1001","5901234123457"
+      "2","1001","4001234567890"
+      "3","1002","5901234123457"
+      "4","1002","2001234567893"
+      "5","1003","4001234567890"
+      "6","1003","5001234567892"
+      "7","1004","5901234123457"
+      "8","1005","2001234567893"
+      "9","1005","5001234567892"
+      "10","1005","6001234567891"
 quality:
   type: SodaCL   # data quality check format: SodaCL, montecarlo, dbt-tests, custom
   specification: # expressed as string or inline yaml
@@ -117,21 +161,6 @@ serviceLevelObjectives:
   availability: 99.9%
   completeness: All orders since 2020-01-01T00:00:00Z
   performance: Full table scan < 60 seconds
-examples:  # TBD samples, sampleData, examples
-  - type: csv
-    model: orders
-    data: |-
-      order_id,customer_id,email,order_timestamp,order_total
-      1,101,user1@example.com,2023-07-01,100.50
-      2,102,user2@example.com,2023-07-02,75.25
-      3,103,user3@example.com,2023-07-03,50.00
-      4,104,user4@example.com,2023-07-04,200.20
-      5,105,user5@example.com,2023-07-05,300.75
-      6,106,user6@example.com,2023-07-06,120.80
-      7,107,user7@example.com,2023-07-07,50.50
-      8,108,user8@example.com,2023-07-08,90.00
-      9,109,user9@example.com,2023-07-09,180.60
-      10,110,user10@example.com,2023-07-10,250.40
 tags: # TBD move to info (like in AsyncAPI)?
   - business-critical
 links:
