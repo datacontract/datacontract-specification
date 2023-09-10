@@ -33,7 +33,7 @@ Example
 
 ```yaml
 dataContractSpecification: 0.0.1
-id: https://demo.datamesh-manager.com/acme/datacontracts/orders-latest-npii/1.0.0
+id: https://demo.datamesh-manager.com/acme/datacontracts/orders-latest-npii/1.0.0 # TBD or orders-latest-npii
 info:
   title: Orders Latest NPII
   version: 1.0.0
@@ -44,24 +44,18 @@ info:
     url: https://demo.datamesh-manager.com/acme/teams/checkout
     email: checkout@example.com
 provider: #TBD
-  teamId: checkout
-  teamName: Checkout
-  dataProductId: orders
-  dataProductName: Orders
-  outputPortId: bigquery_orders_latest_npii_v1
-  outputPortName: bigquery_orders_latest_npii_v1
-servers: # TBD
-  - url: jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=MyBigQueryProject;OAuthType=1;
-    description: Production
-#  production:
-#    host: https://www.googleapis.com/bigquery/v2
-#    project: acme_orders_prod
-#    database: orders
-#    dataset: bigquery_orders_latest_npii_v1
-#    description: RabbitMQ broker for the production environment.
-#    tags:
-#      - name: "env:production"
-#        description: "This environment is the live environment available for final users."
+  team: checkout
+  dataProduct: orders
+  outputPort: bigquery_orders_latest_npii_v1
+servers:
+  production:
+    type: BigQuery
+    project: acme_orders_prod
+    dataset: bigquery_orders_latest_npii_v1
+    description: BigQuery 
+    tags:
+      - name: "env:production"
+        description: "This environment is the live environment."
 terms:
   usage: >
     Data can be used for reports, analytics and machine learning use cases.
@@ -156,11 +150,12 @@ quality:
       - duplicate_count(order_id) = 0
     checks for line_items:
       - row_count > 0
-serviceLevelObjectives:
-  freshness: < 60 seconds
-  availability: 99.9%
-  completeness: All orders since 2020-01-01T00:00:00Z
-  performance: Full table scan < 60 seconds
+#serviceLevelObjectives:
+#  freshness: < 60 seconds
+#  availability: 99.9%
+#  completeness: All orders since 2020-01-01T00:00:00Z
+#  volume: beetween 2,000,000 and 3,000,000 rows
+#  performance: Full table scan < 60 seconds
 tags: # TBD move to info (like in AsyncAPI)?
   - business-critical
 links:
