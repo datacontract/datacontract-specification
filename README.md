@@ -5,13 +5,13 @@ The Data Contract Specification is an open initiative to define a common data co
 ![data_contract_data_usage_agreement.drawio.png](images/data_contract_data_usage_agreement.drawio.png)
 
 
-A _data contract_ defines the syntax, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. A data contract can be implemented by a data product's output port. Data contracts can also be used for the input port to specify the expectations of data dependencies.
+A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. A data contract is implemented by a software component, such as a data product's output port. Data contracts can also be used for the input port to specify the expectations of data dependencies.
 
-A _data contract specification_ defines a YAML structure (that may also be rendered as JSON). It is data platform neutral, but existing well-known standards can be used to express schemas (e.g., JSON Schema, dbt models, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL Queries) to avoid unnecessary abstractions.
+The _data contract specification_ defines a YAML to describe attributes of provided data sets. It is data platform neutral, but supports well-known formats to express schemas (e.g., JSON Schema, dbt models, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL Queries) to avoid unnecessary abstractions.
 
-A data consumer concludes a _data usage agreement_ with the data provider referring a specific data contract version. Data usage agreements have a defined lifecycle and help the data provider to track who accesses their data and for which purposes.
+Every data consumer concludes a _data usage agreement_ with the data provider referring a specific data contract version. Data usage agreements have a defined lifecycle and help the data provider to track who accesses their data and for which purposes.
 
-Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). The formal data contract can act as the basis for automation, testing, monitoring, access control, and computational governance policies. A data contract can also be used as a collaboration tool for data providers and consumers to discuss data requirements and make assumptions explicit.
+Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). Data contracts can serve as a foundational component of a data governance strategy. They represent a documented understanding of how data should be structured and interpreted. Data contracts are essential for ensuring data interoperability and data quality. The formal data contract can act as the basis for automation, testing, monitoring, access control, and computational governance policies. A data contract can also be used as a collaboration tool for data providers and consumers to discuss data requirements and make assumptions explicit.
 
 
 
@@ -313,7 +313,8 @@ Data Usage Agreement
 
 Tooling
 ---
-- [Data Mesh Manager](https://www.datamesh-manager.com/) supports the data contract specification and allows the user to import or export data contracts using this specification. The lifecycle, including an approval flow, of those data contracts can be managed within the tool as well.
+- _datacontract CLI_ (coming soon) a CLI tool to help you create, develop, and maintain your data contracts.
+- [Data Mesh Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data products and data contracts. It supports the data contract specification and allows the user to import or export data contracts using this specification.
 
 License
 ---
