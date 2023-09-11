@@ -4,15 +4,14 @@ The Data Contract Specification is an open initiative to define a common data co
 
 ![data_contract_data_usage_agreement.drawio.png](images/data_contract_data_usage_agreement.drawio.png)
 
-A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. A data contract is implemented by a software component, such as a data product's output port. Data contracts can also be used for the input port to specify the expectations of data dependencies.
-
 The _data contract specification_ defines a YAML to describe attributes of provided data sets. It is data platform neutral, but supports well-known formats to express schemas (e.g., JSON Schema, dbt models, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL Queries) to avoid unnecessary abstractions.
 
 Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). Data contracts can serve as a foundational component of a data governance strategy. They represent a documented understanding of how data should be structured and interpreted. Data contracts are essential for ensuring data interoperability and data quality. The formal data contract can act as the basis for automation, testing, monitoring, access control, and computational governance policies. A data contract can also be used as a collaboration tool for data providers and consumers to discuss data requirements and make assumptions explicit.
 
 _Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. The term "contract" may be somewhat misleading, but it is how it is used in practice. The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes. _
 
-The specification is inspired by [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html) and follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) conventions.
+The specification is inspired by [AIDA User Group's Open Data Contract Standard](https://github.com/AIDAUserGroup/open-data-contract-standard), (formerly [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md)) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html). 
+It follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) conventions.
 
 Version
 ---
