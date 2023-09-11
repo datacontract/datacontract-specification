@@ -5,7 +5,7 @@ It can be used on its own, or in combination with the [Data Product Specificatio
 
 A [data contract](https://www.datamesh-manager.com/learn/what-is-a-data-contract) is a formal agreement between two parties (the data product provider and the data product consumer) to use a data product. It specifies the guarantees about a provided data set, the purpose of data usage, and costs. Data contracts have a lifecycle to allow the evolution of data products, and they can be used to automate setting of permissions or monitoring data quality via tests.
 
-The specification is inspired by [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html). It aims to be technology-agnostic.
+The specification is inspired by [AIDA User Group's Open Data Contract Standard](https://github.com/AIDAUserGroup/open-data-contract-standard), (formerly [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md)) and Data Mesh Manager's [Data Contract API](https://app.datamesh-manager.com/swagger/index.html). It aims to be technology-agnostic.
 
 
 
