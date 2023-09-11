@@ -24,29 +24,22 @@ Example
 
 ```yaml
 dataContractSpecification: 0.0.1
-id: https://demo.datamesh-manager.com/acme/datacontracts/orders-latest-npii/1.0.0 # TBD or orders-latest-npii
+id: orders-latest-npii
 info:
   title: Orders Latest NPII
   version: 1.0.0
   description: Successful customer orders in the webshop. All orders since 2020-01-01. Orders with their line items are in their current state (no history included). PII data is removed.
-  status: proposed / active # TBD
-  contact: # TBD
-    name: Checkout Team
-    url: https://demo.datamesh-manager.com/acme/teams/checkout
-    email: checkout@example.com
-provider: #TBD
-  team: checkout
+  owner: "Checkout Team"
   dataProduct: orders
   outputPort: bigquery_orders_latest_npii_v1
+  contact:
+    name: John Doe (Data Product Owner)
+    email: john.doe@example.com
 servers:
   production:
     type: BigQuery
     project: acme_orders_prod
     dataset: bigquery_orders_latest_npii_v1
-    description: BigQuery 
-    tags:
-      - name: "env:production"
-        description: "This environment is the live environment."
 terms:
   usage: >
     Data can be used for reports, analytics and machine learning use cases.
@@ -54,16 +47,12 @@ terms:
   limitations: >
     Not suitable for real-time use cases.
     Data may not be used to identify individual customers.
-  quota: >
     Max data processing per day: 10 TiB
-  billing: # TODO string or complex ?
-    amount: 5000
-    currency: USD
-    unit: month  # Chrono units (month, day, second) or usage units (gigabyte, megabyte)
+  billing: 5000 USD per month
   noticePeriod: P3M
 schema:
   type: dbt  # the specification format: dbt, bigquery, jsonschema, avro, protobuf, sql, custom
-  specification:  # expressed as string or inline yaml
+  specification:  # expressed as string or inline yaml or via "$ref: model.yaml"
     version: 2 
     description: The subset of the output port's data model that we agree to use
     models:
@@ -104,10 +93,10 @@ schema:
           - name: sku
             type: string
             description: The purchased article number
-examples:  # TBD samples, sampleData, examples
-  - type: csv
+examples:
+  - type: csv # csv, json, yaml, custom
     model: orders
-    data: |-
+    data: |- # expressed as string or inline yaml or via "$ref: data.csv"
       order_id,order_timestamp,order_total
       "1001","2023-09-09T08:30:00Z",2500
       "1002","2023-09-08T15:45:00Z",1800
@@ -135,25 +124,12 @@ examples:  # TBD samples, sampleData, examples
       "10","1005","6001234567891"
 quality:
   type: SodaCL   # data quality check format: SodaCL, montecarlo, dbt-tests, custom
-  specification: # expressed as string or inline yaml
+  specification: # expressed as string or inline yaml or via "$ref: checks.yaml"
     checks for orders:
       - row_count > 0
       - duplicate_count(order_id) = 0
     checks for line_items:
       - row_count > 0
-#serviceLevelObjectives:
-#  freshness: < 60 seconds
-#  availability: 99.9%
-#  completeness: All orders since 2020-01-01T00:00:00Z
-#  volume: beetween 2,000,000 and 3,000,000 rows
-#  performance: Full table scan < 60 seconds
-tags: # TBD move to info (like in AsyncAPI)?
-  - business-critical
-links:
-  schema: https://catalog.example.com/search/search-queries
-  catalog: https://catalog.example.com/search/search-queries
-custom:
-  iamRole: serviceAccount:marketing-data-consumer@example-prod-data.iam.gserviceaccount.com
 ```
 
 Schema
@@ -163,25 +139,43 @@ Schema
 
 This is the root document.
 
-| Field | Type                                                                | Description                                                                     |
-| ----- |---------------------------------------------------------------------|---------------------------------------------------------------------------------|
-| dataContractSpecification | string                                                              | REQUIRED. Specifies the Data Contract Specification being used.                 |
-| info | [Info Object](#info-object)                                         | REQUIRED. Specifies the metadata of the data contract.                          |
-| provider | [Provider Object](#provider-object)                                 | REQUIRED. Specifies the data product provider                                   |
-| terms | [Terms Object](#terms-object)                                       | REQUIRED. Specifies the terms and conditions of the data contract.              |
-| schema | [Schema Object](#schema-object)                                     | Specifies the data contract schema. The spcification supports different schemas. |
-| tags | [string]                                                            | Specifies the tags of the data contract.                                        |
-| links | [Links Object](#links-object)                                       | Specifies further links of the data contract.                                   |
-| custom | [Custom Object](#custom-object)                                     | Specifies custom fields of the data contract.                                   |
+| Field                     | Type                                 | Description                                                                                           |
+|---------------------------|--------------------------------------|-------------------------------------------------------------------------------------------------------|
+| dataContractSpecification | string                               | REQUIRED. Specifies the Data Contract Specification being used.                                       |
+| id                        | string                               | REQUIRED. Specifies the identifier of the data contract.                                              |
+| info                      | [Info Object](#info-object)          | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                        |
+| terms                     | [Terms Object](#terms-object)        | REQUIRED. Specifies the terms and conditions of the data contract.                                    |
+| schema                    | [Schema Object](#schema-object)      | Specifies the data contract schema. The specification supports different schemas.                     |
+| examples                  | [Examples Object](#examples-object)  | Specifies example data sets for the schema. The specification supports different example types.       |
+| quality                   | [Quality Object](#quality-object)    | Specifies the quality attributes and checks. The specification supports different quality check DSLs. |
+
+
 
 ### Info Object
 
 Metadata and life cycle information about the data contract.
 
-| Field | Type                                                                | Description                                                                                                                     |
-| ----- |---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| id | string                                                              | REQUIRED. The unique identifier of the data contract.                                                                           |
-| status | string                                                           | The status of the data contract. Typical values are:                   `draft`, `requested`, `approved`, `rejected`, `canceled` |
+| Field   | Type                              | Description                                                                                                                                                      |
+|---------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title   | `string`                          | REQUIRED. The title of the Data Contract.                                                                                                                        |
+| version | `string`                          | REQUIRED. The version of the Data Contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
+| contact | [Contact Object](#contact-object) | The contact information for the Data Contract.                                                                                                                   |
+
+### Contact Object
+
+Contact information for the Data Contract.
+
+| Field | Type     | Description                                                                                         |
+|-------|----------|-----------------------------------------------------------------------------------------------------|
+| name  | `string` | The identifying name of the contact person/organization.                                            |
+| url   | `string` | The URL pointing to the contact information. This MUST be in the form of a URL.                     |
+| email | `string` | The email address of the contact person/organization. This MUST be in the form of an email address. |
+
+```yaml
+name: API Support
+url: https://www.example.com/support
+email: support@example.com
+```
 
 ### Provider Object
 
@@ -196,18 +190,6 @@ Information about the data product provider.
 | outputPortId | string                                                     | REQUIRED. The unique identifier of the output port.                                                                          |
 | outputPortName | string                                                   | The name of the output port.                                                                                                                     |
 
-### Consumer Object
-
-Information about the data product consumer.
-
-| Field | Type                                                                | Description                                                                 |
-| ----- |---------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| teamId | string                                                              | REQUIRED. The unique identifier of the team that consumes the data product. |
-| teamName | string                                                            | The name of the team that consumes the data product.                        |
-| dataProductId | string                                                   | The unique identifier of the data product where the data is processed.      |
-| dataProductName | string                                                 | The name of the data product where the data is processed.                   |
-
-
 ### Terms Object
 
 The terms and conditions of the data contract.
@@ -218,7 +200,6 @@ The terms and conditions of the data contract.
 | limitations          | string | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may be used for.                         |
 | billing              | string | The billing describes the pricing model for using the data product, such as whether it's free, having a monthly fee, or metered pay-per-use.                      |
 | noticePeriod         | string | The period of time that must be given by either party to terminate or modify the contract. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
-| individualAgreements | string | Any additional individual agreements between the provider and the consumer.                                                                                       |
 
 
 ### Schema Object
@@ -260,47 +241,23 @@ models:
           - not_null
 ```
 
-
-
-### Links Object
-
-Links can be added as key-value pairs.
-
-Example:
-
-```yaml
-links:
-  schema: https://schema.example.com/search/search-queries
-  catalog: https://catalog.example.com/search/search-queries
-```
-
-### Custom Object
-
-Custom information can be added as kay-value pairs.
-
-Example:
-
-```yaml
-custom:
-  iamRole: serviceAccount:marketing-data-consumer@example-prod-data.iam.gserviceaccount.com
-```
-
-Data Usage Agreement
-===
-
-| Field | Type                                                                | Description                                                                 |
-| ----- |---------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| purpose | string                                                                                                                                        | The purpose describes the reason and the context on why the consumer wants to consume the data.                                 |
-| startDate | string                                                       | The start date of the data contract. May be in the future.                                                                      |
-| endDate | string                                                         | The end date of the data contract. Will be set, when a data contract is canceled.                                               |
-
-
-
-
 Tooling
 ---
 - _datacontract CLI_ (coming soon) a CLI tool to help you create, develop, and maintain your data contracts.
 - [Data Mesh Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data products and data contracts. It supports the data contract specification and allows the user to import or export data contracts using this specification.
+
+Other Data Contract Specifications
+---
+- [AIDA User Group's Open Data Contract Standard](https://github.com/AIDAUserGroup/open-data-contract-standard)
+- [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md)
+
+Literature
+---
+- [Driving Data Quality with Data Contracts](https://www.amazon.com/dp/B0C37FPH3D) by Andrew Jones
+
+Contributing
+---
+Contributions are welcome! Please open an issue or a pull request.
 
 License
 ---
