@@ -53,7 +53,7 @@ terms:
   billing: 5000 USD per month
   noticePeriod: P3M
 schema:
-  type: dbt  # the specification format: default, dbt, bigquery, avro, protobuf, sql, json-schema, custom
+  type: dbt  # the specification format: dbt, bigquery, avro, protobuf, sql, json-schema, custom
   specification:  # expressed as string or inline yaml or via "$ref: model.yaml"
     version: 2 
     description: The subset of the output port's data model that we agree to use
