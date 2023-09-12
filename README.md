@@ -4,7 +4,9 @@ The Data Contract Specification is an open initiative to define a common data co
 
 ![data_contract_data_usage_agreement.drawio.png](images/data_contract_data_usage_agreement.drawio.png)
 
-The _data contract specification_ defines a YAML to describe attributes of provided data sets. It is data platform neutral, but supports well-known formats to express schemas (e.g., JSON Schema, dbt models, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL Queries) to avoid unnecessary abstractions.
+A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. A data contract is implemented by a software component, such as a data product's output port. Data contracts can also be used for the input port to specify the expectations of data dependencies.
+
+The _data contract specification_ defines a YAML format to describe attributes of provided data sets. It is data platform neutral, and supports well-known formats to express schemas (e.g., JSON Schema, dbt models, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL Queries) to avoid unnecessary abstractions.
 
 Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). Data contracts can serve as a foundational component of a data governance strategy. They represent a documented understanding of how data should be structured and interpreted. Data contracts are essential for ensuring data interoperability and data quality. The formal data contract can act as the basis for automation, testing, monitoring, access control, and computational governance policies. A data contract can also be used as a collaboration tool for data providers and consumers to discuss data requirements and make assumptions explicit.
 
@@ -161,21 +163,31 @@ Metadata and life cycle information about the data contract.
 | version | `string`                          | REQUIRED. The version of the Data Contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
 | contact | [Contact Object](#contact-object) | The contact information for the Data Contract.                                                                                                                   |
 
+
+
+| Field   | Type   | Description                                                                                                                                                          |
+|---------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title   | string | **REQUIRED**. The title of the data contract.                                                                                                                        |
+| version | string | **REQUIRED**. The version of the Data Contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
+| description | string | A description of the data contract.                                                                                                                                  |
+| owner   | string | The owner or team responsible for manageing the data contract and providing the data.                                                                                |
+| dataProduct | string | The data product that contains the output port providing the data.                                                                                                   |
+| outputPort | string | The output port that implements the data contract.                                                                                                                   |
+| contact | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                           |
+
+
+
+
 ### Contact Object
 
 Contact information for the Data Contract.
 
-| Field | Type     | Description                                                                                         |
-|-------|----------|-----------------------------------------------------------------------------------------------------|
-| name  | `string` | The identifying name of the contact person/organization.                                            |
-| url   | `string` | The URL pointing to the contact information. This MUST be in the form of a URL.                     |
-| email | `string` | The email address of the contact person/organization. This MUST be in the form of an email address. |
+| Field | Type     | Description                                                                                           |
+|-------|----------|-------------------------------------------------------------------------------------------------------|
+| name  | `string` | The identifying name of the contact person/organization.                                              |
+| url   | `string` | The URL pointing to the contact information. This _MUST_ be in the form of a URL.                     |
+| email | `string` | The email address of the contact person/organization. This _MUST_ be in the form of an email address. |
 
-```yaml
-name: API Support
-url: https://www.example.com/support
-email: support@example.com
-```
 
 ### Provider Object
 
@@ -194,34 +206,37 @@ Information about the data product provider.
 
 The terms and conditions of the data contract.
 
-| Field                | Type   | Description                                                                                                                                                       |
-|----------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| usage                | string | The usage describes the way the data is used, such as how often it is queried.                                                                                    |
-| limitations          | string | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may be used for.                         |
-| billing              | string | The billing describes the pricing model for using the data product, such as whether it's free, having a monthly fee, or metered pay-per-use.                      |
-| noticePeriod         | string | The period of time that must be given by either party to terminate or modify the contract. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
+| Field                | Type   | Description                                                                                                                                                                 |
+|----------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| usage                | string | The usage describes the way the data is expected to be used. Can contain business and technical information.                                                                |
+| limitations          | string | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may not be used for.                               |
+| billing              | string | The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use.                                        |
+| noticePeriod         | string | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
 
 
 ### Schema Object
 
-The schema of the data contract that the provider and consumer agree to use. 
-Can be a subset of the schema of the output port.
+The schema of the data contract describes the syntax and semantics of provided data sets. 
 As the type of the output port depends on the data platform, multiple schema specifications are supported.
 
-A schema may define a single table, a collection of tables as a dataset, or any arbitrary structure.
+A schema may define a single table, a collection of tables as a dataset, a file structure, or any arbitrary structure.
+
+To avoid unnecessary abstractions, the data contract specification supports existing well-known formats
 
 Some schema types, such as `dbt`, also support defining tests and additional metadata.
 
 It is best practice to use a schema specification that can be directly imported to and exported from the data platform for automated data contract testing.
 
 
-| Field | Type                                                                                                   | Description                                                                                                                          |
-| ----- |--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| type | string                                                                                                 | REQUIRED. The type of the schema.<br> Typical values are: `dbt`, `bigquery`, `jsonschema`, `openapi`, `protobuf`, `paypal`, `custom` |
-| specification | [dbt Schema Object](#dbt-schema-object) \| [BigQuery Schema Object](#bigquery-schema-object) \| string | REQUIRED. The specification of the schema. The schema specification can be encoded as a string or as native yaml.                    |
+| Field | Type                                                                                                                                                                                                                 | Description                                                                                                                         |
+| ----- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| type | string                                                                                                                                                                                                               | REQUIRED. The type of the schema.<br> Typical values are: `dbt`, `bigquery`, `json-schema`, `sql-ddl`, `avro`, `protobuf`, `custom` |
+| specification | [dbt Schema Object](#dbt-schema-object) \| [BigQuery Schema Object](#bigquery-schema-object) \| [JSON Schema Schema Object](#bigquery-schema-object) \| \| [SQL DDL Schema Object](#sql-ddl-schema-object) \| string | REQUIRED. The specification of the schema. The schema specification can be encoded as a string or as inline yaml.                   |
 
 
 #### dbt Schema Object
+
+
 
 Example:
 
