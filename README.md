@@ -143,16 +143,16 @@ This is the root document.
 
 It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 
-| Field                     | Type                                | Description                                                                                           |
-|---------------------------|-------------------------------------|-------------------------------------------------------------------------------------------------------|
-| dataContractSpecification | string                              | REQUIRED. Specifies the Data Contract Specification being used.                                       |
-| id                        | string                              | REQUIRED. Specifies the identifier of the data contract.                                              |
-| info                      | [Info Object](#info-object)         | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                        |
-| servers                   | [Servers Object](#servers-object)   |                         |
-| terms                     | [Terms Object](#terms-object)       | REQUIRED. Specifies the terms and conditions of the data contract.                                    |
-| schema                    | [Schema Object](#schema-object)     | Specifies the data contract schema. The specification supports different schemas.                     |
+| Field                     | Type                               | Description                                                                                           |
+|---------------------------|------------------------------------|-------------------------------------------------------------------------------------------------------|
+| dataContractSpecification | `string`                           | REQUIRED. Specifies the Data Contract Specification being used.                                       |
+| id                        | `string`                           | REQUIRED. Specifies the identifier of the data contract.                                              |
+| info                      | [Info Object](#info-object)        | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                        |
+| servers                   | [Servers Object](#servers-object)  |                         |
+| terms                     | [Terms Object](#terms-object)      | REQUIRED. Specifies the terms and conditions of the data contract.                                    |
+| schema                    | [Schema Object](#schema-object)    | Specifies the data contract schema. The specification supports different schemas.                     |
 | examples                  | [Examples Object](#examples-object) | Specifies example data sets for the schema. The specification supports different example types.       |
-| quality                   | [Quality Object](#quality-object)   | Specifies the quality attributes and checks. The specification supports different quality check DSLs. |
+| quality                   | [Quality Object](#quality-object)  | Specifies the quality attributes and checks. The specification supports different quality check DSLs. |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -166,12 +166,12 @@ Metadata and life cycle information about the data contract.
 
 | Field   | Type   | Description                                                                                                                                                      |
 |---------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| title   | string | REQUIRED. The title of the data contract.                                                                                                                        |
-| version | string | REQUIRED. The version of the Data Contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
+| title   | `string` | REQUIRED. The title of the data contract.                                                                                                                        |
+| version | `string` | REQUIRED. The version of the Data Contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
 | description | string | A description of the data contract.                                                                                                                              |
-| owner   | string | The owner or team responsible for manageing the data contract and providing the data.                                                                            |
-| dataProduct | string | The data product that contains the output port providing the data.                                                                                               |
-| outputPort | string | The output port that implements the data contract.                                                                                                               |
+| owner   | `string` | The owner or team responsible for manageing the data contract and providing the data.                                                                            |
+| dataProduct | `string` | The data product that contains the output port providing the data.                                                                                               |
+| outputPort | `string` | The output port that implements the data contract.                                                                                                               |
 | contact | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                       |
 
 
@@ -526,8 +526,8 @@ The quality object contains quality attributes and checks.
 
 | Field | Type                                                                                                                          | Description                                                                                                                    |
 | ----- |-------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| type | string                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `custom`                                     |
-| specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> string | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML. |
+| type | `string`                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `custom`                                     |
+| specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> `string` | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML. |
 
 
 #### SodaCL Quality Object
