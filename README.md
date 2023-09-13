@@ -168,7 +168,7 @@ Metadata and life cycle information about the data contract.
 |---------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | title   | `string` | REQUIRED. The title of the data contract.                                                                                                                        |
 | version | `string` | REQUIRED. The version of the Data Contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
-| description | string | A description of the data contract.                                                                                                                              |
+| description | `string` | A description of the data contract.                                                                                                                              |
 | owner   | `string` | The owner or team responsible for manageing the data contract and providing the data.                                                                            |
 | dataProduct | `string` | The data product that contains the output port providing the data.                                                                                               |
 | outputPort | `string` | The output port that implements the data contract.                                                                                                               |
