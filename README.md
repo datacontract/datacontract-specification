@@ -128,6 +128,7 @@ quality:
   type: SodaCL   # data quality check format: SodaCL, montecarlo, custom
   specification: # expressed as string or inline yaml or via "$ref: checks.yaml"
     checks for orders:
+      - freshness(order_timestamp) < 24
       - row_count > 0
       - duplicate_count(order_id) = 0
     checks for line_items:
