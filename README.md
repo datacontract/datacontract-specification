@@ -1,12 +1,12 @@
 # Data Contract Specification
 
-Data contracts bring data producers and their data consumers together.
-
 ![datacontract.png](images/datacontract.png)
+
+Data contracts bring data producers and data consumers together.
 
 A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. A data contract is implemented by a data product's output port or other data technologies. Data contracts can also be used for the input port to specify the expectations of data dependencies and verify given guarantees.
 
-The _data contract specification_ defines a YAML format to describe attributes of provided data sets. It is data platform neutral, yet supports well-known formats to express schemas (e.g., dbt models, JSON Schema, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL queries) to avoid unnecessary abstractions. The Data Contract Specification is an open initiative to define a common data contract format. Think of an [OpenAPI specification](https://www.openapis.org/), but for data sets.
+The _data contract specification_ defines a YAML format to describe attributes of provided data sets. It is data platform neutral, yet supports well-known formats to express schemas (e.g., dbt models, JSON Schema, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL queries) to avoid unnecessary abstractions. The data contract specification is an open initiative to define a common data contract format. Think of an [OpenAPI specification](https://www.openapis.org/), but for data sets.
 
 Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). Data contracts can serve as a foundational component of a data governance strategy. They represent a documented understanding of how data should be structured and interpreted. Data contracts are essential for ensuring data interoperability and data quality. The formal data contract can act as the basis for automation, testing, monitoring, access control, and computational governance policies. A data contract can also be used as a collaboration tool for data providers and consumers to discuss data requirements and make assumptions explicit.
 
@@ -194,7 +194,7 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 Information about the servers.
 
-The Servers Object is a map of [Server Objects](server-object).
+The Servers Object is a map of [Server Objects](#server-object).
 
 ### Server Object
 
@@ -506,9 +506,9 @@ The Examples Object is an array of [Example Objects](#examples-object).
 | Field       | Type     | Description                                                                                                                             |
 |-------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `csv`, `json`, `yaml`, `custom` |
-| description | `string` | An optional string describing the example.                                                                                               
-| model       | `string` | The reference to the model in the schema, e.g. a table name.                                                                                                 
-| data        | `string` | Example data for this model.                                                                                               
+| description | `string` | An optional string describing the example.                                                                                              |
+| model       | `string` | The reference to the model in the schema, e.g. a table name.                                                                            |                                                                                        
+| data        | `string` | Example data for this model.                                                                                                            |
 
 Example:
 
