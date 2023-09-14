@@ -2,4 +2,4 @@ plugins:
   - jekyll-sitemap
 name: Data Contract Specification
 title: null
-description: The data contract specification defines a format to describe attributes of provided data sets.
+description: Data contracts bring data producers and data consumers together.
