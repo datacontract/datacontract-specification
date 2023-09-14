@@ -128,11 +128,11 @@ quality:
   type: SodaCL   # data quality check format: SodaCL, montecarlo, custom
   specification: # expressed as string or inline yaml or via "$ref: checks.yaml"
     checks for orders:
-      - freshness(order_timestamp) < 24
-      - row_count > 0
+      - freshness(order_timestamp) < 24h
+      - row_count > 500000
       - duplicate_count(order_id) = 0
     checks for line_items:
-      - row_count > 0
+      - row_count > 500000
 ```
 
 Schema
@@ -218,11 +218,20 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 #### S3 Server Object
 
-| Field  | Type     | Description |
-|--------|----------|---------|
-| type   | `string` | `s3`    |
-| bucket | `string` |         |
-| path   | `string` |         |
+| Field    | Type     | Description                    |
+|----------|----------|--------------------------------|
+| type     | `string` | `s3`                           |
+| location | `string` | S3 URL, starting with `s3://`  |
+
+Example:
+
+```yaml
+servers:
+  production:
+    type: s3
+    location: s3://acme-orders-prod/orders/
+```
+
 
 #### Redshift Server Object
 
