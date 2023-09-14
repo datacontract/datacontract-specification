@@ -274,10 +274,10 @@ The terms and conditions of the data contract.
 
 | Field                | Type   | Description                                                                                                                                                                 |
 |----------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| usage                | string | The usage describes the way the data is expected to be used. Can contain business and technical information.                                                                |
-| limitations          | string | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may not be used for.                               |
-| billing              | string | The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use.                                        |
-| noticePeriod         | string | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
+| usage                | `string` | The usage describes the way the data is expected to be used. Can contain business and technical information.                                                                |
+| limitations          | `string` | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may not be used for.                               |
+| billing              | `string` | The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use.                                        |
+| noticePeriod         | `string` | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
 
 
 ### Schema Object
@@ -290,10 +290,10 @@ A schema may define a single table, a collection of tables as a dataset, a file 
 To avoid unnecessary abstractions, the data contract specification supports existing well-known formats. Some schema types, such as `dbt`, also support defining tests and additional metadata.
 
 
-| Field | Type                                                                                                                                                                                                                 | Description                                                                                                                        |
-| ----- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| type | string                                                                                                                                                                                                               | REQUIRED. The type of the schema.<br> Typical values are: `dbt`, `bigquery`, `json-schema`, `sql-ddl`, `avro`, `protobuf`, `custom` |
-| specification | [dbt Schema Object](#dbt-schema-object) \|<br> [BigQuery Schema Object](#bigquery-schema-object) \|<br> [JSON Schema Schema Object](#bigquery-schema-object) \|<br> [SQL DDL Schema Object](#sql-ddl-schema-object) \|<br> string | REQUIRED. The specification of the schema. The schema specification can be encoded as a string or as inline YAML.                  |
+| Field | Type                                                                                                                                                                                                                 | Description                                                                                                                         |
+| ----- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| type | `string`                                                                                                                                                                                                               | REQUIRED. The type of the schema.<br> Typical values are: `dbt`, `bigquery`, `json-schema`, `sql-ddl`, `avro`, `protobuf`, `custom` |
+| specification | [dbt Schema Object](#dbt-schema-object) \|<br> [BigQuery Schema Object](#bigquery-schema-object) \|<br> [JSON Schema Schema Object](#bigquery-schema-object) \|<br> [SQL DDL Schema Object](#sql-ddl-schema-object) \|<br> `string` | REQUIRED. The specification of the schema. The schema specification can be encoded as a string or as inline YAML.                  |
 
 
 #### dbt Schema Object
@@ -479,7 +479,7 @@ Example (string):
 
 ```yaml
 schema:
-  type: dbt
+  type: sql-ddl
   specification: |-
       -- One record per order. Includes cancelled and deleted orders.
       CREATE TABLE orders (
@@ -534,10 +534,10 @@ examples:
 
 The quality object contains quality attributes and checks.
 
-| Field | Type                                                                                                                          | Description                                                                                                                    |
-| ----- |-------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| type | `string`                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `custom`                                     |
-| specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> `string` | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML. |
+| Field | Type                                                                                                                          | Description                                                                                                                     |
+| ----- |-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| type | `string`                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `custom`                                      |
+| specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> `string` | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML.  |
 
 
 #### SodaCL Quality Object
