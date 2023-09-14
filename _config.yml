@@ -3,3 +3,4 @@ plugins:
 name: Data Contract Specification
 title: null
 description: Data contracts bring data producers and data consumers together.
+image: https://datacontract.com/images/datacontract.png
