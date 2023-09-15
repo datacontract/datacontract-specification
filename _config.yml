@@ -2,4 +2,4 @@ plugins:
   - jekyll-sitemap
 name: Data Contract Specification
 title: null
-description: Data contracts bring data producers and data consumers together.
+description: Data contracts bring data providers and data consumers together.
