@@ -2,7 +2,7 @@
 
 ![datacontract.png](images/datacontract.png)
 
-Data contracts bring data producers and data consumers together.
+Data contracts bring data providers and data consumers together.
 
 A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. A data contract is implemented by a data product's output port or other data technologies. Data contracts can also be used for the input port to specify the expectations of data dependencies and verify given guarantees.
 
