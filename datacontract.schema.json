@@ -1,315 +1,315 @@
 {
-    "$schemaData": "http://json-schemaData.org/draft-07/schemaData#",
-    "type": "object",
-    "properties": {
-      "dataContractSpecification": {
-        "type": "string",
-        "enum": [
-          "0.9.0"
+  "$schemaData": "http://json-schemaData.org/draft-07/schemaData#",
+  "type": "object",
+  "properties": {
+    "dataContractSpecification": {
+      "type": "string",
+      "enum": [
+        "0.9.0"
+      ]
+    },
+    "id": {
+      "type": "string"
+    },
+    "info": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "dataProduct": {
+          "type": "string"
+        },
+        "outputPort": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        }
+      },
+      "required": [
+        "title",
+        "version"
+      ]
+    },
+    "servers": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "bigquery"
+                ]
+              },
+              "project": {
+                "type": "string"
+              },
+              "dataset": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "project",
+              "dataset"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "s3"
+                ]
+              },
+              "location": {
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "required": [
+              "type",
+              "location"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "redshift"
+                ]
+              },
+              "account": {
+                "type": "string"
+              },
+              "database": {
+                "type": "string"
+              },
+              "schemaData": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "account",
+              "database",
+              "schemaData"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "snowflake"
+                ]
+              },
+              "account": {
+                "type": "string"
+              },
+              "database": {
+                "type": "string"
+              },
+              "schemaData": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "account",
+              "database",
+              "schemaData"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "databricks"
+                ]
+              },
+              "share": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "share"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "kafka"
+                ]
+              },
+              "host": {
+                "type": "string"
+              },
+              "topic": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "host",
+              "topic"
+            ]
+          }
         ]
+      }
+    },
+    "terms": {
+      "type": "object",
+      "properties": {
+        "usage": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "string"
+        },
+        "billing": {
+          "type": "string"
+        },
+        "noticePeriod": {
+          "type": "string"
+        }
       },
-      "id": {
-        "type": "string"
+      "required": [
+        "usage",
+        "limitations",
+        "billing",
+        "noticePeriod"
+      ]
+    },
+    "schemaData": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "dbt",
+            "bigquery",
+            "json-schemaData",
+            "sql-ddl",
+            "avro",
+            "protobuf",
+            "custom"
+          ]
+        },
+        "specification": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            }
+          ]
+        }
       },
-      "info": {
+      "required": [
+        "type",
+        "specification"
+      ]
+    },
+    "examples": {
+      "type": "array",
+      "items": {
         "type": "object",
         "properties": {
-          "title": {
-            "type": "string"
-          },
-          "version": {
-            "type": "string"
+          "type": {
+            "type": "string",
+            "enum": [
+              "csv",
+              "json",
+              "yaml",
+              "custom"
+            ]
           },
           "description": {
             "type": "string"
           },
-          "owner": {
+          "model": {
             "type": "string"
           },
-          "dataProduct": {
+          "data": {
             "type": "string"
-          },
-          "outputPort": {
-            "type": "string"
-          },
-          "contact": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string",
-                "format": "uri"
-              },
-              "email": {
-                "type": "string",
-                "format": "email"
-              }
-            }
-          }
-        },
-        "required": [
-          "title",
-          "version"
-        ]
-      },
-      "servers": {
-        "type": "object",
-        "additionalProperties": {
-          "anyOf": [
-            {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "bigquery"
-                  ]
-                },
-                "project": {
-                  "type": "string"
-                },
-                "dataset": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "type",
-                "project",
-                "dataset"
-              ]
-            },
-            {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "s3"
-                  ]
-                },
-                "location": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              },
-              "required": [
-                "type",
-                "location"
-              ]
-            },
-            {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "redshift"
-                  ]
-                },
-                "account": {
-                  "type": "string"
-                },
-                "database": {
-                  "type": "string"
-                },
-                "schemaData": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "type",
-                "account",
-                "database",
-                "schemaData"
-              ]
-            },
-            {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "snowflake"
-                  ]
-                },
-                "account": {
-                  "type": "string"
-                },
-                "database": {
-                  "type": "string"
-                },
-                "schemaData": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "type",
-                "account",
-                "database",
-                "schemaData"
-              ]
-            },
-            {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "databricks"
-                  ]
-                },
-                "share": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "type",
-                "share"
-              ]
-            },
-            {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "kafka"
-                  ]
-                },
-                "host": {
-                  "type": "string"
-                },
-                "topic": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "type",
-                "host",
-                "topic"
-              ]
-            }
-          ]
-        }
-      },
-      "terms": {
-        "type": "object",
-        "properties": {
-          "usage": {
-            "type": "string"
-          },
-          "limitations": {
-            "type": "string"
-          },
-          "billing": {
-            "type": "string"
-          },
-          "noticePeriod": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "usage",
-          "limitations",
-          "billing",
-          "noticePeriod"
-        ]
-      },
-      "schemaData": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "dbt",
-              "bigquery",
-              "json-schemaData",
-              "sql-ddl",
-              "avro",
-              "protobuf",
-              "custom"
-            ]
-          },
-          "specification": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object"
-              }
-            ]
           }
         },
         "required": [
           "type",
-          "specification"
-        ]
-      },
-      "examples": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "enum": [
-                "csv",
-                "json",
-                "yaml",
-                "custom"
-              ]
-            },
-            "description": {
-              "type": "string"
-            },
-            "model": {
-              "type": "string"
-            },
-            "data": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "type",
-            "model",
-            "data"
-          ]
-        }
-      },
-      "quality": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "SodaCL",
-              "montecarlo",
-              "custom"
-            ]
-          },
-          "specification": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object"
-              }
-            ]
-          }
-        },
-        "required": [
-          "type",
-          "specification"
+          "model",
+          "data"
         ]
       }
     },
-    "required": [
-      "dataContractSpecification",
-      "id",
-      "info"
-    ]
-  }ø
+    "quality": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SodaCL",
+            "montecarlo",
+            "custom"
+          ]
+        },
+        "specification": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "specification"
+      ]
+    }
+  },
+  "required": [
+    "dataContractSpecification",
+    "id",
+    "info"
+  ]
+}
