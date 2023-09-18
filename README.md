@@ -139,6 +139,8 @@ quality:
 Schema
 ---
 
+[schema.json](https://github.com/datacontract/datacontract-specification/blob/main/datacontract.schema.json)
+
 ### Data Contract Object
 
 This is the root document.
