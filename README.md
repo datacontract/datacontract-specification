@@ -64,13 +64,13 @@ schema:
           One record per order. Includes cancelled and deleted orders.
         columns:
           - name: order_id
-            type: string
+            data_type: string
             description: Primary key of the orders table
             tests:
               - unique
               - not_null
           - name: order_timestamp
-            type: timestamptz
+            data_type: timestamptz
             description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
             tests:
               - not_null
@@ -84,17 +84,17 @@ schema:
           The items that are part of an order
         columns:
           - name: lines_item_id
-            type: string
+            data_type: string
             description: Primary key of the lines_item_id table
           - name: order_id
-            type: string
+            data_type: string
             description: Foreign key to the orders table
             tests:
               - relationships:
                 to: ref('orders')
                 field: order_id
           - name: sku
-            type: string
+            data_type: string
             description: The purchased article number
 examples:
   - type: csv # csv, json, yaml, custom
