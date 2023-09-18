@@ -23,7 +23,7 @@ Version
 Example
 ---
 
-[![Open in Data Contract Studio](https://img.shields.io/badge/open%20in-Data%Contract%20Studio-blue)](https://studio.datacontract.com/)
+[![Open in Data Contract Studio](https://img.shields.io/badge/open%20in-Data%20Contract%20Studio-blue)](https://studio.datacontract.com/)
 
 ```yaml
 dataContractSpecification: 0.9.0
