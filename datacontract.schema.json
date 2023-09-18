@@ -64,7 +64,8 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "bigquery"
+                  "bigquery",
+                  "BigQuery"
                 ]
               },
               "project": {
