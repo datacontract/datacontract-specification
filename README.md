@@ -171,7 +171,7 @@ Metadata and life cycle information about the data contract.
 | Field   | Type   | Description                                                                                                                                                      |
 |---------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | title   | `string` | REQUIRED. The title of the data contract.                                                                                                                        |
-| version | `string` | REQUIRED. The version of the Data Contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
+| version | `string` | REQUIRED. The version of the data contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
 | description | `string` | A description of the data contract.                                                                                                                              |
 | owner   | `string` | The owner or team responsible for managing the data contract and providing the data.                                                                            |
 | dataProduct | `string` | The data product that contains the output port providing the data.                                                                                               |
@@ -183,7 +183,7 @@ Metadata and life cycle information about the data contract.
 
 ### Contact Object
 
-Contact information for the Data Contract.
+Contact information for the data contract.
 
 | Field | Type     | Description                                                                                           |
 |-------|----------|-------------------------------------------------------------------------------------------------------|
