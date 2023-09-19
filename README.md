@@ -606,8 +606,9 @@ A custom fields can be added with any name. The value can be null, a primitive, 
 Tooling
 ---
 - [Data Contract Studio](https://studio.datacontract.com/) is a free web tool to develop and share data contracts.
+- [Data Contract CLI](https://github.com/datacontract/cli) is a free CLI tool to help you create, develop, and maintain your data contracts.
 - [Data Mesh Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data products and data contracts. It supports the data contract specification and allows the user to import or export data contracts using this specification.
-- _datacontract CLI_ (coming soon) a CLI tool to help you create, develop, and maintain your data contracts.
+
 
 Other Data Contract Specifications
 ---
