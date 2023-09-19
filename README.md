@@ -139,7 +139,7 @@ quality:
 Schema
 ---
 
-[schema.json](https://github.com/datacontract/datacontract-specification/blob/main/datacontract.schema.json)
+[JSON Schema](https://github.com/datacontract/datacontract-specification/blob/main/datacontract.schema.json) of the Data Contract Specification.
 
 ### Data Contract Object
 
@@ -152,8 +152,8 @@ It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 | dataContractSpecification | `string`                           | REQUIRED. Specifies the Data Contract Specification being used.                                       |
 | id                        | `string`                           | REQUIRED. Specifies the identifier of the data contract.                                              |
 | info                      | [Info Object](#info-object)        | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                        |
-| servers                   | [Servers Object](#servers-object)  |                         |
-| terms                     | [Terms Object](#terms-object)      | REQUIRED. Specifies the terms and conditions of the data contract.                                    |
+| servers                   | [Servers Object](#servers-object)  | Specifies the servers of the data contract.                                                           |
+| terms                     | [Terms Object](#terms-object)      | Specifies the terms and conditions of the data contract.                                    |
 | schema                    | [Schema Object](#schema-object)    | Specifies the data contract schema. The specification supports different schemas.                     |
 | examples                  | [Examples Object](#examples-object) | Specifies example data sets for the schema. The specification supports different example types.       |
 | quality                   | [Quality Object](#quality-object)  | Specifies the quality attributes and checks. The specification supports different quality check DSLs. |
