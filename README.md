@@ -27,14 +27,14 @@ Example
 
 ```yaml
 dataContractSpecification: 0.9.0
-id: orders-latest-npii
+id: urn:datacontract:checkout:orders-latest-npii
 info:
   title: Orders Latest NPII
   version: 1.0.0
   description: Successful customer orders in the webshop. All orders since 2020-01-01. Orders with their line items are in their current state (no history included). PII data is removed.
   owner: Checkout Team
-  dataProduct: orders
-  outputPort: bigquery_orders_latest_npii_v1
+  dataProduct: urn:dataproduct:checkout:orders
+  outputPort: urn:outputport:checkout:orders:bigquery_orders_latest_npii_v1
   contact:
     name: John Doe (Data Product Owner)
     email: john.doe@example.com
