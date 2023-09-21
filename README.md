@@ -150,7 +150,7 @@ It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 | Field                     | Type                               | Description                                                                                           |
 |---------------------------|------------------------------------|-------------------------------------------------------------------------------------------------------|
 | dataContractSpecification | `string`                           | REQUIRED. Specifies the Data Contract Specification being used.                                       |
-| id                        | `string`                           | REQUIRED. Specifies the identifier of the data contract.                                              |
+| id                        | `string`                           | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number                                             |
 | info                      | [Info Object](#info-object)        | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                        |
 | servers                   | [Servers Object](#servers-object)  | Specifies the servers of the data contract.                                                           |
 | terms                     | [Terms Object](#terms-object)      | Specifies the terms and conditions of the data contract.                                    |
@@ -174,8 +174,8 @@ Metadata and life cycle information about the data contract.
 | version | `string` | REQUIRED. The version of the data contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
 | description | `string` | A description of the data contract.                                                                                                                              |
 | owner   | `string` | The owner or team responsible for managing the data contract and providing the data.                                                                            |
-| dataProduct | `string` | The data product that contains the output port providing the data.                                                                                               |
-| outputPort | `string` | The output port that implements the data contract.                                                                                                               |
+| dataProduct | `string` | The identifier of the data product that contains the output port providing the data. For contract-first approaches, this field MAY be optional.                                                                                              |
+| outputPort | `string` | The identifier of the output port that implements the data contract. For contract-first approaches, this field MAY be optional.                                                                                                              |
 | contact | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                       |
 
 
