@@ -302,15 +302,10 @@ schema:
     models:
       - name: "My Table"
         description: "My description"
-        config:
-          materialized: table
         columns:
           - name: "My column"
             data_type: text
             description: "My description"
-            tests:
-              - dbt_expectations.expect_column_to_exist
-              - not_null
 ```
 
 Example (string):
@@ -323,15 +318,10 @@ schema:
     models:
       - name: "My Table"
         description: "My description"
-        config:
-          materialized: table
         columns:
           - name: "My column"
             data_type: text
             description: "My description"
-            tests:
-              - dbt_expectations.expect_column_to_exist
-              - not_null
 ```
 
 #### BigQuery Schema Object
