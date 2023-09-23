@@ -4,6 +4,10 @@
 
 Data contracts bring data providers and data consumers together.
 
+**General Overview**
+What are Data Contracts?
+_Data contracts_ are similar to Service Level Agreements (SLAs) but pertain to data. They are agreements between a service provider and data consumers regarding the management and intended usage of data. The goal is to ensure reliable and high-quality data that all parties can trust.
+
 A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. A data contract is implemented by a data product's output port or other data technologies. Data contracts can also be used for the input port to specify the expectations of data dependencies and verify given guarantees.
 
 The _data contract specification_ defines a YAML format to describe attributes of provided data sets. It is data platform neutral, yet supports well-known formats to express schemas (e.g., dbt models, JSON Schema, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL queries) to avoid unnecessary abstractions. The data contract specification is an open initiative to define a common data contract format. Think of an [OpenAPI specification](https://www.openapis.org/), but for data sets.
@@ -16,6 +20,53 @@ _Note: The term "data contract" refers to a specification that is usually owned 
 The specification is inspired by [AIDA User Group's Open Data Contract Standard](https://github.com/AIDAUserGroup/open-data-contract-standard), (formerly [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md)) and Data Mesh Manager's [Data Contract API](https://www.datamesh-manager.com). 
 It follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) conventions.
 
+Why are Data Contracts Needed?
+Data teams often rely on systems that produce data. However, software engineers managing these systems might not be aware of data dependencies. Changes they make can crash dependent data systems. Data contracts can enforce specific formats, constraints, and meanings to prevent such issues. They help data producers and consumers align, especially in a distributed data environment.
+
+**Contents of a Data Contract**
+Data contracts can be simple and focus on effective implementation. They might cover:
+1. Data being extracted
+2. Ingestion type and frequency
+3. Data ownership details
+4. Levels of data access required
+5. Security and governance information
+6. Impact on systems due to ingestion
+
+Responsibility for Data Contracts:
+**The decision to use data contracts typically lies with data leaders. However, all stakeholders involved in data consumption should have input. Data consumers benefit the most, while data producers might need convincing about the benefits.
+
+When to Implement Data Contracts:
+While it might seem best to implement data contracts as soon as possible, it's essential to have stable data pipelines first. If an organization is moving towards a data mesh approach, it might be an ideal time to introduce data contracts.
+
+Future of Data Contracts:
+As organizations adopt a data mesh approach, data contracts become more crucial. They are still relatively new and might evolve in the future to address challenges arising from unexpected schema changes.
+
+**Frequently Asked Questions**
+What formats are typically used for data contracts?
+Data contracts are often written in templated interactive data languages (IDL) such as Apache Avro or JSON.
+
+How do data contracts prevent schema-related issues?
+Data contracts define and enforce the schema and meaning of the data being produced. This ensures that any changes to the data's structure or format are communicated and agreed upon, preventing unexpected breaks in downstream processes.
+
+Are data contracts similar to APIs?
+Yes, in a way. A data contract operates in a transparent and versionable manner, similar to how an API facilitates the reliable exchange of information between applications.
+
+Can data contracts be used externally?
+While most data contract architectures are designed for internal data operations, they can also be part of external data sharing initiatives.
+
+How do data contracts decouple data architecture?
+Data contracts provide a mechanism to avoid using production data or change data capture (CDC) events directly, ensuring that changes in one system don't inadvertently impact another.
+
+What's an example of a data contract implementation?
+One effective implementation was by Andrew Jones at GoCardless. The contract is in Jsonette, merged to Git by the data owner. Dedicated BigQuery and PubSub resources are then automatically deployed and populated with the requested data via a Kubernetes cluster and a custom self-service infrastructure platform called Utopia.
+
+How do data contracts relate to data mesh initiatives?
+If a team is pursuing any data mesh initiative, it's an ideal time to ensure data contracts are a part of it. Data mesh approaches often involve distributed data responsibilities, making contracts essential for clarity and reliability.
+
+How often do data contracts need updating?
+Data contracts are typically fairly evergreen. Aside from occasional version control tweaks and updates to contact details, they don't require frequent changes once established.
+
+Technical Details
 Version
 ---
 
