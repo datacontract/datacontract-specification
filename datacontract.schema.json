@@ -1,5 +1,5 @@
 {
-  "$schemaData": "http://json-schemaData.org/draft-07/schemaData#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
     "dataContractSpecification": {
@@ -136,7 +136,7 @@
                 "type": "string",
                 "description": "An optional string describing the server."
               },
-              "schemaData": {
+              "schema": {
                 "type": "string",
                 "description": "An optional string describing the server."
               }
@@ -145,7 +145,7 @@
               "type",
               "account",
               "database",
-              "schemaData"
+              "schema"
             ]
           },
           {
@@ -166,7 +166,7 @@
                 "type": "string",
                 "description": "An optional string describing the server."
               },
-              "schemaData": {
+              "schema": {
                 "type": "string",
                 "description": "An optional string describing the server."
               }
@@ -175,7 +175,7 @@
               "type",
               "account",
               "database",
-              "schemaData"
+              "schema"
             ]
           },
           {
@@ -255,7 +255,7 @@
       ],
       "description": "The terms and conditions of the data contract."
     },
-    "schemaData": {
+    "schema": {
       "type": "object",
       "properties": {
         "type": {
@@ -263,13 +263,13 @@
           "enum": [
             "dbt",
             "bigquery",
-            "json-schemaData",
+            "json-schema",
             "sql-ddl",
             "avro",
             "protobuf",
             "custom"
           ],
-          "description": "The type of the schema. Typical values are: dbt, bigquery, json-schemaData, sql-ddl, avro, protobuf, custom."
+          "description": "The type of the schema. Typical values are: dbt, bigquery, json-schema, sql-ddl, avro, protobuf, custom."
         },
         "specification": {
           "anyOf": [
