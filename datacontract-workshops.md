@@ -6,12 +6,19 @@ Bring data producers and consumers together to define data contracts in a facili
 
 - Facilitator
 - Data producer
+  - Product Owner
+  - Software Engineers
 - Data consumers
+  - Product Owner
+  - Data Engineers / Scientist / Analyst
+
+Recommendation: keep the group small (not more than 5 people)
 
 ## Settings
 
 - Show data contract the whole workshop on the screen (beamer, screenshare, ...)
 - Facilitator is the typist
+- Facilitator is moderator
 - Data Producer and Data Consumers discuss and give commands to the facilitator
 
 ## Recommended Order of Completion
