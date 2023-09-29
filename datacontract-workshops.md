@@ -8,17 +8,20 @@ Bring data producers and consumers together to define data contracts in a facili
 - Data producer
 - Data consumers
 
-## Setting
+## Settings
 
-- A room with a beamer / video call
-- Show the data contract document during the whole meeting on the beamer / share the screen
-- Filling order
-  1. Info (get the context)
-  2. Examples (example-driven facilitation)
-  3. Schema
-  4. Quality
-  5. Terms
-  6. Servers
+- Show data contract the whole workshop on the screen (beamer, screenshare, ...)
+- Facilitator is the typist
+- Data Producer and Data Consumers discuss and give commands to the facilitator
+
+## Recommended Order of Completion
+
+1. Info (get the context)
+2. Examples (example-driven facilitation)
+3. Schema
+4. Quality
+5. Terms
+6. Servers
 
 ## Tool Recommendation
 
