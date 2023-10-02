@@ -2,6 +2,10 @@
 
 Bring data producers and consumers together to define data contracts in a facilitated workshop.
 
+## Goal
+
+A defined and agreed upon data contract between data producers and consumers.
+
 ## Participants
 
 - Facilitator
@@ -38,3 +42,7 @@ Recommendation: keep the group small (not more than 5 people)
 - Open the [starter template](https://datacontract.com/datacontract.init.yaml) in the [Data Contract Studio](https://studio.datacontract.com) and get going. If you lack an experienced facilitor, ignore any validation errors and warnings within the studio.
 - Use the [Data Contract Studio](https://studio.datacontract.com) to share the results of the workshop afterward with the participants and other stakeholders.
 - Use the [Data Contract CLI](https://cli.datacontract.com) to validate the data contract after the workshop.
+
+## Related
+
+- This data contract workshop could be a followup to a data product design workshop using the [Data Product Canvas](https://www.datamesh-architecture.com/data-product-canvas), making the offered contract at the output port of the designed data product more concrete.
