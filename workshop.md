@@ -28,10 +28,10 @@ Recommendation: keep the group small (not more than 5 people)
 
 1. Info (get the context)
 2. Examples (example-driven facilitation)
-3. Schema
+3. Schema (you will spend most of your time here)
 4. Quality
 5. Terms
-6. Servers
+6. Servers (if already applicable)
 
 ## Tool Recommendation
 
