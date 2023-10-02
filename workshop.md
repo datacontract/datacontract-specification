@@ -6,7 +6,7 @@ Bring data producers and consumers together to define data contracts in a facili
 
 - Facilitator
   - Neutral moderator and typist
-  - Should know the Data Contract Specification and its tools well
+  - Should know the [Data Contract Specification](https://datacontract.com) and its tools well
   - Get the [authors of the Data Contract Specification](https://datacontract.com/#authors) as facilitators for your workshop.
 - Data producer
   - Product Owner
@@ -35,5 +35,5 @@ Recommendation: keep the group small (not more than 5 people)
 
 ## Tool Recommendation
 
-- Use the Data Contract Studio to share the results of the workshop afterward with the participants and other stakeholders.
-- Use the Data Contract CLI to validate the data contract after the workshop.
+- Use the [Data Contract Studio](https://studio.datacontract.com) to share the results of the workshop afterward with the participants and other stakeholders.
+- Use the [Data Contract CLI](https://cli.datacontract.com) to validate the data contract after the workshop.
