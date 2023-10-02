@@ -1,10 +1,13 @@
-# Data Contract Workshops
+# Data Contract Workshop
 
-Bring data producers and consumers together to define data contracts in a facilitated workshops.
+Bring data producers and consumers together to define data contracts in a facilitated workshop.
 
 ## Participants
 
 - Facilitator
+  - Neutral moderator and typist
+  - Should know the Data Contract Specification and its tools well
+  - Get the [authors of the Data Contract Specification](https://datacontract.com/#authors) as facilitators for your workshop.
 - Data producer
   - Product Owner
   - Software Engineers
@@ -32,4 +35,5 @@ Recommendation: keep the group small (not more than 5 people)
 
 ## Tool Recommendation
 
-- Use the Data Contract Studio to share the results of the workshop with the participants
+- Use the Data Contract Studio to share the results of the workshop afterward with the participants and other stakeholders.
+- Use the Data Contract CLI to validate the data contract after the workshop.
