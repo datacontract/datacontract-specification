@@ -586,7 +586,8 @@ A custom fields can be added with any name. The value can be null, a primitive, 
 
 The Data Contract Specification follows these design principles:
 
-- Feels familiar to people already used to OpenAPI and AsyncAPI
+- A data contract should be described in its own file
+- Feels familiar to people already used to OpenAPI and AsyncAPI by following their conventions
 - Supports existing well-known formats to avoid unnecessary abstractions
 - Supports contract-first and code-first approaches
 
