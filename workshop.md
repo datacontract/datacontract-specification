@@ -39,7 +39,7 @@ Recommendation: keep the group small (not more than 5 people)
 
 ## Tooling
 
-- Open the [starter template](https://datacontract.com/datacontract.init.yaml) in the [Data Contract Studio](https://studio.datacontract.com) and get going. If you lack an experienced facilitor, ignore any validation errors and warnings within the studio.
+- Open the [starter template](https://datacontract.com/datacontract.init.yaml) in the [Data Contract Studio](https://studio.datacontract.com) and get going. If you lack an experienced facilitator, ignore any validation errors and warnings within the studio.
 - Use the [Data Contract Studio](https://studio.datacontract.com) to share the results of the workshop afterward with the participants and other stakeholders.
 - Use the [Data Contract CLI](https://cli.datacontract.com) to validate the data contract after the workshop.
 
