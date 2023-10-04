@@ -23,7 +23,7 @@ Recommendation: keep the group small (not more than 5 people)
 
 ## Settings
 
-- Show data contract the whole workshop on the screen (beamer, screenshare, ...)
+- Show data contract the whole workshop on the screen (projector, screenshare, ...)
 - Facilitator is the typist
 - Facilitator is moderator
 - Data Producer and Data Consumers discuss and give commands to the facilitator
