@@ -34,8 +34,6 @@ info:
   version: 1.0.0
   description: Successful customer orders in the webshop. All orders since 2020-01-01. Orders with their line items are in their current state (no history included). PII data is removed.
   owner: Checkout Team
-  dataProduct: urn:dataproduct:checkout:orders
-  outputPort: urn:outputport:checkout:orders:bigquery_orders_latest_npii_v1
   contact:
     name: John Doe (Data Product Owner)
     email: john.doe@example.com
@@ -164,8 +162,8 @@ Metadata and life cycle information about the data contract.
 | version | `string` | REQUIRED. The version of the data contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
 | description | `string` | A description of the data contract.                                                                                                                              |
 | owner   | `string` | The owner or team responsible for managing the data contract and providing the data.                                                                            |
-| dataProduct | `string` | The identifier of the data product that contains the output port providing the data. For contract-first approaches, this field MAY be optional.                                                                                              |
-| outputPort | `string` | The identifier of the output port that implements the data contract. For contract-first approaches, this field MAY be optional.                                                                                                              |
+| dataProduct | `string` | The identifier of the data product that contains the output port providing the data.                                                                                               |
+| outputPort | `string` | DEPRECATED. The identifier of the output port that implements the data contract.                                                                                                              |
 | contact | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                       |
 
 
