@@ -229,6 +229,7 @@
     },
     "terms": {
       "type": "object",
+      "description": "The terms and conditions of the data contract.",
       "properties": {
         "usage": {
           "type": "string",
@@ -246,14 +247,7 @@
           "type": "string",
           "description": "The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., 'P3M' for a period of three months."
         }
-      },
-      "required": [
-        "usage",
-        "limitations",
-        "billing",
-        "noticePeriod"
-      ],
-      "description": "The terms and conditions of the data contract."
+      }
     },
     "schema": {
       "type": "object",
