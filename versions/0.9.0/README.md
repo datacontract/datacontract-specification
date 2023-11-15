@@ -4,35 +4,22 @@
 
 Data contracts bring data providers and data consumers together.
 
-A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. 
-A data contract is implemented by a data product's output port or other data technologies. 
-Data contracts can also be used for the input port to specify the expectations of data dependencies and verify given guarantees.
+A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. A data contract is implemented by a data product's output port or other data technologies. Data contracts can also be used for the input port to specify the expectations of data dependencies and verify given guarantees.
 
-The _data contract specification_ defines a YAML format to describe attributes of provided data sets. 
-It is data platform neutral and can be used with any data platform, such as AWS S3, Google BigQuery, Microsoft Fabric, Databricks, and Snowflake. 
-The data contract specification is an open initiative to define a common data contract format. 
+The _data contract specification_ defines a YAML format to describe attributes of provided data sets. It is data platform neutral, yet supports well-known formats to express schemas (e.g., dbt models, JSON Schema, Protobuf, SQL DDL) and quality tests (e.g., SodaCL, SQL queries) to avoid unnecessary abstractions. The data contract specification is an open initiative to define a common data contract format. Think of an [OpenAPI specification](https://www.openapis.org/), but for data sets.
+
+Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/).
+First, and foremost, data contracts are a communication tool to express a common understanding of how data should be structured and interpreted. They make semantic and quality expectations explicit. They are often created in [workshops](/workshop). Later in development and production, they also serve as the basis for code generation, testing, schema validations, quality checks, monitoring, access control, and computational governance policies.
+
+_Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. The term "contract" may be somewhat misleading, but it is how it is used in practice. The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes._
+
+The specification is inspired by [AIDA User Group's Open Data Contract Standard](https://github.com/AIDAUserGroup/open-data-contract-standard), (formerly [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md)) and Data Mesh Manager's [Data Contract API](https://www.datamesh-manager.com).
 It follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) conventions.
-
-Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). 
-First, and foremost, data contracts are a communication tool to express a common understanding of how data should be structured and interpreted. 
-They make semantic and quality expectations explicit. 
-They are often created collaboratively in [workshops](/workshop) together with data providers and data consumers. 
-Later in development and production, they also serve as the basis for code generation, testing, schema validations, quality checks, monitoring, access control, and computational governance policies.
-
-_Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. 
-The term "contract" may be somewhat misleading, but it is how it is used in practice. 
-The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. 
-Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes._
-
-CLI
----
-
-The [Data Contract CLI](https://github.com/datacontract/cli) is an open-source CLI tool to help you develop, maintain, and automate data contracts.
 
 Version
 ---
 
-0.9.1 ([Changelog](CHANGELOG.md))
+0.9.0
 
 Example
 ---
@@ -40,7 +27,7 @@ Example
 [![Open in Data Contract Studio](https://img.shields.io/badge/open%20in-Data%20Contract%20Studio-blue)](https://studio.datacontract.com/)
 
 ```yaml
-dataContractSpecification: 0.9.1
+dataContractSpecification: 0.9.0
 id: urn:datacontract:checkout:orders-latest-npii
 info:
   title: Orders Latest NPII
@@ -65,31 +52,38 @@ terms:
     Max data processing per day: 10 TiB
   billing: 5000 USD per month
   noticePeriod: P3M
-models:
-  orders:
-    description: One record per order. Includes cancelled and deleted orders.
-    type: table 
-    fields:
-      order_id:
-        $ref: '#/definitions/checkout/orderId'
-      order_timestamp:
-        type: timestamp_tz
-        description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
-      order_total:
-        type: long
-        description: Total amount the smallest monetary unit (e.g., cents).
-  line_items:
-    description: A single article that is part of an order.  
-    type: table
-    fields:
-      lines_item_id:
-        type: string
-        description: Primary key of the lines_item_id table
-      order_id:
-        $ref: '#/definitions/order_id'
-      sku:
-        description: The purchased article number
-        $ref: '#/definitions/sku'
+schema:
+  type: dbt  # the specification format: dbt, bigquery, avro, protobuf, sql, json-schema, custom
+  specification:  # expressed as string or inline yaml or via "$ref: model.yaml"
+    version: 2 
+    description: The subset of the output port's data model that we agree to use
+    models:
+      - name: orders
+        description: >
+          One record per order. Includes cancelled and deleted orders.
+        columns:
+          - name: order_id
+            data_type: string
+            description: Primary key of the orders table
+          - name: order_timestamp
+            data_type: timestamptz
+            description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
+          - name: order_total
+            data_type: integer
+            description: "Total amount of the order in the smallest monetary unit (e.g., cents)."
+      - name: line_items
+        description: >
+          The items that are part of an order
+        columns:
+          - name: lines_item_id
+            data_type: string
+            description: Primary key of the lines_item_id table
+          - name: order_id
+            data_type: string
+            description: Foreign key to the orders table
+          - name: sku
+            data_type: string
+            description: The purchased article number
 examples:
   - type: csv # csv, json, yaml, custom
     model: orders
@@ -128,25 +122,6 @@ quality:
       - duplicate_count(order_id) = 0
     checks for line_items:
       - row_count > 500000
-definitions:
-  order_id:
-    context: checkout
-    name: order_id
-    title: Order ID
-    type: string
-    description: An internal ID that identifies an order in the online shop.
-    example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
-    pii: true
-    classification: restricted
-  sku:
-    context: inventory
-    name: sku
-    title: Stock Keeping Unit
-    type: string
-    example: AC1212ME1
-    description: |
-      A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
-      It is typically associated with an article's barcode, such as the EAN/GTIN.
 ```
 
 Schema
@@ -160,17 +135,16 @@ This is the root document.
 
 It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 
-| Field                     | Type                                         | Description                                                                                              |
-|---------------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| dataContractSpecification | `string`                                     | REQUIRED. Specifies the Data Contract Specification being used.                                          |
-| id                        | `string`                                     | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number |
-| info                      | [Info Object](#info-object)                  | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                           |
-| servers                   | Map[string, [Server Object](#server-object)] | Specifies the servers of the data contract.                                                              |
-| terms                     | [Terms Object](#terms-object)                | Specifies the terms and conditions of the data contract.                                                 |
-| models                    | Map[string, [Model Object](#model-object)]   | REQUIRED. Specifies the data model.                                                                      |
-| schema                    | [Schema Object](#schema-object)              | Specifies the physical schema. The specification supports different schema format.                       |
-| examples                  | Array of [Example Objects](#example-object)  | Specifies example data sets for the schema. The specification supports different example types.          |
-| quality                   | [Quality Object](#quality-object)            | Specifies the quality attributes and checks. The specification supports different quality check DSLs.    |
+| Field                     | Type                               | Description                                                                                           |
+|---------------------------|------------------------------------|-------------------------------------------------------------------------------------------------------|
+| dataContractSpecification | `string`                           | REQUIRED. Specifies the Data Contract Specification being used.                                       |
+| id                        | `string`                           | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number                                             |
+| info                      | [Info Object](#info-object)        | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                        |
+| servers                   | [Servers Object](#servers-object)  | Specifies the servers of the data contract.                                                           |
+| terms                     | [Terms Object](#terms-object)      | Specifies the terms and conditions of the data contract.                                    |
+| schema                    | [Schema Object](#schema-object)    | Specifies the data contract schema. The specification supports different schemas.                     |
+| examples                  | [Examples Object](#examples-object) | Specifies example data sets for the schema. The specification supports different example types.       |
+| quality                   | [Quality Object](#quality-object)  | Specifies the quality attributes and checks. The specification supports different quality check DSLs. |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -188,6 +162,8 @@ Metadata and life cycle information about the data contract.
 | version | `string` | REQUIRED. The version of the data contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
 | description | `string` | A description of the data contract.                                                                                                                              |
 | owner   | `string` | The owner or team responsible for managing the data contract and providing the data.                                                                            |
+| dataProduct | `string` | The identifier of the data product that contains the output port providing the data.                                                                                               |
+| outputPort | `string` | DEPRECATED. The identifier of the output port that implements the data contract.                                                                                                              |
 | contact | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                       |
 
 
@@ -205,6 +181,12 @@ Contact information for the data contract.
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
+### Servers Object
+
+Information about the servers.
+
+The Servers Object is a map of [Server Objects](#server-object).
+
 ### Server Object
 
 The fields are dependent on the defined type.
@@ -213,6 +195,7 @@ The fields are dependent on the defined type.
 |-------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `kafka` |
 | description | `string` | An optional string describing the server.                                                                                                                                |
+
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -288,59 +271,15 @@ The terms and conditions of the data contract.
 | noticePeriod         | `string` | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
 
 
-### Model Object
-
-The Model Object describes the structure and semantics of a data model, such as tables, views, or structured files.
-
-The name of the data model (table name) is defined by the key that refers to this Model Object.
-
-| Field       | Type                                         | Description                                                           |
-|-------------|----------------------------------------------|-----------------------------------------------------------------------|
-| type        | `string`                                     | The type of the model. Examples: `table`, `object`. Default: `table`. |
-| description | `string`                                     | An optional string describing the data model.                         |
-| fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                          |
-
-
-
-### Field Object
-
-The Field Objects describes one field (column, property, nested field) of a data model.
-
-| Field          | Type                    | Description                                                                                                                                                                            |
-|----------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type           | [Data Type](#data-type) | The logical data type of the field.                                                                                                                                                    |
-| description    | `string`                | An optional string describing the semantic of the data in this field.                                                                                                                  |
-| nullable       | `boolean`               | An indication, if this field can be null.                                                                                                                                              | 
-| pii            | `boolean`               | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                         | 
-| classification | `string`                | The data class defining the sensitivity level for this field, according to the organization's classification scheme. Examples may be: `sensitive`, `restricted`, `internal`, `public`. |
-| tags           | Array of `string`       | Custom metadata to provide additional context.                                                                                                                                         |
-| $ref           | `string`                | A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition.                                                      |
-
-
-
-### Data Type
-
-The following data types are supported:
-
-- number, decimal, numeric
-- int, integer
-- long, bigint
-- float
-- double
-- string, text, varchar
-- boolean
-- timestamp_tz
-- timestamp_ntz
-- date
-- array
-- object, record, struct
-- binary
-- null
-
 ### Schema Object
 
-The schema of the data contract describes the technical syntax. 
-As the type of the schema depends on the data platform, multiple schema specifications are supported.
+The schema of the data contract describes the syntax and semantics of provided data sets.
+As the type of the output port depends on the data platform, multiple schema specifications are supported.
+
+A schema may define a single table, a collection of tables as a dataset, a file structure, or any arbitrary structure.
+
+To avoid unnecessary abstractions, the data contract specification supports existing well-known formats. Some schema types, such as `dbt`, also support defining tests and additional metadata.
+
 
 | Field | Type                                                                                                                                                                                                                 | Description                                                                                                                         |
 | ----- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
@@ -539,6 +478,10 @@ schema:
 
 ```
 
+### Examples Object
+
+The Examples Object is an array of [Example Objects](#examples-object).
+
 ### Example Object
 
 | Field       | Type     | Description                                                                                                                             |
@@ -635,7 +578,7 @@ quality:
 
 While the Data Contract Specification tries to accommodate most use cases, additional data can be added to extend the specification at certain points.
 
-A custom fields can be added with any name. The value can be null, a primitive, an array or an object. 
+A custom fields can be added with any name. The value can be null, a primitive, an array or an object.
 
 ### Design Principles
 
