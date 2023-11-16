@@ -160,17 +160,18 @@ This is the root document.
 
 It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 
-| Field                     | Type                                         | Description                                                                                              |
-|---------------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| dataContractSpecification | `string`                                     | REQUIRED. Specifies the Data Contract Specification being used.                                          |
-| id                        | `string`                                     | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number |
-| info                      | [Info Object](#info-object)                  | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                           |
-| servers                   | Map[string, [Server Object](#server-object)] | Specifies the servers of the data contract.                                                              |
-| terms                     | [Terms Object](#terms-object)                | Specifies the terms and conditions of the data contract.                                                 |
-| models                    | Map[string, [Model Object](#model-object)]   | REQUIRED. Specifies the data model.                                                                      |
-| schema                    | [Schema Object](#schema-object)              | Specifies the physical schema. The specification supports different schema format.                       |
-| examples                  | Array of [Example Objects](#example-object)  | Specifies example data sets for the schema. The specification supports different example types.          |
-| quality                   | [Quality Object](#quality-object)            | Specifies the quality attributes and checks. The specification supports different quality check DSLs.    |
+| Field                     | Type                                                 | Description                                                                                              |
+|---------------------------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| dataContractSpecification | `string`                                             | REQUIRED. Specifies the Data Contract Specification being used.                                          |
+| id                        | `string`                                             | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number |
+| info                      | [Info Object](#info-object)                          | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                           |
+| servers                   | Map[string, [Server Object](#server-object)]         | Specifies the servers of the data contract.                                                              |
+| terms                     | [Terms Object](#terms-object)                        | Specifies the terms and conditions of the data contract.                                                 |
+| models                    | Map[string, [Model Object](#model-object)]           | Specifies the data model.                                                                                |
+| definitions               | Map[string, [Definition Object](#definition-object)] | Specifies definitions.                                                                                   |
+| schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                       |
+| examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the schema. The specification supports different example types.          |
+| quality                   | [Quality Object](#quality-object)                    | Specifies the quality attributes and checks. The specification supports different quality check DSLs.    |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -317,10 +318,28 @@ The Field Objects describes one field (column, property, nested field) of a data
 | $ref           | `string`                | A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition.                                                      |
 
 
+### Definition Object
+
+The Definition Object includes a clear and concise explanations of syntax, semantic, and classification of a business object in a given context.
+It serves as a reference for a common understanding of terminology, ensure consistent usage and to identify join-able fields.
+Models fields can refer to definitions using the `$ref` field to link to existing definitions and avoid duplicate documentations.
+
+| Field          | Type                    | Description                                                                                                          |
+|----------------|-------------------------|----------------------------------------------------------------------------------------------------------------------|
+| context        | `string`                | The context in which this definition is valid. Default: `global`.                                                    |
+| name           | `string`                | The technical name of this definition.                                                                               |
+| title          | `string`                | The business name of this definition.                                                                                |
+| type           | [Data Type](#data-type) | The logical data type                                                                                                |
+| description    | `string`                | Clear and concise explanations related to the context                                                                |
+| example        | `string`                | An example value.                                                                                                    |
+| pii            | `boolean`               | An indication, if this field contains Personal Identifiable Information (PII).                                       |
+| classification | `string`                | The data class defining the sensitivity level for this field, according to the organization's classification scheme. |
+| tags           | Array of `string`       | Custom metadata to provide additional context.                                                                       |
+
 
 ### Data Type
 
-The following data types are supported:
+The following data types are supported for model fields and definitions:
 
 - number, decimal, numeric
 - int, integer
@@ -339,8 +358,8 @@ The following data types are supported:
 
 ### Schema Object
 
-The schema of the data contract describes the technical syntax. 
-As the type of the schema depends on the data platform, multiple schema specifications are supported.
+The schema of the data contract describes the physical schema. 
+The type of the schema depends on the data platform.
 
 | Field | Type                                                                                                                                                                                                                 | Description                                                                                                                         |
 | ----- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|

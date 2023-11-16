@@ -289,10 +289,6 @@
                   "type": "string",
                   "description": "An optional string describing the semantic of the data in this field."
                 },
-                "nullable": {
-                  "type": "boolean",
-                  "description": "An indication, if this field can be null."
-                },
                 "pii": {
                   "type": "boolean",
                   "description": "An indication, if this field contains Personal Identifiable Information (PII)."
