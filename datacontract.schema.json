@@ -276,12 +276,12 @@
                     "double",
                     "string", "text", "varchar",
                     "boolean",
-                    "timestamp",
+                    "timestamp", "timestamp_tz",
                     "timestamp_ntz",
                     "date",
                     "array",
                     "object", "record", "struct",
-                    "binary",
+                    "bytes",
                     "null"
                   ]
                 },
