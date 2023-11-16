@@ -647,12 +647,12 @@ quality:
 
 The following data types are supported for model fields and definitions:
 
+- Unicode character sequence: `string`, `text`, `varchar`
 - Any numeric type, either integers or floating point numbers: `number`, `decimal`, `numeric`
 - 32-bit signed integer: `int`, `integer`
 - 64-bit signed integer: `long`, `bigint`
 - Single precision (32-bit) IEEE 754 floating-point number: `float`
 - Double precision (64-bit) IEEE 754 floating-point number: `double`
-- Unicode character sequence: `string`, `text`, `varchar`
 - Binary value: `boolean`
 - Timestamp with timezone: `timestamp`, `timestamp_tz`
 - Timestamp with no timezone: `timestamp_ntz`
