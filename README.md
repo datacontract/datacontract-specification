@@ -90,6 +90,25 @@ models:
       sku:
         description: The purchased article number
         $ref: '#/definitions/sku'
+definitions:
+  order_id:
+    context: checkout
+    name: order_id
+    title: Order ID
+    type: string
+    description: An internal ID that identifies an order in the online shop.
+    example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
+    pii: true
+    classification: restricted
+  sku:
+    context: inventory
+    name: sku
+    title: Stock Keeping Unit
+    type: string
+    example: AC1212ME1
+    description: |
+      A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
+      It is typically associated with an article's barcode, such as the EAN/GTIN.
 examples:
   - type: csv # csv, json, yaml, custom
     model: orders
@@ -128,25 +147,6 @@ quality:
       - duplicate_count(order_id) = 0
     checks for line_items:
       - row_count > 500000
-definitions:
-  order_id:
-    context: checkout
-    name: order_id
-    title: Order ID
-    type: string
-    description: An internal ID that identifies an order in the online shop.
-    example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
-    pii: true
-    classification: restricted
-  sku:
-    context: inventory
-    name: sku
-    title: Stock Keeping Unit
-    type: string
-    example: AC1212ME1
-    description: |
-      A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
-      It is typically associated with an article's barcode, such as the EAN/GTIN.
 ```
 
 Schema
