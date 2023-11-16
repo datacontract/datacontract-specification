@@ -19,12 +19,12 @@ They make semantic and quality expectations explicit.
 They are often created collaboratively in [workshops](/workshop) together with data providers and data consumers. 
 Later in development and production, they also serve as the basis for code generation, testing, schema validations, quality checks, monitoring, access control, and computational governance policies.
 
+The specification comes along with the [Data Contract CLI](https://github.com/datacontract/cli), an open-source tool to develop, validate, and enforce data contracts.
+
 _Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. 
 The term "contract" may be somewhat misleading, but it is how it is used in practice. 
 The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. 
 Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes._
-
-The [Data Contract CLI](https://github.com/datacontract/cli) is an open-source tool to develop, maintain, and automate data contracts.
 
 Version
 ---
