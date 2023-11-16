@@ -71,7 +71,7 @@ models:
     type: table 
     fields:
       order_id:
-        $ref: '#/definitions/checkout/orderId'
+        $ref: '#/definitions/order_id'
       order_timestamp:
         type: timestamp_tz
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
