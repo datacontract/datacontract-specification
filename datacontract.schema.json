@@ -276,7 +276,7 @@
                     "double",
                     "string", "text", "varchar",
                     "boolean",
-                    "timestamp_tz",
+                    "timestamp",
                     "timestamp_ntz",
                     "date",
                     "array",

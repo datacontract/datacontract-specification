@@ -70,7 +70,7 @@ models:
       order_id:
         $ref: '#/definitions/order_id'
       order_timestamp:
-        type: timestamp_tz
+        type: timestamp
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
       order_total:
         type: long
@@ -348,25 +348,6 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 | classification | `string`                 | The data class defining the sensitivity level for this field, according to the organization's classification scheme. |
 | tags           | Array of `string`        | Custom metadata to provide additional context.                                                                       |
 
-
-### Data Types
-
-The following data types are supported for model fields and definitions:
-
-- number, decimal, numeric
-- int, integer
-- long, bigint
-- float
-- double
-- string, text, varchar
-- boolean
-- timestamp_tz
-- timestamp_ntz
-- date
-- array
-- object, record, struct
-- binary
-- null
 
 ### Schema Object
 
@@ -661,6 +642,25 @@ quality:
           timestamp_field: created
           field: order_status
 ```
+
+### Data Types
+
+The following data types are supported for model fields and definitions:
+
+- Any numeric type, either integers or floating point numbers: `number`, `decimal`, `numeric`
+- 32-bit signed integer: `int`, `integer`
+- 64-bit signed integer: `long`, `bigint`
+- Single precision (32-bit) IEEE 754 floating-point number: `float`
+- Double precision (64-bit) IEEE 754 floating-point number: `double`
+- unicode character sequence: `string`, `text`, `varchar`
+- Binary value: `boolean`
+- Timestamp with timezone: `timestamp`, `timestamp_tz`
+- Timestamp with no timezone: `timestamp_ntz`
+- Date with no time information: `date`
+- Array: `array`
+- Sequence of 8-bit unsigned bytes: `bytes`
+- Complex type: `object`, `record`, `struct`
+- No value: `null`
 
 ### Specification Extensions
 
