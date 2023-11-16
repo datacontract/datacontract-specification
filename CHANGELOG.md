@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-## [0.9.1] - 2023-11-15
+## [0.9.1] - 2023-11-16
 
 ### Added
 
@@ -17,6 +17,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Property `info.dataProduct` as data products should define which data contracts they implement.
 - Property `info.outputPort` as data products should define which data contracts they implement.
+
+Those removals are not considered as breaking changes, as these attributes are now treated as specification extensions.
 
 ## [0.9.0] - 2023-09-12
 

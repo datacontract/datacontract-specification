@@ -24,10 +24,7 @@ The term "contract" may be somewhat misleading, but it is how it is used in prac
 The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. 
 Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes._
 
-CLI
----
-
-The [Data Contract CLI](https://github.com/datacontract/cli) is an open-source CLI tool to help you develop, maintain, and automate data contracts.
+The [Data Contract CLI](https://github.com/datacontract/cli) is an open-source tool to develop, maintain, and automate data contracts.
 
 Version
 ---
@@ -152,6 +149,21 @@ quality:
 Schema
 ---
 
+- [Data Contract Object](#data-contract-object)
+- [Info Object](#info-object)
+- [Contact Object](#contact-object)
+- [Server Object](#server-object)
+- [Terms Object](#terms-object)
+- [Model Object](#model-object)
+- [Field Object](#field-object)
+- [Definition Object](#definition-object)
+- [Schema Object](#schema-object)
+- [Example Object](#example-object)
+- [Quality Object](#quality-object)
+- [Data Types](#data-types)
+- [Specification Extensions](#specification-extensions)
+
+
 [JSON Schema](https://github.com/datacontract/datacontract-specification/blob/main/datacontract.schema.json) of the Data Contract Specification.
 
 ### Data Contract Object
@@ -191,7 +203,7 @@ Metadata and life cycle information about the data contract.
 | owner   | `string` | The owner or team responsible for managing the data contract and providing the data.                                                                            |
 | contact | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                       |
 
-
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
 
 ### Contact Object
@@ -307,15 +319,15 @@ The name of the data model (table name) is defined by the key that refers to thi
 
 The Field Objects describes one field (column, property, nested field) of a data model.
 
-| Field          | Type                    | Description                                                                                                                                                                            |
-|----------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type           | [Data Type](#data-type) | The logical data type of the field.                                                                                                                                                    |
-| description    | `string`                | An optional string describing the semantic of the data in this field.                                                                                                                  |
-| nullable       | `boolean`               | An indication, if this field can be null.                                                                                                                                              | 
-| pii            | `boolean`               | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                         | 
-| classification | `string`                | The data class defining the sensitivity level for this field, according to the organization's classification scheme. Examples may be: `sensitive`, `restricted`, `internal`, `public`. |
-| tags           | Array of `string`       | Custom metadata to provide additional context.                                                                                                                                         |
-| $ref           | `string`                | A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition.                                                      |
+| Field          | Type                     | Description                                                                                                                                                                            |
+|----------------|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type           | [Data Type](#data-types) | The logical data type of the field.                                                                                                                                                    |
+| description    | `string`                 | An optional string describing the semantic of the data in this field.                                                                                                                  |
+| nullable       | `boolean`                | An indication, if this field can be null.                                                                                                                                              | 
+| pii            | `boolean`                | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                         | 
+| classification | `string`                 | The data class defining the sensitivity level for this field, according to the organization's classification scheme. Examples may be: `sensitive`, `restricted`, `internal`, `public`. |
+| tags           | Array of `string`        | Custom metadata to provide additional context.                                                                                                                                         |
+| $ref           | `string`                 | A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition.                                                      |
 
 
 ### Definition Object
@@ -324,20 +336,20 @@ The Definition Object includes a clear and concise explanations of syntax, seman
 It serves as a reference for a common understanding of terminology, ensure consistent usage and to identify join-able fields.
 Models fields can refer to definitions using the `$ref` field to link to existing definitions and avoid duplicate documentations.
 
-| Field          | Type                    | Description                                                                                                          |
-|----------------|-------------------------|----------------------------------------------------------------------------------------------------------------------|
-| context        | `string`                | The context in which this definition is valid. Default: `global`.                                                    |
-| name           | `string`                | The technical name of this definition.                                                                               |
-| title          | `string`                | The business name of this definition.                                                                                |
-| type           | [Data Type](#data-type) | The logical data type                                                                                                |
-| description    | `string`                | Clear and concise explanations related to the context                                                                |
-| example        | `string`                | An example value.                                                                                                    |
-| pii            | `boolean`               | An indication, if this field contains Personal Identifiable Information (PII).                                       |
-| classification | `string`                | The data class defining the sensitivity level for this field, according to the organization's classification scheme. |
-| tags           | Array of `string`       | Custom metadata to provide additional context.                                                                       |
+| Field          | Type                     | Description                                                                                                          |
+|----------------|--------------------------|----------------------------------------------------------------------------------------------------------------------|
+| context        | `string`                 | The context in which this definition is valid. Default: `global`.                                                    |
+| name           | `string`                 | The technical name of this definition.                                                                               |
+| title          | `string`                 | The business name of this definition.                                                                                |
+| type           | [Data Type](#data-types) | The logical data type                                                                                                |
+| description    | `string`                 | Clear and concise explanations related to the context                                                                |
+| example        | `string`                 | An example value.                                                                                                    |
+| pii            | `boolean`                | An indication, if this field contains Personal Identifiable Information (PII).                                       |
+| classification | `string`                 | The data class defining the sensitivity level for this field, according to the organization's classification scheme. |
+| tags           | Array of `string`        | Custom metadata to provide additional context.                                                                       |
 
 
-### Data Type
+### Data Types
 
 The following data types are supported for model fields and definitions:
 
