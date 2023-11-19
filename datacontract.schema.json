@@ -5,7 +5,8 @@
     "dataContractSpecification": {
       "type": "string",
       "enum": [
-        "0.9.1"
+        "0.9.1",
+        "0.9.0"
       ],
       "description": "Specifies the Data Contract Specification being used."
     },
@@ -242,6 +243,7 @@
       }
     },
     "models": {
+      "description": "Specifies the logical data model. Use the models name (e.g., the table name) as the key.",
       "type": "object",
       "minProperties": 1,
       "propertyNames": {
@@ -254,9 +256,12 @@
             "type": "string"
           },
           "type": {
-            "type": "string"
+            "description": "The type of the model. Examples: table, object. Default: table.",
+            "type": "string",
+            "default": "table",
           },
           "fields": {
+            "description": "Specifies a field in the data model. Use the field name (e.g., the column name) as the key.",
             "type": "object",
             "additionalProperties": {
               "type": "object",
