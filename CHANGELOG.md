@@ -14,7 +14,7 @@ The public API SHOULD NOT be considered stable.
 
 ### Added
 
-- A generic data model (#13), mainly to simplify editor support with a defined schema, and better Databricks support that has no standard schema model.
+- A logical data model (#13), mainly to simplify editor support with a defined schema, easier to detect breaking changes, and better Databricks support.
 - Definitions (#14) for reusable semantic definitions within one data contract or across data contracts. 
 
 ### Removed
