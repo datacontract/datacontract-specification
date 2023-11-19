@@ -179,10 +179,10 @@ It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 | info                      | [Info Object](#info-object)                          | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                           |
 | servers                   | Map[string, [Server Object](#server-object)]         | Specifies the servers of the data contract.                                                              |
 | terms                     | [Terms Object](#terms-object)                        | Specifies the terms and conditions of the data contract.                                                 |
-| models                    | Map[string, [Model Object](#model-object)]           | Specifies the data model.                                                                                |
+| models                    | Map[string, [Model Object](#model-object)]           | Specifies the logical data model.                                                                                |
 | definitions               | Map[string, [Definition Object](#definition-object)] | Specifies definitions.                                                                                   |
 | schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                       |
-| examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the schema. The specification supports different example types.          |
+| examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.          |
 | quality                   | [Quality Object](#quality-object)                    | Specifies the quality attributes and checks. The specification supports different quality check DSLs.    |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
