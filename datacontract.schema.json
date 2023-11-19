@@ -381,7 +381,6 @@
         },
         "required": [
           "type",
-          "model",
           "data"
         ]
       },
