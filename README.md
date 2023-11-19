@@ -671,17 +671,16 @@ A custom fields can be added with any name. The value can be null, a primitive, 
 
 The Data Contract Specification follows these design principles:
 
-- Is an open standard and its serialization can be versioned in git
-- Follows OpenAPI and AsyncAPI conventions so that it feels immediately familiar
-- Supports tooling by being machine-readable
-- Supports existing well-known formats to avoid unnecessary abstractions
-- Supports contract-first approaches
-- Supports code-first approaches
+- A free, open, and open-sourced standard
+- Follow OpenAPI and AsyncAPI conventions so that it feels immediately familiar 
+- Support contract-first approaches
+- Support code-first approaches
+- Support tooling by being machine-readable
 
 Tooling
 ---
-- [Data Contract Studio](https://studio.datacontract.com/) is a free web tool to develop and share data contracts.
 - [Data Contract CLI](https://github.com/datacontract/cli) is a free CLI tool to help you create, develop, and maintain your data contracts.
+- [Data Contract Studio](https://studio.datacontract.com/) is a free web tool to develop and share data contracts.
 - [Data Mesh Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data products and data contracts. It supports the data contract specification and allows the user to import or export data contracts using this specification.
 
 
