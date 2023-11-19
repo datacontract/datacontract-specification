@@ -258,7 +258,7 @@
           "type": {
             "description": "The type of the model. Examples: table, object. Default: table.",
             "type": "string",
-            "default": "table",
+            "default": "table"
           },
           "fields": {
             "description": "Specifies a field in the data model. Use the field name (e.g., the column name) as the key.",
