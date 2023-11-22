@@ -89,7 +89,7 @@ models:
         $ref: '#/definitions/sku'
 definitions:
   order_id:
-    context: checkout
+    domain: checkout
     name: order_id
     title: Order ID
     type: string
@@ -98,7 +98,7 @@ definitions:
     pii: true
     classification: restricted
   sku:
-    context: inventory
+    domain: inventory
     name: sku
     title: Stock Keeping Unit
     type: string
@@ -331,17 +331,17 @@ The Field Objects describes one field (column, property, nested field) of a data
 
 ### Definition Object
 
-The Definition Object includes a clear and concise explanations of syntax, semantic, and classification of a business object in a given context.
+The Definition Object includes a clear and concise explanations of syntax, semantic, and classification of a business object in a given domain.
 It serves as a reference for a common understanding of terminology, ensure consistent usage and to identify join-able fields.
 Models fields can refer to definitions using the `$ref` field to link to existing definitions and avoid duplicate documentations.
 
 | Field          | Type                     | Description                                                                                                          |
 |----------------|--------------------------|----------------------------------------------------------------------------------------------------------------------|
-| context        | `string`                 | The context in which this definition is valid. Default: `global`.                                                    |
+| domain         | `string`                 | The domain in which this definition is valid. Default: `global`.                                                     |
 | name           | `string`                 | The technical name of this definition.                                                                               |
 | title          | `string`                 | The business name of this definition.                                                                                |
 | type           | [Data Type](#data-types) | The logical data type                                                                                                |
-| description    | `string`                 | Clear and concise explanations related to the context                                                                |
+| description    | `string`                 | Clear and concise explanations related to the domain                                                                 |
 | example        | `string`                 | An example value.                                                                                                    |
 | pii            | `boolean`                | An indication, if this field contains Personal Identifiable Information (PII).                                       |
 | classification | `string`                 | The data class defining the sensitivity level for this field, according to the organization's classification scheme. |
