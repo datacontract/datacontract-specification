@@ -58,27 +58,6 @@ info:
 #  billing:
 #  noticePeriod:
 
-### models
-# models:
-#   my_model:
-#     description:
-#     type:
-#     fields:
-#       my_field:
-#         type: 
-#         description:
-
-### definitions
-# definitions: 
-#   my_field: 
-#     domain: 
-#     name: 
-#     title: 
-#     type: 
-#     description: 
-#     example: 
-#     pii:
-#     classification: 
 
 ### schema
 
