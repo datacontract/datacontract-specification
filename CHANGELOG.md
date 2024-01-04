@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Please note,  while the major version is zero (0.y.z), Anything MAY change at any time. 
 The public API SHOULD NOT be considered stable.
 
+## [0.9.2] - 2024-01-04
+
+### Added
+
+- Format and validation attributes to fields in models and definitions
+
 ## [0.9.1] - 2023-11-19
 
 ### Added
