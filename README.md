@@ -29,7 +29,7 @@ Data usage agreements have a defined lifecycle, start/end date, and help the dat
 Version
 ---
 
-0.9.1 ([Changelog](CHANGELOG.md))
+0.9.2 ([Changelog](CHANGELOG.md))
 
 Example
 ---
@@ -37,7 +37,7 @@ Example
 [![Open in Data Contract Studio](https://img.shields.io/badge/open%20in-Data%20Contract%20Studio-blue)](https://studio.datacontract.com/)
 
 ```yaml
-dataContractSpecification: 0.9.1
+dataContractSpecification: 0.9.2
 id: urn:datacontract:checkout:orders-latest-npii
 info:
   title: Orders Latest NPII
@@ -70,18 +70,32 @@ models:
       order_id:
         $ref: '#/definitions/order_id'
       order_timestamp:
-        type: timestamp
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
+        type: timestamp
+        required: true 
       order_total:
-        type: long
         description: Total amount the smallest monetary unit (e.g., cents).
+        type: long
+        required: true
+      customer_id:
+        description: Unique identifier for the customer.
+        type: text
+        minLength: 10
+        maxLength: 20
+      customer_email_address:
+        description: The email address, as entered by the customer. The email address was not verified.
+        type: text
+        format: email
+        required: true
   line_items:
     description: A single article that is part of an order.  
     type: table
     fields:
       lines_item_id:
-        type: string
+        type: text
         description: Primary key of the lines_item_id table
+        required: true
+        unique: true
       order_id:
         $ref: '#/definitions/order_id'
       sku:
@@ -92,7 +106,8 @@ definitions:
     domain: checkout
     name: order_id
     title: Order ID
-    type: string
+    type: text
+    format: uuid
     description: An internal ID that identifies an order in the online shop.
     example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
     pii: true
@@ -101,8 +116,9 @@ definitions:
     domain: inventory
     name: sku
     title: Stock Keeping Unit
-    type: string
-    example: AC1212ME1
+    type: text
+    pattern: ^[A-Za-z0-9]{8,14}$
+    example: 96385074
     description: |
       A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
       It is typically associated with an article's barcode, such as the EAN/GTIN.
@@ -319,14 +335,21 @@ The name of the data model (table name) is defined by the key that refers to thi
 
 The Field Objects describes one field (column, property, nested field) of a data model.
 
-| Field          | Type                     | Description                                                                                                                                                                            |
-|----------------|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type           | [Data Type](#data-types) | The logical data type of the field.                                                                                                                                                    |
-| description    | `string`                 | An optional string describing the semantic of the data in this field.                                                                                                                  |
-| pii            | `boolean`                | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                         | 
-| classification | `string`                 | The data class defining the sensitivity level for this field, according to the organization's classification scheme. Examples may be: `sensitive`, `restricted`, `internal`, `public`. |
-| tags           | Array of `string`        | Custom metadata to provide additional context.                                                                                                                                         |
-| $ref           | `string`                 | A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition.                                                      |
+| Field          | Type                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|----------------|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| description    | `string`                 | An optional string describing the semantic of the data in this field.                                                                                                                                                                                                                                                                                                                                                        |
+| type           | [Data Type](#data-types) | The logical data type of the field.                                                                                                                                                                                                                                                                                                                                                                                          |
+| required       | `boolean`                | An indication, if this field must contain a value and may not be null. Default: `false`                                                                                                                                                                                                                                                                                                                                      |
+| unique         | `boolean`                | An indication, if the value must be unique within the model. Default: `false`                                                                                                                                                                                                                                                                                                                                                |
+| format         | `string`                 | `email`: A value must be complaint to [RFC 5321, section 4.1.2](https://www.rfc-editor.org/info/rfc5321).<br>`uri`: A value must be complaint to [RFC 3986](https://www.rfc-editor.org/info/rfc3986).<br>`uuid`: A value must be complaint to [RFC 4122](https://www.rfc-editor.org/info/rfc4122). Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`). |
+| minLength      | `number`                 | A value must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                         |
+| maxLength      | `number`                 | A value must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                            |
+| pattern        | `string`                 | A value must be valid according to the [ECMA-262](https://262.ecma-international.org/5.1/) regular expression dialect. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                             |
+| example        | `string`                 | An example value.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| pii            | `boolean`                | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               | 
+| classification | `string`                 | The data class defining the sensitivity level for this field, according to the organization's classification scheme. Examples may be: `sensitive`, `restricted`, `internal`, `public`.                                                                                                                                                                                                                                       |
+| tags           | Array of `string`        | Custom metadata to provide additional context.                                                                                                                                                                                                                                                                                                                                                                               |
+| $ref           | `string`                 | A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition.                                                                                                                                                                                                                                                                                            |
 
 
 ### Definition Object
@@ -335,17 +358,28 @@ The Definition Object includes a clear and concise explanations of syntax, seman
 It serves as a reference for a common understanding of terminology, ensure consistent usage and to identify join-able fields.
 Models fields can refer to definitions using the `$ref` field to link to existing definitions and avoid duplicate documentations.
 
-| Field          | Type                     | Description                                                                                                          |
-|----------------|--------------------------|----------------------------------------------------------------------------------------------------------------------|
-| domain         | `string`                 | The domain in which this definition is valid. Default: `global`.                                                     |
-| name           | `string`                 | The technical name of this definition.                                                                               |
-| title          | `string`                 | The business name of this definition.                                                                                |
-| type           | [Data Type](#data-types) | The logical data type                                                                                                |
-| description    | `string`                 | Clear and concise explanations related to the domain                                                                 |
-| example        | `string`                 | An example value.                                                                                                    |
-| pii            | `boolean`                | An indication, if this field contains Personal Identifiable Information (PII).                                       |
-| classification | `string`                 | The data class defining the sensitivity level for this field, according to the organization's classification scheme. |
-| tags           | Array of `string`        | Custom metadata to provide additional context.                                                                       |
+| Field            | Type                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|------------------|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| domain           | `string`                 | The domain in which this definition is valid. Default: `global`.                                                                                                                                                                                                                                                                                                                                                             |
+| name             | `string`                 | The technical name of this definition.                                                                                                                                                                                                                                                                                                                                                                                       |
+| title            | `string`                 | The business name of this definition.                                                                                                                                                                                                                                                                                                                                                                                        |
+| description      | `string`                 | Clear and concise explanations related to the domain                                                                                                                                                                                                                                                                                                                                                                         |
+| type             | [Data Type](#data-types) | The logical data type                                                                                                                                                                                                                                                                                                                                                                                                        |
+| required         | `boolean`                | An indication, if this field must contain a value and may not be null. Default: `false`                                                                                                                                                                                                                                                                                                                                      |
+| unique           | `boolean`                | An indication, if the value must be unique within the model. Default: `false`                                                                                                                                                                                                                                                                                                                                                |
+| enum             | array of `string`        | A value must be equal to one of the elements in this array value. Only evaluated if the value is not null.                                                                                                                                                                                                                                                                                                                   |
+| format           | `string`                 | `email`: A value must be complaint to [RFC 5321, section 4.1.2](https://www.rfc-editor.org/info/rfc5321).<br>`uri`: A value must be complaint to [RFC 3986](https://www.rfc-editor.org/info/rfc3986).<br>`uuid`: A value must be complaint to [RFC 4122](https://www.rfc-editor.org/info/rfc4122). Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`). |
+| minLength        | `number`                 | A value must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                         |
+| maxLength        | `number`                 | A value must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                            |
+| pattern          | `string`                 | A value must be valid according to the [ECMA-262](https://262.ecma-international.org/5.1/) regular expression dialect. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                             |
+| minimum          | `number`                 | A value of a number must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                              |
+| exclusiveMinimum | `number`                 | A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                            |
+| maximum          | `number`                 | A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                 |
+| exclusiveMaximum | `number`                 | A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                               |
+| example          | `string`                 | An example value.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| pii              | `boolean`                | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               |
+| classification   | `string`                 | The data class defining the sensitivity level for this field, according to the organization's classification scheme.                                                                                                                                                                                                                                                                                                         |
+| tags             | Array of `string`        | Custom metadata to provide additional context.                                                                                                                                                                                                                                                                                                                                                                               |
 
 
 ### Schema Object
