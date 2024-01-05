@@ -69,6 +69,8 @@ models:
     fields:
       order_id:
         $ref: '#/definitions/order_id'
+        required: true
+        unique: true
       order_timestamp:
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
         type: timestamp
