@@ -301,6 +301,14 @@
                   "default": false,
                   "description": "An indication, if the value must be unique within the model."
                 },
+                "enum": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true,
+                  "description": "A value must be equal to one of the elements in this array value. Only evaluated if the value is not null."
+                },
                 "minLength": {
                   "type": "number",
                   "description": "A value must greater than, or equal to, the value of this. Only applies to string types."
@@ -316,6 +324,22 @@
                 "pattern": {
                   "type": "string",
                   "description": "A regular expression the value must match. Only applies to string types."
+                },
+                "minimum": {
+                  "type": "number",
+                  "description": "A value of a number must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values."
+                },
+                "exclusiveMinimum": {
+                  "type": "number",
+                  "description": "A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values."
+                },
+                "maximum": {
+                  "type": "number",
+                  "description": "A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values."
+                },
+                "exclusiveMaximum": {
+                  "type": "number",
+                  "description": "A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values."
                 },
                 "example": {
                   "type": "string",
