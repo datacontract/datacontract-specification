@@ -388,7 +388,6 @@
     "definitions": {
       "description": "Clear and concise explanations of syntax, semantic, and classification of business objects in a given domain.",
       "type": "object",
-      "minProperties": 1,
       "propertyNames": {
         "pattern": "^[a-zA-Z0-9_-]+$"
       },
@@ -461,12 +460,12 @@
             },
             "description": "Custom metadata to provide additional context."
           }
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
+        },
+        "required": [
+          "name",
+          "type"
+        ]
+      }
     },
     "schema": {
       "type": "object",
