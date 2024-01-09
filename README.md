@@ -240,10 +240,10 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                              |
-|-------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `kafka` |
-| description | `string` | An optional string describing the server.                                                                                                                                |
+| Field       | Type     | Description                                                                                                                                                                       |
+|-------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `kafka`, `local` |
+| description | `string` | An optional string describing the server.                                                                                                                                         |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -304,6 +304,14 @@ servers:
 | type  | `string` | `kafka`     |
 | host  | `string` |             |
 | topic | `string` |             |
+
+#### Local Server Object
+
+| Field  | Type     | Description                                                                         |
+|--------|----------|-------------------------------------------------------------------------------------|
+| type   | `string` | `local`                                                                             |
+| path   | `string` | The relative or absolute path to the data file(s), such as `./folder/data.parquet`. |
+| format | `string` | The format of the file(s), such as `parquet`, `csv`, or `json`.                     |
 
 
 

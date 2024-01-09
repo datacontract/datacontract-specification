@@ -216,7 +216,38 @@
               "host",
               "topic"
             ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "local"
+                ],
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "path": {
+                "type": "string",
+                "description": "The relative or absolute path to the data file(s).",
+                "examples": [
+                  "./folder/data.parquet",
+                  "./folder/*.parquet"
+                ]
+              },
+              "format": {
+                "type": "string",
+                "description": "The format of the file(s)",
+                "examples": ["json", "parquet", "csv"]
+              }
+            },
+            "required": [
+              "type",
+              "host",
+              "topic"
+            ]
           }
+
         ]
       },
       "description": "Information about the servers."
