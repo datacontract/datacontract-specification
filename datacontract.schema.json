@@ -250,8 +250,8 @@
             "additionalProperties": true,
             "required": [
               "type",
-              "host",
-              "topic"
+              "path",
+              "format"
             ]
           }
 
