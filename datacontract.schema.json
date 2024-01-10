@@ -85,6 +85,7 @@
                 "description": "An optional string describing the server."
               }
             },
+            "additionalProperties": true,
             "required": [
               "type",
               "project",
@@ -107,6 +108,7 @@
                 "description": "An optional string describing the server. Must be in the form of a URL."
               }
             },
+            "additionalProperties": true,
             "required": [
               "type",
               "location"
@@ -135,6 +137,7 @@
                 "description": "An optional string describing the server."
               }
             },
+            "additionalProperties": true,
             "required": [
               "type",
               "account",
@@ -165,6 +168,7 @@
                 "description": "An optional string describing the server."
               }
             },
+            "additionalProperties": true,
             "required": [
               "type",
               "account",
@@ -187,6 +191,7 @@
                 "description": "An optional string describing the server."
               }
             },
+            "additionalProperties": true,
             "required": [
               "type",
               "share"
@@ -211,6 +216,7 @@
                 "description": "An optional string describing the server."
               }
             },
+            "additionalProperties": true,
             "required": [
               "type",
               "host",
@@ -241,6 +247,7 @@
                 "examples": ["json", "parquet", "csv"]
               }
             },
+            "additionalProperties": true,
             "required": [
               "type",
               "host",
