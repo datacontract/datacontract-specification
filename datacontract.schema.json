@@ -453,16 +453,6 @@
             "type": "string",
             "description": "The logical data type."
           },
-          "required": {
-            "type": "boolean",
-            "default": false,
-            "description": "An indication if this field must contain a value and may not be null."
-          },
-          "unique": {
-            "type": "boolean",
-            "default": false,
-            "description": "An indication if the value must be unique within the model."
-          },
           "minLength": {
             "type": "number",
             "description": "A value must be greater than or equal to this value. Applies only to string types."
