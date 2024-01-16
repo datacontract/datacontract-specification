@@ -261,6 +261,9 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 |----------|----------|--------------------------------|
 | type     | `string` | `s3`                           |
 | location | `string` | S3 URL, starting with `s3://`  |
+| endpointUrl | `string` | The server endpoint for S3-compatible servers, such as `https://minio.example.com`  |
+| format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`  |
+| delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array`  |
 
 Example:
 
