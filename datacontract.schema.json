@@ -558,7 +558,7 @@
               "type": "string",
               "description": "Example data for this model."
             },{
-              "type": "object",
+              "type": "array",
               "description": "Example data for this model in a structured format. Use this for type json or yaml."
             }]
           }
