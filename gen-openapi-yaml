@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# INSTALL BEFORE
+# npm install -g @openapi-contrib/json-schema-to-openapi-schema
+# brew install yq
+
+json-schema-to-openapi-schema convert datacontract.schema.json > datacontract.schema.openapi-format.json
+yq --input-format=json --output-format=yaml --prettyPrint datacontract.schema.openapi-format.json > datacontract.schema.openapi-format.yaml
+echo "Compare 'datacontract.schema.openapi-format.yaml' with openapi.yaml of the Data Mesh Manager"
