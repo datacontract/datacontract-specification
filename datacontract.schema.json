@@ -64,7 +64,7 @@
     "servers": {
       "type": "object",
       "additionalProperties": {
-        "anyOf": [
+        "oneOf": [
           {
             "type": "object",
             "properties": {
@@ -512,7 +512,7 @@
           "description": "The type of the schema. Typical values are: dbt, bigquery, json-schema, sql-ddl, avro, protobuf, custom."
         },
         "specification": {
-          "anyOf": [
+          "oneOf": [
             {
               "type": "string",
               "description": "The specification of the schema as a string."
@@ -578,7 +578,7 @@
           "description": "The type of the quality check. Typical values are: SodaCL, montecarlo, custom."
         },
         "specification": {
-          "anyOf": [
+          "oneOf": [
             {
               "type": "string",
               "description": "The specification of the quality attributes as a string."
