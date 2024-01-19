@@ -543,7 +543,7 @@
               "yaml",
               "custom"
             ],
-            "description": "The type of the example data. Well-known types are: csv, json, yaml, custom."
+            "description": "The type of the example data. Well-known types are csv, json, yaml, custom."
           },
           "description": {
             "type": "string",
@@ -554,8 +554,13 @@
             "description": "The reference to the model in the schema, e.g., a table name."
           },
           "data": {
-            "type": "string",
-            "description": "Example data for this model."
+            "oneOf": [{
+              "type": "string",
+              "description": "Example data for this model."
+            },{
+              "type": "object",
+              "description": "Example data for this model in a structured format. Use this for type json or yaml."
+            }]
           }
         },
         "required": [
