@@ -2,72 +2,66 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "description": "Clear and concise explanations of syntax, semantic, and classification of business objects in a given domain.",
-  "propertyNames": {
-    "pattern": "^[a-zA-Z0-9_-]+$"
-  },
-  "additionalProperties": {
-    "type": "object",
-    "properties": {
-      "domain": {
-        "type": "string",
-        "description": "The domain in which this definition is valid.",
-        "default": "global"
-      },
-      "name": {
-        "type": "string",
-        "description": "The technical name of this definition."
-      },
-      "title": {
-        "type": "string",
-        "description": "The business name of this definition."
-      },
-      "description": {
-        "type": "string",
-        "description": "Clear and concise explanations related to the domain."
-      },
-      "type": {
-        "type": "string",
-        "description": "The logical data type."
-      },
-      "minLength": {
-        "type": "number",
-        "description": "A value must be greater than or equal to this value. Applies only to string types."
-      },
-      "maxLength": {
-        "type": "number",
-        "description": "A value must be less than or equal to this value. Applies only to string types."
-      },
-      "format": {
-        "type": "string",
-        "description": "Specific format requirements for the value (e.g., 'email', 'uri', 'uuid')."
-      },
-      "pattern": {
-        "type": "string",
-        "description": "A regular expression pattern the value must match. Applies only to string types."
-      },
-      "example": {
-        "type": "string",
-        "description": "An example value."
-      },
-      "pii": {
-        "type": "boolean",
-        "description": "Indicates if the field contains Personal Identifiable Information (PII)."
-      },
-      "classification": {
-        "type": "string",
-        "description": "The data class defining the sensitivity level for this field."
-      },
-      "tags": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "description": "Custom metadata to provide additional context."
-      }
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "The domain in which this definition is valid.",
+      "default": "global"
     },
-    "required": [
-      "name",
-      "type"
-    ]
-  }
+    "name": {
+      "type": "string",
+      "description": "The technical name of this definition."
+    },
+    "title": {
+      "type": "string",
+      "description": "The business name of this definition."
+    },
+    "description": {
+      "type": "string",
+      "description": "Clear and concise explanations related to the domain."
+    },
+    "type": {
+      "type": "string",
+      "description": "The logical data type."
+    },
+    "minLength": {
+      "type": "number",
+      "description": "A value must be greater than or equal to this value. Applies only to string types."
+    },
+    "maxLength": {
+      "type": "number",
+      "description": "A value must be less than or equal to this value. Applies only to string types."
+    },
+    "format": {
+      "type": "string",
+      "description": "Specific format requirements for the value (e.g., 'email', 'uri', 'uuid')."
+    },
+    "pattern": {
+      "type": "string",
+      "description": "A regular expression pattern the value must match. Applies only to string types."
+    },
+    "example": {
+      "type": "string",
+      "description": "An example value."
+    },
+    "pii": {
+      "type": "boolean",
+      "description": "Indicates if the field contains Personal Identifiable Information (PII)."
+    },
+    "classification": {
+      "type": "string",
+      "description": "The data class defining the sensitivity level for this field."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom metadata to provide additional context."
+    }
+  },
+  "required": [
+    "name",
+    "type"
+  ]
 }
