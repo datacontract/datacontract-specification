@@ -406,6 +406,15 @@
                     "public"
                   ]
                 },
+                "anonymization": {
+                    "type": "string",
+                    "description": "The anonymization method used for this field. If the field contains PII, this field should be set to the anonymization method used. Examples: hashed, masked, none.",
+                    "examples": [
+                      "hashed",
+                      "masked",
+                      "none"
+                    ]
+                },
                 "tags": {
                   "type": "array",
                   "items": {
