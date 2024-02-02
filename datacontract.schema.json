@@ -299,6 +299,16 @@
             "type": "string",
             "default": "table"
           },
+          "classification": {
+            "type": "string",
+            "description": "The data class defining the sensitivity level for this model, according to the organization's classification scheme.",
+            "examples": [
+              "sensitive",
+              "restricted",
+              "internal",
+              "public"
+            ]
+          },
           "fields": {
             "description": "Specifies a field in the data model. Use the field name (e.g., the column name) as the key.",
             "type": "object",
