@@ -336,11 +336,12 @@ The Model Object describes the structure and semantics of a data model, such as 
 
 The name of the data model (table name) is defined by the key that refers to this Model Object.
 
-| Field       | Type                                         | Description                                                           |
-|-------------|----------------------------------------------|-----------------------------------------------------------------------|
-| type        | `string`                                     | The type of the model. Examples: `table`, `object`. Default: `table`. |
-| description | `string`                                     | An optional string describing the data model.                         |
-| fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                          |
+| Field          | Type                                         | Description                                                                                                                                                                                                                                                                                                                                   |
+|----------------|----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type           | `string`                                     | The type of the model. Examples: `table`, `object`. Default: `table`.                                                                                                                                                                                                                                                                         |
+| description    | `string`                                     | An optional string describing the data model.                                                                                                                                                                                                                                                                                                 |
+| classification | `string`                                     | The data class defining the sensitivity level for this model, according to the organization's classification scheme. Sensitivity may be higher than the sensitivity of the fields, e.g., the combination of two `internal` fields may result in a model being `sensitivie`. Examples may be: `sensitive`, `restricted`, `internal`, `public`. |
+| fields         | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                                                                                                                                                                                                                                  |
 
 
 
