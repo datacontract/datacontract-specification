@@ -38,20 +38,24 @@ Example
 
 ```yaml
 dataContractSpecification: 0.9.2
-id: urn:datacontract:checkout:orders-latest-npii
+id: urn:datacontract:checkout:orders-latest
 info:
-  title: Orders Latest NPII
+  title: Orders Latest
   version: 1.0.0
-  description: Successful customer orders in the webshop. All orders since 2020-01-01. Orders with their line items are in their current state (no history included). PII data is removed.
+  description: |
+    Successful customer orders in the webshop. 
+    All orders since 2020-01-01. 
+    Orders with their line items are in their current state (no history included). 
   owner: Checkout Team
   contact:
     name: John Doe (Data Product Owner)
-    email: john.doe@example.com
+    url: https://teams.microsoft.com/l/channel/example/checkout
 servers:
   production:
-    type: BigQuery
-    project: acme_orders_prod
-    dataset: bigquery_orders_latest_npii_v1
+    type: s3
+    location: s3://datacontract-example-orders-latest/data/{model}/*.json
+    format: json
+    delimiter: new_line
 terms:
   usage: >
     Data can be used for reports, analytics and machine learning use cases.
@@ -65,7 +69,7 @@ terms:
 models:
   orders:
     description: One record per order. Includes cancelled and deleted orders.
-    type: table 
+    type: table
     fields:
       order_id:
         $ref: '#/definitions/order_id'
@@ -74,7 +78,7 @@ models:
       order_timestamp:
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
         type: timestamp
-        required: true 
+        required: true
       order_total:
         description: Total amount the smallest monetary unit (e.g., cents).
         type: long
@@ -90,7 +94,7 @@ models:
         format: email
         required: true
   line_items:
-    description: A single article that is part of an order.  
+    description: A single article that is part of an order.
     type: table
     fields:
       lines_item_id:
@@ -120,7 +124,7 @@ definitions:
     title: Stock Keeping Unit
     type: text
     pattern: ^[A-Za-z0-9]{8,14}$
-    example: 96385074
+    example: "96385074"
     description: |
       A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
       It is typically associated with an article's barcode, such as the EAN/GTIN.
@@ -158,11 +162,38 @@ quality:
   specification: # expressed as string or inline yaml or via "$ref: checks.yaml"
     checks for orders:
       - freshness(order_timestamp) < 24h
-      - row_count > 500000
+      - row_count >= 5000
       - duplicate_count(order_id) = 0
     checks for line_items:
-      - row_count > 500000
+      - values in (order_id) must exist in orders (order_id)
+      - row_count >= 5000
 ```
+
+Data Contract Testing
+---
+
+Use [Data Contract CLI](https://cli.datacontract.com) to verify that your actual dataset matches the defined model and quality expectations. 
+
+```bash
+pip3 install datacontract-cli
+datacontract test https://datacontract.com/examples/orders-latest/datacontract.yaml
+```
+
+or, if you prefer Docker:
+```bash
+docker run datacontract/cli test https://datacontract.com/examples/orders-latest/datacontract.yaml
+```
+
+The Data Contract contains all required information to verify data: 
+
+- The servers block has the connection details to the actual data set.
+- The models define the syntax, formats, and constraints. 
+- The quality defined further quality checks.
+
+The Data Contract CLI chooses the appropriate engine to execute the tests, based on the server type.
+
+More information and configuration options on [cli.datacontract.com](https://cli.datacontract.com).
+
 
 Schema
 ---
