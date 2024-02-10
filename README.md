@@ -181,7 +181,7 @@ datacontract test https://datacontract.com/examples/orders-latest/datacontract.y
 
 or, if you prefer Docker:
 ```bash
-docker run datacontract/cli test https://datacontract.com/examples/orders-latest/datacontract.yaml
+docker run --platform linux/amd64 datacontract/cli test https://datacontract.com/examples/orders-latest/datacontract.yaml
 ```
 
 The Data Contract contains all required information to verify data: 
