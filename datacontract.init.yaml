@@ -1,8 +1,8 @@
-dataContractSpecification: 0.9.1
+dataContractSpecification: 0.9.2
 id: my-data-contract-id
 info:
   title: My Data Contract
-  version: 0.9.2
+  version: 0.0.1
 #  description:
 #  owner:
 #  contact:
@@ -30,6 +30,7 @@ info:
 
 
 ### models
+
 # models:
 #   my_model:
 #     description:
@@ -41,6 +42,7 @@ info:
 
 
 ### definitions
+
 # definitions: 
 #   my_field: 
 #     domain: 
@@ -57,7 +59,7 @@ info:
 
 #examples:
 #  - type: csv
-#    model: my_table
+#    model: my_model
 #    data: |-
 #      id,timestamp,amount
 #      "1001","2023-09-09T08:30:00Z",2500
@@ -69,5 +71,5 @@ info:
 #quality:
 #  type: SodaCL
 #  specification:
-#    checks for my_table: |-
+#    checks for my_model: |-
 #      - duplicate_count(id) = 0
