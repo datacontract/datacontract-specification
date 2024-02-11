@@ -181,14 +181,21 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "databricks"
-                ],
+                "const": "databricks",
                 "description": "The type of the data product technology that implements the data contract."
               },
-              "share": {
+              "host": {
                 "type": "string",
-                "description": "An optional string describing the server."
+                "description": "The Databricks host",
+                "examples": ["dbc-abcdefgh-1234.cloud.databricks.com"]
+              },
+              "catalog": {
+                "type": "string",
+                "description": "The name of the Hive or Unity catalog"
+              },
+              "schema": {
+                "type": "string",
+                "description": "The schema name in the catalog"
               }
             },
             "additionalProperties": true,

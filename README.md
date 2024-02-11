@@ -326,10 +326,12 @@ servers:
 
 #### Databricks Server Object
 
-| Field    | Type     | Description  |
-|----------|----------|--------------|
-| type     | `string` | `databricks` |
-| share     | `string` |              |
+| Field   | Type     | Description                                                         |
+|---------|----------|---------------------------------------------------------------------|
+| type    | `string` | `databricks`                                                        |
+| host    | `string` | The Databricks host, e.g., `dbc-abcdefgh-1234.cloud.databricks.com` |
+| catalog | `string` | The name of the Hive or Unity catalog                               |
+| schema  | `string` | The schema name in the catalog                                      |
 
 #### Kafka Server Object
 
