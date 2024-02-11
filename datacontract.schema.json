@@ -201,7 +201,9 @@
             "additionalProperties": true,
             "required": [
               "type",
-              "share"
+              "host",
+              "catalog",
+              "schema"
             ]
           },
           {
