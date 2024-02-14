@@ -32,10 +32,16 @@ Recommendation: keep the group small (not more than 5 people)
 
 1. Info (get the context)
 2. Examples (example-driven facilitation)
-3. Schema (you will spend most of your time here)
+3. Model (you will spend most of your time here)
+   - Use the [Data Contract CLI](https://cli.datacontract.com) to test the model against the previously created examples:
+    `datacontract test --examples datacontract.yaml`
 4. Quality
 5. Terms
 6. Servers (if already applicable)
+   - Start with a "local" server with actual, real data you downloaded
+   - Use the [Data Contract CLI](https://cli.datacontract.com) to test the model against the actual data on a specific server:
+    `datacontract test datacontract.yaml`
+   - Switch to the actual remote server, if applicable
 
 ## Tooling
 
