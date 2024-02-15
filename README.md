@@ -195,7 +195,7 @@ The Data Contract CLI chooses the appropriate engine to execute the tests, based
 More information and configuration options on [cli.datacontract.com](https://cli.datacontract.com).
 
 
-Schema
+Specification
 ---
 
 ![The eight major categories in the data contract specification](images/categories.png)
