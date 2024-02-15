@@ -198,6 +198,8 @@ More information and configuration options on [cli.datacontract.com](https://cli
 Schema
 ---
 
+![The eight major categories in the data contract specification](images/categories.png)
+
 - [Data Contract Object](#data-contract-object)
 - [Info Object](#info-object)
 - [Contact Object](#contact-object)
