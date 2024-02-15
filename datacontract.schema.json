@@ -211,9 +211,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "const": [
-                  "postgres"
-                ],
+                "const": "postgres",
                 "description": "The type of the data product technology that implements the data contract."
               },
               "host": {
