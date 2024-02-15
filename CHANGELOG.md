@@ -15,6 +15,8 @@ The public API SHOULD NOT be considered stable.
 ### Added
 
 - Format and validation attributes to fields in models and definitions
+- Postgres support
+- Databricks support
 
 ## [0.9.1] - 2023-11-19
 
