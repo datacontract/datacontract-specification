@@ -211,6 +211,45 @@
             "properties": {
               "type": {
                 "type": "string",
+                "const": [
+                  "postgres"
+                ],
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "host": {
+                "type": "string",
+                "description": "The host to the database server",
+                "examples": ["localhost"]
+              },
+              "port": {
+                "type": "integer",
+                "description": "The port to the database server."
+              },
+              "database": {
+                "type": "string",
+                "description": "The name of the database.",
+                "examples": ["postgres"]
+              },
+              "schema": {
+                "type": "string",
+                "description": "The name of the schema in the database.",
+                "examples": ["public"]
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "host",
+              "port",
+              "database",
+              "schema"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
                 "enum": [
                   "kafka"
                 ],

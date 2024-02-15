@@ -273,10 +273,10 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                                       |
-|-------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `kafka`, `local` |
-| description | `string` | An optional string describing the server.                                                                                                                                         |
+| Field       | Type     | Description                                                                                                                                                                                   |
+|-------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `local` |
+| description | `string` | An optional string describing the server.                                                                                                                                                     |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -334,6 +334,17 @@ servers:
 | host    | `string` | The Databricks host, e.g., `dbc-abcdefgh-1234.cloud.databricks.com` |
 | catalog | `string` | The name of the Hive or Unity catalog                               |
 | schema  | `string` | The schema name in the catalog                                      |
+
+#### Postgres Server Object
+
+| Field    | Type      | Description                                             |
+|----------|-----------|---------------------------------------------------------|
+| type     | `string`  | `postgres`                                              |
+| host     | `string`  | The host to the database server                         |
+| port     | `integer` | The port to the database server                         |
+| database | `string`  | The name of the database, e.g., `postgres`.             |
+| schema   | `string`  | The name of the schema in the database, e.g., `public`. |
+
 
 #### Kafka Server Object
 
