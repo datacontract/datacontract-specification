@@ -275,6 +275,32 @@
               "type": {
                 "type": "string",
                 "enum": [
+                  "pubsub"
+                ],
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "project": {
+                "type": "string",
+                "description": "The GCP project name."
+              },
+              "topic": {
+                "type": "string",
+                "description": "The topic name."
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "project",
+              "topic"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
                   "local"
                 ],
                 "description": "The type of the data product technology that implements the data contract."

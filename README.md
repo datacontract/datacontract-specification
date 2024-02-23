@@ -277,20 +277,20 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                                                   |
-|-------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `local` |
-| description | `string` | An optional string describing the server.                                                                                                                                                     |
+| Field       | Type     | Description                                                                                                                                                                                             |
+|-------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `local` |
+| description | `string` | An optional string describing the server.                                                                                                                                                               |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
 #### BigQuery Server Object
 
-| Field   | Type     | Description |
-|---------|----------|-------------|
-| type    | `string` | `bigquery`  |
-| project | `string` |             |
-| dataset | `string` |             |
+| Field   | Type     | Description           |
+|---------|----------|-----------------------|
+| type    | `string` | `bigquery`            |
+| project | `string` | The GCP project name. |
+| dataset | `string` |                       |
 
 #### S3 Server Object
 
@@ -357,6 +357,14 @@ servers:
 | type  | `string` | `kafka`     |
 | host  | `string` |             |
 | topic | `string` |             |
+
+#### Pub/Sub Server Object
+
+| Field   | Type     | Description           |
+|---------|----------|-----------------------|
+| type    | `string` | `pubsub`              |
+| project | `string` | The GCP project name. |
+| topic   | `string` | The topic name.       |
 
 #### Local Server Object
 
