@@ -1,9 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
+  "title": "DataContractSpecification",
   "properties": {
     "dataContractSpecification": {
       "type": "string",
+      "title": "DataContractSpecificationVersion",
       "enum": [
         "0.9.2",
         "0.9.1",
@@ -67,6 +69,7 @@
         "oneOf": [
           {
             "type": "object",
+            "title": "BigQueryServer",
             "properties": {
               "type": {
                 "type": "string",
@@ -94,6 +97,7 @@
           },
           {
             "type": "object",
+            "title": "S3Server",
             "properties": {
               "type": {
                 "type": "string",
@@ -116,6 +120,7 @@
           },
           {
             "type": "object",
+            "title": "RedshiftServer",
             "properties": {
               "type": {
                 "type": "string",
@@ -147,6 +152,7 @@
           },
           {
             "type": "object",
+            "title": "SnowflakeServer",
             "properties": {
               "type": {
                 "type": "string",
@@ -178,6 +184,7 @@
           },
           {
             "type": "object",
+            "title": "DatabricksServer",
             "properties": {
               "type": {
                 "type": "string",
@@ -208,6 +215,7 @@
           },
           {
             "type": "object",
+            "title": "PostgresServer",
             "properties": {
               "type": {
                 "type": "string",
@@ -245,6 +253,8 @@
           },
           {
             "type": "object",
+            "title": "KafkaServer",
+            "description": "Kafka Server",
             "properties": {
               "type": {
                 "type": "string",
@@ -255,11 +265,16 @@
               },
               "host": {
                 "type": "string",
-                "description": "An optional string describing the server."
+                "description": "The bootstrap server of the kafka cluster."
               },
               "topic": {
                 "type": "string",
-                "description": "An optional string describing the server."
+                "description": "The topic name."
+              },
+              "format": {
+                "type": "string",
+                "description": "The format of the message. Examples: json, avro, protobuf. Default: json.",
+                "default": "json"
               }
             },
             "additionalProperties": true,
@@ -271,6 +286,7 @@
           },
           {
             "type": "object",
+            "title": "PubSubServer",
             "properties": {
               "type": {
                 "type": "string",
@@ -297,6 +313,7 @@
           },
           {
             "type": "object",
+            "title": "LocalServer",
             "properties": {
               "type": {
                 "type": "string",
@@ -362,6 +379,7 @@
       },
       "additionalProperties": {
         "type": "object",
+        "title": "Model",
         "properties": {
           "description": {
             "type": "string"
@@ -369,6 +387,7 @@
           "type": {
             "description": "The type of the model. Examples: table, view, object. Default: table.",
             "type": "string",
+            "title": "ModelType",
             "default": "table",
             "enum": [
               "table",
@@ -381,6 +400,7 @@
             "type": "object",
             "additionalProperties": {
               "type": "object",
+              "title": "Field",
               "properties": {
                 "description": {
                   "type": "string",
@@ -388,6 +408,7 @@
                 },
                 "type": {
                   "type": "string",
+                  "title": "FieldType",
                   "description": "The logical data type of the field.",
                   "enum": [
                     "number",
@@ -508,6 +529,7 @@
       },
       "additionalProperties": {
         "type": "object",
+        "title": "Definition",
         "properties": {
           "domain": {
             "type": "string",
@@ -577,6 +599,7 @@
       "properties": {
         "type": {
           "type": "string",
+          "title": "SchemaType",
           "enum": [
             "dbt",
             "bigquery",
@@ -614,6 +637,7 @@
         "properties": {
           "type": {
             "type": "string",
+            "title": "ExampleType",
             "enum": [
               "csv",
               "json",
@@ -652,6 +676,7 @@
       "properties": {
         "type": {
           "type": "string",
+          "title": "QualityType",
           "enum": [
             "SodaCL",
             "montecarlo",

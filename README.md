@@ -352,11 +352,12 @@ servers:
 
 #### Kafka Server Object
 
-| Field | Type     | Description |
-|-------|----------|-------------|
-| type  | `string` | `kafka`     |
-| host  | `string` |             |
-| topic | `string` |             |
+| Field  | Type     | Description                                                               |
+|--------|----------|---------------------------------------------------------------------------|
+| type   | `string` | `kafka`                                                                   |
+| host   | `string` | The bootstrap server of the kafka cluster.                                |
+| topic  | `string` | The topic name.                                                           |
+| format | `string` | The format of the message. Examples: json, avro, protobuf. Default: json. |
 
 #### Pub/Sub Server Object
 
