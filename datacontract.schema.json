@@ -441,6 +441,11 @@
                   "default": false,
                   "description": "An indication, if this field must contain a value and may not be null."
                 },
+                "primary": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "If this field is a primary key."
+                },
                 "unique": {
                   "type": "boolean",
                   "default": false,
