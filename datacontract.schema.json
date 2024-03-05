@@ -446,6 +446,14 @@
                   "default": false,
                   "description": "If this field is a primary key."
                 },
+                "references": {
+                  "type": "string",
+                  "description": "The reference to a field in another model. E.g. use 'orders.order_id' to reference the order_id field of the model orders. Think of defining a foreign key relationship.",
+                  "examples": [
+                    "orders.order_id",
+                    "model.nested_field.field"
+                  ]
+                },
                 "unique": {
                   "type": "boolean",
                   "default": false,

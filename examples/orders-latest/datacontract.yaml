@@ -6,7 +6,7 @@ info:
   description: |
     Successful customer orders in the webshop. 
     All orders since 2020-01-01. 
-    Orders with their line items are in their current state (no history included). 
+    Orders with their line items are in their current state (no history included).
   owner: Checkout Team
   contact:
     name: John Doe (Data Product Owner)
@@ -36,6 +36,7 @@ models:
         $ref: '#/definitions/order_id'
         required: true
         unique: true
+        primary: true
       order_timestamp:
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
         type: timestamp
@@ -63,8 +64,10 @@ models:
         description: Primary key of the lines_item_id table
         required: true
         unique: true
+        primary: true
       order_id:
         $ref: '#/definitions/order_id'
+        references: model.order_id
       sku:
         description: The purchased article number
         $ref: '#/definitions/sku'
