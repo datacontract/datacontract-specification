@@ -13,6 +13,6 @@ datacontract lint examples/orders-latest/datacontract.yaml --schema $SCHEMA
 datacontract test --examples examples/orders-latest/datacontract.yaml --schema $SCHEMA
 
 datacontract lint examples/covid-cases/datacontract.yaml --schema $SCHEMA
-# BUG
-# datacontract test --examples examples/covid-cases/datacontract.yaml --schema $SCHEMA
+#BUG
+#datacontract test --examples examples/covid-cases/datacontract.yaml --schema $SCHEMA
 
