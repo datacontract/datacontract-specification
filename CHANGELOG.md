@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Please note,  while the major version is zero (0.y.z), Anything MAY change at any time. 
 The public API SHOULD NOT be considered stable.
 
+## [0.9.3] - 2024-03-06
+
+### Added
+
+- Service levels as a top level `servicelevels` element
+- pubsub server support
+- primary key and relationship support via `field.primary` and `field.references` attributes
+- databricks server support improved
+
 ## [0.9.2] - 2024-01-04
 
 ### Added

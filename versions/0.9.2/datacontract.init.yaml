@@ -1,0 +1,75 @@
+dataContractSpecification: 0.9.2
+id: my-data-contract-id
+info:
+  title: My Data Contract
+  version: 0.0.1
+#  description:
+#  owner:
+#  contact:
+#    name:
+#    url:
+#    email:
+
+
+### servers
+
+#servers:
+#  production:
+#    type: s3
+#    location: s3://
+#    format: parquet
+#    delimiter: new_line
+
+### terms
+
+#terms:
+#  usage:
+#  limitations:
+#  billing:
+#  noticePeriod:
+
+
+### models
+
+# models:
+#   my_model:
+#     description:
+#     type:
+#     fields:
+#       my_field:
+#         type:
+#         description:
+
+
+### definitions
+
+# definitions:
+#   my_field:
+#     domain:
+#     name:
+#     title:
+#     type:
+#     description:
+#     example:
+#     pii:
+#     classification:
+
+
+### examples
+
+#examples:
+#  - type: csv
+#    model: my_model
+#    data: |-
+#      id,timestamp,amount
+#      "1001","2023-09-09T08:30:00Z",2500
+#      "1002","2023-09-08T15:45:00Z",1800
+
+
+### quality
+
+#quality:
+#  type: SodaCL
+#  specification:
+#    checks for my_model: |-
+#      - duplicate_count(id) = 0

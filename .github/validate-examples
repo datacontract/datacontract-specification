@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+SCHEMA=datacontract.schema.json
+
+awk '/^```yaml$/{flag=1; next} /^```$/{print ""; flag=0; exit} flag' README.md > datacontract-from-readme.yaml
+datacontract lint datacontract-from-readme.yaml --schema $SCHEMA
+datacontract test --examples datacontract-from-readme.yaml --schema $SCHEMA
+# Compare with example?
+
+datacontract lint examples/orders-latest/datacontract.yaml --schema $SCHEMA
+datacontract test --examples examples/orders-latest/datacontract.yaml --schema $SCHEMA
+
+datacontract lint examples/covid-cases/datacontract.yaml --schema $SCHEMA
+#BUG
+#datacontract test --examples examples/covid-cases/datacontract.yaml --schema $SCHEMA
+
