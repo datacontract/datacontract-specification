@@ -7,7 +7,6 @@
       "type": "string",
       "title": "DataContractSpecificationVersion",
       "enum": [
-        "0.9.3",
         "0.9.2",
         "0.9.1",
         "0.9.0"
@@ -55,11 +54,9 @@
               "description": "The email address of the contact person/organization. This MUST be in the form of an email address."
             }
           },
-          "description": "Contact information for the data contract.",
-          "additionalProperties": true
+          "description": "Contact information for the data contract."
         }
       },
-      "additionalProperties": true,
       "required": [
         "title",
         "version"
@@ -371,8 +368,7 @@
           "type": "string",
           "description": "The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., 'P3M' for a period of three months."
         }
-      },
-      "additionalProperties": true
+      }
     },
     "models": {
       "description": "Specifies the logical data model. Use the models name (e.g., the table name) as the key.",
@@ -679,181 +675,6 @@
         ]
       },
       "description": "The Examples Object is an array of Example Objects."
-    },
-    "servicelevels": {
-      "type": "object",
-      "description": "Specifies the service level agreements for the provided data, including availability, data retention policies, latency requirements, data freshness, update frequency, support availability, and backup policies.",
-      "properties": {
-        "availability": {
-          "type": "object",
-          "description": "Availability refers to the promise or guarantee by the service provider about the uptime of the system that provides the data.",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "An optional string describing the availability service level.",
-              "example": "The server is available during support hours"
-            },
-            "percentage": {
-              "type": "string",
-              "description": "An optional string describing the guaranteed uptime in percent (e.g., `99.9%`)",
-              "pattern": "^\\d+(\\.\\d+)?%$",
-              "example": "99.9%"
-            }
-          }
-        },
-        "retention": {
-          "type": "object",
-          "description": "Retention covers the period how long data will be available.",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "An optional string describing the retention service level.",
-              "example": "Data is retained for one year."
-            },
-            "period": {
-              "type": "string",
-              "description": "An optional period of time, how long data is available. Supported formats: Simple duration (e.g., `1 year`, `30d`) and ISO 8601 duration (e.g, `P1Y`).",
-              "example": "P1Y"
-            },
-            "unlimited": {
-              "type": "boolean",
-              "description": "An optional indicator that data is kept forever.",
-              "example": false
-            },
-            "timestampField": {
-              "type": "string",
-              "description": "An optional reference to the field that contains the timestamp that the period refers to.",
-              "example": "orders.order_timestamp"
-            }
-          }
-        },
-        "latency": {
-          "type": "object",
-          "description": "Latency refers to the maximum amount of time from the source to its destination.",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "An optional string describing the latency service level.",
-              "example": "Data is available within 25 hours after the order was placed."
-            },
-            "threshold": {
-              "type": "string",
-              "description": "An optional maximum duration between the source timestamp and the processed timestamp. Supported formats: Simple duration (e.g., `24 hours`, `5s`) and ISO 8601 duration (e.g, `PT24H`).",
-              "example": "25h"
-            },
-            "sourceTimestampField": {
-              "type": "string",
-              "description": "An optional reference to the field that contains the timestamp when the data was provided at the source.",
-              "example": "orders.order_timestamp"
-            },
-            "processedTimestampField": {
-              "type": "string",
-              "description": "An optional reference to the field that contains the processing timestamp, which denotes when the data is made available to consumers of this data contract.",
-              "example": "orders.processed_timestamp"
-            }
-          }
-        },
-        "freshness": {
-          "type": "object",
-          "description": "The maximum age of the youngest row in a table.",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "An optional string describing the freshness service level.",
-              "example": "The age of the youngest row in a table is within 25 hours."
-            },
-            "threshold": {
-              "type": "string",
-              "description": "An optional maximum age of the youngest entry. Supported formats: Simple duration (e.g., `24 hours`, `5s`) and ISO 8601 duration (e.g, `PT24H`).",
-              "example": "25h"
-            },
-            "timestampField": {
-              "type": "string",
-              "description": "An optional reference to the field that contains the timestamp that the threshold refers to.",
-              "example": "orders.order_timestamp"
-            }
-          }
-        },
-        "frequency": {
-          "type": "object",
-          "description": "Frequency describes how often data is updated.",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "An optional string describing the frequency service level.",
-              "example": "Data is delivered once a day."
-            },
-            "type": {
-              "type": "string",
-              "enum": ["batch", "micro-batching", "streaming", "manual"],
-              "description": "The method of data processing.",
-              "example": "batch"
-            },
-            "interval": {
-              "type": "string",
-              "description": "Optional. Only for batch: How often the pipeline is triggered, e.g., `daily`.",
-              "example": "daily"
-            },
-            "cron": {
-              "type": "string",
-              "description": "Optional. Only for batch: A cron expression when the pipelines is triggered. E.g., `0 0 * * *`.",
-              "example": "0 0 * * *"
-            }
-          }
-        },
-        "support": {
-          "type": "object",
-          "description": "Support describes the times when support will be available for contact.",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "An optional string describing the support service level.",
-              "example": "The data is available during typical business hours at headquarters."
-            },
-            "time": {
-              "type": "string",
-              "description": "An optional string describing the times when support will be available for contact such as `24/7` or `business hours only`.",
-              "example": "9am to 5pm in EST on business days"
-            },
-            "responseTime": {
-              "type": "string",
-              "description": "An optional string describing the time it takes for the support team to acknowledge a request. This does not mean the issue will be resolved immediately, but it assures users that their request has been received and will be dealt with.",
-              "example": "24 hours"
-            }
-          }
-        },
-        "backup": {
-          "type": "object",
-          "description": "Backup specifies details about data backup procedures.",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "An optional string describing the backup service level.",
-              "example": "Data is backed up once a week, every Sunday at 0:00 UTC."
-            },
-            "interval": {
-              "type": "string",
-              "description": "An optional interval that defines how often data will be backed up, e.g., `daily`.",
-              "example": "weekly"
-            },
-            "cron": {
-              "type": "string",
-              "description": "An optional cron expression when data will be backed up, e.g., `0 0 * * *`.",
-              "example": "0 0 * * 0"
-            },
-            "recoveryTime": {
-              "type": "string",
-              "description": "An optional Recovery Time Objective (RTO) specifies the maximum amount of time allowed to restore data from a backup after a failure or loss event (e.g., 4 hours, 24 hours).",
-              "example": "24 hours"
-            },
-            "recoveryPoint": {
-              "type": "string",
-              "description": "An optional Recovery Point Objective (RPO) defines the maximum acceptable age of files that must be recovered from backup storage for normal operations to resume after a disaster or data loss event. This essentially measures how much data you can afford to lose, measured in time (e.g., 4 hours, 24 hours).",
-              "example": "1 week"
-            }
-          }
-        }
-      }
     },
     "quality": {
       "type": "object",
