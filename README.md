@@ -216,6 +216,7 @@ Specification
 - [Definition Object](#definition-object)
 - [Schema Object](#schema-object)
 - [Example Object](#example-object)
+- [Service Level Object](#servicelevel-object)
 - [Quality Object](#quality-object)
 - [Data Types](#data-types)
 - [Specification Extensions](#specification-extensions)
@@ -236,10 +237,11 @@ It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 | info                      | [Info Object](#info-object)                          | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                           |
 | servers                   | Map[string, [Server Object](#server-object)]         | Specifies the servers of the data contract.                                                              |
 | terms                     | [Terms Object](#terms-object)                        | Specifies the terms and conditions of the data contract.                                                 |
-| models                    | Map[string, [Model Object](#model-object)]           | Specifies the logical data model.                                                                                |
+| models                    | Map[string, [Model Object](#model-object)]           | Specifies the logical data model.                                                                        |
 | definitions               | Map[string, [Definition Object](#definition-object)] | Specifies definitions.                                                                                   |
 | schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                       |
-| examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.          |
+| examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.      |
+| servicelevel              | [Service Level Object](#quality-object)              | Specifies the service level of the provided data                                                         |
 | quality                   | [Quality Object](#quality-object)                    | Specifies the quality attributes and checks. The specification supports different quality check DSLs.    |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
@@ -689,6 +691,116 @@ examples:
     "1009","2023-09-01T09:25:00Z",3100
     "1010","2023-08-31T22:50:00Z",2700
 ```
+
+### Service Level Object
+
+A service level is defined as an agreed-upon, measurable level of performance for provided the data.
+Data Contract Specification defines well-known service levels. 
+This list can be extended with custom service levels.
+
+| Field        | Type                                        | Description                                                             |
+|--------------|---------------------------------------------|-------------------------------------------------------------------------|
+| availability | [Availability Object](#availability-object) | The promised uptime of the system that provides the data                |
+| retention    | [Retention Object](#retention-object)       | The period how long data will be available.                             |
+| latency      | [Latency Object](#latency-object)           | The maximum amount of time from the from the source to its destination. |
+| freshness    | [Freshness Object](#freshness-object)       | The maximum age of the youngest entry.                                  |
+| frequency    | [Frequency Object](#frequency-object)       | The update frequency.                                                   |
+| support      | [Support Object](#support-object)           | The times when support is provided.                                     |
+| backup       | [Backup Object](#backup-object)             | TBD                                                                     |
+
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+#### Availability Object
+
+Availability refers to the promise or guarantee by the service provider about the uptime of the system that provides the data.
+
+| Field       | Type     | Description                                                   |
+|-------------|----------|---------------------------------------------------------------|
+| description | `string` | An optional string describing the availability service level. |
+| percentage  | `string` | The guaranteed uptime in percent (e.g., `99.9%`)              |
+
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+#### Retention Object
+
+Retention covers the period how long data will be available.
+
+| Field          | Type      | Description                                                                                                                                    |
+|----------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| description    | `string`  | An optional string describing the retention service level.                                                                                     |
+| period         | `string`  | The period of time, how long data is available. Supported formats: Simple duration (e.g., `1 year`, `30d`) and ISO 8601 duration (e.g, `P1Y`). |
+| unlimited      | `boolean` | Indicator that data is kept forever.                                                                                                           |
+| timestampField | `string`  | A reference to the field that contains the timestamp that the period refers to.                                                                |
+
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+#### Latency Object
+
+Latency refers the maximum amount of time from the source to its destination.
+
+This covers the duration of the part of the system that is under control of the owner, but not any upstream systems or end-to-end durations.
+
+| Field                   | Type     | Description                                                                                                                                                                                                 |
+|-------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| description             | `string` | An optional string describing the latency service level.                                                                                                                                                    |
+| threshold               | `string` | The maximum duration between the fact when the data has happened and the time when the data is available. Supported formats: Simple duration (e.g., `24 hours`, `5s`) and ISO 8601 duration (e.g, `PT24H`). |
+| businessTimestampField  | `string` | A reference to the field that contains the actual business timestamp when the fact has happened.                                                                                                            |
+| processedTimestampField | `string` | A reference to the field that contains the processing timestamp, which denotes when the data is made available to consumers.                                                                                |
+
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+#### Freshness Object
+
+Freshness refers to the maximum age of the youngest entry.
+
+| Field                   | Type     | Description                                                                                                                              |
+|-------------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------|
+| description             | `string` | An optional string describing the freshness service level.                                                                               |
+| threshold               | `string` | The maximum age of the youngest entry. Supported formats: Simple duration (e.g., `24 hours`, `5s`) and ISO 8601 duration (e.g, `PT24H`). |
+| timestampField          | `string` | A reference to the field that contains the timestamp that the threshold refers to.                                                       |
+
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+#### Frequency Object
+
+Frequency describes how often data is updated.
+
+| Field       | Type     | Description                                                                           |
+|-------------|----------|---------------------------------------------------------------------------------------|
+| description | `string` | An optional string describing the frequency service level.                            |
+| type        | `string` | The type of data processing. Typical values are `batch`, `streaming`, `manual`.       |
+| interval    | `string` | Only for batch: How often the pipeline is triggered, e.g., `daily`.                   |
+| cron        | `string` | Only for batch: A cron expression when the pipelines is triggered. E.g., `0 0 * * *`. |
+
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+
+#### Support Object
+
+Support describes the times when support will be available for contact.
+
+| Field        | Type     | Description                                                                                                                                                                                                                       |
+|--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| description  | `string` | An optional string describing the support service level.                                                                                                                                                                          |
+| time         | `string` | A string describing the times when support will be available for contact such as `24/7` or `business hours only`.                                                                                                                 |
+| responseTime | `string` | A string describing the time it takes for the support team to acknowledge a request. This does not mean the issue will be resolved immediately, but it assures users that their request has been received and will be dealt with. |
+                                                                                                                                          
+
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+
+#### Backup Object
+
+Backup specifies details about data backup procedures.
+
+|--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| description  | `string` | An optional string describing the backup service level.                                                                                                                                                                          |
+| interval    | `string` | This defines how often data will be backed up, e.g., `daily`.                   |
+| cron        | `string` | This defines cron expression when data will be backed up, e.g., `0 0 * * *`. |
+| rto        | `string` |  The Recovery Time Objective (RTO) specifies the maximum amount of time allowed to restore data from a backup after a failure or loss event (e.g., 4 hours, 24 hours). |
+| rpo        | `string` | The Recovery Point Objective (RPO) defines the maximum acceptable age of files that must be recovered from backup storage for normal operations to resume after a disaster or data loss event. This essentially measures how much data you can afford to lose, measured in time (e.g., 4 hours, 24 hours). |
+
+
 
 ### Quality Object
 
