@@ -3,3 +3,4 @@
 datacontract.schema.openapi-format.*
 .soda/
 datacontract-from-readme.yaml
+.duckdb/
