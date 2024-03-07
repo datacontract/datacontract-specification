@@ -251,7 +251,7 @@ Specification
 - [Definition Object](#definition-object)
 - [Schema Object](#schema-object)
 - [Example Object](#example-object)
-- [Service Level Object](#servicelevel-object)
+- [Service Level Object](#service-levels-object)
 - [Quality Object](#quality-object)
 - [Data Types](#data-types)
 - [Specification Extensions](#specification-extensions)
