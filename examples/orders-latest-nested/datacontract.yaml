@@ -65,6 +65,12 @@ models:
           city:
             description: The city name.
             type: text
+          additional_lines:
+            description: Additional address lines, such as floor, apartment, or company name.
+            type: array
+            items:
+              type: text
+              description: Additional line
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp

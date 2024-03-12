@@ -452,6 +452,9 @@
                     "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
                   }
                 },
+                "items": {
+                  "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+                },
                 "primary": {
                   "type": "boolean",
                   "default": false,
