@@ -16,6 +16,7 @@ servers:
     delimiter: new_line
 models:
   covid_cases:
+    description: the number of confirmed covid cases reported for a specified region, with location and county/province/country information.
     fields:
       fips:
         type: string
