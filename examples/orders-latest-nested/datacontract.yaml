@@ -65,7 +65,7 @@ models:
           city:
             description: The city name.
             type: text
-          additionalLines:
+          additional_lines:
             description: Additional address lines, such as floor, apartment, or company name.
             type: array
             items:
