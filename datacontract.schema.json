@@ -445,6 +445,13 @@
                   "default": false,
                   "description": "An indication, if this field must contain a value and may not be null."
                 },
+                "fields": {
+                  "description": "The nested fields (e.g. columns) of the object, record, or struct.",
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+                  }
+                },
                 "primary": {
                   "type": "boolean",
                   "default": false,
