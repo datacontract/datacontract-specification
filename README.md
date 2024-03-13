@@ -170,7 +170,7 @@ servicelevels:
     description: The server is available during support hours
     percentage: 99.9%
   retention:
-    description: Data is retained for one year because!
+    description: Data is retained for one year
     period: P1Y
     unlimited: false
   latency:
