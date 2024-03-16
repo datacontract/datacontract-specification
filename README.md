@@ -857,7 +857,7 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 #### Backup Object
 
 Backup specifies details about data backup procedures.
-
+| Field | Type | Description                                                                                                                                                                                                                                  |
 |--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | description  | `string` | An optional string describing the backup service level.                                                                                                                                                                          |
 | interval    | `string` | An optional interval that defines how often data will be backed up, e.g., `daily`.                   |
