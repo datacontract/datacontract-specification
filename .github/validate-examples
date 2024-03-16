@@ -2,9 +2,9 @@
 
 set -ex
 
-function datacontract() {
-    docker run --rm -v "${PWD}:/home/datacontract" --platform linux/amd64 datacontract/cli:latest "$@"
-}
+#function datacontract() {
+#    docker run --rm -v "${PWD}:/home/datacontract" --platform linux/amd64 datacontract/cli:latest "$@"
+#}
 
 datacontract --version
 
