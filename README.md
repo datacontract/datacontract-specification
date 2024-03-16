@@ -81,6 +81,7 @@ models:
         $ref: '#/definitions/order_id'
         required: true
         unique: true
+        primary: true
       order_timestamp:
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
         type: timestamp
@@ -112,8 +113,10 @@ models:
         description: Primary key of the lines_item_id table
         required: true
         unique: true
+        primary: true
       order_id:
         $ref: '#/definitions/order_id'
+        references: orders.order_id
       sku:
         description: The purchased article number
         $ref: '#/definitions/sku'
@@ -141,6 +144,7 @@ definitions:
 examples:
   - type: csv # csv, json, yaml, custom
     model: orders
+    description: An example list of order records.
     data: | # expressed as string or inline yaml or via "$ref: data.csv"
       order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
       "1001","2030-09-09T08:30:00Z",2500,"1000000001","mary.taylor82@example.com","2030-09-09T08:31:00Z"
@@ -155,6 +159,7 @@ examples:
       "1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
   - type: csv
     model: line_items
+    description: An example list of line items.
     data: |
       lines_item_id,order_id,sku
       "LI-1","1001","5901234123457"
