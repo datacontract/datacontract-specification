@@ -338,7 +338,7 @@ The fields are dependent on the defined type.
 
 | Field       | Type     | Description                                                                                                                                                                                             |
 |-------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `local` |
+| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `local` |
 | description | `string` | An optional string describing the server.                                                                                                                                                               |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
