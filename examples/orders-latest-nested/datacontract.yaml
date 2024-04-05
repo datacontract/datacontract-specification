@@ -141,7 +141,7 @@ examples:
       "LI-8","1005","2001234567893"
       "LI-9","1005","5001234567892"
       "LI-10","1005","6001234567891"
-servicelevels:
+serviceLevels:
   availability:
     description: The server is available during support hours
     percentage: 99.9%

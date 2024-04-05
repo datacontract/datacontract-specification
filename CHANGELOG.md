@@ -14,7 +14,7 @@ The public API SHOULD NOT be considered stable.
 
 ### Added
 
-- Service levels as a top level `servicelevels` element
+- Service levels as a top level `serviceLevels` element
 - pubsub server support
 - primary key and relationship support via `field.primary` and `field.references` attributes
 - databricks server support improved

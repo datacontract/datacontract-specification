@@ -172,7 +172,7 @@ examples:
       "LI-8","1005","2001234567893"
       "LI-9","1005","5001234567892"
       "LI-10","1005","6001234567891"
-servicelevels:
+serviceLevels:
   availability:
     description: The server is available during support hours
     percentage: 99.9%
@@ -301,7 +301,7 @@ It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 | definitions               | Map[string, [Definition Object](#definition-object)] | Specifies definitions.                                                                                   |
 | schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                       |
 | examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.      |
-| servicelevels             | [Service Levels Object](#service-levels-object)      | Specifies the service level of the provided data                                                         |
+| serviceLevels             | [Service Levels Object](#service-levels-object)      | Specifies the service level of the provided data                                                         |
 | quality                   | [Quality Object](#quality-object)                    | Specifies the quality attributes and checks. The specification supports different quality check DSLs.    |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).

@@ -698,7 +698,7 @@
       },
       "description": "The Examples Object is an array of Example Objects."
     },
-    "servicelevels": {
+    "serviceLevels": {
       "type": "object",
       "description": "Specifies the service level agreements for the provided data, including availability, data retention policies, latency requirements, data freshness, update frequency, support availability, and backup policies.",
       "properties": {

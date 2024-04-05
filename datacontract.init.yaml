@@ -65,9 +65,9 @@ info:
 #      "1001","2023-09-09T08:30:00Z",2500
 #      "1002","2023-09-08T15:45:00Z",1800
 
-### servicelevels
+### serviceLevels
 
-#servicelevels:
+#serviceLevels:
 #  availability:
 #    description: The server is available during support hours
 #    percentage: 99.9%
