@@ -595,6 +595,22 @@
             "type": "string",
             "description": "A regular expression pattern the value must match. Applies only to string types."
           },
+          "minimum": {
+            "type": "number",
+            "description": "A value of a number must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values."
+          },
+          "exclusiveMinimum": {
+            "type": "number",
+            "description": "A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values."
+          },
+          "maximum": {
+            "type": "number",
+            "description": "A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values."
+          },
+          "exclusiveMaximum": {
+            "type": "number",
+            "description": "A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values."
+          },
           "example": {
             "type": "string",
             "description": "An example value."
