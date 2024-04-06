@@ -197,7 +197,9 @@
               "host": {
                 "type": "string",
                 "description": "The Databricks host",
-                "examples": ["dbc-abcdefgh-1234.cloud.databricks.com"]
+                "examples": [
+                  "dbc-abcdefgh-1234.cloud.databricks.com"
+                ]
               },
               "catalog": {
                 "type": "string",
@@ -228,7 +230,9 @@
               "host": {
                 "type": "string",
                 "description": "The host to the database server",
-                "examples": ["localhost"]
+                "examples": [
+                  "localhost"
+                ]
               },
               "port": {
                 "type": "integer",
@@ -237,12 +241,16 @@
               "database": {
                 "type": "string",
                 "description": "The name of the database.",
-                "examples": ["postgres"]
+                "examples": [
+                  "postgres"
+                ]
               },
               "schema": {
                 "type": "string",
                 "description": "The name of the schema in the database.",
-                "examples": ["public"]
+                "examples": [
+                  "public"
+                ]
               }
             },
             "additionalProperties": true,
@@ -336,7 +344,11 @@
               "format": {
                 "type": "string",
                 "description": "The format of the file(s)",
-                "examples": ["json", "parquet", "csv"]
+                "examples": [
+                  "json",
+                  "parquet",
+                  "csv"
+                ]
               }
             },
             "additionalProperties": true,
@@ -346,7 +358,6 @@
               "format"
             ]
           }
-
         ]
       },
       "description": "Information about the servers."
@@ -411,34 +422,7 @@
                   "description": "An optional string describing the semantic of the data in this field."
                 },
                 "type": {
-                  "type": "string",
-                  "title": "FieldType",
-                  "description": "The logical data type of the field.",
-                  "enum": [
-                    "number",
-                    "decimal",
-                    "numeric",
-                    "int",
-                    "integer",
-                    "long",
-                    "bigint",
-                    "float",
-                    "double",
-                    "string",
-                    "text",
-                    "varchar",
-                    "boolean",
-                    "timestamp",
-                    "timestamp_tz",
-                    "timestamp_ntz",
-                    "date",
-                    "array",
-                    "object",
-                    "record",
-                    "struct",
-                    "bytes",
-                    "null"
-                  ]
+                  "$ref": "#/$defs/FieldType"
                 },
                 "required": {
                   "type": "boolean",
@@ -576,8 +560,7 @@
             "description": "Clear and concise explanations related to the domain."
           },
           "type": {
-            "type": "string",
-            "description": "The logical data type."
+            "$ref": "#/$defs/FieldType"
           },
           "minLength": {
             "type": "number",
@@ -682,13 +665,16 @@
             "description": "The reference to the model in the schema, e.g., a table name."
           },
           "data": {
-            "oneOf": [{
-              "type": "string",
-              "description": "Example data for this model."
-            },{
-              "type": "array",
-              "description": "Example data for this model in a structured format. Use this for type json or yaml."
-            }]
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "Example data for this model."
+              },
+              {
+                "type": "array",
+                "description": "Example data for this model in a structured format. Use this for type json or yaml."
+              }
+            ]
           }
         },
         "required": [
@@ -803,7 +789,12 @@
             },
             "type": {
               "type": "string",
-              "enum": ["batch", "micro-batching", "streaming", "manual"],
+              "enum": [
+                "batch",
+                "micro-batching",
+                "streaming",
+                "manual"
+              ],
               "description": "The method of data processing.",
               "example": "batch"
             },
@@ -910,5 +901,37 @@
     "dataContractSpecification",
     "id",
     "info"
-  ]
+  ],
+  "$defs": {
+    "FieldType": {
+      "type": "string",
+      "title": "FieldType",
+      "description": "The logical data type of the field.",
+      "enum": [
+        "number",
+        "decimal",
+        "numeric",
+        "int",
+        "integer",
+        "long",
+        "bigint",
+        "float",
+        "double",
+        "string",
+        "text",
+        "varchar",
+        "boolean",
+        "timestamp",
+        "timestamp_tz",
+        "timestamp_ntz",
+        "date",
+        "array",
+        "object",
+        "record",
+        "struct",
+        "bytes",
+        "null"
+      ]
+    }
+  }
 }
