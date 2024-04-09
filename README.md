@@ -343,7 +343,7 @@ The fields are dependent on the defined type.
 
 | Field       | Type     | Description                                                                                                                                                                                                               |
 |-------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `local`, `glue` |
+| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `glue`, `local` |
 | description | `string` | An optional string describing the server.                                                                                                                                                                                 |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
@@ -431,13 +431,6 @@ servers:
 | project | `string` | The GCP project name. |
 | topic   | `string` | The topic name.       |
 
-#### Local Server Object
-
-| Field  | Type     | Description                                                                         |
-|--------|----------|-------------------------------------------------------------------------------------|
-| type   | `string` | `local`                                                                             |
-| path   | `string` | The relative or absolute path to the data file(s), such as `./folder/data.parquet`. |
-| format | `string` | The format of the file(s), such as `parquet`, `csv`, or `json`.                     |
 
 #### AWS Glue Server Object
 
@@ -461,6 +454,13 @@ servers:
     format: parquet
 ```
 
+#### Local Server Object
+
+| Field  | Type     | Description                                                                         |
+|--------|----------|-------------------------------------------------------------------------------------|
+| type   | `string` | `local`                                                                             |
+| path   | `string` | The relative or absolute path to the data file(s), such as `./folder/data.parquet`. |
+| format | `string` | The format of the file(s), such as `parquet`, `csv`, or `json`.                     |
 
 ### Terms Object
 
