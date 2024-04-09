@@ -341,10 +341,10 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                                                             |
-|-------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `local` |
-| description | `string` | An optional string describing the server.                                                                                                                                                               |
+| Field       | Type     | Description                                                                                                                                                                                                               |
+|-------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `local`, `glue` |
+| description | `string` | An optional string describing the server.                                                                                                                                                                                 |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -439,6 +439,27 @@ servers:
 | path   | `string` | The relative or absolute path to the data file(s), such as `./folder/data.parquet`. |
 | format | `string` | The format of the file(s), such as `parquet`, `csv`, or `json`.                     |
 
+#### AWS Glue Server Object
+
+| Field    | Type     | Description                                                |
+|----------|----------|------------------------------------------------------------|
+| type     | `string` | `glue`                                                     |
+| account  | `string` | The AWS account, e.g., `1234-5678-9012`                    |
+| database | `string` | The AWS Glue Catalog database                              |
+| location | `string` | S3 path, starting with `s3://`                             |
+| format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv` |
+
+Example:
+
+```yaml
+servers:
+  production:
+    type: glue
+    account: "1234-5678-9012"
+    database: acme-orders
+    location: s3://acme-orders-prod/orders/
+    format: parquet
+```
 
 
 ### Terms Object
