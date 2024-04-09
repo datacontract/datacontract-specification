@@ -437,8 +437,8 @@ servers:
 | Field    | Type     | Description                                                |
 |----------|----------|------------------------------------------------------------|
 | type     | `string` | `glue`                                                     |
-| account  | `string` | The AWS account, e.g., `1234-5678-9012`                    |
-| database | `string` | The AWS Glue Catalog database                              |
+| account  | `string` | REQUIRED. The AWS account, e.g., `1234-5678-9012`          |
+| database | `string` | REQUIRED. The AWS Glue Catalog database                    |
 | location | `string` | S3 path, starting with `s3://`                             |
 | format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv` |
 
