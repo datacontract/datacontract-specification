@@ -264,8 +264,7 @@
             "required": [
               "type",
               "account",
-              "database",
-              "location"
+              "database"
             ]
           },
           {
