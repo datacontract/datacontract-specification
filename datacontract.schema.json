@@ -220,6 +220,55 @@
           },
           {
             "type": "object",
+            "title": "GlueServer",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "glue",
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "account": {
+                "type": "string",
+                "description": "The AWS Glue account",
+                "examples": [
+                  "1234-5678-9012"
+                ]
+              },
+              "database": {
+                "type": "string",
+                "description": "The AWS Glue database name",
+                "examples": [
+                  "my_database"
+                ]
+              },
+              "location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The AWS S3 path. Must be in the form of a URL.",
+                "examples": [
+                  "s3://datacontract-example-orders-latest/data/{model}"
+                ]
+              },
+              "format": {
+                "type": "string",
+                "description": "The format of the files",
+                "examples": [
+                  "parquet",
+                  "csv",
+                  "json",
+                  "delta"
+                ]
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "account",
+              "database"
+            ]
+          },
+          {
+            "type": "object",
             "title": "PostgresServer",
             "properties": {
               "type": {

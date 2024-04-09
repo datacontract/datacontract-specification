@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Please note,  while the major version is zero (0.y.z), Anything MAY change at any time. 
 The public API SHOULD NOT be considered stable.
 
+### Added
+- AWS Glue Catalog server support
+
 ## [0.9.3] - 2024-03-06
 
 ### Added
