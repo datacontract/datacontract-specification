@@ -205,7 +205,7 @@ servicelevels:
     recoveryTime: 24 hours
     recoveryPoint: 1 week
 quality:
-  type: SodaCL   # data quality check format: SodaCL, montecarlo, custom
+  type: SodaCL   # data quality check format: SodaCL, montecarlo, great-expectations, custom
   specification: # expressed as string or inline yaml or via "$ref: checks.yaml"
     checks for orders:
       - row_count >= 5
@@ -892,9 +892,9 @@ Backup specifies details about data backup procedures.
 
 The quality object contains quality attributes and checks.
 
-| Field | Type                                                                                                                          | Description                                                                                                                     |
-| ----- |-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| type | `string`                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `custom`                                      |
+| Field         | Type                                                                                                                          | Description                                                                                                     |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| type          | `string`                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `great-expectations`, `custom` |
 | specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> `string` | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML.  |
 
 
@@ -949,6 +949,32 @@ quality:
         - table: project:dataset.table_name
           timestamp_field: created
           field: order_status
+```
+
+#### Great Expectations Quality Object
+
+Quality attributes defined as Great Expectations [Expectations](https://greatexpectations.io/expectations/).
+
+The `specification` represents a list of expectations on a specific model. 
+
+Example (string):
+
+```yaml
+quality:
+  type: great-expectations
+  specification:
+    orders: |-
+      [
+          {
+              "expectation_type": "expect_table_row_count_to_be_between",
+              "kwargs": {
+                  "min_value": 10
+              },
+              "meta": {
+      
+              }
+          }
+      ]
 ```
 
 ### Data Types
