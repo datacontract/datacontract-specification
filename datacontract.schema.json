@@ -938,9 +938,10 @@
           "enum": [
             "SodaCL",
             "montecarlo",
+            "great-expectations",
             "custom"
           ],
-          "description": "The type of the quality check. Typical values are SodaCL, montecarlo, custom."
+          "description": "The type of the quality check. Typical values are SodaCL, montecarlo, great-expectations, custom."
         },
         "specification": {
           "oneOf": [
