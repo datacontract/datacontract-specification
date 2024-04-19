@@ -23,7 +23,7 @@ They make semantic and quality expectations explicit.
 They are often created collaboratively in [workshops](/workshop) together with data providers and data consumers. 
 Later in development and production, they also serve as the basis for code generation, testing, schema validations, quality checks, monitoring, access control, and computational governance policies.
 
-The specification comes along with the [Data Contract CLI](https://github.com/datacontract/cli), an open-source tool to develop, validate, and enforce data contracts.
+The specification comes along with the [Data Contract CLI](https://github.com/datacontract/datacontract-cli), an open-source tool to develop, validate, and enforce data contracts.
 
 IntelliJ, VS Code and other common IDEs will show you autocompletions without additional configuration.
 
@@ -1014,7 +1014,7 @@ The Data Contract Specification follows these design principles:
 
 Tooling
 ---
-- [Data Contract CLI](https://github.com/datacontract/cli) is a free CLI tool to help you create, develop, and maintain your data contracts.
+- [Data Contract CLI](https://github.com/datacontract/datacontract-cli) is a free CLI tool to help you create, develop, and maintain your data contracts.
 - [Data Contract Studio](https://studio.datacontract.com/) is a free web tool to develop and share data contracts.
 - [Data Mesh Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data products and data contracts. It supports the data contract specification and allows the user to import or export data contracts using this specification.
 
