@@ -112,7 +112,33 @@
               "location": {
                 "type": "string",
                 "format": "uri",
-                "description": "An optional string describing the server. Must be in the form of a URL."
+                "description": "An optional string describing the server. Must be in the form of a URL.",
+                "examples": [
+                  "s3://datacontract-example-orders-latest/data/{model}/*.json"
+                ]
+              },
+              "endpointUrl": {
+                "type": "string",
+                "format": "uri",
+                "description": "The server endpoint for S3-compatible servers.",
+                "examples": ["https://minio.example.com"]
+              },
+              "format": {
+                "type": "string",
+                "enum": [
+                  "parquet",
+                  "json",
+                  "csv"
+                ],
+                "description": "File format."
+              },
+              "delimiter": {
+                "type": "string",
+                "enum": [
+                  "new_line",
+                  "array"
+                ],
+                "description": "Only for format = json. How multiple json documents are delimited within one file"
               }
             },
             "additionalProperties": true,
@@ -151,6 +177,51 @@
               "account",
               "database",
               "schema"
+            ]
+          },
+          {
+            "type": "object",
+            "title": "AzureServer",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "azure"
+                ],
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "location": {
+                "type": "string",
+                "format": "uri",
+                "description": "Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs.",
+                "examples": [
+                  "az://my_storage_account_name.blob.core.windows.net/my_container/path/*.parquet",
+                  "abfss://my_storage_account_name.dfs.core.windows.net/my_container_name/path/*.parquet"
+                ]
+              },
+              "format": {
+                "type": "string",
+                "enum": [
+                  "parquet",
+                  "json",
+                  "csv"
+                ],
+                "description": "File format."
+              },
+              "delimiter": {
+                "type": "string",
+                "enum": [
+                  "new_line",
+                  "array"
+                ],
+                "description": "Only for format = json. How multiple json documents are delimited within one file"
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "location",
+              "format"
             ]
           },
           {

@@ -13,7 +13,7 @@ A data contract is implemented by a data product's output port or other data tec
 Data contracts can also be used for the input port to specify the expectations of data dependencies and verify given guarantees.
 
 The _data contract specification_ defines a YAML format to describe attributes of provided data sets. 
-It is data platform neutral and can be used with any data platform, such as AWS S3, Google BigQuery, Microsoft Fabric, Databricks, and Snowflake. 
+It is data platform neutral and can be used with any data platform, such as AWS S3, Google BigQuery, Azure, Databricks, and Snowflake. 
 The data contract specification is an open initiative to define a common data contract format. 
 It follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) conventions.
 
@@ -345,10 +345,10 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                                                                               |
-|-------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `redshift`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `glue`, `local` |
-| description | `string` | An optional string describing the server.                                                                                                                                                                                 |
+| Field       | Type     | Description                                                                                                                                                                                                                        |
+|-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `local` |
+| description | `string` | An optional string describing the server.                                                                                                                                                                                          |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -379,6 +379,28 @@ servers:
     location: s3://acme-orders-prod/orders/
 ```
 
+#### AWS Glue Server Object
+
+| Field    | Type     | Description                                                |
+|----------|----------|------------------------------------------------------------|
+| type     | `string` | `glue`                                                     |
+| account  | `string` | REQUIRED. The AWS account, e.g., `1234-5678-9012`          |
+| database | `string` | REQUIRED. The AWS Glue Catalog database                    |
+| location | `string` | S3 path, starting with `s3://`                             |
+| format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv` |
+
+Example:
+
+```yaml
+servers:
+  production:
+    type: glue
+    account: "1234-5678-9012"
+    database: acme-orders
+    location: s3://acme-orders-prod/orders/
+    format: parquet
+```
+
 
 #### Redshift Server Object
 
@@ -388,6 +410,16 @@ servers:
 | account  | `string` |             |
 | database | `string` |             |
 | schema   | `string` |             |
+
+#### Azure Server Object
+
+| Field    | Type     | Description                                                                                                                                                                                                                                                                                                                       |
+|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type     | `string` | `azure`                                                                                                                                                                                                                                                                                                                           |
+| location | `string` | Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs. Starting with `az://` or `abfss`<br> Examples: `az://my_storage_account_name.blob.core.windows.net/my_container/path/*.parquet` or `abfss://my_storage_account_name.dfs.core.windows.net/my_container_name/path/*.parquet` |
+| format   | `string` | Format of files, such as `parquet`, `json`, `csv`                                                                                                                                                                                                                                                                        |
+| delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array`                                                                                                                                                                                                                  |
+
 
 #### Snowflake Server Object
 
@@ -435,28 +467,6 @@ servers:
 | project | `string` | The GCP project name. |
 | topic   | `string` | The topic name.       |
 
-
-#### AWS Glue Server Object
-
-| Field    | Type     | Description                                                |
-|----------|----------|------------------------------------------------------------|
-| type     | `string` | `glue`                                                     |
-| account  | `string` | REQUIRED. The AWS account, e.g., `1234-5678-9012`          |
-| database | `string` | REQUIRED. The AWS Glue Catalog database                    |
-| location | `string` | S3 path, starting with `s3://`                             |
-| format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv` |
-
-Example:
-
-```yaml
-servers:
-  production:
-    type: glue
-    account: "1234-5678-9012"
-    database: acme-orders
-    location: s3://acme-orders-prod/orders/
-    format: parquet
-```
 
 #### Local Server Object
 
