@@ -86,10 +86,12 @@ models:
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
         type: timestamp
         required: true
+        example: "2024-09-09T08:30:00Z"
       order_total:
         description: Total amount the smallest monetary unit (e.g., cents).
         type: long
         required: true
+        example: "9999"
       customer_id:
         description: Unique identifier for the customer.
         type: text
@@ -100,6 +102,8 @@ models:
         type: text
         format: email
         required: true
+        pii: true
+        classification: sensitive
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
@@ -205,7 +209,7 @@ servicelevels:
     recoveryTime: 24 hours
     recoveryPoint: 1 week
 quality:
-  type: SodaCL   # data quality check format: SodaCL, montecarlo, great-expectations, custom
+  type: SodaCL   # data quality check format: SodaCL, montecarlo, custom
   specification: # expressed as string or inline yaml or via "$ref: checks.yaml"
     checks for orders:
       - row_count >= 5
