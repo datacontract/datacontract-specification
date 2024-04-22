@@ -524,11 +524,33 @@
                 },
                 "format": {
                   "type": "string",
-                  "description": "A specific format the value must comply with (e.g., 'email', 'uri', 'uuid')."
+                  "description": "A specific format the value must comply with (e.g., 'email', 'uri', 'uuid').",
+                  "examples": [
+                    "email",
+                    "uri",
+                    "uuid"
+                  ]
+                },
+                "precision": {
+                  "type": "number",
+                  "examples": [
+                    38
+                  ],
+                  "description": "The maximum number of digits in a number. Only applies to numeric values. Defaults to 38."
+                },
+                "scale": {
+                  "type": "number",
+                  "examples": [
+                    0
+                  ],
+                  "description": "The maximum number of decimal places in a number. Only applies to numeric values. Defaults to 0."
                 },
                 "pattern": {
                   "type": "string",
-                  "description": "A regular expression the value must match. Only applies to string types."
+                  "description": "A regular expression the value must match. Only applies to string types.",
+                  "examples": [
+                      "^[a-zA-Z0-9_-]+$"
+                  ]
                 },
                 "minimum": {
                   "type": "number",
