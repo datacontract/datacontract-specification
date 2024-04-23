@@ -646,14 +646,14 @@
             "description": "Specific format requirements for the value (e.g., 'email', 'uri', 'uuid')."
           },
           "precision": {
-            "type": "number",
+            "type": "integer",
             "examples": [
               38
             ],
             "description": "The maximum number of digits in a number. Only applies to numeric values. Defaults to 38."
           },
           "scale": {
-            "type": "number",
+            "type": "integer",
             "examples": [
               0
             ],
