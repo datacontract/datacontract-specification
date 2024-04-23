@@ -896,13 +896,14 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 #### Backup Object
 
 Backup specifies details about data backup procedures.
-| Field | Type | Description                                                                                                                                                                                                                                  |
-|--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| description  | `string` | An optional string describing the backup service level.                                                                                                                                                                          |
-| interval    | `string` | An optional interval that defines how often data will be backed up, e.g., `daily`.                   |
-| cron         | `string` | An optional cron expression when data will be backed up, e.g., `0 0 * * *`. |
-| recoveryTime        | `string` |  An optional Recovery Time Objective (RTO) specifies the maximum amount of time allowed to restore data from a backup after a failure or loss event (e.g., 4 hours, 24 hours). |
-| recoveryPoint        | `string` | An optional Recovery Point Objective (RPO) defines the maximum acceptable age of files that must be recovered from backup storage for normal operations to resume after a disaster or data loss event. This essentially measures how much data you can afford to lose, measured in time (e.g., 4 hours, 24 hours). |
+
+| Field         | Type     | Description                                                                                                                                                                                                                                                                                                        |
+|---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| description   | `string` | An optional string describing the backup service level.                                                                                                                                                                                                                                                            |
+| interval      | `string` | An optional interval that defines how often data will be backed up, e.g., `daily`.                                                                                                                                                                                                                                 |
+| cron          | `string` | An optional cron expression when data will be backed up, e.g., `0 0 * * *`.                                                                                                                                                                                                                                        |
+| recoveryTime  | `string` | An optional Recovery Time Objective (RTO) specifies the maximum amount of time allowed to restore data from a backup after a failure or loss event (e.g., 4 hours, 24 hours).                                                                                                                                      |
+| recoveryPoint | `string` | An optional Recovery Point Objective (RPO) defines the maximum acceptable age of files that must be recovered from backup storage for normal operations to resume after a disaster or data loss event. This essentially measures how much data you can afford to lose, measured in time (e.g., 4 hours, 24 hours). |
 
 
 
