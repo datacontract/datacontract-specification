@@ -25,7 +25,7 @@ Later in development and production, they also serve as the basis for code gener
 
 The specification comes along with the [Data Contract CLI](https://github.com/datacontract/datacontract-cli), an open-source tool to develop, validate, and enforce data contracts.
 
-IntelliJ, VS Code and other common IDEs will show you autocompletions without additional configuration.
+IntelliJ, VS Code and other common IDEs allow you to use autocompletions without additional configuration.
 
 _Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. 
 The term "contract" may be somewhat misleading, but it is how it is used in practice. 
@@ -248,7 +248,7 @@ More information and configuration options on [cli.datacontract.com](https://cli
 
 IDE Integration
 ---
-IntelliJ, VS Code and other common IDEs will show you autocompletions without additional configuration. Autocompletion is enabled for files following these patterns:
+IntelliJ comes with a built-in YAML plugin which will show you autocompletions. For VS Code we recommend to install the [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) plugin. No additional configuration is required. Autocompletion is then enabled for files following these patterns:
 
 ```
 datacontract.yaml
