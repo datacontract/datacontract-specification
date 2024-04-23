@@ -127,6 +127,7 @@
                 "type": "string",
                 "enum": [
                   "parquet",
+                  "delta",
                   "json",
                   "csv"
                 ],
@@ -203,6 +204,7 @@
                 "type": "string",
                 "enum": [
                   "parquet",
+                  "delta",
                   "json",
                   "csv"
                 ],
@@ -467,6 +469,7 @@
                 "examples": [
                   "json",
                   "parquet",
+                  "delta",
                   "csv"
                 ]
               }

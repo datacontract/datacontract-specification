@@ -474,7 +474,7 @@ servers:
 |--------|----------|-------------------------------------------------------------------------------------|
 | type   | `string` | `local`                                                                             |
 | path   | `string` | The relative or absolute path to the data file(s), such as `./folder/data.parquet`. |
-| format | `string` | The format of the file(s), such as `parquet`, `csv`, or `json`.                     |
+| format | `string` | The format of the file(s), such as `parquet`, `delta`, `csv`, or `json`.            |
 
 ### Terms Object
 
