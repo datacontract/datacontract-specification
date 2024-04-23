@@ -586,20 +586,42 @@
                   "description": "A value must be equal to one of the elements in this array value. Only evaluated if the value is not null."
                 },
                 "minLength": {
-                  "type": "number",
+                  "type": "integer",
                   "description": "A value must greater than, or equal to, the value of this. Only applies to string types."
                 },
                 "maxLength": {
-                  "type": "number",
+                  "type": "integer",
                   "description": "A value must less than, or equal to, the value of this. Only applies to string types."
                 },
                 "format": {
                   "type": "string",
-                  "description": "A specific format the value must comply with (e.g., 'email', 'uri', 'uuid')."
+                  "description": "A specific format the value must comply with (e.g., 'email', 'uri', 'uuid').",
+                  "examples": [
+                    "email",
+                    "uri",
+                    "uuid"
+                  ]
+                },
+                "precision": {
+                  "type": "number",
+                  "examples": [
+                    38
+                  ],
+                  "description": "The maximum number of digits in a number. Only applies to numeric values. Defaults to 38."
+                },
+                "scale": {
+                  "type": "number",
+                  "examples": [
+                    0
+                  ],
+                  "description": "The maximum number of decimal places in a number. Only applies to numeric values. Defaults to 0."
                 },
                 "pattern": {
                   "type": "string",
-                  "description": "A regular expression the value must match. Only applies to string types."
+                  "description": "A regular expression the value must match. Only applies to string types.",
+                  "examples": [
+                      "^[a-zA-Z0-9_-]+$"
+                  ]
                 },
                 "minimum": {
                   "type": "number",
@@ -683,16 +705,30 @@
             "$ref": "#/$defs/FieldType"
           },
           "minLength": {
-            "type": "number",
+            "type": "integer",
             "description": "A value must be greater than or equal to this value. Applies only to string types."
           },
           "maxLength": {
-            "type": "number",
+            "type": "integer",
             "description": "A value must be less than or equal to this value. Applies only to string types."
           },
           "format": {
             "type": "string",
             "description": "Specific format requirements for the value (e.g., 'email', 'uri', 'uuid')."
+          },
+          "precision": {
+            "type": "integer",
+            "examples": [
+              38
+            ],
+            "description": "The maximum number of digits in a number. Only applies to numeric values. Defaults to 38."
+          },
+          "scale": {
+            "type": "integer",
+            "examples": [
+              0
+            ],
+            "description": "The maximum number of decimal places in a number. Only applies to numeric values. Defaults to 0."
           },
           "pattern": {
             "type": "string",
