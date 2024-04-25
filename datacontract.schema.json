@@ -29,6 +29,16 @@
           "type": "string",
           "description": "The version of the data contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version)."
         },
+        "status": {
+          "type": "string",
+          "description": "The status of the data contract. Can be proposed, in development, active, retired.",
+          "enum": [
+            "proposed",
+            "in development",
+            "active",
+            "retired"
+          ]
+        },
         "description": {
           "type": "string",
           "description": "A description of the data contract."
