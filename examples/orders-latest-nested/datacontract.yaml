@@ -87,7 +87,7 @@ models:
         primary: true
       order_id:
         $ref: '#/definitions/order_id'
-        references: model.order_id
+        references: orders.order_id
       sku:
         description: The purchased article number
         $ref: '#/definitions/sku'
@@ -114,6 +114,7 @@ definitions:
       It is typically associated with an article's barcode, such as the EAN/GTIN.
 examples:
   - type: csv # csv, json, yaml, custom
+    description: Example data generated with ChatGPT
     model: orders
     data: | # expressed as string or inline yaml or via "$ref: data.csv"
       order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
@@ -129,6 +130,7 @@ examples:
       "1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
   - type: csv
     model: line_items
+    description: Example data generated with ChatGPT
     data: |
       lines_item_id,order_id,sku
       "LI-1","1001","5901234123457"
