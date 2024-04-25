@@ -438,7 +438,6 @@
               "schema"
             ]
           },
-          ,
           {
             "type": "object",
             "title": "OracleServer",
