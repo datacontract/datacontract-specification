@@ -32,7 +32,7 @@
         "status": {
           "type": "string",
           "description": "The status of the data contract. Can be proposed, in development, active, retired.",
-          "enum": [
+          "x-extensible-enum": [
             "proposed",
             "in development",
             "active",
@@ -436,6 +436,46 @@
               "port",
               "database",
               "schema"
+            ]
+          },
+          ,
+          {
+            "type": "object",
+            "title": "OracleServer",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "oracle",
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "host": {
+                "type": "string",
+                "description": "The host to the oracle server",
+                "examples": [
+                  "localhost"
+                ]
+              },
+              "port": {
+                "type": "integer",
+                "description": "The port to the oracle server.",
+                "examples": [
+                  1523
+                ]
+              },
+              "serviceName": {
+                "type": "string",
+                "description": "The name of the service.",
+                "examples": [
+                  "postgres"
+                ]
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "host",
+              "port",
+              "serviceName"
             ]
           },
           {

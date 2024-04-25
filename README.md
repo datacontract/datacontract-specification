@@ -450,6 +450,14 @@ servers:
 | database | `string`  | The name of the database, e.g., `postgres`.             |
 | schema   | `string`  | The name of the schema in the database, e.g., `public`. |
 
+#### Oracle Server Object
+
+| Field       | Type      | Description                     |
+|-------------|-----------|---------------------------------|
+| type        | `string`  | `oracle`                        |
+| host        | `string`  | The host to the oracle server   |
+| port        | `integer` | The port to the oracle server   |
+| serviceName | `string`  | The name of the service         |
 
 #### Kafka Server Object
 
