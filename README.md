@@ -345,10 +345,10 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                                                                                        |
-|-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `local` |
-| description | `string` | An optional string describing the server.                                                                                                                                                                                          |
+| Field       | Type     | Description                                                                                                                                                                                                                               |
+|-------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `sftp`, `glue`, `redshift`, `azure`, `snowflake`, `databricks`, `postgres`, `kafka`, `pubsub`, `local` |
+| description | `string` | An optional string describing the server.                                                                                                                                                                                                 |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -378,6 +378,15 @@ servers:
     type: s3
     location: s3://acme-orders-prod/orders/
 ```
+
+#### sftp Server Object
+
+| Field    | Type     | Description                                                                                                      |
+|----------|----------|------------------------------------------------------------------------------------------------------------------|
+| type     | `string` | `sftp`                                                                                                           |
+| location | `string` | S3 URL, starting with `sftp://`                                                                                  |
+| format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
+| delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array` |
 
 #### AWS Glue Server Object
 

@@ -12,6 +12,7 @@ The public API SHOULD NOT be considered stable.
 
 ### Added
 - AWS Glue Catalog server support
+- sftp server support
 
 ## [0.9.3] - 2024-03-06
 
