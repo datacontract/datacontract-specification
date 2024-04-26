@@ -20,7 +20,7 @@ It follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.async
 Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). 
 First, and foremost, data contracts are a communication tool to express a common understanding of how data should be structured and interpreted. 
 They make semantic and quality expectations explicit. 
-They are often created collaboratively in [workshops](/workshop) together with data providers and data consumers. 
+They are often created collaboratively in [workshops](./workshop.md) together with data providers and data consumers. 
 Later in development and production, they also serve as the basis for code generation, testing, schema validations, quality checks, monitoring, access control, and computational governance policies.
 
 The specification comes along with the [Data Contract CLI](https://github.com/datacontract/datacontract-cli), an open-source tool to develop, validate, and enforce data contracts.
