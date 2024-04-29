@@ -1,0 +1,52 @@
+dataContractSpecification: 0.9.3
+id: muellimperium-exchange-format
+info:
+  title: Muellimperium Exchange Format
+  version: 0.0.1
+  description: |
+    The Muellimperium Exchange Format is a data contract for exchanging data between the Muellimperium and its partners.
+  owner: Emperor of the Muellimperium
+  contract:
+    name: The Emperor
+    email: the-emperor@muellimperium.com
+servers:
+  exchange:
+    type: local
+    path: data.csv
+    format: csv
+models:
+  garbage_collection:
+    type: table
+    fields:
+      location:
+        type: text
+        required: true
+        description: The location where the garbage is collected.
+      garbage_type:
+        type: text
+        required: true
+        description: The type of garbage that is collected.
+        enum:
+          - paper
+          - plastic
+          - residual_waste
+          - bio_waste
+          - bulky_waste
+          - hazardous_waste
+      collection_date:
+        type: date
+        required: true
+        description: The date when the garbage is collected.
+examples:
+  - model: garbage_collection
+    type: json
+    data:
+      - location: "Musterstadt"
+        garbage_type: "paper"
+        collection_date: "2022-01-01"
+      - location: "Musterstadt"
+        garbage_type: "plastic"
+        collection_date: "2022-01-02"
+      - location: "Musterstadt"
+        garbage_type: "residual_waste"
+        collection_date: "2022-01-03"
