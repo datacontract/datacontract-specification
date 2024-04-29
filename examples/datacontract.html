@@ -1447,7 +1447,7 @@ video {
             <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
               Data Contract</h2>
             <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-              urn:datacontract:checkout:orders-latest
+              covid_cases
             </div>
           </div>
           <div class="mt-5 flex lg:mt-0 lg:ml-4 gap-3 items-center">
@@ -1478,50 +1478,25 @@ video {
                 <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                   <div class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500">Title</dt>
-                    <dd class="mt-1 text-sm text-gray-900">Orders Latest</dd>
+                    <dd class="mt-1 text-sm text-gray-900">COVID-19 cases</dd>
                   </div>
 
                   <div class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500">Version</dt>
-                    <dd class="mt-1 text-sm text-gray-900">1.0.0</dd>
+                    <dd class="mt-1 text-sm text-gray-900">0.0.1</dd>
                   </div>
 
                   
                   <div class="sm:col-span-2">
                     <dt class="text-sm font-medium text-gray-500">Description</dt>
                     <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Successful customer orders in the webshop. 
-All orders since 2020-01-01. 
-Orders with their line items are in their current state (no history included).
-</span>
+                      <span class="whitespace-pre-wrap">Johns Hopkins University Consolidated data on COVID-19 cases, sourced from Enigma</span>
                     </dd>
                   </div>
                   
 
                   
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Owner</dt>
-                    <dd class="mt-1 text-sm text-gray-900">
-                      <span>Checkout Team</span>
-                    </dd>
-                  </div>
-                  
 
-                  
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Contact</dt>
-                    <dd class="mt-1 text-sm text-gray-900">
-                      
-                        John Doe (Data Product Owner)
-                      
-                      
-                      
-                        <div>
-                          <a href="https://teams.microsoft.com/l/channel/example/checkout" class="text-sky-500 hover:text-gray-700">https://teams.microsoft.com/l/channel/example/checkout</a>
-                        </div>
-                      
-                    </dd>
-                  </div>
                   
 
                 </dl>
@@ -1544,7 +1519,7 @@ Orders with their line items are in their current state (no history included).
                 <div class="flex items-center gap-x-4">
                   <div class="hidden sm:flex sm:flex-col">
                     <dt class="text-sm font-medium text-gray-500">Server</dt>
-                    <dd class="mt-1 text-sm text-gray-900">production</dd>
+                    <dd class="mt-1 text-sm text-gray-900">s3-json</dd>
                   </div>
                 </div>
 
@@ -1565,7 +1540,7 @@ Orders with their line items are in their current state (no history included).
                 <div class="flex items-center gap-x-4">
                   <div class="hidden sm:flex sm:flex-col">
                     <dt class="text-sm font-medium text-gray-500">Location</dt>
-                    <dd class="mt-1 text-sm text-gray-900">s3://datacontract-example-orders-latest/data/{model}/*.json</dd>
+                    <dd class="mt-1 text-sm text-gray-900">s3://covid19-lake/enigma-jhu/json/*.json</dd>
                   </div>
                 </div>
                 
@@ -1616,58 +1591,6 @@ Orders with their line items are in their current state (no history included).
 
 
           
-          <section>
-            <div class="px-4 sm:px-0">
-              <h1 class="text-base font-semibold leading-6 text-gray-900" id="terms">Terms</h1>
-              <p class="text-sm text-gray-500">Terms and conditions of the data contract</p>
-            </div>
-            <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
-
-              <div class="px-4 py-5 sm:px-6">
-
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Usage</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Data can be used for reports, analytics and machine learning use cases.
-Order may be linked and joined by other tables
-</span>
-                    </dd>
-                  </div>
-
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Limitations</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Not suitable for real-time use cases.
-Data may not be used to identify individual customers.
-Max data processing per day: 10 TiB
-</span>
-                    </dd>
-                  </div>
-
-                  
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Billing</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">5000 USD per month</span>
-                    </dd>
-                  </div>
-                  
-
-                  
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Notice Period</dt>
-                      <dd class="mt-1 text-sm text-gray-900 flex" >
-                        <span class="whitespace-pre-wrap">P3M</span>
-                      </dd>
-                    </div>
-                  
-
-                </dl>
-              </div>
-            </div>
-          </section>
-          
 
 
           <section id="models">
@@ -1691,9 +1614,9 @@ Max data processing per day: 10 TiB
                       <thead class="bg-gray-50">
                       <tr>
                         <th scope="colgroup" colspan="4" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
-                          <span>orders</span>
+                          <span>covid_cases</span>
                           <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">table</span>
-                          <div class="text-sm font-medium text-gray-500">One record per order. Includes cancelled and deleted orders.</div>
+                          <div class="text-sm font-medium text-gray-500">the number of confirmed covid cases reported for a specified region, with location and county/province/country information.</div>
                         </th>
 
                       </tr>
@@ -1705,25 +1628,21 @@ Max data processing per day: 10 TiB
                       <tr>
                         <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
                           <div class="py-2 text-sm">
-                            order_id
+                            fips
                             
                           </div>
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
                           
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="unique">U</span>
                           
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
-                          text
+                          string
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">An internal ID that identifies an order in the online shop.</div>
+                          <div class="text-gray-400">state and county two digits code</div>
                           
                         </td>
 
@@ -1733,23 +1652,21 @@ Max data processing per day: 10 TiB
                       <tr>
                         <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
                           <div class="py-2 text-sm">
-                            order_timestamp
+                            admin2
                             
                           </div>
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
                           
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
                           
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
-                          timestamp
+                          string
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.</div>
+                          <div class="text-gray-400">county name</div>
                           
                         </td>
 
@@ -1759,23 +1676,21 @@ Max data processing per day: 10 TiB
                       <tr>
                         <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
                           <div class="py-2 text-sm">
-                            order_total
+                            province_state
                             
                           </div>
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
                           
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
                           
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
-                          long
+                          string
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">Total amount the smallest monetary unit (e.g., cents).</div>
+                          <div class="text-gray-400">province name or state name</div>
                           
                         </td>
 
@@ -1785,7 +1700,7 @@ Max data processing per day: 10 TiB
                       <tr>
                         <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
                           <div class="py-2 text-sm">
-                            customer_id
+                            country_region
                             
                           </div>
                         </td>
@@ -1795,11 +1710,11 @@ Max data processing per day: 10 TiB
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
-                          text
+                          string
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">Unique identifier for the customer.</div>
+                          <div class="text-gray-400">country name or region name</div>
                           
                         </td>
 
@@ -1809,23 +1724,21 @@ Max data processing per day: 10 TiB
                       <tr>
                         <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
                           <div class="py-2 text-sm">
-                            customer_email_address
+                            last_update
                             
                           </div>
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
                           
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
                           
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
-                          text
+                          timestamp_ntz
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">The email address, as entered by the customer. The email address was not verified.</div>
+                          <div class="text-gray-400">last update timestamp</div>
                           
                         </td>
 
@@ -1835,79 +1748,21 @@ Max data processing per day: 10 TiB
                       <tr>
                         <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
                           <div class="py-2 text-sm">
-                            processed_timestamp
+                            latitude
                             
                           </div>
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
                           
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
                           
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
-                          timestamp
+                          double
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">The timestamp when the record was processed by the data platform.</div>
-                          
-                        </td>
-
-                      </tr>
-                      
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-
-            <div class="mt-3 flow-root">
-              <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-
-                    <table class="min-w-full divide-y divide-gray-300">
-                      <thead class="bg-gray-50">
-                      <tr>
-                        <th scope="colgroup" colspan="4" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
-                          <span>line_items</span>
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">table</span>
-                          <div class="text-sm font-medium text-gray-500">A single article that is part of an order.</div>
-                        </th>
-
-                      </tr>
-                      </thead>
-                      <tbody class="divide-y divide-gray-200 bg-white">
-
-                      
-
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
-                          <div class="py-2 text-sm">
-                            lines_item_id
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="unique">U</span>
-                          
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">Primary key of the lines_item_id table</div>
+                          <div class="text-gray-400">location (latitude)</div>
                           
                         </td>
 
@@ -1917,7 +1772,7 @@ Max data processing per day: 10 TiB
                       <tr>
                         <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
                           <div class="py-2 text-sm">
-                            order_id
+                            longitude
                             
                           </div>
                         </td>
@@ -1927,11 +1782,11 @@ Max data processing per day: 10 TiB
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
-                          text
+                          double
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">An internal ID that identifies an order in the online shop.</div>
+                          <div class="text-gray-400">location (longitude)</div>
                           
                         </td>
 
@@ -1941,7 +1796,7 @@ Max data processing per day: 10 TiB
                       <tr>
                         <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
                           <div class="py-2 text-sm">
-                            sku
+                            confirmed
                             
                           </div>
                         </td>
@@ -1951,11 +1806,35 @@ Max data processing per day: 10 TiB
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
-                          text
+                          int
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">The purchased article number</div>
+                          <div class="text-gray-400">number of confirmed cases</div>
+                          
+                        </td>
+
+                      </tr>
+                      
+
+                      <tr>
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                          <div class="py-2 text-sm">
+                            combined_key
+                            
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
+                          
+                          
+                        </td>
+                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+                          
+                          string
+                          
+                        </td>
+                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+                          <div class="text-gray-400">county name+state name+country name</div>
                           
                         </td>
 
@@ -1991,12 +1870,9 @@ Max data processing per day: 10 TiB
               <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
                 <div class="px-4 py-5 sm:px-6">
                   <div id="schema-specification" >
-                      <pre><code class="text-sm">checks for orders:
-- row_count >= 5
-- duplicate_count(order_id) = 0
-checks for line_items:
-- values in (order_id) must exist in orders (order_id)
-- row_count >= 5
+                      <pre><code class="text-sm">checks for covid_cases:
+- freshness(last_update::datetime) < 5000d
+- row_count > 1000
 </code></pre>
                   </div>
                 </div>
@@ -2009,7 +1885,7 @@ checks for line_items:
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 29 Apr 2024 19:39:54 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.1
+        Created at 29 Apr 2024 19:30:08 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.1
       </div>
 
     </div>
@@ -2035,199 +1911,84 @@ checks for line_items:
               <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Data Contract YAML</h3>
             </div>
             <pre class="overflow-x-auto text-sm bg-gray-50 p-4"><code>dataContractSpecification: 0.9.3
-id: urn:datacontract:checkout:orders-latest
+id: covid_cases
 info:
-  title: Orders Latest
-  version: 1.0.0
-  description: "Successful customer orders in the webshop. \nAll orders since 2020-01-01.\
-    \ \nOrders with their line items are in their current state (no history included).\n"
-  owner: Checkout Team
-  contact:
-    name: John Doe (Data Product Owner)
-    url: https://teams.microsoft.com/l/channel/example/checkout
+  title: COVID-19 cases
+  version: 0.0.1
+  description: Johns Hopkins University Consolidated data on COVID-19 cases, sourced
+    from Enigma
 servers:
-  production:
+  s3-json:
     type: s3
     format: json
     delimiter: new_line
-    location: s3://datacontract-example-orders-latest/data/{model}/*.json
-terms:
-  usage: 'Data can be used for reports, analytics and machine learning use cases.
-
-    Order may be linked and joined by other tables
-
-    '
-  limitations: 'Not suitable for real-time use cases.
-
-    Data may not be used to identify individual customers.
-
-    Max data processing per day: 10 TiB
-
-    '
-  billing: 5000 USD per month
-  noticePeriod: P3M
+    location: s3://covid19-lake/enigma-jhu/json/*.json
 models:
-  orders:
-    description: One record per order. Includes cancelled and deleted orders.
+  covid_cases:
+    description: the number of confirmed covid cases reported for a specified region,
+      with location and county/province/country information.
     type: table
     fields:
-      order_id:
-        ref: '#/definitions/order_id'
-        type: text
-        format: uuid
-        required: true
-        primary: true
-        unique: true
-        description: An internal ID that identifies an order in the online shop.
-        pii: true
-        classification: restricted
-      order_timestamp:
-        type: timestamp
-        required: true
-        primary: false
-        unique: false
-        description: The business timestamp in UTC when the order was successfully
-          registered in the source system and the payment was successful.
-      order_total:
-        type: long
-        required: true
-        primary: false
-        unique: false
-        description: Total amount the smallest monetary unit (e.g., cents).
-      customer_id:
-        type: text
+      fips:
+        type: string
         required: false
         primary: false
         unique: false
-        description: Unique identifier for the customer.
-        minLength: 10
-        maxLength: 20
-      customer_email_address:
-        type: text
-        format: email
-        required: true
-        primary: false
-        unique: false
-        description: The email address, as entered by the customer. The email address
-          was not verified.
-        pii: true
-        classification: sensitive
-      processed_timestamp:
-        type: timestamp
-        required: true
-        primary: false
-        unique: false
-        description: The timestamp when the record was processed by the data platform.
-  line_items:
-    description: A single article that is part of an order.
-    type: table
-    fields:
-      lines_item_id:
-        type: text
-        required: true
-        primary: true
-        unique: true
-        description: Primary key of the lines_item_id table
-      order_id:
-        ref: '#/definitions/order_id'
-        type: text
-        format: uuid
+        description: state and county two digits code
+      admin2:
+        type: string
         required: false
         primary: false
         unique: false
-        references: orders.order_id
-        description: An internal ID that identifies an order in the online shop.
-        pii: true
-        classification: restricted
-      sku:
-        ref: '#/definitions/sku'
-        type: text
+        description: county name
+      province_state:
+        type: string
         required: false
         primary: false
         unique: false
-        description: The purchased article number
-        pattern: ^[A-Za-z0-9]{8,14}$
-definitions:
-  order_id:
-    domain: checkout
-    name: order_id
-    title: Order ID
-    description: An internal ID that identifies an order in the online shop.
-    type: text
-    format: uuid
-    pii: true
-    classification: restricted
-  sku:
-    domain: inventory
-    name: sku
-    title: Stock Keeping Unit
-    description: "A Stock Keeping Unit (SKU) is an internal unique identifier for\
-      \ an article. \nIt is typically associated with an article's barcode, such as\
-      \ the EAN/GTIN.\n"
-    type: text
-    pattern: ^[A-Za-z0-9]{8,14}$
-examples:
-- type: csv
-  description: An example list of order records.
-  model: orders
-  data: 'order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
-
-    "1001","2030-09-09T08:30:00Z",2500,"1000000001","mary.taylor82@example.com","2030-09-09T08:31:00Z"
-
-    "1002","2030-09-08T15:45:00Z",1800,"1000000002","michael.miller83@example.com","2030-09-09T08:31:00Z"
-
-    "1003","2030-09-07T12:15:00Z",3200,"1000000003","michael.smith5@example.com","2030-09-09T08:31:00Z"
-
-    "1004","2030-09-06T19:20:00Z",1500,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
-
-    "1005","2030-09-05T10:10:00Z",4200,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
-
-    "1006","2030-09-04T14:55:00Z",2800,"1000000005","john.davis28@example.com","2030-09-09T08:31:00Z"
-
-    "1007","2030-09-03T21:05:00Z",1900,"1000000006","linda.brown67@example.com","2030-09-09T08:31:00Z"
-
-    "1008","2030-09-02T17:40:00Z",3600,"1000000007","patricia.smith40@example.com","2030-09-09T08:31:00Z"
-
-    "1009","2030-09-01T09:25:00Z",3100,"1000000008","linda.wilson43@example.com","2030-09-09T08:31:00Z"
-
-    "1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
-
-    '
-- type: csv
-  description: An example list of line items.
-  model: line_items
-  data: 'lines_item_id,order_id,sku
-
-    "LI-1","1001","5901234123457"
-
-    "LI-2","1001","4001234567890"
-
-    "LI-3","1002","5901234123457"
-
-    "LI-4","1002","2001234567893"
-
-    "LI-5","1003","4001234567890"
-
-    "LI-6","1003","5001234567892"
-
-    "LI-7","1004","5901234123457"
-
-    "LI-8","1005","2001234567893"
-
-    "LI-9","1005","5001234567892"
-
-    "LI-10","1005","6001234567891"
-
-    '
+        description: province name or state name
+      country_region:
+        type: string
+        required: false
+        primary: false
+        unique: false
+        description: country name or region name
+      last_update:
+        type: timestamp_ntz
+        required: false
+        primary: false
+        unique: false
+        description: last update timestamp
+      latitude:
+        type: double
+        required: false
+        primary: false
+        unique: false
+        description: location (latitude)
+      longitude:
+        type: double
+        required: false
+        primary: false
+        unique: false
+        description: location (longitude)
+      confirmed:
+        type: int
+        required: false
+        primary: false
+        unique: false
+        description: number of confirmed cases
+      combined_key:
+        type: string
+        required: false
+        primary: false
+        unique: false
+        description: county name+state name+country name
 quality:
   type: SodaCL
   specification:
-    checks for orders:
-    - row_count >= 5
-    - duplicate_count(order_id) = 0
-    checks for line_items:
-    - values in (order_id) must exist in orders (order_id)
-    - row_count >= 5
+    checks for covid_cases:
+    - freshness(last_update::datetime) < 5000d
+    - row_count > 1000
 </code></pre>
           </div>
           <div class="mt-5 sm:mt-6">

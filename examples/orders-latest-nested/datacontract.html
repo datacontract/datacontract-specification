@@ -1835,6 +1835,30 @@ Max data processing per day: 10 TiB
                       <tr>
                         <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
                           <div class="py-2 text-sm">
+                            address
+                            
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
+                          
+                          
+                        </td>
+                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+                          
+                          object
+                          
+                        </td>
+                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+                          <div class="text-gray-400">The delivery address of the customer.</div>
+                          
+                        </td>
+
+                      </tr>
+                      
+
+                      <tr>
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                          <div class="py-2 text-sm">
                             processed_timestamp
                             
                           </div>
@@ -2009,7 +2033,7 @@ checks for line_items:
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 29 Apr 2024 19:39:54 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.1
+        Created at 29 Apr 2024 19:39:53 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.1
       </div>
 
     </div>
@@ -2110,8 +2134,38 @@ models:
         unique: false
         description: The email address, as entered by the customer. The email address
           was not verified.
-        pii: true
-        classification: sensitive
+      address:
+        type: object
+        required: false
+        primary: false
+        unique: false
+        description: The delivery address of the customer.
+        fields:
+          street:
+            type: text
+            required: false
+            primary: false
+            unique: false
+            description: The street name and house number.
+          city:
+            type: text
+            required: false
+            primary: false
+            unique: false
+            description: The city name.
+          additional_lines:
+            type: array
+            required: false
+            primary: false
+            unique: false
+            description: Additional address lines, such as floor, apartment, or company
+              name.
+            items:
+              type: text
+              required: false
+              primary: false
+              unique: false
+              description: Additional line
       processed_timestamp:
         type: timestamp
         required: true
@@ -2168,7 +2222,7 @@ definitions:
     pattern: ^[A-Za-z0-9]{8,14}$
 examples:
 - type: csv
-  description: An example list of order records.
+  description: Example data generated with ChatGPT
   model: orders
   data: 'order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
 
@@ -2194,7 +2248,7 @@ examples:
 
     '
 - type: csv
-  description: An example list of line items.
+  description: Example data generated with ChatGPT
   model: line_items
   data: 'lines_item_id,order_id,sku
 
