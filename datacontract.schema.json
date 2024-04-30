@@ -1198,6 +1198,7 @@
         "object",
         "record",
         "struct",
+        "map",
         "bytes",
         "null"
       ]
