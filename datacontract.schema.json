@@ -637,6 +637,10 @@
                   "type": "string",
                   "description": "An optional string describing the semantic of the data in this field."
                 },
+                "title": {
+                  "type": "string",
+                  "description": "An optional string providing a human readable name for the field. Especially useful if the field name is cryptic or contains abbreviations."
+                },
                 "type": {
                   "$ref": "#/$defs/FieldType"
                 },
