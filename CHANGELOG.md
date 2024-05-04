@@ -16,6 +16,7 @@ The public API SHOULD NOT be considered stable.
 - info.status field
 - oracle server support
 - field.title attribute
+- model.title attribute
 
 ## [0.9.3] - 2024-03-06
 

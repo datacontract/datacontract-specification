@@ -511,11 +511,12 @@ The Model Object describes the structure and semantics of a data model, such as 
 
 The name of the data model (table name) is defined by the key that refers to this Model Object.
 
-| Field       | Type                                         | Description                                                                   |
-|-------------|----------------------------------------------|-------------------------------------------------------------------------------|
-| type        | `string`                                     | The type of the model. Examples: `table`, `view`, `object`. Default: `table`. |
-| description | `string`                                     | An optional string describing the data model.                                 |
-| fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                  |
+| Field       | Type                                         | Description                                                                                                                          |
+|-------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string`                                     | The type of the model. Examples: `table`, `view`, `object`. Default: `table`.                                                        |
+| description | `string`                                     | An optional string describing the data model.                                                                                        |
+| title       | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
+| fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
 
 
 
