@@ -626,6 +626,11 @@
               "object"
             ]
           },
+          "title": {
+            "type": "string",
+            "description": "An optional string providing a human readable name for the model. Especially useful if the model name is cryptic or contains abbreviations.",
+            "examples": ["Purchase Orders", "Air Shipments"]
+          },
           "fields": {
             "description": "Specifies a field in the data model. Use the field name (e.g., the column name) as the key.",
             "type": "object",
