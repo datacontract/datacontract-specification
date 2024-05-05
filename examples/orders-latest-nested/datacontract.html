@@ -744,12 +744,8 @@ video {
   width: 2.5rem;
 }
 
-.w-16 {
-  width: 4rem;
-}
-
-.w-3\/12 {
-  width: 25%;
+.w-2\/12 {
+  width: 16.666667%;
 }
 
 .w-4 {
@@ -937,6 +933,11 @@ video {
   border-radius: 0.375rem;
 }
 
+.bg-blue-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 246 255 / var(--tw-bg-opacity));
+}
+
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -960,6 +961,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-yellow-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 252 232 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-75 {
@@ -1062,6 +1068,10 @@ video {
   vertical-align: middle;
 }
 
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1099,6 +1109,10 @@ video {
   font-weight: 600;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .leading-5 {
   line-height: 1.25rem;
 }
@@ -1109,6 +1123,11 @@ video {
 
 .leading-7 {
   line-height: 1.75rem;
+}
+
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
 .text-gray-400 {
@@ -1139,6 +1158,11 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-yellow-600 {
+  --tw-text-opacity: 1;
+  color: rgb(202 138 4 / var(--tw-text-opacity));
 }
 
 .shadow {
@@ -1174,6 +1198,10 @@ video {
   --tw-ring-color: rgb(0 0 0 / var(--tw-ring-opacity));
 }
 
+.ring-blue-500\/10 {
+  --tw-ring-color: rgb(59 130 246 / 0.1);
+}
+
 .ring-gray-300 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
@@ -1185,6 +1213,10 @@ video {
 
 .ring-gray-900\/5 {
   --tw-ring-color: rgb(17 24 39 / 0.05);
+}
+
+.ring-yellow-500\/10 {
+  --tw-ring-color: rgb(234 179 8 / 0.1);
 }
 
 .ring-opacity-5 {
@@ -1487,6 +1519,8 @@ video {
                   </div>
 
                   
+
+                  
                   <div class="sm:col-span-2">
                     <dt class="text-sm font-medium text-gray-500">Description</dt>
                     <dd class="mt-1 text-sm text-gray-900" >
@@ -1608,7 +1642,7 @@ Max data processing per day: 10 TiB
                     <table class="min-w-full divide-y divide-gray-300">
                       <thead class="bg-gray-50">
                       <tr>
-                        <th scope="colgroup" colspan="4" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+                        <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
                           <span>orders</span>
                           <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">table</span>
                           <div class="text-sm font-medium text-gray-500">One record per order. Includes cancelled and deleted orders.</div>
@@ -1621,19 +1655,14 @@ Max data processing per day: 10 TiB
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            order_id
+                            
+                            <div>Order ID</div>
+                            
+                            <div class="font-mono">order_id</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="unique">U</span>
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1641,25 +1670,54 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">An internal ID that identifies an order in the online shop.</div>
                           
+                          <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            order_timestamp
+                            
+                            <div class="font-mono">order_timestamp</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1667,25 +1725,44 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.</div>
                           
+                          <div class="text-gray-500">The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            order_total
+                            
+                            <div class="font-mono">order_total</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1693,23 +1770,44 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">Total amount the smallest monetary unit (e.g., cents).</div>
                           
+                          <div class="text-gray-500">Total amount the smallest monetary unit (e.g., cents).</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            customer_id
+                            
+                            <div class="font-mono">customer_id</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1717,25 +1815,46 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">Unique identifier for the customer.</div>
                           
+                          <div class="text-gray-500">Unique identifier for the customer.</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">minLength:10</span>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">maxLength:20</span>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            customer_email_address
+                            
+                            <div class="font-mono">customer_email_address</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1743,23 +1862,46 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">The email address, as entered by the customer. The email address was not verified.</div>
                           
+                          <div class="text-gray-500">The email address, as entered by the customer. The email address was not verified.</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+                            
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:email</span>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            address
+                            
+                            <div class="font-mono">address</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1767,25 +1909,42 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">The delivery address of the customer.</div>
                           
+                          <div class="text-gray-500">The delivery address of the customer.</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            processed_timestamp
+                            
+                            <div class="font-mono">processed_timestamp</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1793,8 +1952,32 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">The timestamp when the record was processed by the data platform.</div>
                           
+                          <div class="text-gray-500">The timestamp when the record was processed by the data platform.</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
@@ -1816,7 +1999,7 @@ Max data processing per day: 10 TiB
                     <table class="min-w-full divide-y divide-gray-300">
                       <thead class="bg-gray-50">
                       <tr>
-                        <th scope="colgroup" colspan="4" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+                        <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
                           <span>line_items</span>
                           <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">table</span>
                           <div class="text-sm font-medium text-gray-500">A single article that is part of an order.</div>
@@ -1829,19 +2012,12 @@ Max data processing per day: 10 TiB
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            lines_item_id
+                            
+                            <div class="font-mono">lines_item_id</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="required">R</span>
-                          
-                          
-                          <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" title="unique">U</span>
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1849,23 +2025,50 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">Primary key of the lines_item_id table</div>
                           
+                          <div class="text-gray-500">Primary key of the lines_item_id table</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            order_id
+                            
+                            <div>Order ID</div>
+                            
+                            <div class="font-mono">order_id</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1873,23 +2076,50 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">An internal ID that identifies an order in the online shop.</div>
                           
+                          <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            sku
+                            
+                            <div>Stock Keeping Unit</div>
+                            
+                            <div class="font-mono">sku</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1897,8 +2127,32 @@ Max data processing per day: 10 TiB
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">The purchased article number</div>
                           
+                          <div class="text-gray-500">The purchased article number</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">pattern:^[A-Za-z0-9]{8,14}$</span>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
@@ -1925,7 +2179,7 @@ Max data processing per day: 10 TiB
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 29 Apr 2024 20:26:31 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.1
+        Created at 05 May 2024 15:52:13 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.1
       </div>
 
     </div>
@@ -1983,6 +2237,7 @@ models:
     fields:
       order_id:
         ref: '#/definitions/order_id'
+        title: Order ID
         type: text
         format: uuid
         required: true
@@ -2070,6 +2325,7 @@ models:
         description: Primary key of the lines_item_id table
       order_id:
         ref: '#/definitions/order_id'
+        title: Order ID
         type: text
         format: uuid
         required: false
@@ -2081,6 +2337,7 @@ models:
         classification: restricted
       sku:
         ref: '#/definitions/sku'
+        title: Stock Keeping Unit
         type: text
         required: false
         primary: false

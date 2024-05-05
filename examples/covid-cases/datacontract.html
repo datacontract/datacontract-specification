@@ -744,12 +744,8 @@ video {
   width: 2.5rem;
 }
 
-.w-16 {
-  width: 4rem;
-}
-
-.w-3\/12 {
-  width: 25%;
+.w-2\/12 {
+  width: 16.666667%;
 }
 
 .w-4 {
@@ -937,6 +933,11 @@ video {
   border-radius: 0.375rem;
 }
 
+.bg-blue-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 246 255 / var(--tw-bg-opacity));
+}
+
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -960,6 +961,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-yellow-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 252 232 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-75 {
@@ -1062,6 +1068,10 @@ video {
   vertical-align: middle;
 }
 
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1099,6 +1109,10 @@ video {
   font-weight: 600;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .leading-5 {
   line-height: 1.25rem;
 }
@@ -1109,6 +1123,11 @@ video {
 
 .leading-7 {
   line-height: 1.75rem;
+}
+
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
 .text-gray-400 {
@@ -1139,6 +1158,11 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-yellow-600 {
+  --tw-text-opacity: 1;
+  color: rgb(202 138 4 / var(--tw-text-opacity));
 }
 
 .shadow {
@@ -1174,6 +1198,10 @@ video {
   --tw-ring-color: rgb(0 0 0 / var(--tw-ring-opacity));
 }
 
+.ring-blue-500\/10 {
+  --tw-ring-color: rgb(59 130 246 / 0.1);
+}
+
 .ring-gray-300 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
@@ -1185,6 +1213,10 @@ video {
 
 .ring-gray-900\/5 {
   --tw-ring-color: rgb(17 24 39 / 0.05);
+}
+
+.ring-yellow-500\/10 {
+  --tw-ring-color: rgb(234 179 8 / 0.1);
 }
 
 .ring-opacity-5 {
@@ -1487,6 +1519,8 @@ video {
                   </div>
 
                   
+
+                  
                   <div class="sm:col-span-2">
                     <dt class="text-sm font-medium text-gray-500">Description</dt>
                     <dd class="mt-1 text-sm text-gray-900" >
@@ -1613,7 +1647,7 @@ video {
                     <table class="min-w-full divide-y divide-gray-300">
                       <thead class="bg-gray-50">
                       <tr>
-                        <th scope="colgroup" colspan="4" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+                        <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
                           <span>covid_cases</span>
                           <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">table</span>
                           <div class="text-sm font-medium text-gray-500">the number of confirmed covid cases reported for a specified region, with location and county/province/country information.</div>
@@ -1626,15 +1660,12 @@ video {
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            fips
+                            
+                            <div class="font-mono">fips</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1642,23 +1673,42 @@ video {
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">state and county two digits code</div>
                           
+                          <div class="text-gray-500">state and county two digits code</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            admin2
+                            
+                            <div class="font-mono">admin2</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1666,23 +1716,42 @@ video {
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">county name</div>
                           
+                          <div class="text-gray-500">county name</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            province_state
+                            
+                            <div class="font-mono">province_state</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1690,23 +1759,42 @@ video {
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">province name or state name</div>
                           
+                          <div class="text-gray-500">province name or state name</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            country_region
+                            
+                            <div class="font-mono">country_region</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1714,23 +1802,42 @@ video {
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">country name or region name</div>
                           
+                          <div class="text-gray-500">country name or region name</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            last_update
+                            
+                            <div class="font-mono">last_update</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1738,23 +1845,42 @@ video {
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">last update timestamp</div>
                           
+                          <div class="text-gray-500">last update timestamp</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            latitude
+                            
+                            <div class="font-mono">latitude</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1762,23 +1888,42 @@ video {
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">location (latitude)</div>
                           
+                          <div class="text-gray-500">location (latitude)</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            longitude
+                            
+                            <div class="font-mono">longitude</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1786,23 +1931,42 @@ video {
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">location (longitude)</div>
                           
+                          <div class="text-gray-500">location (longitude)</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            confirmed
+                            
+                            <div class="font-mono">confirmed</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1810,23 +1974,42 @@ video {
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">number of confirmed cases</div>
                           
+                          <div class="text-gray-500">number of confirmed cases</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
                       
 
                       <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-3/12">
+                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
                           <div class="py-2 text-sm">
-                            combined_key
+                            
+                            <div class="font-mono">combined_key</div>
                             
                           </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-16">
-                          
-                          
                         </td>
                         <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
                           
@@ -1834,8 +2017,30 @@ video {
                           
                         </td>
                         <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          <div class="text-gray-400">county name+state name+country name</div>
                           
+                          <div class="text-gray-500">county name+state name+country name</div>
+                          
+
+                          
+
+                          <div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                          </div>
+
                         </td>
 
                       </tr>
@@ -1885,7 +2090,7 @@ video {
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 29 Apr 2024 20:26:33 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.1
+        Created at 05 May 2024 15:52:15 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.1
       </div>
 
     </div>
