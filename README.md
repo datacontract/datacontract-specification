@@ -318,14 +318,14 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 Metadata and life cycle information about the data contract.
 
 
-| Field   | Type   | Description                                                                                                                                                      |
-|---------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| title   | `string` | REQUIRED. The title of the data contract.                                                                                                                        |
-| version | `string` | REQUIRED. The version of the data contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
-| status  | `string` | The status of the data contract. Can be proposed, in development, active, retired. |
-| description | `string` | A description of the data contract.                                                                                                                              |
-| owner   | `string` | The owner or team responsible for managing the data contract and providing the data.                                                                            |
-| contact | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                       |
+| Field       | Type                              | Description                                                                                                                                                      |
+|-------------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title       | `string`                          | REQUIRED. The title of the data contract.                                                                                                                        |
+| version     | `string`                          | REQUIRED. The version of the data contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
+| status      | `string`                          | The status of the data contract. Can be proposed, in development, active, retired.                                                                               |
+| description | `string`                          | A description of the data contract.                                                                                                                              |
+| owner       | `string`                          | The owner or team responsible for managing the data contract and providing the data.                                                                             |
+| contact     | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                       |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -346,10 +346,10 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                                                                                                         |
-|-------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Field       | Type     | Description                                                                                                                                                                                                                                          |
+|-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `local` |
-| description | `string` | An optional string describing the server.                                                                                                                                                                                                           |
+| description | `string` | An optional string describing the server.                                                                                                                                                                                                            |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -363,13 +363,13 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 #### S3 Server Object
 
-| Field    | Type     | Description                    |
-|----------|----------|--------------------------------|
-| type     | `string` | `s3`                           |
-| location | `string` | S3 URL, starting with `s3://`  |
-| endpointUrl | `string` | The server endpoint for S3-compatible servers, such as `https://minio.example.com`  |
-| format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`  |
-| delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array`  |
+| Field       | Type     | Description                                                                                                      |
+|-------------|----------|------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | `s3`                                                                                                             |
+| location    | `string` | S3 URL, starting with `s3://`                                                                                    |
+| endpointUrl | `string` | The server endpoint for S3-compatible servers, such as `https://minio.example.com`                               |
+| format      | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
+| delimiter   | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array` |
 
 Example:
 
@@ -414,12 +414,12 @@ servers:
 
 #### Azure Server Object
 
-| Field    | Type     | Description                                                                                                                                                                                                                                                                                                                       |
-|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type     | `string` | `azure`                                                                                                                                                                                                                                                                                                                           |
-| location | `string` | Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs. Starting with `az://` or `abfss`<br> Examples: `az://my_storage_account_name.blob.core.windows.net/my_container/path/*.parquet` or `abfss://my_storage_account_name.dfs.core.windows.net/my_container_name/path/*.parquet` |
-| format   | `string` | Format of files, such as `parquet`, `json`, `csv`                                                                                                                                                                                                                                                                        |
-| delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array`                                                                                                                                                                                                                  |
+| Field     | Type     | Description                                                                                                                                                                                                                                                                                                              |
+|-----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type      | `string` | `azure`                                                                                                                                                                                                                                                                                                                  |
+| location  | `string` | Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs. Starting with `az://` or `abfss`<br> Examples: `az://my_storage_account_name.blob.core.windows.net/my_container/path/*.parquet` or `abfss://my_storage_account_name.dfs.core.windows.net/my_container_name/path/*.parquet` |
+| format    | `string` | Format of files, such as `parquet`, `json`, `csv`                                                                                                                                                                                                                                                                        |
+| delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array`                                                                                                                                                                                                         |
 
 
 #### Snowflake Server Object
@@ -478,11 +478,11 @@ servers:
 
 #### sftp Server Object
 
-| Field    | Type     | Description                                                                                                      |
-|----------|----------|------------------------------------------------------------------------------------------------------------------|
-| type     | `string` | `sftp`                                                                                                           |
-| location | `string` | S3 URL, starting with `sftp://`                                                                                  |
-| format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
+| Field     | Type     | Description                                                                                                      |
+|-----------|----------|------------------------------------------------------------------------------------------------------------------|
+| type      | `string` | `sftp`                                                                                                           |
+| location  | `string` | S3 URL, starting with `sftp://`                                                                                  |
+| format    | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
 | delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array` |
 
 #### Local Server Object
@@ -497,12 +497,12 @@ servers:
 
 The terms and conditions of the data contract.
 
-| Field                | Type   | Description                                                                                                                                                                 |
-|----------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| usage                | `string` | The usage describes the way the data is expected to be used. Can contain business and technical information.                                                                |
-| limitations          | `string` | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may not be used for.                               |
-| billing              | `string` | The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use.                                        |
-| noticePeriod         | `string` | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
+| Field        | Type     | Description                                                                                                                                                                 |
+|--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| usage        | `string` | The usage describes the way the data is expected to be used. Can contain business and technical information.                                                                |
+| limitations  | `string` | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may not be used for.                               |
+| billing      | `string` | The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use.                                        |
+| noticePeriod | `string` | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
 
 
 ### Model Object
@@ -567,8 +567,8 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 | description      | `string`                 | Clear and concise explanations related to the domain                                                                                                                                                                                                                                                                                                                                                                         |
 | enum             | array of `string`        | A value must be equal to one of the elements in this array value. Only evaluated if the value is not null.                                                                                                                                                                                                                                                                                                                   |
 | format           | `string`                 | `email`: A value must be complaint to [RFC 5321, section 4.1.2](https://www.rfc-editor.org/info/rfc5321).<br>`uri`: A value must be complaint to [RFC 3986](https://www.rfc-editor.org/info/rfc3986).<br>`uuid`: A value must be complaint to [RFC 4122](https://www.rfc-editor.org/info/rfc4122). Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`). |
-| precision        | `number`                                     | The maximum number of digits in a number. Only applies to numeric values. Defaults to 38.                                                                                                                                                                                                                                                                                                                                    |
-| scale            | `number`                                     | The maximum number of decimal places in a number. Only applies to numeric values. Defaults to 0.                                                                                                                                                                                                                                                                                                                             |
+| precision        | `number`                 | The maximum number of digits in a number. Only applies to numeric values. Defaults to 38.                                                                                                                                                                                                                                                                                                                                    |
+| scale            | `number`                 | The maximum number of decimal places in a number. Only applies to numeric values. Defaults to 0.                                                                                                                                                                                                                                                                                                                             |
 | minLength        | `number`                 | A value must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                         |
 | maxLength        | `number`                 | A value must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                            |
 | pattern          | `string`                 | A value must be valid according to the [ECMA-262](https://262.ecma-international.org/5.1/) regular expression dialect. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                             |
@@ -587,10 +587,10 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 The schema of the data contract describes the physical schema. 
 The type of the schema depends on the data platform.
 
-| Field | Type                                                                                                                                                                                                                 | Description                                                                                                                         |
-| ----- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| type | `string`                                                                                                                                                                                                               | REQUIRED. The type of the schema.<br> Typical values are: `dbt`, `bigquery`, `json-schema`, `sql-ddl`, `avro`, `protobuf`, `custom` |
-| specification | [dbt Schema Object](#dbt-schema-object) \|<br> [BigQuery Schema Object](#bigquery-schema-object) \|<br> [JSON Schema Schema Object](#bigquery-schema-object) \|<br> [SQL DDL Schema Object](#sql-ddl-schema-object) \|<br> `string` | REQUIRED. The specification of the schema. The schema specification can be encoded as a string or as inline YAML.                  |
+| Field         | Type                                                                                                                                                                                                                                | Description                                                                                                                         |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| type          | `string`                                                                                                                                                                                                                            | REQUIRED. The type of the schema.<br> Typical values are: `dbt`, `bigquery`, `json-schema`, `sql-ddl`, `avro`, `protobuf`, `custom` |
+| specification | [dbt Schema Object](#dbt-schema-object) \|<br> [BigQuery Schema Object](#bigquery-schema-object) \|<br> [JSON Schema Schema Object](#bigquery-schema-object) \|<br> [SQL DDL Schema Object](#sql-ddl-schema-object) \|<br> `string` | REQUIRED. The specification of the schema. The schema specification can be encoded as a string or as inline YAML.                   |
 
 
 #### dbt Schema Object
@@ -930,10 +930,10 @@ Backup specifies details about data backup procedures.
 
 The quality object contains quality attributes and checks.
 
-| Field         | Type                                                                                                                          | Description                                                                                                     |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| type          | `string`                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `great-expectations`, `custom` |
-| specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> `string` | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML.  |
+| Field         | Type                                                                                                                            | Description                                                                                                                    |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| type          | `string`                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `great-expectations`, `custom`               |
+| specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> `string` | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML. |
 
 
 #### SodaCL Quality Object
