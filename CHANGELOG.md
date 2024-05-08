@@ -17,6 +17,7 @@ The public API SHOULD NOT be considered stable.
 - oracle server support
 - field.title attribute
 - model.title attribute
+- AWS Kinesis Data Streams server support
 
 ## [0.9.3] - 2024-03-06
 

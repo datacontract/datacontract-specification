@@ -348,7 +348,7 @@ The fields are dependent on the defined type.
 
 | Field       | Type     | Description                                                                                                                                                                                                                                          |
 |-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `local` |
+| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `local` |
 | description | `string` | An optional string describing the server.                                                                                                                                                                                                            |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
@@ -484,6 +484,15 @@ servers:
 | location  | `string` | S3 URL, starting with `sftp://`                                                                                  |
 | format    | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
 | delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array` |
+
+#### AWS Kinesis Data Streams Server Object
+
+| Field  | Type     | Description                                                               |
+|--------|----------|---------------------------------------------------------------------------|
+| type   | `string` | `kinesis`                                                                 |
+| stream | `string` | The name of the Kinesis data stream.                                      |
+| region | `string` | AWS region, e.g., `eu-west-1`.                                            |
+| format | `string` | The format of the records. Examples: json, avro, protobuf.                |
 
 #### Local Server Object
 

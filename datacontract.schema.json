@@ -539,6 +539,45 @@
           },
           {
             "type": "object",
+            "title": "KinesisDataStreamsServer",
+            "description": "Kinesis Data Streams Server",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "kinesis"
+                ],
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "stream": {
+                "type": "string",
+                "description": "The name of the Kinesis data stream."
+              },
+              "region": {
+                "type": "string",
+                "description": "AWS region.",
+                "examples": [
+                  "eu-west-1"
+                ]
+              },
+              "format": {
+                "type": "string",
+                "description": "The format of the record",
+                "examples": [
+                  "json",
+                  "avro",
+                  "protobuf"
+                ]
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "stream"
+            ]
+          },
+          {
+            "type": "object",
             "title": "LocalServer",
             "properties": {
               "type": {
