@@ -40,7 +40,7 @@ Version
 Example
 ---
 
-[![Data Contract Catalog](https://img.shields.io/badge/Data%20Contract-Catalog-blue)](/examples/index.htm)
+[![Data Contract Catalog](https://img.shields.io/badge/Data%20Contract-Catalog-blue)](https://datacontract.com/examples/index.html)
 
 ```yaml
 dataContractSpecification: 0.9.3
