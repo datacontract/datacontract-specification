@@ -40,7 +40,7 @@ Version
 Example
 ---
 
-[![Open in Data Contract Studio](https://img.shields.io/badge/open%20in-Data%20Contract%20Studio-blue)](https://studio.datacontract.com/) or in the examples [catalog](/examples/index.html).
+[![Data Contract Catalog](https://img.shields.io/badge/Data%20Contract-Catalog-blue)](/examples/index.htm)
 
 ```yaml
 dataContractSpecification: 0.9.3
