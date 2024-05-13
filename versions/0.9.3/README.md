@@ -35,7 +35,7 @@ Data usage agreements have a defined lifecycle, start/end date, and help the dat
 Version
 ---
 
-0.9.4([Changelog](CHANGELOG.md))
+0.9.3 ([Changelog](CHANGELOG.md))
 
 Example
 ---
@@ -98,28 +98,16 @@ models:
         minLength: 10
         maxLength: 20
       customer_email_address:
-        description: The email address, as entered by the customer.
+        description: The email address, as entered by the customer. The email address was not verified.
         type: text
         format: email
         required: true
         pii: true
         classification: sensitive
-        quality:
-          - type: business-rule
-            name: The email address was verified by the system
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
         required: true
-    quality:
-      - type: row_count
-        must_be_greater_than: 5
-      - type: sql
-        description: The maximum duration between two orders should be less that 3600 seconds
-        query: |
-          SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
-          FROM orders
-        must_be_less_than: 3600
   line_items:
     description: A single article that is part of an order.
     type: table
@@ -220,6 +208,15 @@ servicelevels:
     cron: 0 0 * * 0
     recoveryTime: 24 hours
     recoveryPoint: 1 week
+quality:
+  type: SodaCL   # data quality check format: SodaCL, montecarlo, custom
+  specification: # expressed as string or inline yaml or via "$ref: checks.yaml"
+    checks for orders:
+      - row_count >= 5
+      - duplicate_count(order_id) = 0
+    checks for line_items:
+      - values in (order_id) must exist in orders (order_id)
+      - row_count >= 5
 ```
 
 Data Contract CLI
@@ -520,8 +517,6 @@ The name of the data model (table name) is defined by the key that refers to thi
 | description | `string`                                     | An optional string describing the data model.                                                                                        |
 | title       | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
 | fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
-| quality     | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on model level.                                                                                     |
-
 
 
 
@@ -556,8 +551,6 @@ The Field Objects describes one field (column, property, nested field) of a data
 | $ref             | `string`                                     | A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition.                                                                                                                                                                                                                                                                                            |
 | fields           | Map[`string`, [Field Object](#field-object)] | The nested fields (e.g. columns) of the object, record, or struct. Use only when type is object, record, or struct.                                                                                                                                                                                                                                                                                                          |
 | items            | [Field Object](#field-object)                | The type of the elements in the array. Use only when type is array.                                                                                                                                                                                                                                                                                                                                                          |
-| quality          | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on field level.                                                                                                                                                                                                                                                                                                                                                                             |
-
 
 ### Definition Object
 
@@ -935,138 +928,80 @@ Backup specifies details about data backup procedures.
 
 ### Quality Object
 
-The quality object defined a quality attribute.
+The quality object contains quality attributes and checks.
 
-Quality attributes are checks that can be applied to the data to ensure its quality. Data can be verified by executing these checks through a data quality engine.
-
-A quality object can be specified on field level, or on model level. The top-level quality object is deprecated.
-
-The fields of the quality object depends on the quality type.
-
-#### Plain-text
-
-A human-readable text that describe the quality of the data. These can later be translated into a technical check (such as SQL), or checked through an AI engine.
-
-| Field       | Type     | Description                                      |
-|-------------|----------|--------------------------------------------------|
-| type        | `string` | `plain-text`                                     |
-| name        | `string` | Optional. A human-readable name for this check   |
-| description | `string` | A plain text describing the quality of the data. |
-
-Example:
-
-```yaml
-- type: plain-text
-  description: The email address was verified by the system
-```
-
-#### SQL
-
-An individual SQL query that returns a single number or boolean value that can be compared. The SQL query must be in the SQL dialect of the provided server.
-
-| Field                            | Type                   | Description                                                |
-|----------------------------------|------------------------|------------------------------------------------------------|
-| type                             | `string`               | `sql`                                                      |
-| query                            | `string`               | A SQL query that returns a single number or boolean value. |
-| must_be_equal_to                 | `integer` or `boolean` | The threshold to check the return value of the query       |
-| must_be_greater_than             | `integer`              | The threshold to check the return value of the query       |
-| must_be_greater_than_or_equal_to | `integer`              | The threshold to check the return value of the query       |
-| must_be_less_than                | `integer`              | The threshold to check the return value of the query       |
-| must_be_less_than_or_equal_to    | `integer`              | The threshold to check the return value of the query       |
-| name                             | `string`               | Optional. A human-readable name for this check             |
-| description                      | `string`               | A plain text describing the quality of the data.           |
-
-```yaml
-- type: sql
-  description: The maximum duration between two orders should be less that 3600 seconds
-  query: |
-    SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
-    FROM orders
-  must_be_less_than: 3600
-```
+| Field         | Type                                                                                                                            | Description                                                                                                                    |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| type          | `string`                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `great-expectations`, `custom`               |
+| specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> `string` | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML. |
 
 
-#### Row Count
-
-Counts the number of rows in a model.
-
-| Field                            | Type      | Description                                          |
-|----------------------------------|-----------|------------------------------------------------------|
-| type                             | `string`  | `row_count`                                          |
-| must_be_equal_to                 | `number`  | The threshold to check the return value of the query |
-| must_not_be_equal_to             | `number`  | The threshold to check the return value of the query |
-| must_be_greater_than             | `number` | The threshold to check the return value of the query |
-| must_be_greater_than_or_equal_to | `number` | The threshold to check the return value of the query |
-| must_be_less_than                | `number` | The threshold to check the return value of the query |
-| must_be_less_than_or_equal_to    | `number` | The threshold to check the return value of the query |
-| name                             | `string`  | Optional. A human-readable name for this check       |
-| description                      | `string`  | A plain text describing the quality of the data.     |
-
-
-```yaml
-- type: row_count
-  must_be_greater_than: 500000
-```
-
-
-#### Unique
-
-A uniqueness check for multiple fields.
-
-| Field                            | Type              | Description                                                            |
-|----------------------------------|-------------------|------------------------------------------------------------------------|
-| type                             | `string`          | `unique`                                                               |
-| fields                           | Array of `string` | An ordered list of fields that values need to be unique in combination |
-| name                             | `string`          | Optional. A human-readable name for this check                         |
-| description                      | `string`          | A plain text describing the quality of the data.                       |
-
-
-```yaml
-- type: unique
-  fields:
-    - country
-    - order_id
-```
-
-
-#### Freshness
-TBD
-
-
-#### SodaCL
+#### SodaCL Quality Object
 
 Quality attributes in [Soda Checks Language](https://docs.soda.io/soda-cl/soda-cl-overview.html).
 
 The `specification` represents the content of a `checks.yml` file.
 
-Example:
+Example (inline):
 
 ```yaml
 quality:
-  - type: SodaCL
-    specification: |
-      checks for orders:
-        - row_count > 0
-        - duplicate_count(order_id) = 0
-      checks for line_items:
-        - row_count > 0
+  type: SodaCL   # data quality check format: SodaCL, montecarlo, dbt-tests, custom
+  specification: # expressed as string or inline yaml or via "$ref: checks.yaml"
+    checks for orders:
+      - row_count > 0
+      - duplicate_count(order_id) = 0
+    checks for line_items:
+      - row_count > 0
 ```
 
+Example (string):
 
-#### Great Expectations
+```yaml
+quality:
+  type: SodaCL
+  specification: |-
+    checks for search_queries:
+      - freshness(search_timestamp) < 1d
+      - row_count > 100000
+      - missing_count(search_query) = 0
+```
+
+#### Monte Carlo Quality Object
+
+Quality attributes defined as Monte Carlos [Monitors as Code](https://docs.getmontecarlo.com/docs/monitors-as-code).
+
+The `specification` represents the content of a `montecarlo.yml` file.
+
+Example (string):
+
+```yaml
+quality:
+  type: montecarlo
+  specification: |-
+    montecarlo:
+      field_health:
+        - table: project:dataset.table_name
+          timestamp_field: created
+      dimension_tracking:
+        - table: project:dataset.table_name
+          timestamp_field: created
+          field: order_status
+```
+
+#### Great Expectations Quality Object
 
 Quality attributes defined as Great Expectations [Expectations](https://greatexpectations.io/expectations/).
 
-The `specification` represents a expectation suite as JSON string.
+The `specification` represents a list of expectations on a specific model. 
 
-New with 0.9.4: This quality type is only applicable on model level.
-
-Example:
+Example (string):
 
 ```yaml
 quality:
-  - type: great-expectations
-    specification: |
+  type: great-expectations
+  specification:
+    orders: |-
       [
           {
               "expectation_type": "expect_table_row_count_to_be_between",
@@ -1078,29 +1013,6 @@ quality:
               }
           }
       ]
-```
-
-
-#### Monte Carlo
-
-Quality attributes defined as Monte Carlos [Monitors as Code](https://docs.getmontecarlo.com/docs/monitors-as-code).
-
-The `specification` represents the content of a `montecarlo.yml` file.
-
-Example:
-
-```yaml
-quality:
-  - type: montecarlo
-    specification: |
-      montecarlo:
-        field_health:
-          - table: project:dataset.table_name
-            timestamp_field: created
-        dimension_tracking:
-          - table: project:dataset.table_name
-            timestamp_field: created
-            field: order_status
 ```
 
 ### Data Types
