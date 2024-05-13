@@ -574,6 +574,14 @@ video {
   border-width: 0;
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.visible {
+  visibility: visible;
+}
+
 .fixed {
   position: fixed;
 }
@@ -588,6 +596,15 @@ video {
 
 .inset-0 {
   inset: 0px;
+}
+
+.inset-y-0 {
+  top: 0px;
+  bottom: 0px;
+}
+
+.left-0 {
+  left: 0px;
 }
 
 .right-0 {
@@ -680,6 +697,10 @@ video {
   -webkit-line-clamp: 3;
 }
 
+.block {
+  display: block;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -762,6 +783,10 @@ video {
 
 .w-7\/12 {
   width: 58.333333%;
+}
+
+.w-72 {
+  width: 18rem;
 }
 
 .w-full {
@@ -933,6 +958,10 @@ video {
   border-radius: 0.375rem;
 }
 
+.border-0 {
+  border-width: 0px;
+}
+
 .bg-blue-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(239 246 255 / var(--tw-bg-opacity));
@@ -1010,6 +1039,11 @@ video {
   padding-bottom: 0.25rem;
 }
 
+.py-1\.5 {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -1030,6 +1064,14 @@ video {
 
 .pb-7 {
   padding-bottom: 1.75rem;
+}
+
+.pl-10 {
+  padding-left: 2.5rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
 }
 
 .pl-4 {
@@ -1223,10 +1265,6 @@ video {
   --tw-ring-opacity: 0.05;
 }
 
-.filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
 .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1237,6 +1275,16 @@ video {
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.placeholder\:text-gray-400::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-gray-400::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .hover\:bg-gray-50:hover {
@@ -1257,6 +1305,21 @@ video {
 .hover\:text-gray-700:hover {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:ring-inset:focus {
+  --tw-ring-inset: inset;
+}
+
+.focus\:ring-indigo-600:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(79 70 229 / var(--tw-ring-opacity));
 }
 
 .focus-visible\:outline:focus-visible {
@@ -1338,10 +1401,20 @@ video {
     align-items: center;
   }
 
+  .sm\:items-baseline {
+    align-items: baseline;
+  }
+
   .sm\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.5rem * var(--tw-space-x-reverse));
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .sm\:space-x-8 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(2rem * var(--tw-space-x-reverse));
+    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .sm\:truncate {
@@ -1379,6 +1452,15 @@ video {
   .sm\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .sm\:leading-6 {
+    line-height: 1.5rem;
   }
 
   .sm\:tracking-tight {
@@ -1492,11 +1574,50 @@ video {
 
             
 
+            <form aria-labelledby="filter-heading" class="pb-4" >
+              <h2 id="filter-heading" class="sr-only">Filters</h2>
+              <div class="flex items-center justify-between">
+                <div class="hidden sm:flex sm:items-baseline sm:space-x-8">
+                  <div>
+                    <div class="relative rounded-md shadow-sm">
+                      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <svg class="pointer-events-none absolute h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                      <input type="text" name="q" id="search" class="block w-72 rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Search">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            
+
+
             <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
 
               
 
-              <li class="col-span-1 rounded-lg bg-white shadow hover:bg-gray-50">
+              <li class="col-span-1 rounded-lg bg-white shadow hover:bg-gray-50"
+                  data-search="orders latest (nested) checkout team successful customer orders in the webshop. 
+all orders since 2020-01-01. 
+orders with their line items are in their current state (no history included).
+ 
+      one record per order. includes cancelled and deleted orders. 
+        order_id an internal id that identifies an order in the online shop. 
+        order_timestamp the business timestamp in utc when the order was successfully registered in the source system and the payment was successful. 
+        order_total total amount the smallest monetary unit (e.g., cents). 
+        customer_id unique identifier for the customer. 
+        customer_email_address the email address, as entered by the customer. the email address was not verified. 
+        address the delivery address of the customer. 
+        processed_timestamp the timestamp when the record was processed by the data platform. 
+    
+      a single article that is part of an order. 
+        lines_item_id primary key of the lines_item_id table 
+        order_id an internal id that identifies an order in the online shop. 
+        sku the purchased article number 
+    
+  ">
                 <a href="orders-latest-nested/datacontract.html" >
                   <div class="flex w-full justify-between space-x-1 p-6 pb-4">
                     <div class="flex-1 truncate">
@@ -1532,7 +1653,25 @@ Orders with their line items are in their current state (no history included).
               </li>
               
 
-              <li class="col-span-1 rounded-lg bg-white shadow hover:bg-gray-50">
+              <li class="col-span-1 rounded-lg bg-white shadow hover:bg-gray-50"
+                  data-search="orders latest checkout team successful customer orders in the webshop. 
+all orders since 2020-01-01. 
+orders with their line items are in their current state (no history included).
+ 
+      one record per order. includes cancelled and deleted orders. 
+        order_id an internal id that identifies an order in the online shop. 
+        order_timestamp the business timestamp in utc when the order was successfully registered in the source system and the payment was successful. 
+        order_total total amount the smallest monetary unit (e.g., cents). 
+        customer_id unique identifier for the customer. 
+        customer_email_address the email address, as entered by the customer. the email address was not verified. 
+        processed_timestamp the timestamp when the record was processed by the data platform. 
+    
+      a single article that is part of an order. 
+        lines_item_id primary key of the lines_item_id table 
+        order_id an internal id that identifies an order in the online shop. 
+        sku the purchased article number 
+    
+  ">
                 <a href="orders-latest/datacontract.html" >
                   <div class="flex w-full justify-between space-x-1 p-6 pb-4">
                     <div class="flex-1 truncate">
@@ -1568,7 +1707,20 @@ Orders with their line items are in their current state (no history included).
               </li>
               
 
-              <li class="col-span-1 rounded-lg bg-white shadow hover:bg-gray-50">
+              <li class="col-span-1 rounded-lg bg-white shadow hover:bg-gray-50"
+                  data-search="covid-19 cases  johns hopkins university consolidated data on covid-19 cases, sourced from enigma 
+      the number of confirmed covid cases reported for a specified region, with location and county/province/country information. 
+        fips state and county two digits code 
+        admin2 county name 
+        province_state province name or state name 
+        country_region country name or region name 
+        last_update last update timestamp 
+        latitude location (latitude) 
+        longitude location (longitude) 
+        confirmed number of confirmed cases 
+        combined_key county name+state name+country name 
+    
+  ">
                 <a href="covid-cases/datacontract.html" >
                   <div class="flex w-full justify-between space-x-1 p-6 pb-4">
                     <div class="flex-1 truncate">
@@ -1594,7 +1746,15 @@ Orders with their line items are in their current state (no history included).
               </li>
               
 
-              <li class="col-span-1 rounded-lg bg-white shadow hover:bg-gray-50">
+              <li class="col-span-1 rounded-lg bg-white shadow hover:bg-gray-50"
+                  data-search="muellimperium exchange format emperor of the muellimperium the muellimperium exchange format is a data contract for exchanging data between the muellimperium and its partners.
+ 
+      none 
+        location the location where the garbage is collected. 
+        garbage_type the type of garbage that is collected. 
+        collection_date the date when the garbage is collected. 
+    
+  ">
                 <a href="muellimperium/datacontract.html" >
                   <div class="flex w-full justify-between space-x-1 p-6 pb-4">
                     <div class="flex-1 truncate">
@@ -1632,6 +1792,10 @@ Orders with their line items are in their current state (no history included).
             
 
 
+            <div id="no-results" class="hidden text-sm text-gray-500">
+              No results found.
+            </div>
+
           </section>
 
         </div>
@@ -1639,7 +1803,7 @@ Orders with their line items are in their current state (no history included).
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 05 May 2024 15:52:16 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.1
+        Created at 08 May 2024 18:45:58 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.3
       </div>
 
     </div>
@@ -1697,6 +1861,36 @@ Orders with their line items are in their current state (no history included).
   </footer>
 
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search');
+    const contractsList = document.querySelectorAll('#catalog li');
+    const noResults = document.getElementById('no-results');
+
+    searchInput.addEventListener('keyup', function() {
+      let visibleCount = 0;  // Counter to track the number of visible items
+      const searchText = searchInput.value.toLowerCase();
+
+      contractsList.forEach(contract => {
+        const searchData = contract.getAttribute('data-search');
+        if (searchData && searchData.includes(searchText)) {
+          contract.style.display = '';
+          visibleCount++;
+        } else {
+          contract.style.display = 'none';
+        }
+      });
+
+      // Manage the visibility of the no results message
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');  // Show the message if no items are visible
+      } else {
+        noResults.classList.add('hidden');     // Hide the message if there are visible items
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
