@@ -105,7 +105,7 @@ models:
         pii: true
         classification: sensitive
         quality:
-          - type: business-rule
+          - type: text
             name: The email address was verified by the system
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
@@ -297,19 +297,19 @@ This is the root document.
 
 It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 
-| Field                     | Type                                                 | Description                                                                                              |
-|---------------------------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| dataContractSpecification | `string`                                             | REQUIRED. Specifies the Data Contract Specification being used.                                          |
-| id                        | `string`                                             | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number |
-| info                      | [Info Object](#info-object)                          | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                           |
-| servers                   | Map[string, [Server Object](#server-object)]         | Specifies the servers of the data contract.                                                              |
-| terms                     | [Terms Object](#terms-object)                        | Specifies the terms and conditions of the data contract.                                                 |
-| models                    | Map[string, [Model Object](#model-object)]           | Specifies the logical data model.                                                                        |
-| definitions               | Map[string, [Definition Object](#definition-object)] | Specifies definitions.                                                                                   |
-| schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                       |
-| examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.      |
-| servicelevels             | [Service Levels Object](#service-levels-object)      | Specifies the service level of the provided data                                                         |
-| quality                   | [Quality Object](#quality-object)                    | Specifies the quality attributes and checks. The specification supports different quality check DSLs.    |
+| Field                     | Type                                                 | Description                                                                                                          |
+|---------------------------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| dataContractSpecification | `string`                                             | REQUIRED. Specifies the Data Contract Specification being used.                                                      |
+| id                        | `string`                                             | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number             |
+| info                      | [Info Object](#info-object)                          | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                                       |
+| servers                   | Map[string, [Server Object](#server-object)]         | Specifies the servers of the data contract.                                                                          |
+| terms                     | [Terms Object](#terms-object)                        | Specifies the terms and conditions of the data contract.                                                             |
+| models                    | Map[string, [Model Object](#model-object)]           | Specifies the logical data model.                                                                                    |
+| definitions               | Map[string, [Definition Object](#definition-object)] | Specifies definitions.                                                                                               |
+| schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                                   |
+| examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.                  |
+| servicelevels             | [Service Levels Object](#service-levels-object)      | Specifies the service level of the provided data                                                                     |
+| quality                   | [Quality Object](#quality-object)                    | Deprecated on top-level. Use model-level and field-field level quality. Specifies the quality attributes and checks. |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -939,28 +939,43 @@ The quality object defined a quality attribute.
 
 Quality attributes are checks that can be applied to the data to ensure its quality. Data can be verified by executing these checks through a data quality engine.
 
-A quality object can be specified on field level, or on model level. The top-level quality object is deprecated.
+Quality attributes can be:
+- Text: A human-readable text that describes the quality of the data.
+- SQL: An individual SQL query that returns a single value that can be compared.
+- Predefined Types: Some commonly-used predefined quality attributes such as `row_count`, `unique`, `freshness`
+- Vendor-specific: Quality attributes that are specific to a vendor, such as Great Expectations, SodaCL or Montecarlo.
 
-The fields of the quality object depends on the quality type.
+A quality object can be specified on field level, or on model level. The top-level quality object are deprecated.
 
-#### Plain-text
+The fields of the quality object depends on the quality `type`.
 
-A human-readable text that describe the quality of the data. These can later be translated into a technical check (such as SQL), or checked through an AI engine.
+#### Text
 
-| Field       | Type     | Description                                      |
-|-------------|----------|--------------------------------------------------|
-| type        | `string` | `plain-text`                                     |
-| name        | `string` | Optional. A human-readable name for this check   |
-| description | `string` | A plain text describing the quality of the data. |
+ Applicable on: [ ] top-level, [x] model, [x] field
+
+A human-readable text that describe the quality of the data. Later in the development process, these might be translated into an executable check (such as `sql`), or checked through an AI engine.
+
+| Field       | Type     | Description                                                        |
+|-------------|----------|--------------------------------------------------------------------|
+| type        | `string` | `text`                                                             |
+| name        | `string` | Optional. A human-readable name for this check                     |
+| description | `string` | A plain text describing the quality attribute in natural language. |
 
 Example:
 
 ```yaml
-- type: plain-text
-  description: The email address was verified by the system
+models:
+  my_table:
+    fields:
+      email:
+        quality:
+          - type: text
+            description: The email address was verified by the system
 ```
 
 #### SQL
+
+Applicable on: [ ] top-level, [x] model, [x] field
 
 An individual SQL query that returns a single number or boolean value that can be compared. The SQL query must be in the SQL dialect of the provided server.
 
@@ -977,16 +992,22 @@ An individual SQL query that returns a single number or boolean value that can b
 | description                      | `string`               | A plain text describing the quality of the data.           |
 
 ```yaml
-- type: sql
-  description: The maximum duration between two orders should be less that 3600 seconds
-  query: |
-    SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
-    FROM orders
-  must_be_less_than: 3600
+models:
+  my_table:
+    quality:
+      - type: sql
+        description: The maximum duration between two orders should be less that 3600 seconds
+        query: |
+          SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
+          FROM orders
+        must_be_less_than: 3600
 ```
 
 
 #### Row Count
+
+Applicable on: [ ] top-level, [x] model, [ ]  field
+
 
 Counts the number of rows in a model.
 
@@ -1004,14 +1025,19 @@ Counts the number of rows in a model.
 
 
 ```yaml
-- type: row_count
-  must_be_greater_than: 500000
+models:
+  my_table:
+    quality:
+      - type: row_count
+        must_be_greater_than: 500000
 ```
 
 
 #### Unique
 
-A uniqueness check for multiple fields.
+Applicable on: [ ] top-level, [x] model, [ ] field
+
+A uniqueness check for multiple fields. (For a single field uniqueness check, use the `unique` field attribute.)
 
 | Field                            | Type              | Description                                                            |
 |----------------------------------|-------------------|------------------------------------------------------------------------|
@@ -1020,20 +1046,113 @@ A uniqueness check for multiple fields.
 | name                             | `string`          | Optional. A human-readable name for this check                         |
 | description                      | `string`          | A plain text describing the quality of the data.                       |
 
+Example:
 
 ```yaml
-- type: unique
-  fields:
-    - country
-    - order_id
+models:
+  my_table:
+    fields:
+      order_id:
+        type: string
+      country:
+        type: string
+    quality:
+      - type: unique
+        fields:
+          - country
+          - order_id
 ```
 
 
 #### Freshness
-TBD
+
+
+Applicable on: [ ] top-level, [ ] model, [x] field
+
+At least one element in the model must have a timestamp value that is less than a certain threshold.
+
+
+| Field                     | Type     | Description                                      |
+|---------------------------|----------|--------------------------------------------------|
+| type                      | `string` | `freshness`                                      |
+| must_be_less_than_seconds | `number` | The threshold in seconds to compare              |
+| name                      | `string` | Optional. A human-readable name for this check   |
+| description               | `string` | A plain text describing the quality of the data. |
+
+
+Example: 
+
+```yaml
+models:
+  my_table:
+    fields:
+      some_timestamp:
+        type: timestamp
+        quality:
+          - type: freshness
+            must_be_less_than_seconds: 3600
+            description: At least one element in the model must have a timestamp value that is less than 1 hour
+```
+
+
+#### Great Expectations
+
+Applicable on: [ ] top-level, [x] model, [x]  field
+
+Quality attributes defined as an Great Expectations [Expectation](https://greatexpectations.io/expectations/).
+
+
+Example:
+
+```yaml
+models:
+  my_table:
+    quality:
+    - type: great-expectations
+      expectation_type: expect_table_row_count_to_be_between
+      kwargs:
+        min_value: 10000
+        max_value: 50000
+```
+
+
+
+#### Great Expectations (Expectation Suite)
+
+Applicable on: [ ] top-level, [x] model, [ ]  field
+
+Quality attributes defined as Great Expectations [Expectations](https://greatexpectations.io/expectations/).
+
+The `specification` represents an expectation suite as JSON string.
+
+New with v0.9.4: This quality type is only applicable on model level.
+
+Example:
+
+```yaml
+models:
+  my_table:
+    quality:
+      - type: great-expectations
+        specification: |
+          [
+              {
+                  "expectation_type": "expect_table_row_count_to_be_between",
+                  "kwargs": {
+                      "min_value": 10000,
+                      "max_value": 50000,
+                  },
+                  "meta": {
+          
+                  }
+              }
+          ]
+```
 
 
 #### SodaCL
+
+Applicable on: [x] top-level, [x] model, [ ]  field
 
 Quality attributes in [Soda Checks Language](https://docs.soda.io/soda-cl/soda-cl-overview.html).
 
@@ -1052,36 +1171,9 @@ quality:
         - row_count > 0
 ```
 
-
-#### Great Expectations
-
-Quality attributes defined as Great Expectations [Expectations](https://greatexpectations.io/expectations/).
-
-The `specification` represents a expectation suite as JSON string.
-
-New with 0.9.4: This quality type is only applicable on model level.
-
-Example:
-
-```yaml
-quality:
-  - type: great-expectations
-    specification: |
-      [
-          {
-              "expectation_type": "expect_table_row_count_to_be_between",
-              "kwargs": {
-                  "min_value": 10
-              },
-              "meta": {
-      
-              }
-          }
-      ]
-```
-
-
 #### Monte Carlo
+
+Applicable on: [x] top-level, [x] model, [ ]  field
 
 Quality attributes defined as Monte Carlos [Monitors as Code](https://docs.getmontecarlo.com/docs/monitors-as-code).
 
