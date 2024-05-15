@@ -2296,6 +2296,246 @@ Max data processing per day: 10 TiB
           
 
           
+          <section id="servicelevels">
+            <div class="px-4 sm:px-0">
+              <h1 class="text-base font-semibold leading-6 text-gray-900">Service Levels</h1>
+              <p class="text-sm text-gray-500">Service levels of the data contract</p>
+            </div>
+            <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
+              <div class="px-4 py-5 sm:px-6">
+                <dl class="grid grid-cols-1 gap-x-4 gap-y-6 divide-y">
+                  
+                  <div class="grid sm:grid-cols-2" >
+                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="availability">
+                      Availability
+                    </h2>
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Description</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">The server is available during support hours</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Percentage</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">99.9%</span>
+                      </dd>
+                    </div>
+                    
+                  </div>
+                  
+                  
+                  <div class="grid sm:grid-cols-2" >
+                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="retention">
+                      Retention
+                    </h2>
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Description</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">Data is retained for one year</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Period</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">P1Y</span>
+                      </dd>
+                    </div>
+                    
+                    
+                  </div>
+                  
+                  
+                  <div class="grid sm:grid-cols-2" >
+                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="latency">
+                      Latency
+                    </h2>
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Description</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">Data is available within 25 hours after the order was placed</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Threshold</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">25h</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Source Timestamp field</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap font-mono">orders.order_timestamp</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Processed Timestamp field</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap font-mono">orders.processed_timestamp</span>
+                      </dd>
+                    </div>
+                    
+                  </div>
+                  
+                  
+                  <div class="grid sm:grid-cols-2" >
+                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="freshness">
+                      Freshness
+                    </h2>
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Description</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">The age of the youngest row in a table.</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Threshold</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">25h</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Timestamp field</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap font-mono">orders.order_timestamp</span>
+                      </dd>
+                    </div>
+                    
+                  </div>
+                  
+                  
+                  <div class="grid sm:grid-cols-2" >
+                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="frequency">
+                      Frequency
+                    </h2>
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Description</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">Data is delivered once a day</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Type</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">batch</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Interval</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">daily</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Cron</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap font-mono">0 0 * * *</span>
+                      </dd>
+                    </div>
+                    
+                  </div>
+                  
+                  
+                  <div class="grid sm:grid-cols-2" >
+                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="support">
+                      Support
+                    </h2>
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Description</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">The data is available during typical business hours at headquarters</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Time</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">9am to 5pm in EST on business days</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Response Time</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">1h</span>
+                      </dd>
+                    </div>
+                    
+                  </div>
+                  
+                  
+                  <div class="grid sm:grid-cols-2" >
+                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="backup">
+                      Backup
+                    </h2>
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Description</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">Data is backed up once a week, every Sunday at 0:00 UTC.</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Cron</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap font-mono">0 0 * * 0</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Recovery Time</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">24 hours</span>
+                      </dd>
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-1">
+                      <dt class="text-sm font-medium text-gray-500">Recovery Point</dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        <span class="whitespace-pre-wrap">1 week</span>
+                      </dd>
+                    </div>
+                    
+                  </div>
+                  
+                </dl>
+              </div>
+            </div>
+          </section>
+          
 
           
             <section id="quality">
@@ -2330,7 +2570,7 @@ checks for line_items:
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 08 May 2024 18:45:56 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.3
+        Created at 15 May 2024 14:53:02 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.3
       </div>
 
     </div>
@@ -2552,6 +2792,38 @@ quality:
     checks for line_items:
     - values in (order_id) must exist in orders (order_id)
     - row_count >= 5
+servicelevels:
+  availability:
+    description: The server is available during support hours
+    percentage: 99.9%
+  retention:
+    description: Data is retained for one year
+    period: P1Y
+    unlimited: false
+  latency:
+    description: Data is available within 25 hours after the order was placed
+    threshold: 25h
+    sourceTimestampField: orders.order_timestamp
+    processedTimestampField: orders.processed_timestamp
+  freshness:
+    description: The age of the youngest row in a table.
+    threshold: 25h
+    timestampField: orders.order_timestamp
+  frequency:
+    description: Data is delivered once a day
+    type: batch
+    interval: daily
+    cron: 0 0 * * *
+  support:
+    description: The data is available during typical business hours at headquarters
+    time: 9am to 5pm in EST on business days
+    responseTime: 1h
+  backup:
+    description: Data is backed up once a week, every Sunday at 0:00 UTC.
+    interval: weekly
+    cron: 0 0 * * 0
+    recoveryTime: 24 hours
+    recoveryPoint: 1 week
 </code></pre>
           </div>
           <div class="mt-5 sm:mt-6">
