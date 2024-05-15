@@ -346,10 +346,10 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                                                                                                          |
-|-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `local` |
-| description | `string` | An optional string describing the server.                                                                                                                                                                                                            |
+| Field       | Type     | Description                                                                                                                                                                                                                                                                  |
+|-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `local` |
+| description | `string` | An optional string describing the server.                                                                                                                                                                                                                                    |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -420,6 +420,17 @@ servers:
 | location  | `string` | Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs. Starting with `az://` or `abfss`<br> Examples: `az://my_storage_account_name.blob.core.windows.net/my_container/path/*.parquet` or `abfss://my_storage_account_name.dfs.core.windows.net/my_container_name/path/*.parquet` |
 | format    | `string` | Format of files, such as `parquet`, `json`, `csv`                                                                                                                                                                                                                                                                        |
 | delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array`                                                                                                                                                                                                         |
+
+
+#### SQL-Server Server Object
+
+| Field    | Type      | Description                                          |
+|----------|-----------|------------------------------------------------------|
+| type     | `string`  | `sqlserver`                                          |
+| host     | `string`  | The host to the database server                      |
+| port     | `integer` | The port to the database server, default: `1433`     |
+| database | `string`  | The name of the database, e.g., `database`.          |
+| schema   | `string`  | The name of the schema in the database, e.g., `dbo`. |
 
 
 #### Snowflake Server Object

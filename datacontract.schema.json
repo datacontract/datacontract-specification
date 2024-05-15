@@ -282,6 +282,54 @@
           },
           {
             "type": "object",
+            "title": "SqlserverServer",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "sqlserver"
+                ],
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "host": {
+                "type": "string",
+                "description": "The host to the database server",
+                "examples": [
+                  "localhost"
+                ]
+              },
+              "port": {
+                "type": "integer",
+                "description": "The port to the database server.",
+                "default": 1433,
+                "examples": [
+                  1433
+                ]
+              },
+              "database": {
+                "type": "string",
+                "description": "The name of the database.",
+                "examples": [
+                  "database"
+                ]
+              },
+              "schema": {
+                "type": "string",
+                "description": "The name of the schema in the database.",
+                "examples": [
+                  "dbo"
+                ]
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "location",
+              "format"
+            ]
+          },
+          {
+            "type": "object",
             "title": "SnowflakeServer",
             "properties": {
               "type": {
