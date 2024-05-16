@@ -63,6 +63,9 @@ models:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
         required: true
+        config:
+          jsonType: string
+          jsonFormat: date-time
   line_items:
     description: A single article that is part of an order.
     type: table

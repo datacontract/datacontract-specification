@@ -11,6 +11,7 @@ Please note,  while the major version is zero (0.y.z), Anything MAY change at an
 The public API SHOULD NOT be considered stable.
 
 ### Added
+- Support for server-specific data types as config map ([#63](https://github.com/datacontract/datacontract-specification/issues/63))
 - AWS Glue Catalog server support
 - sftp server support
 - info.status field
