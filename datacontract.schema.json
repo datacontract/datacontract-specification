@@ -324,8 +324,9 @@
             "additionalProperties": true,
             "required": [
               "type",
-              "location",
-              "format"
+              "host",
+              "database",
+              "schema"
             ]
           },
           {
@@ -859,7 +860,77 @@
                 "$ref": {
                   "type": "string",
                   "description": "A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition."
+                },
+                "config": {
+                  "type": "object",
+                  "description": "Additional metadata for field configuration.",
+                  "additionalProperties": {
+                    "type": [
+                      "string",
+                      "number",
+                      "boolean",
+                      "object",
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "properties": {
+                    "avroType": {
+                      "type": "string",
+                      "description": "Specify the field type to use when exporting the data model to Apache Avro."
+                    },
+                    "avroLogicalType": {
+                      "type": "string",
+                      "description": "Specify the logical field type to use when exporting the data model to Apache Avro."
+                    },
+                    "bigqueryType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a BigQuery table, e.g., `NUMERIC(5, 2)`."
+                    },
+                    "snowflakeType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a Snowflake table, e.g., `TIMESTAMP_LTZ`."
+                    },
+                    "redshiftType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a Redshift table, e.g., `SMALLINT`."
+                    },
+                    "sqlserverType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a SQL Server table, e.g., `DATETIME2`."
+                    },
+                    "unityType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a Databricks Unity Catalog table."
+                    },
+                    "glueType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in an AWS Glue Data Catalog table."
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "config": {
+            "type": "object",
+            "description": "Additional metadata for model configuration.",
+            "additionalProperties": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "object",
+                "array",
+                "null"
+
+
+              ]
+            },
+            "properties": {
+              "avroNamespace": {
+                "type": "string",
+                "description": "The namespace to use when importing and exporting the data model from / to Apache Avro."
               }
             }
           }
@@ -1132,7 +1203,7 @@
             },
             "threshold": {
               "type": "string",
-              "description": "An optional maximum age of the youngest entry. Supported formats: Simple duration (e.g., `24 hours`, `5s`) and ISO 8601 duration (e.g, `PT24H`).",
+              "description": "An optional maximum age of the youngest entry. Supported formats: Simple duration (e.g., `24 hours`, `5s`) and ISO 8601 duration (e.g., `PT24H`).",
               "example": "25h"
             },
             "timestampField": {

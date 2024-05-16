@@ -108,6 +108,9 @@ models:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
         required: true
+        config:
+          jsonType: string
+          jsonFormat: date-time
   line_items:
     description: A single article that is part of an order.
     type: table
@@ -537,6 +540,8 @@ The name of the data model (table name) is defined by the key that refers to thi
 | description | `string`                                     | An optional string describing the data model.                                                                                        |
 | title       | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
 | fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
+| config      | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
+
 
 
 
@@ -571,6 +576,8 @@ The Field Objects describes one field (column, property, nested field) of a data
 | $ref             | `string`                                     | A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition.                                                                                                                                                                                                                                                                                            |
 | fields           | Map[`string`, [Field Object](#field-object)] | The nested fields (e.g. columns) of the object, record, or struct. Use only when type is object, record, or struct.                                                                                                                                                                                                                                                                                                          |
 | items            | [Field Object](#field-object)                | The type of the elements in the array. Use only when type is array.                                                                                                                                                                                                                                                                                                                                                          |
+| config           | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                                                                                                                                                                                                                                                                                                                     |
+
 
 ### Definition Object
 
@@ -1035,6 +1042,47 @@ quality:
       ]
 ```
 
+### Config Object
+
+The config field can be used to set additional metadata that may be used by tools, e.g. to define a namespace for code generation, specify physical data types, toggle tests, etc.
+
+A config field can be added with any name. The value can be null, a primitive, an array or an object.
+
+For developer experience, a list of well-known field names is maintained here, as these fields are used in the Data Contract CLI:
+
+
+| Field           | Type     | Description                                                                                                    |
+|-----------------|----------|----------------------------------------------------------------------------------------------------------------|
+| avroNamespace   | `string` | (Only on model level) The namespace to use when importing and exporting the data model from / to Apache Avro.  |
+| avroType        | `string` | (Only on field level) Specify the field type to use when exporting the data model to Apache Avro.              |
+| avroLogicalType | `string` | (Only on field level) Specify the logical field type to use when  exporting the data model to Apache Avro.     |
+| bigqueryType    | `string` | (Only on field level) Specify the physical column type that is used in a BigQuery table, e.g., `NUMERIC(5, 2)` |
+| snowflakeType   | `string` | (Only on field level) Specify the physical column type that is used in a Snowflake table, e.g, `TIMESTAMP_LTZ` |
+| redshiftType    | `string` | (Only on field level) Specify the physical column type that is used in a Redshift table, e.g, `SMALLINT`       |
+| sqlserverType   | `string` | (Only on field level) Specify the physical column type that is used in a Snowflake table, e.g, `DATETIME2`     |
+| unityType       | `string` | (Only on field level) Specify the physical column type that is used in a Databricks Unity Catalog table        |
+| glueType        | `string` | (Only on field level) Specify the physical column type that is used in a AWS Glue Data Catalog table           |
+
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+Example:
+
+```
+models:
+  orders:
+    config:
+      avroNamespace: "my.namespace"
+    fields:
+      my_field_1:
+        description: Example for AVRO with Timestamp (millisecond precision)
+        type: timestamp
+        config:
+          avroType: long
+          avroLogicalType: timestamp-millis
+          snowflakeType: timestamp_tz
+```
+
+
 ### Data Types
 
 The following data types are supported for model fields and definitions:
@@ -1058,7 +1106,7 @@ The following data types are supported for model fields and definitions:
 
 While the Data Contract Specification tries to accommodate most use cases, additional data can be added to extend the specification at certain points.
 
-A custom fields can be added with any name. The value can be null, a primitive, an array or an object. 
+A custom field can be added with any name. The value can be null, a primitive, an array or an object. 
 
 ### Design Principles
 
