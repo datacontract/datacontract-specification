@@ -853,7 +853,7 @@ One can either describe each service level informally using the `description` fi
 |--------------|-----------------------------------------------|-------------------------------------------------------------------------|
 | availability | [Availability Object](#availability-object)   | The promised uptime of the system that provides the data                |
 | retention    | [Retention Object](#retention-object)         | The period how long data will be available.                             |
-| latency      | [Latency Object](#latency-object)             | The maximum amount of time from the from the source to its destination. |
+| latency      | [Latency Object](#latency-object)             | The maximum amount of time from the the source to its destination. |
 | freshness    | [Freshness Object](#freshness-object)         | The maximum age of the youngest entry.                                  |
 | frequency    | [Frequency Object](#frequency-object)         | The update frequency.                                                   |
 | support      | [Support Object](#support-object)             | The times when support is provided.                                     |
