@@ -19,6 +19,7 @@ The public API SHOULD NOT be considered stable.
 - field.title attribute
 - model.title attribute
 - AWS Kinesis Data Streams server support
+- Remove `schema` in favor of encoding any physical schema configuration in the `model` using the `config` map at the field level and supporting import/export ([#21](https://github.com/datacontract/datacontract-specification/issues/21)).
 
 ## [0.9.3] - 2024-03-06
 
