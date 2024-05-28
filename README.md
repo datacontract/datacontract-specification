@@ -1130,14 +1130,6 @@ datacontract-*.yml
 **/datacontracts/*.yaml
 ```
 
-Other Data Contract Specifications
----
-- [AIDA User Group's Open Data Contract Standard](https://github.com/AIDAUserGroup/open-data-contract-standard)
-- [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md)
-
-Literature
----
-- [Driving Data Quality with Data Contracts](https://www.amazon.com/dp/B0C37FPH3D) by Andrew Jones
 
 Authors
 ---
