@@ -249,24 +249,6 @@ The Data Contract CLI chooses the appropriate engine, formulates test cases, con
 
 More information and configuration options on [cli.datacontract.com](https://cli.datacontract.com).
 
-IDE Integration
----
-IntelliJ comes with a built-in YAML plugin which will show you autocompletions. For VS Code we recommend to install the [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) plugin. No additional configuration is required. Autocompletion is then enabled for files following these patterns:
-
-```
-datacontract.yaml
-datacontract.yml
-*-datacontract.yaml
-*-datacontract.yml
-*.datacontract.yaml
-*.datacontract.yml
-datacontract-*.yaml
-datacontract-*.yml
-**/datacontract/*.yml
-**/datacontract/*.yaml
-**/datacontracts/*.yml
-**/datacontracts/*.yaml
-```
 
 Specification
 ---
@@ -1123,6 +1105,30 @@ Tooling
 - [Data Contract CLI](https://github.com/datacontract/datacontract-cli) is a free CLI tool to help you create, develop, and maintain your data contracts.
 - [Data Mesh Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data products and data contracts. It supports the data contract specification and allows the user to import or export data contracts using this specification.
 
+
+Code Completion
+---
+The [JSON Schema](https://datacontract.com/datacontract.schema.json) of the current data contract specification is registered in [Schema Store](https://www.schemastore.org/), which brings code completion and syntax checks for all major IDEs.
+IntelliJ comes with a built-in YAML plugin which will show you autocompletions. 
+For VS Code we recommend to install the [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) plugin. 
+No additional configuration is required. 
+
+Autocompletion is then enabled for files following these patterns:
+
+```
+datacontract.yaml
+datacontract.yml
+*-datacontract.yaml
+*-datacontract.yml
+*.datacontract.yaml
+*.datacontract.yml
+datacontract-*.yaml
+datacontract-*.yml
+**/datacontract/*.yml
+**/datacontract/*.yaml
+**/datacontracts/*.yml
+**/datacontracts/*.yaml
+```
 
 Other Data Contract Specifications
 ---
