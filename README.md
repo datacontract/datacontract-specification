@@ -26,10 +26,10 @@ Later in development and production, they also serve as the basis for code gener
 
 The specification comes along with the [Data Contract CLI](https://github.com/datacontract/datacontract-cli), an open-source tool to develop, validate, and enforce data contracts.
 
-_Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. 
-The term "contract" may be somewhat misleading, but it is how it is used in practice. 
-The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. 
-Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes._
+> _Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. 
+> The term "contract" may be somewhat misleading, but it is how it is used by the industry. 
+> The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. 
+> Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes._
 
 Version
 ---
