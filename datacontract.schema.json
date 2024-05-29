@@ -396,6 +396,21 @@
           },
           {
             "type": "object",
+            "title": "DataframeServer",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "dataframe",
+                "description": "The type of the data product technology that implements the data contract."
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type"
+            ]
+          },
+          {
+            "type": "object",
             "title": "GlueServer",
             "properties": {
               "type": {
