@@ -415,6 +415,7 @@ servers:
 | port     | `integer` | The port to the database server, default: `1433`     |
 | database | `string`  | The name of the database, e.g., `database`.          |
 | schema   | `string`  | The name of the schema in the database, e.g., `dbo`. |
+| driver   | `string`  | The name of the supported driver, e.g., `ODBC Driver 18 for SQL Server`. |
 
 
 #### Snowflake Server Object
