@@ -765,6 +765,10 @@ video {
   width: 2.5rem;
 }
 
+.w-2 {
+  width: 0.5rem;
+}
+
 .w-2\/12 {
   width: 16.666667%;
 }
@@ -785,8 +789,8 @@ video {
   width: 58.333333%;
 }
 
-.w-72 {
-  width: 18rem;
+.w-9\/12 {
+  width: 75%;
 }
 
 .w-full {
@@ -841,6 +845,10 @@ video {
   align-items: center;
 }
 
+.items-baseline {
+  align-items: baseline;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -866,11 +874,6 @@ video {
        column-gap: 1rem;
 }
 
-.gap-x-6 {
-  -moz-column-gap: 1.5rem;
-       column-gap: 1.5rem;
-}
-
 .gap-y-6 {
   row-gap: 1.5rem;
 }
@@ -891,6 +894,12 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.5rem * var(--tw-space-x-reverse));
   margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2rem * var(--tw-space-x-reverse));
+  margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
@@ -1007,6 +1016,11 @@ video {
 
 .p-6 {
   padding: 1.5rem;
+}
+
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .px-1 {
@@ -1381,16 +1395,16 @@ video {
     width: 80%;
   }
 
+  .sm\:w-72 {
+    width: 18rem;
+  }
+
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:flex-row {
     flex-direction: row;
-  }
-
-  .sm\:flex-col {
-    flex-direction: column;
   }
 
   .sm\:flex-wrap {
@@ -1401,20 +1415,10 @@ video {
     align-items: center;
   }
 
-  .sm\:items-baseline {
-    align-items: baseline;
-  }
-
   .sm\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.5rem * var(--tw-space-x-reverse));
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .sm\:space-x-8 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(2rem * var(--tw-space-x-reverse));
-    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .sm\:truncate {
@@ -1580,74 +1584,74 @@ video {
 
       <div>
         <div class="space-y-6 mt-6">
-          <section>
+          <section id="information">
             <div class=" px-4 sm:px-0">
-              <h1 class="text-base font-semibold leading-6 text-gray-900" id="info">Info</h1>
-              <p class="text-sm text-gray-500">Information about the data contract</p>
-            </div>
-            <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
+  <h1 class="text-base font-semibold leading-6 text-gray-900" id="info">Info</h1>
+  <p class="text-sm text-gray-500">Information about the data contract</p>
+</div>
+<div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
 
-              <div class="px-4 py-5 sm:px-6">
+  <div class="px-4 py-5 sm:px-6">
 
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Title</dt>
-                    <dd class="mt-1 text-sm text-gray-900">Orders Latest</dd>
-                  </div>
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Title</dt>
+        <dd class="mt-1 text-sm text-gray-900">Orders Latest</dd>
+      </div>
 
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Version</dt>
-                    <dd class="mt-1 text-sm text-gray-900">1.0.0</dd>
-                  </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Version</dt>
+        <dd class="mt-1 text-sm text-gray-900">1.0.0</dd>
+      </div>
 
-                  
+      
 
-                  
-                  <div class="sm:col-span-2">
-                    <dt class="text-sm font-medium text-gray-500">Description</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Successful customer orders in the webshop. 
+      
+      <div class="sm:col-span-2">
+        <dt class="text-sm font-medium text-gray-500">Description</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">Successful customer orders in the webshop. 
 All orders since 2020-01-01. 
 Orders with their line items are in their current state (no history included).
 </span>
-                    </dd>
-                  </div>
-                  
+        </dd>
+      </div>
+      
 
-                  
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Owner</dt>
-                    <dd class="mt-1 text-sm text-gray-900">
-                      <span>Checkout Team</span>
-                    </dd>
-                  </div>
-                  
+      
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Owner</dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          <span>Checkout Team</span>
+        </dd>
+      </div>
+      
 
-                  
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Contact</dt>
-                    <dd class="mt-1 text-sm text-gray-900">
-                      
-                        John Doe (Data Product Owner)
-                      
-                      
-                      
-                        <div>
-                          <a href="https://teams.microsoft.com/l/channel/example/checkout" class="text-sky-500 hover:text-gray-700">https://teams.microsoft.com/l/channel/example/checkout</a>
-                        </div>
-                      
-                    </dd>
-                  </div>
-                  
-
-                </dl>
-              </div>
+      
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Contact</dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          
+            John Doe (Data Product Owner)
+          
+          
+          
+            <div>
+              <a href="https://teams.microsoft.com/l/channel/example/checkout" class="text-sky-500 hover:text-gray-700">https://teams.microsoft.com/l/channel/example/checkout</a>
             </div>
+          
+        </dd>
+      </div>
+      
+
+    </dl>
+  </div>
+</div>
           </section>
 
 
           
-          <section>
+          <section id="servers">
             <div class="px-4 sm:px-0">
               <h1 class="text-base font-semibold leading-6 text-gray-900" id="servers">Servers</h1>
               <p class="text-sm text-gray-500">Servers of the data contract</p>
@@ -1656,73 +1660,73 @@ Orders with their line items are in their current state (no history included).
             <ul role="list" class="mt-2 divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-lg">
 
               
-              <li class="relative flex gap-x-6 px-4 py-5 sm:px-6">
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Server</dt>
-                    <dd class="mt-1 text-sm text-gray-900">production</dd>
-                  </div>
-                </div>
+                <li class="relative flex gap-x-6 px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col">
+      <dt class="text-sm font-medium text-gray-500">Server</dt>
+      <dd class="mt-1 text-sm text-gray-900">production</dd>
+    </div>
+  </div>
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Type</dt>
-                    <dd class="mt-1 text-sm text-gray-900">s3</dd>
-                  </div>
-                </div>
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col">
+      <dt class="text-sm font-medium text-gray-500">Type</dt>
+      <dd class="mt-1 text-sm text-gray-900">s3</dd>
+    </div>
+  </div>
+  
 
-                
+  
 
-                
+  
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Location</dt>
-                    <dd class="mt-1 text-sm text-gray-900">s3://datacontract-example-orders-latest/data/{model}/*.json</dd>
-                  </div>
-                </div>
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col">
+      <dt class="text-sm font-medium text-gray-500">Location</dt>
+      <dd class="mt-1 text-sm text-gray-900">s3://datacontract-example-orders-latest/data/{model}/*.json</dd>
+    </div>
+  </div>
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Format</dt>
-                    <dd class="mt-1 text-sm text-gray-900">json</dd>
-                  </div>
-                </div>
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col">
+      <dt class="text-sm font-medium text-gray-500">Format</dt>
+      <dd class="mt-1 text-sm text-gray-900">json</dd>
+    </div>
+  </div>
+  
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Delimiter</dt>
-                    <dd class="mt-1 text-sm text-gray-900">new_line</dd>
-                  </div>
-                </div>
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col">
+      <dt class="text-sm font-medium text-gray-500">Delimiter</dt>
+      <dd class="mt-1 text-sm text-gray-900">new_line</dd>
+    </div>
+  </div>
+  
 
-              </li>
+</li>
               
 
             </ul>
@@ -1732,56 +1736,56 @@ Orders with their line items are in their current state (no history included).
 
 
           
-          <section>
+          <section id="terms">
             <div class="px-4 sm:px-0">
-              <h1 class="text-base font-semibold leading-6 text-gray-900" id="terms">Terms</h1>
-              <p class="text-sm text-gray-500">Terms and conditions of the data contract</p>
-            </div>
-            <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
+  <h1 class="text-base font-semibold leading-6 text-gray-900" id="terms">Terms</h1>
+  <p class="text-sm text-gray-500">Terms and conditions of the data contract</p>
+</div>
+<div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
 
-              <div class="px-4 py-5 sm:px-6">
+  <div class="px-4 py-5 sm:px-6">
 
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Usage</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Data can be used for reports, analytics and machine learning use cases.
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Usage</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">Data can be used for reports, analytics and machine learning use cases.
 Order may be linked and joined by other tables
 </span>
-                    </dd>
-                  </div>
+        </dd>
+      </div>
 
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Limitations</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Not suitable for real-time use cases.
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Limitations</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">Not suitable for real-time use cases.
 Data may not be used to identify individual customers.
 Max data processing per day: 10 TiB
 </span>
-                    </dd>
-                  </div>
+        </dd>
+      </div>
 
-                  
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Billing</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">5000 USD per month</span>
-                    </dd>
-                  </div>
-                  
+      
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Billing</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">5000 USD per month</span>
+        </dd>
+      </div>
+      
 
-                  
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Notice Period</dt>
-                      <dd class="mt-1 text-sm text-gray-900 flex" >
-                        <span class="whitespace-pre-wrap">P3M</span>
-                      </dd>
-                    </div>
-                  
+      
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Notice Period</dt>
+          <dd class="mt-1 text-sm text-gray-900 flex" >
+            <span class="whitespace-pre-wrap">P3M</span>
+          </dd>
+        </div>
+      
 
-                </dl>
-              </div>
-            </div>
+    </dl>
+  </div>
+</div>
           </section>
           
 
@@ -1815,299 +1819,309 @@ Max data processing per day: 10 TiB
                       </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-200 bg-white">
+                      
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+
+    <div class="py-2 text-sm">
+      
+      <div>Order ID</div>
+      
+      <div class="font-mono">order_id</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
+    
+
+    
+    <div class="mt-1 italic">
+      Example: <span class="font-mono">243c25e5-a081-43a9-aeab-6d5d5b6cb5e2</span>
+    </div>
+    
+
+    <div>
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
+      
+    </div>
+  </td>
+</tr>
+
 
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div>Order ID</div>
-                            
-                            <div class="font-mono">order_id</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">order_timestamp</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    timestamp
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.</div>
+    
 
-                          
+    
+    <div class="mt-1 italic">
+      Example: <span class="font-mono">2024-09-09T08:30:00Z</span>
+    </div>
+    
 
-                          <div>
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">order_timestamp</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          timestamp
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">order_total</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    long
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">Total amount the smallest monetary unit (e.g., cents).</div>
+    
 
-                          
+    
+    <div class="mt-1 italic">
+      Example: <span class="font-mono">9999</span>
+    </div>
+    
 
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">order_total</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          long
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">Total amount the smallest monetary unit (e.g., cents).</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">customer_id</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">Unique identifier for the customer.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">minLength:10</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">maxLength:20</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">customer_id</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">Unique identifier for the customer.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">customer_email_address</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The email address, as entered by the customer. The email address was not verified.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">minLength:10</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">maxLength:20</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:email</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">sensitive</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">customer_email_address</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The email address, as entered by the customer. The email address was not verified.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">processed_timestamp</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    timestamp
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The timestamp when the record was processed by the data platform.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:email</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">sensitive</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
-
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">processed_timestamp</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          timestamp
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The timestamp when the record was processed by the data platform.</div>
-                          
-
-                          
-
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
-
-                        </td>
-
-                      </tr>
-                      
-
                       </tbody>
                     </table>
                   </div>
@@ -2133,156 +2147,162 @@ Max data processing per day: 10 TiB
                       </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-200 bg-white">
+                      
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">lines_item_id</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">Primary key of the lines_item_id table</div>
+    
+
+    
+
+    <div>
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
+
 
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">lines_item_id</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">Primary key of the lines_item_id table</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div>Order ID</div>
+      
+      <div class="font-mono">order_id</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
+    
 
-                          
+    
+    <div class="mt-1 italic">
+      Example: <span class="font-mono">243c25e5-a081-43a9-aeab-6d5d5b6cb5e2</span>
+    </div>
+    
 
-                          <div>
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div>Order ID</div>
-                            
-                            <div class="font-mono">order_id</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div>Stock Keeping Unit</div>
+      
+      <div class="font-mono">sku</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The purchased article number</div>
+    
 
-                          
+    
+    <div class="mt-1 italic">
+      Example: <span class="font-mono">96385074</span>
+    </div>
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">pattern:^[A-Za-z0-9]{8,14}$</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
-
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div>Stock Keeping Unit</div>
-                            
-                            <div class="font-mono">sku</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The purchased article number</div>
-                          
-
-                          
-
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">pattern:^[A-Za-z0-9]{8,14}$</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
-
-                        </td>
-
-                      </tr>
-                      
-
                       </tbody>
                     </table>
                   </div>
@@ -2290,250 +2310,480 @@ Max data processing per day: 10 TiB
               </div>
             </div>
             
-
           </section>
+          
+          
+          <section id="definitions">
+            <div class="px-4 sm:px-0">
+              <h1 class="text-base font-semibold leading-6 text-gray-900">Definitions</h1>
+              <p class="text-sm text-gray-500">Domain specific definitions in the data contract</p>
+            </div>
+            
+            
+            <div class="mt-3 flow-root">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
 
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+          <tr>
+            <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+              <span>order_id</span>
+              <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">checkout</span>
+              <div class="text-sm font-medium text-gray-500">An internal ID that identifies an order in the online shop.</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr>
+              <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+                <div class="py-2 text-sm">
+                  
+                  <div>Order ID</div>
+                  
+                  <div class="font-mono">order_id</div>
+                </div>
+              </td>
+              <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+                <div class="py-2 text-sm">
+                  text
+                  
+                    <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">uuid</span>
+                  
+                </div>
+              </td>
+              <td class="px-3 py-2 text-sm text-gray-500 w-9/12">
+                
+                <div class="mt-1">
+                  <span class="text-gray-600 font-medium">Example:</span> <span class="font-mono">243c25e5-a081-43a9-aeab-6d5d5b6cb5e2</span>
+                </div>
+                
+                
+                
+                <div>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
+                  
+                  
+                  <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
+                  
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+            
+            <div class="mt-3 flow-root">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+          <tr>
+            <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+              <span>sku</span>
+              <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">inventory</span>
+              <div class="text-sm font-medium text-gray-500">A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
+It is typically associated with an article's barcode, such as the EAN/GTIN.
+</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr>
+              <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+                <div class="py-2 text-sm">
+                  
+                  <div>Stock Keeping Unit</div>
+                  
+                  <div class="font-mono">sku</div>
+                </div>
+              </td>
+              <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+                <div class="py-2 text-sm">
+                  text
+                  
+                </div>
+              </td>
+              <td class="px-3 py-2 text-sm text-gray-500 w-9/12">
+                
+                <div class="mt-1">
+                  <span class="text-gray-600 font-medium">Example:</span> <span class="font-mono">96385074</span>
+                </div>
+                
+                
+                
+                <div>
+                  
+                  
+                  
+                  <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">pattern:^[A-Za-z0-9]{8,14}$</span>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+            
+          </section>
+          
+
+          
+          <section id="examples">
+            <div class="px-4 sm:px-0">
+              <h1 class="text-base font-semibold leading-6 text-gray-900">Examples</h1>
+              <p class="text-sm text-gray-500">Examples for models in the data contract</p>
+            </div>
+            
+              <div class="mt-3 flow-root">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+          <tr>
+            <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+              <span>orders</span>
+              <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">csv</span>
+              <div class="text-sm font-medium text-gray-500">An example list of order records.</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr>
+              <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-12/12">
+                <pre>order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
+"1001","2030-09-09T08:30:00Z",2500,"1000000001","mary.taylor82@example.com","2030-09-09T08:31:00Z"
+"1002","2030-09-08T15:45:00Z",1800,"1000000002","michael.miller83@example.com","2030-09-09T08:31:00Z"
+"1003","2030-09-07T12:15:00Z",3200,"1000000003","michael.smith5@example.com","2030-09-09T08:31:00Z"
+"1004","2030-09-06T19:20:00Z",1500,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
+"1005","2030-09-05T10:10:00Z",4200,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
+"1006","2030-09-04T14:55:00Z",2800,"1000000005","john.davis28@example.com","2030-09-09T08:31:00Z"
+"1007","2030-09-03T21:05:00Z",1900,"1000000006","linda.brown67@example.com","2030-09-09T08:31:00Z"
+"1008","2030-09-02T17:40:00Z",3600,"1000000007","patricia.smith40@example.com","2030-09-09T08:31:00Z"
+"1009","2030-09-01T09:25:00Z",3100,"1000000008","linda.wilson43@example.com","2030-09-09T08:31:00Z"
+"1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
+</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+            
+              <div class="mt-3 flow-root">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+          <tr>
+            <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+              <span>line_items</span>
+              <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">csv</span>
+              <div class="text-sm font-medium text-gray-500">An example list of line items.</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr>
+              <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-12/12">
+                <pre>lines_item_id,order_id,sku
+"LI-1","1001","5901234123457"
+"LI-2","1001","4001234567890"
+"LI-3","1002","5901234123457"
+"LI-4","1002","2001234567893"
+"LI-5","1003","4001234567890"
+"LI-6","1003","5001234567892"
+"LI-7","1004","5901234123457"
+"LI-8","1005","2001234567893"
+"LI-9","1005","5001234567892"
+"LI-10","1005","6001234567891"
+</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+            
+          </section>
           
 
           
           <section id="servicelevels">
             <div class="px-4 sm:px-0">
-              <h1 class="text-base font-semibold leading-6 text-gray-900">Service Levels</h1>
-              <p class="text-sm text-gray-500">Service levels of the data contract</p>
-            </div>
-            <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
-              <div class="px-4 py-5 sm:px-6">
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-6 divide-y">
-                  
-                  <div class="grid sm:grid-cols-2" >
-                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="availability">
-                      Availability
-                    </h2>
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Description</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">The server is available during support hours</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Percentage</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">99.9%</span>
-                      </dd>
-                    </div>
-                    
-                  </div>
-                  
-                  
-                  <div class="grid sm:grid-cols-2" >
-                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="retention">
-                      Retention
-                    </h2>
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Description</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">Data is retained for one year</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Period</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">P1Y</span>
-                      </dd>
-                    </div>
-                    
-                    
-                  </div>
-                  
-                  
-                  <div class="grid sm:grid-cols-2" >
-                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="latency">
-                      Latency
-                    </h2>
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Description</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">Data is available within 25 hours after the order was placed</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Threshold</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">25h</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Source Timestamp field</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap font-mono">orders.order_timestamp</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Processed Timestamp field</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap font-mono">orders.processed_timestamp</span>
-                      </dd>
-                    </div>
-                    
-                  </div>
-                  
-                  
-                  <div class="grid sm:grid-cols-2" >
-                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="freshness">
-                      Freshness
-                    </h2>
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Description</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">The age of the youngest row in a table.</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Threshold</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">25h</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Timestamp field</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap font-mono">orders.order_timestamp</span>
-                      </dd>
-                    </div>
-                    
-                  </div>
-                  
-                  
-                  <div class="grid sm:grid-cols-2" >
-                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="frequency">
-                      Frequency
-                    </h2>
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Description</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">Data is delivered once a day</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Type</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">batch</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Interval</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">daily</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Cron</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap font-mono">0 0 * * *</span>
-                      </dd>
-                    </div>
-                    
-                  </div>
-                  
-                  
-                  <div class="grid sm:grid-cols-2" >
-                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="support">
-                      Support
-                    </h2>
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Description</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">The data is available during typical business hours at headquarters</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Time</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">9am to 5pm in EST on business days</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Response Time</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">1h</span>
-                      </dd>
-                    </div>
-                    
-                  </div>
-                  
-                  
-                  <div class="grid sm:grid-cols-2" >
-                    <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="backup">
-                      Backup
-                    </h2>
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Description</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">Data is backed up once a week, every Sunday at 0:00 UTC.</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Cron</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap font-mono">0 0 * * 0</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Recovery Time</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">24 hours</span>
-                      </dd>
-                    </div>
-                    
-                    
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Recovery Point</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        <span class="whitespace-pre-wrap">1 week</span>
-                      </dd>
-                    </div>
-                    
-                  </div>
-                  
-                </dl>
-              </div>
-            </div>
+  <h1 class="text-base font-semibold leading-6 text-gray-900">Service Levels</h1>
+  <p class="text-sm text-gray-500">Service levels of the data contract</p>
+</div>
+<div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
+  <div class="px-4 py-5 sm:px-6">
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-6 divide-y">
+      
+      <div class="grid sm:grid-cols-2" >
+        <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="availability">
+          Availability
+        </h2>
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Description</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">The server is available during support hours</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Percentage</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">99.9%</span>
+          </dd>
+        </div>
+        
+      </div>
+      
+      
+      <div class="grid sm:grid-cols-2" >
+        <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="retention">
+          Retention
+        </h2>
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Description</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">Data is retained for one year</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Period</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">P1Y</span>
+          </dd>
+        </div>
+        
+        
+      </div>
+      
+      
+      <div class="grid sm:grid-cols-2" >
+        <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="latency">
+          Latency
+        </h2>
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Description</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">Data is available within 25 hours after the order was placed</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Threshold</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">25h</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Source Timestamp field</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap font-mono">orders.order_timestamp</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Processed Timestamp field</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap font-mono">orders.processed_timestamp</span>
+          </dd>
+        </div>
+        
+      </div>
+      
+      
+      <div class="grid sm:grid-cols-2" >
+        <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="freshness">
+          Freshness
+        </h2>
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Description</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">The age of the youngest row in a table.</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Threshold</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">25h</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Timestamp field</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap font-mono">orders.order_timestamp</span>
+          </dd>
+        </div>
+        
+      </div>
+      
+      
+      <div class="grid sm:grid-cols-2" >
+        <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="frequency">
+          Frequency
+        </h2>
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Description</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">Data is delivered once a day</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Type</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">batch</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Interval</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">daily</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Cron</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap font-mono">0 0 * * *</span>
+          </dd>
+        </div>
+        
+      </div>
+      
+      
+      <div class="grid sm:grid-cols-2" >
+        <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="support">
+          Support
+        </h2>
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Description</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">The data is available during typical business hours at headquarters</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Time</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">9am to 5pm in EST on business days</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Response Time</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">1h</span>
+          </dd>
+        </div>
+        
+      </div>
+      
+      
+      <div class="grid sm:grid-cols-2" >
+        <h2 class="sm:col-span-2 mt-2 text-base font-semibold leading-6 text-gray-900" id="backup">
+          Backup
+        </h2>
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Description</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">Data is backed up once a week, every Sunday at 0:00 UTC.</span>
+          </dd>
+        </div>
+        
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Cron</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap font-mono">0 0 * * 0</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Recovery Time</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">24 hours</span>
+          </dd>
+        </div>
+        
+        
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Recovery Point</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <span class="whitespace-pre-wrap">1 week</span>
+          </dd>
+        </div>
+        
+      </div>
+      
+    </dl>
+  </div>
+</div>
           </section>
           
 
@@ -2546,8 +2796,6 @@ Max data processing per day: 10 TiB
                 <p class="text-sm text-gray-500">
                   <span>SodaCL</span>
                 </p>
-
-
               </div>
               <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
                 <div class="px-4 py-5 sm:px-6">
@@ -2566,11 +2814,10 @@ checks for line_items:
           
 
         </div>
-
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 15 May 2024 14:53:02 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.3
+        Created at 05 Jun 2024 04:39:46 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.7
       </div>
 
     </div>
@@ -2643,6 +2890,7 @@ models:
         description: An internal ID that identifies an order in the online shop.
         pii: true
         classification: restricted
+        example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
       order_timestamp:
         type: timestamp
         required: true
@@ -2650,12 +2898,14 @@ models:
         unique: false
         description: The business timestamp in UTC when the order was successfully
           registered in the source system and the payment was successful.
+        example: '2024-09-09T08:30:00Z'
       order_total:
         type: long
         required: true
         primary: false
         unique: false
         description: Total amount the smallest monetary unit (e.g., cents).
+        example: '9999'
       customer_id:
         type: text
         required: false
@@ -2680,6 +2930,9 @@ models:
         primary: false
         unique: false
         description: The timestamp when the record was processed by the data platform.
+        config:
+          jsonType: string
+          jsonFormat: date-time
   line_items:
     description: A single article that is part of an order.
     type: table
@@ -2702,6 +2955,7 @@ models:
         description: An internal ID that identifies an order in the online shop.
         pii: true
         classification: restricted
+        example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
       sku:
         ref: '#/definitions/sku'
         title: Stock Keeping Unit
@@ -2711,6 +2965,7 @@ models:
         unique: false
         description: The purchased article number
         pattern: ^[A-Za-z0-9]{8,14}$
+        example: '96385074'
 definitions:
   order_id:
     domain: checkout
@@ -2721,6 +2976,7 @@ definitions:
     format: uuid
     pii: true
     classification: restricted
+    example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
   sku:
     domain: inventory
     name: sku
@@ -2730,6 +2986,7 @@ definitions:
       \ the EAN/GTIN.\n"
     type: text
     pattern: ^[A-Za-z0-9]{8,14}$
+    example: '96385074'
 examples:
 - type: csv
   description: An example list of order records.

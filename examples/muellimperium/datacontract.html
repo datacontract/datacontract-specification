@@ -765,6 +765,10 @@ video {
   width: 2.5rem;
 }
 
+.w-2 {
+  width: 0.5rem;
+}
+
 .w-2\/12 {
   width: 16.666667%;
 }
@@ -785,8 +789,8 @@ video {
   width: 58.333333%;
 }
 
-.w-72 {
-  width: 18rem;
+.w-9\/12 {
+  width: 75%;
 }
 
 .w-full {
@@ -841,6 +845,10 @@ video {
   align-items: center;
 }
 
+.items-baseline {
+  align-items: baseline;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -866,11 +874,6 @@ video {
        column-gap: 1rem;
 }
 
-.gap-x-6 {
-  -moz-column-gap: 1.5rem;
-       column-gap: 1.5rem;
-}
-
 .gap-y-6 {
   row-gap: 1.5rem;
 }
@@ -891,6 +894,12 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.5rem * var(--tw-space-x-reverse));
   margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2rem * var(--tw-space-x-reverse));
+  margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
@@ -1007,6 +1016,11 @@ video {
 
 .p-6 {
   padding: 1.5rem;
+}
+
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .px-1 {
@@ -1381,16 +1395,16 @@ video {
     width: 80%;
   }
 
+  .sm\:w-72 {
+    width: 18rem;
+  }
+
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:flex-row {
     flex-direction: row;
-  }
-
-  .sm\:flex-col {
-    flex-direction: column;
   }
 
   .sm\:flex-wrap {
@@ -1401,20 +1415,10 @@ video {
     align-items: center;
   }
 
-  .sm\:items-baseline {
-    align-items: baseline;
-  }
-
   .sm\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.5rem * var(--tw-space-x-reverse));
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .sm\:space-x-8 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(2rem * var(--tw-space-x-reverse));
-    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .sm\:truncate {
@@ -1580,57 +1584,57 @@ video {
 
       <div>
         <div class="space-y-6 mt-6">
-          <section>
+          <section id="information">
             <div class=" px-4 sm:px-0">
-              <h1 class="text-base font-semibold leading-6 text-gray-900" id="info">Info</h1>
-              <p class="text-sm text-gray-500">Information about the data contract</p>
-            </div>
-            <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
+  <h1 class="text-base font-semibold leading-6 text-gray-900" id="info">Info</h1>
+  <p class="text-sm text-gray-500">Information about the data contract</p>
+</div>
+<div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
 
-              <div class="px-4 py-5 sm:px-6">
+  <div class="px-4 py-5 sm:px-6">
 
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Title</dt>
-                    <dd class="mt-1 text-sm text-gray-900">Muellimperium Exchange Format</dd>
-                  </div>
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Title</dt>
+        <dd class="mt-1 text-sm text-gray-900">Muellimperium Exchange Format</dd>
+      </div>
 
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Version</dt>
-                    <dd class="mt-1 text-sm text-gray-900">0.0.1</dd>
-                  </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Version</dt>
+        <dd class="mt-1 text-sm text-gray-900">0.0.1</dd>
+      </div>
 
-                  
+      
 
-                  
-                  <div class="sm:col-span-2">
-                    <dt class="text-sm font-medium text-gray-500">Description</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">The Muellimperium Exchange Format is a data contract for exchanging data between the Muellimperium and its partners.
+      
+      <div class="sm:col-span-2">
+        <dt class="text-sm font-medium text-gray-500">Description</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">The Muellimperium Exchange Format is a data contract for exchanging data between the Muellimperium and its partners.
 </span>
-                    </dd>
-                  </div>
-                  
+        </dd>
+      </div>
+      
 
-                  
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Owner</dt>
-                    <dd class="mt-1 text-sm text-gray-900">
-                      <span>Emperor of the Muellimperium</span>
-                    </dd>
-                  </div>
-                  
+      
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Owner</dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          <span>Emperor of the Muellimperium</span>
+        </dd>
+      </div>
+      
 
-                  
+      
 
-                </dl>
-              </div>
-            </div>
+    </dl>
+  </div>
+</div>
           </section>
 
 
           
-          <section>
+          <section id="servers">
             <div class="px-4 sm:px-0">
               <h1 class="text-base font-semibold leading-6 text-gray-900" id="servers">Servers</h1>
               <p class="text-sm text-gray-500">Servers of the data contract</p>
@@ -1639,66 +1643,66 @@ video {
             <ul role="list" class="mt-2 divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-lg">
 
               
-              <li class="relative flex gap-x-6 px-4 py-5 sm:px-6">
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Server</dt>
-                    <dd class="mt-1 text-sm text-gray-900">exchange</dd>
-                  </div>
-                </div>
+                <li class="relative flex gap-x-6 px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col">
+      <dt class="text-sm font-medium text-gray-500">Server</dt>
+      <dd class="mt-1 text-sm text-gray-900">exchange</dd>
+    </div>
+  </div>
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Type</dt>
-                    <dd class="mt-1 text-sm text-gray-900">local</dd>
-                  </div>
-                </div>
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col">
+      <dt class="text-sm font-medium text-gray-500">Type</dt>
+      <dd class="mt-1 text-sm text-gray-900">local</dd>
+    </div>
+  </div>
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Path</dt>
-                    <dd class="mt-1 text-sm text-gray-900">data.csv</dd>
-                  </div>
-                </div>
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col">
+      <dt class="text-sm font-medium text-gray-500">Path</dt>
+      <dd class="mt-1 text-sm text-gray-900">data.csv</dd>
+    </div>
+  </div>
+  
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Format</dt>
-                    <dd class="mt-1 text-sm text-gray-900">csv</dd>
-                  </div>
-                </div>
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col">
+      <dt class="text-sm font-medium text-gray-500">Format</dt>
+      <dd class="mt-1 text-sm text-gray-900">csv</dd>
+    </div>
+  </div>
+  
 
-                
+  
 
-              </li>
+</li>
               
 
             </ul>
@@ -1739,144 +1743,142 @@ video {
                       </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-200 bg-white">
+                      
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">location</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The location where the garbage is collected.</div>
+    
+
+    
+
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
+
 
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">location</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The location where the garbage is collected.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">garbage_type</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The type of garbage that is collected.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">garbage_type</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The type of garbage that is collected.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">collection_date</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    date
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The date when the garbage is collected.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
-
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">collection_date</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          date
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The date when the garbage is collected.</div>
-                          
-
-                          
-
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
-
-                        </td>
-
-                      </tr>
-                      
-
                       </tbody>
                     </table>
                   </div>
@@ -1884,9 +1886,46 @@ video {
               </div>
             </div>
             
-
           </section>
+          
+          
 
+          
+          <section id="examples">
+            <div class="px-4 sm:px-0">
+              <h1 class="text-base font-semibold leading-6 text-gray-900">Examples</h1>
+              <p class="text-sm text-gray-500">Examples for models in the data contract</p>
+            </div>
+            
+              <div class="mt-3 flow-root">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+          <tr>
+            <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+              <span>garbage_collection</span>
+              <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">json</span>
+              <div class="text-sm font-medium text-gray-500">None</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr>
+              <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-12/12">
+                <pre>[{'location': 'Musterstadt', 'garbage_type': 'paper', 'collection_date': '2022-01-01'}, {'location': 'Musterstadt', 'garbage_type': 'plastic', 'collection_date': '2022-01-02'}, {'location': 'Musterstadt', 'garbage_type': 'residual_waste', 'collection_date': '2022-01-03'}]</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+            
+          </section>
           
 
           
@@ -1894,11 +1933,10 @@ video {
           
 
         </div>
-
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 15 May 2024 14:53:04 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.3
+        Created at 05 Jun 2024 04:39:48 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.7
       </div>
 
     </div>

@@ -765,6 +765,10 @@ video {
   width: 2.5rem;
 }
 
+.w-2 {
+  width: 0.5rem;
+}
+
 .w-2\/12 {
   width: 16.666667%;
 }
@@ -785,8 +789,8 @@ video {
   width: 58.333333%;
 }
 
-.w-72 {
-  width: 18rem;
+.w-9\/12 {
+  width: 75%;
 }
 
 .w-full {
@@ -841,6 +845,10 @@ video {
   align-items: center;
 }
 
+.items-baseline {
+  align-items: baseline;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -866,11 +874,6 @@ video {
        column-gap: 1rem;
 }
 
-.gap-x-6 {
-  -moz-column-gap: 1.5rem;
-       column-gap: 1.5rem;
-}
-
 .gap-y-6 {
   row-gap: 1.5rem;
 }
@@ -891,6 +894,12 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.5rem * var(--tw-space-x-reverse));
   margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2rem * var(--tw-space-x-reverse));
+  margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
@@ -1007,6 +1016,11 @@ video {
 
 .p-6 {
   padding: 1.5rem;
+}
+
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .px-1 {
@@ -1381,16 +1395,16 @@ video {
     width: 80%;
   }
 
+  .sm\:w-72 {
+    width: 18rem;
+  }
+
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:flex-row {
     flex-direction: row;
-  }
-
-  .sm\:flex-col {
-    flex-direction: column;
   }
 
   .sm\:flex-wrap {
@@ -1401,20 +1415,10 @@ video {
     align-items: center;
   }
 
-  .sm\:items-baseline {
-    align-items: baseline;
-  }
-
   .sm\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.5rem * var(--tw-space-x-reverse));
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .sm\:space-x-8 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(2rem * var(--tw-space-x-reverse));
-    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .sm\:truncate {
@@ -1580,69 +1584,69 @@ video {
 
       <div>
         <div class="space-y-6 mt-6">
-          <section>
+          <section id="information">
             <div class=" px-4 sm:px-0">
-              <h1 class="text-base font-semibold leading-6 text-gray-900" id="info">Info</h1>
-              <p class="text-sm text-gray-500">Information about the data contract</p>
-            </div>
-            <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
+  <h1 class="text-base font-semibold leading-6 text-gray-900" id="info">Info</h1>
+  <p class="text-sm text-gray-500">Information about the data contract</p>
+</div>
+<div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
 
-              <div class="px-4 py-5 sm:px-6">
+  <div class="px-4 py-5 sm:px-6">
 
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Title</dt>
-                    <dd class="mt-1 text-sm text-gray-900">Orders Latest (Nested)</dd>
-                  </div>
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Title</dt>
+        <dd class="mt-1 text-sm text-gray-900">Orders Latest (Nested)</dd>
+      </div>
 
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Version</dt>
-                    <dd class="mt-1 text-sm text-gray-900">1.0.0</dd>
-                  </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Version</dt>
+        <dd class="mt-1 text-sm text-gray-900">1.0.0</dd>
+      </div>
 
-                  
+      
 
-                  
-                  <div class="sm:col-span-2">
-                    <dt class="text-sm font-medium text-gray-500">Description</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Successful customer orders in the webshop. 
+      
+      <div class="sm:col-span-2">
+        <dt class="text-sm font-medium text-gray-500">Description</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">Successful customer orders in the webshop. 
 All orders since 2020-01-01. 
 Orders with their line items are in their current state (no history included).
 </span>
-                    </dd>
-                  </div>
-                  
+        </dd>
+      </div>
+      
 
-                  
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Owner</dt>
-                    <dd class="mt-1 text-sm text-gray-900">
-                      <span>Checkout Team</span>
-                    </dd>
-                  </div>
-                  
+      
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Owner</dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          <span>Checkout Team</span>
+        </dd>
+      </div>
+      
 
-                  
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Contact</dt>
-                    <dd class="mt-1 text-sm text-gray-900">
-                      
-                        John Doe (Data Product Owner)
-                      
-                      
-                      
-                        <div>
-                          <a href="https://teams.microsoft.com/l/channel/example/checkout" class="text-sky-500 hover:text-gray-700">https://teams.microsoft.com/l/channel/example/checkout</a>
-                        </div>
-                      
-                    </dd>
-                  </div>
-                  
-
-                </dl>
-              </div>
+      
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Contact</dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          
+            John Doe (Data Product Owner)
+          
+          
+          
+            <div>
+              <a href="https://teams.microsoft.com/l/channel/example/checkout" class="text-sky-500 hover:text-gray-700">https://teams.microsoft.com/l/channel/example/checkout</a>
             </div>
+          
+        </dd>
+      </div>
+      
+
+    </dl>
+  </div>
+</div>
           </section>
 
 
@@ -1650,56 +1654,56 @@ Orders with their line items are in their current state (no history included).
 
 
           
-          <section>
+          <section id="terms">
             <div class="px-4 sm:px-0">
-              <h1 class="text-base font-semibold leading-6 text-gray-900" id="terms">Terms</h1>
-              <p class="text-sm text-gray-500">Terms and conditions of the data contract</p>
-            </div>
-            <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
+  <h1 class="text-base font-semibold leading-6 text-gray-900" id="terms">Terms</h1>
+  <p class="text-sm text-gray-500">Terms and conditions of the data contract</p>
+</div>
+<div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
 
-              <div class="px-4 py-5 sm:px-6">
+  <div class="px-4 py-5 sm:px-6">
 
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Usage</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Data can be used for reports, analytics and machine learning use cases.
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Usage</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">Data can be used for reports, analytics and machine learning use cases.
 Order may be linked and joined by other tables
 </span>
-                    </dd>
-                  </div>
+        </dd>
+      </div>
 
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Limitations</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Not suitable for real-time use cases.
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Limitations</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">Not suitable for real-time use cases.
 Data may not be used to identify individual customers.
 Max data processing per day: 10 TiB
 </span>
-                    </dd>
-                  </div>
+        </dd>
+      </div>
 
-                  
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Billing</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">5000 USD per month</span>
-                    </dd>
-                  </div>
-                  
+      
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Billing</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">5000 USD per month</span>
+        </dd>
+      </div>
+      
 
-                  
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Notice Period</dt>
-                      <dd class="mt-1 text-sm text-gray-900 flex" >
-                        <span class="whitespace-pre-wrap">P3M</span>
-                      </dd>
-                    </div>
-                  
+      
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500">Notice Period</dt>
+          <dd class="mt-1 text-sm text-gray-900 flex" >
+            <span class="whitespace-pre-wrap">P3M</span>
+          </dd>
+        </div>
+      
 
-                </dl>
-              </div>
-            </div>
+    </dl>
+  </div>
+</div>
           </section>
           
 
@@ -1733,338 +1737,495 @@ Max data processing per day: 10 TiB
                       </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-200 bg-white">
+                      
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+
+    <div class="py-2 text-sm">
+      
+      <div>Order ID</div>
+      
+      <div class="font-mono">order_id</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
+    
+
+    
+    <div class="mt-1 italic">
+      Example: <span class="font-mono">243c25e5-a081-43a9-aeab-6d5d5b6cb5e2</span>
+    </div>
+    
+
+    <div>
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
+      
+    </div>
+  </td>
+</tr>
+
 
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div>Order ID</div>
-                            
-                            <div class="font-mono">order_id</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">order_timestamp</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    timestamp
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">order_timestamp</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          timestamp
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">order_total</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    long
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">Total amount the smallest monetary unit (e.g., cents).</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">order_total</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          long
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">Total amount the smallest monetary unit (e.g., cents).</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">customer_id</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">Unique identifier for the customer.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">minLength:10</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">maxLength:20</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">customer_id</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">Unique identifier for the customer.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">customer_email_address</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The email address, as entered by the customer. The email address was not verified.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">minLength:10</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">maxLength:20</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:email</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">customer_email_address</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The email address, as entered by the customer. The email address was not verified.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">address</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    object
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The delivery address of the customer.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:email</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
+
+  
+<tr class="bg-gray-50">
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12 flex items-center gap-x-4">
+    
+    
+    <div class="w-2">&nbsp;</div>
+    
+    <div>
+      &#x21b3;
+    </div>
+
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">street</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The street name and house number.</div>
+    
+
+    
+
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
+
+
+
+  
+<tr class="bg-gray-50">
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12 flex items-center gap-x-4">
+    
+    
+    <div class="w-2">&nbsp;</div>
+    
+    <div>
+      &#x21b3;
+    </div>
+
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">city</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The city name.</div>
+    
+
+    
+
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
+
+
+
+  
+<tr class="bg-gray-50">
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12 flex items-center gap-x-4">
+    
+    
+    <div class="w-2">&nbsp;</div>
+    
+    <div>
+      &#x21b3;
+    </div>
+
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">additional_lines</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    array
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">Additional address lines, such as floor, apartment, or company name.</div>
+    
+
+    
+
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
+
+
+
+<!-- Mark the end of the contained fields -->
+<tr style="--tw-divide-y-reverse: 2">
+</tr>
+
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">address</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          object
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The delivery address of the customer.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">processed_timestamp</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    timestamp
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The timestamp when the record was processed by the data platform.</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
-
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">processed_timestamp</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          timestamp
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The timestamp when the record was processed by the data platform.</div>
-                          
-
-                          
-
-                          <div>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
-
-                        </td>
-
-                      </tr>
-                      
-
                       </tbody>
                     </table>
                   </div>
@@ -2090,156 +2251,162 @@ Max data processing per day: 10 TiB
                       </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-200 bg-white">
+                      
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+
+    <div class="py-2 text-sm">
+      
+      <div class="font-mono">lines_item_id</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">Primary key of the lines_item_id table</div>
+    
+
+    
+
+    <div>
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
+
 
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">lines_item_id</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">Primary key of the lines_item_id table</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div>Order ID</div>
+      
+      <div class="font-mono">order_id</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
+    
 
-                          
+    
+    <div class="mt-1 italic">
+      Example: <span class="font-mono">243c25e5-a081-43a9-aeab-6d5d5b6cb5e2</span>
+    </div>
+    
 
-                          <div>
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">primary</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">required</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">unique</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
+      
+      
+      <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div>Order ID</div>
-                            
-                            <div class="font-mono">order_id</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">An internal ID that identifies an order in the online shop.</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <div>Stock Keeping Unit</div>
+      
+      <div class="font-mono">sku</div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    text
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">The purchased article number</div>
+    
 
-                          
+    
+    <div class="mt-1 italic">
+      Example: <span class="font-mono">96385074</span>
+    </div>
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">format:uuid</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">pattern:^[A-Za-z0-9]{8,14}$</span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
-
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div>Stock Keeping Unit</div>
-                            
-                            <div class="font-mono">sku</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          text
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">The purchased article number</div>
-                          
-
-                          
-
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">pattern:^[A-Za-z0-9]{8,14}$</span>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
-
-                        </td>
-
-                      </tr>
-                      
-
                       </tbody>
                     </table>
                   </div>
@@ -2247,8 +2414,152 @@ Max data processing per day: 10 TiB
               </div>
             </div>
             
-
           </section>
+          
+          
+          <section id="definitions">
+            <div class="px-4 sm:px-0">
+              <h1 class="text-base font-semibold leading-6 text-gray-900">Definitions</h1>
+              <p class="text-sm text-gray-500">Domain specific definitions in the data contract</p>
+            </div>
+            
+            
+            <div class="mt-3 flow-root">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+          <tr>
+            <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+              <span>order_id</span>
+              <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">checkout</span>
+              <div class="text-sm font-medium text-gray-500">An internal ID that identifies an order in the online shop.</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr>
+              <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+                <div class="py-2 text-sm">
+                  
+                  <div>Order ID</div>
+                  
+                  <div class="font-mono">order_id</div>
+                </div>
+              </td>
+              <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+                <div class="py-2 text-sm">
+                  text
+                  
+                    <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">uuid</span>
+                  
+                </div>
+              </td>
+              <td class="px-3 py-2 text-sm text-gray-500 w-9/12">
+                
+                <div class="mt-1">
+                  <span class="text-gray-600 font-medium">Example:</span> <span class="font-mono">243c25e5-a081-43a9-aeab-6d5d5b6cb5e2</span>
+                </div>
+                
+                
+                
+                <div>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <span class="inline-flex items-center rounded-md bg-blue-50 px-1 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-500/10 mr-1 mt-1">restricted</span>
+                  
+                  
+                  <span class="inline-flex items-center rounded-md bg-yellow-50 px-1 py-1 text-xs font-medium text-yellow-600 ring-1 ring-inset ring-yellow-500/10 mr-1 mt-1">PII</span>
+                  
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+            
+            <div class="mt-3 flow-root">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+          <tr>
+            <th scope="colgroup" colspan="3" class="py-2 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+              <span>sku</span>
+              <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">inventory</span>
+              <div class="text-sm font-medium text-gray-500">A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
+It is typically associated with an article's barcode, such as the EAN/GTIN.
+</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr>
+              <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+                <div class="py-2 text-sm">
+                  
+                  <div>Stock Keeping Unit</div>
+                  
+                  <div class="font-mono">sku</div>
+                </div>
+              </td>
+              <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+                <div class="py-2 text-sm">
+                  text
+                  
+                </div>
+              </td>
+              <td class="px-3 py-2 text-sm text-gray-500 w-9/12">
+                
+                <div class="mt-1">
+                  <span class="text-gray-600 font-medium">Example:</span> <span class="font-mono">96385074</span>
+                </div>
+                
+                
+                
+                <div>
+                  
+                  
+                  
+                  <span class="inline-flex items-center rounded-md bg-gray-50 px-1 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mr-1 mt-1">pattern:^[A-Za-z0-9]{8,14}$</span>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+            
+          </section>
+          
 
           
 
@@ -2257,11 +2568,10 @@ Max data processing per day: 10 TiB
           
 
         </div>
-
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 15 May 2024 14:53:01 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.3
+        Created at 05 Jun 2024 04:39:46 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.7
       </div>
 
     </div>
@@ -2328,6 +2638,7 @@ models:
         description: An internal ID that identifies an order in the online shop.
         pii: true
         classification: restricted
+        example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
       order_timestamp:
         type: timestamp
         required: true
@@ -2417,6 +2728,7 @@ models:
         description: An internal ID that identifies an order in the online shop.
         pii: true
         classification: restricted
+        example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
       sku:
         ref: '#/definitions/sku'
         title: Stock Keeping Unit
@@ -2426,6 +2738,7 @@ models:
         unique: false
         description: The purchased article number
         pattern: ^[A-Za-z0-9]{8,14}$
+        example: '96385074'
 definitions:
   order_id:
     domain: checkout
@@ -2436,6 +2749,7 @@ definitions:
     format: uuid
     pii: true
     classification: restricted
+    example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
   sku:
     domain: inventory
     name: sku
@@ -2445,6 +2759,7 @@ definitions:
       \ the EAN/GTIN.\n"
     type: text
     pattern: ^[A-Za-z0-9]{8,14}$
+    example: '96385074'
 </code></pre>
           </div>
           <div class="mt-5 sm:mt-6">
