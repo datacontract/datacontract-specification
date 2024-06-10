@@ -1105,7 +1105,7 @@ Tooling
 - [Data Contract CLI](https://github.com/datacontract/datacontract-cli) is a free CLI tool to help you create, develop, and maintain your data contracts.
 - [Data Mesh Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data products and data contracts. It supports the data contract specification and allows the user to import or export data contracts using this specification.
 - [Data Contract GPT](https://gpt.datacontract.com) is a custom GPT that can help you write data contracts.
-- [Data Contract Editor](https://editor.datacontract.com) is a editor for Data Contracts, including a live html preview.
+- [Data Contract Editor](https://editor.datacontract.com) is an editor for Data Contracts, including a live html preview.
 
 Code Completion
 ---
