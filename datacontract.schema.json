@@ -389,7 +389,6 @@
             "additionalProperties": true,
             "required": [
               "type",
-              "host",
               "catalog",
               "schema"
             ]
