@@ -939,10 +939,10 @@ Backup specifies details about data backup procedures.
 
 The quality object contains quality attributes and checks.
 
-| Field         | Type                                                                                                                            | Description                                                                                                                    |
-|---------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| type          | `string`                                                                                                                        | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `great-expectations`, `custom`               |
-| specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> `string` | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML. |
+| Field         | Type                                                                                                                                                                                                           | Description                                                                                                                    |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| type          | `string`                                                                                                                                                                                                       | REQUIRED. The type of the schema.<br> Typical values are: `SodaCL`, `montecarlo`, `great-expectations`, `custom`               |
+| specification | [SodaCL Quality Object](#sodacl-quality-object) \|<br> [Monte Carlo Schema Object](#monte-carlo-quality-object) \|<br> [Great Expectations Quality Object](#great-expectations-quality-object) \|<br> `string` | REQUIRED. The specification of the quality attributes. The quality specification can be encoded as a string or as inline YAML. |
 
 
 #### SodaCL Quality Object
