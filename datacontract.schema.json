@@ -651,6 +651,50 @@
           },
           {
             "type": "object",
+            "title": "TrinoServer",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "trino",
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "host": {
+                "type": "string",
+                "description": "The host to the database server",
+                "examples": [
+                  "localhost"
+                ]
+              },
+              "port": {
+                "type": "integer",
+                "description": "The port to the database server."
+              },
+              "catalog": {
+                "type": "string",
+                "description": "The name of the catalog.",
+                "examples": [
+                  "hive"
+                ]
+              },
+              "schema": {
+                "type": "string",
+                "description": "The name of the schema in the database.",
+                "examples": [
+                  "my_schema"
+                ]
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "host",
+              "port",
+              "catalog",
+              "schema"
+            ]
+          },
+          {
+            "type": "object",
             "title": "LocalServer",
             "properties": {
               "type": {
