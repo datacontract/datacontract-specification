@@ -874,6 +874,11 @@ video {
        column-gap: 1rem;
 }
 
+.gap-x-6 {
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
+}
+
 .gap-y-6 {
   row-gap: 1.5rem;
 }
@@ -1407,6 +1412,10 @@ video {
     flex-direction: row;
   }
 
+  .sm\:flex-col {
+    flex-direction: column;
+  }
+
   .sm\:flex-wrap {
     flex-wrap: wrap;
   }
@@ -1662,30 +1671,21 @@ Orders with their line items are in their current state (no history included).
               
                 <li class="relative flex gap-x-6 px-4 py-5 sm:px-6">
   <div class="flex items-center gap-x-4">
-    <div class="hidden sm:flex sm:flex-col">
-      <dt class="text-sm font-medium text-gray-500">Server</dt>
-      <dd class="mt-1 text-sm text-gray-900">production</dd>
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Server</dt>
+        <dd class="mt-1 text-sm text-gray-900">production</dd>
+      </div>
     </div>
   </div>
 
   
   <div class="flex items-center gap-x-4">
-    <div class="hidden sm:flex sm:flex-col">
-      <dt class="text-sm font-medium text-gray-500">Type</dt>
-      <dd class="mt-1 text-sm text-gray-900">s3</dd>
-    </div>
-  </div>
-  
-
-  
-
-  
-
-  
-  <div class="flex items-center gap-x-4">
-    <div class="hidden sm:flex sm:flex-col">
-      <dt class="text-sm font-medium text-gray-500">Location</dt>
-      <dd class="mt-1 text-sm text-gray-900">s3://datacontract-example-orders-latest/data/{model}/*.json</dd>
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Type</dt>
+        <dd class="mt-1 text-sm text-gray-900">s3</dd>
+      </div>
     </div>
   </div>
   
@@ -1695,6 +1695,21 @@ Orders with their line items are in their current state (no history included).
   
 
   
+  <div class="flex items-center gap-x-4">
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Location</dt>
+        <dd class="mt-1 text-sm text-gray-900">s3://datacontract-example-orders-latest/data/{model}/*.json</dd>
+      </div>
+    </div>
+  </div>
+  
+
+  
+
+  
+
+  
 
   
 
@@ -1710,18 +1725,22 @@ Orders with their line items are in their current state (no history included).
 
   
   <div class="flex items-center gap-x-4">
-    <div class="hidden sm:flex sm:flex-col">
-      <dt class="text-sm font-medium text-gray-500">Format</dt>
-      <dd class="mt-1 text-sm text-gray-900">json</dd>
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Format</dt>
+        <dd class="mt-1 text-sm text-gray-900">json</dd>
+      </div>
     </div>
   </div>
   
 
   
   <div class="flex items-center gap-x-4">
-    <div class="hidden sm:flex sm:flex-col">
-      <dt class="text-sm font-medium text-gray-500">Delimiter</dt>
-      <dd class="mt-1 text-sm text-gray-900">new_line</dd>
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Delimiter</dt>
+        <dd class="mt-1 text-sm text-gray-900">new_line</dd>
+      </div>
     </div>
   </div>
   
@@ -2817,7 +2836,7 @@ checks for line_items:
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 05 Jun 2024 04:39:46 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.7
+        Created at 21 Jun 2024 10:20:04 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.8
       </div>
 
     </div>

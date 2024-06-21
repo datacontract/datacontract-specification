@@ -1,0 +1,1 @@
+datacontract catalog --files "**/*.yaml" --output "."
