@@ -1045,6 +1045,23 @@
               "type": "string"
             },
             "description": "Custom metadata to provide additional context."
+          },
+          "links": {
+            "type": "object",
+            "description": "Links to external resources.",
+            "minProperties": 1,
+            "propertyNames": {
+              "pattern": "^[a-zA-Z0-9_-]+$"
+            },
+            "additionalProperties": {
+              "type": "string",
+              "title": "Link",
+              "description": "A URL to an external resource.",
+              "format": "uri",
+              "examples": [
+                "https://example.com"
+              ]
+            }
           }
         },
         "required": [
@@ -1345,6 +1362,36 @@
         "specification"
       ],
       "description": "The quality object contains quality attributes and checks."
+    },
+    "links": {
+      "type": "object",
+      "description": "Links to external resources.",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[a-zA-Z0-9_-]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "title": "Link",
+        "description": "A URL to an external resource.",
+        "format": "uri",
+        "examples": [
+          "https://example.com"
+        ]
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Tags to facilitate searching and filtering.",
+        "examples": [
+          "databricks",
+          "pii",
+          "sensitive"
+        ]
+      },
+      "description": "Tags to facilitate searching and filtering."
     }
   },
   "required": [
