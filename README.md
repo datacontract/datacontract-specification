@@ -336,6 +336,7 @@ The fields are dependent on the defined type.
 |-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `local` |
 | description | `string` | An optional string describing the server.                                                                                                                                                                                                                                    |
+| environment | `string` | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                         |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
