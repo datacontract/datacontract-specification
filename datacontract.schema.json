@@ -78,6 +78,16 @@
     },
     "servers": {
       "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "An optional string describing the servers."
+        },
+        "environment": {
+          "type": "string",
+          "description": "The environment in which the servers are running. Examples: prod, sit, stg."
+        }
+      },
       "additionalProperties": {
         "oneOf": [
           {
