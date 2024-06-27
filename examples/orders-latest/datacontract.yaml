@@ -8,15 +8,24 @@ info:
     All orders since 2020-01-01. 
     Orders with their line items are in their current state (no history included).
   owner: Checkout Team
+  slackChannel: "#checkout"
   contact:
     name: John Doe (Data Product Owner)
     url: https://teams.microsoft.com/l/channel/example/checkout
+tags:
+  - checkout
+  - orders
+  - s3
+links:
+  datacontractCli: https://cli.datacontract.com
 servers:
   production:
     type: s3
+    environment: prod
     location: s3://datacontract-example-orders-latest/data/{model}/*.json
     format: json
     delimiter: new_line
+    description: "One folder per model. One file per day."
 terms:
   usage: |
     Data can be used for reports, analytics and machine learning use cases.
@@ -93,6 +102,8 @@ definitions:
     example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
     pii: true
     classification: restricted
+    tags:
+      - orders
   sku:
     domain: inventory
     name: sku
@@ -103,6 +114,10 @@ definitions:
     description: |
       A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
       It is typically associated with an article's barcode, such as the EAN/GTIN.
+    links:
+      wikipedia: https://en.wikipedia.org/wiki/Stock_keeping_unit
+    tags:
+      - inventory
 examples:
   - type: csv # csv, json, yaml, custom
     model: orders

@@ -638,6 +638,11 @@ video {
   margin-right: auto;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .-ml-0 {
   margin-left: -0px;
 }
@@ -648,6 +653,10 @@ video {
 
 .mb-3 {
   margin-bottom: 0.75rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
 }
 
 .mr-1 {
@@ -749,6 +758,10 @@ video {
   height: 1.5rem;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -787,6 +800,10 @@ video {
 
 .w-7\/12 {
   width: 58.333333%;
+}
+
+.w-8 {
+  width: 2rem;
 }
 
 .w-9\/12 {
@@ -996,6 +1013,11 @@ video {
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
+.bg-indigo-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 231 255 / var(--tw-bg-opacity));
+}
+
 .bg-indigo-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
@@ -1038,6 +1060,11 @@ video {
   padding-right: 0.5rem;
 }
 
+.px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -1051,6 +1078,16 @@ video {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
 }
 
 .py-1 {
@@ -1204,6 +1241,11 @@ video {
 .text-gray-600 {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .text-gray-900 {
@@ -1576,6 +1618,9 @@ video {
             <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
               muellimperium-exchange-format
             </div>
+            <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+              
+            </div>
           </div>
           <div class="mt-5 flex lg:mt-0 lg:ml-4 gap-3 items-center">
             <button
@@ -1601,6 +1646,8 @@ video {
 <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
 
   <div class="px-4 py-5 sm:px-6">
+
+    
 
     <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
       <div class="sm:col-span-1">
@@ -1635,6 +1682,13 @@ video {
       
 
       
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">contract</dt>
+        <dd class="mt-1 text-sm text-gray-900">{'name': 'The Emperor', 'email': 'the-emperor@muellimperium.com'}</dd>
+      </div>
+      
+
+      
 
     </dl>
   </div>
@@ -1661,6 +1715,8 @@ video {
       </div>
     </div>
   </div>
+
+  
 
   
   <div class="flex items-center gap-x-4">
@@ -1719,6 +1775,10 @@ video {
 
   
 
+  
+
+  
+
 </li>
               
 
@@ -1767,7 +1827,7 @@ video {
 
     <div class="py-2 text-sm">
       
-      <div class="font-mono">location</div>
+      <span class="font-mono flex">location</span>
     </div>
   </td>
   <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
@@ -1800,6 +1860,8 @@ video {
       
       
       
+      
+      
     </div>
   </td>
 </tr>
@@ -1812,7 +1874,7 @@ video {
 
     <div class="py-2 text-sm">
       
-      <div class="font-mono">garbage_type</div>
+      <span class="font-mono flex">garbage_type</span>
     </div>
   </td>
   <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
@@ -1845,6 +1907,8 @@ video {
       
       
       
+      
+      
     </div>
   </td>
 </tr>
@@ -1857,7 +1921,7 @@ video {
 
     <div class="py-2 text-sm">
       
-      <div class="font-mono">collection_date</div>
+      <span class="font-mono flex">collection_date</span>
     </div>
   </td>
   <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
@@ -1890,6 +1954,8 @@ video {
       
       
       
+      
+      
     </div>
   </td>
 </tr>
@@ -1904,7 +1970,7 @@ video {
             </div>
             
           </section>
-          
+
           
 
           
@@ -1953,7 +2019,7 @@ video {
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 21 Jun 2024 10:20:08 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.8
+        Created at 27 Jun 2024 14:50:12 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.8
       </div>
 
     </div>
@@ -1988,6 +2054,9 @@ info:
 
     '
   owner: Emperor of the Muellimperium
+  contract:
+    name: The Emperor
+    email: the-emperor@muellimperium.com
 servers:
   exchange:
     type: local
