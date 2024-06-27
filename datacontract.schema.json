@@ -881,6 +881,23 @@
                   },
                   "description": "Custom metadata to provide additional context."
                 },
+                "links": {
+                  "type": "object",
+                  "description": "Links to external resources.",
+                  "minProperties": 1,
+                  "propertyNames": {
+                    "pattern": "^[a-zA-Z0-9_-]+$"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "title": "Link",
+                    "description": "A URL to an external resource.",
+                    "format": "uri",
+                    "examples": [
+                      "https://example.com"
+                    ]
+                  }
+                },
                 "$ref": {
                   "type": "string",
                   "description": "A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition."
