@@ -19,6 +19,7 @@ The public API SHOULD NOT be considered stable.
 - field.title attribute
 - model.title attribute
 - AWS Kinesis Data Streams server support
+- field.links attribute
 
 ## [0.9.3] - 2024-03-06
 
