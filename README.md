@@ -349,7 +349,7 @@ The fields are dependent on the defined type.
 
 | Field       | Type     | Description                                                                                                                                                                                                                                                                  |
 |-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `local` |
+| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
 | description | `string` | An optional string describing the server.                                                                                                                                                                                                                                    |
 | environment | `string` | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                         |
 
@@ -507,6 +507,16 @@ servers:
 | stream | `string` | The name of the Kinesis data stream.                                      |
 | region | `string` | AWS region, e.g., `eu-west-1`.                                            |
 | format | `string` | The format of the records. Examples: json, avro, protobuf.                |
+
+#### Trino Server Object
+
+| Field    | Type      | Description                                               |
+|----------|-----------|-----------------------------------------------------------|
+| type     | `string`  | `trino`                                                   |
+| host     | `string`  | The Trino host                                            |
+| port     | `integer` | The Trino port                                            | 
+| catalog  | `string`  | The name of the catalog, e.g., `my_catalog`.              |
+| schema   | `string`  | The name of the schema in the catalog, e.g., `my_schema`. |
 
 #### Local Server Object
 
