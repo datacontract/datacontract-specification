@@ -1121,22 +1121,13 @@ While the Data Contract Specification tries to accommodate most use cases, addit
 
 A custom field can be added with any name. The value can be null, a primitive, an array or an object. 
 
-### Design Principles
-
-The Data Contract Specification follows these design principles:
-
-- A free, open, and open-sourced standard
-- Follow OpenAPI and AsyncAPI conventions so that it feels immediately familiar 
-- Support contract-first approaches
-- Support code-first approaches
-- Support tooling by being machine-readable
 
 Tooling
 ---
-- [Data Contract CLI](https://github.com/datacontract/datacontract-cli) is a free CLI tool to help you create, develop, and maintain your data contracts.
-- [Data Mesh Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data products and data contracts. It supports the data contract specification and allows the user to import or export data contracts using this specification.
+- [Data Contract CLI](https://github.com/datacontract/datacontract-cli) is an open-source CLI tool to help you create, develop, and maintain your data contracts.
+- [Data Contract Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data contracts. It includes a data contract catalog, a Web-Editor, and a request and approval workflow to automate access to data products for a full enterprise data marketplace.  
 - [Data Contract GPT](https://gpt.datacontract.com) is a custom GPT that can help you write data contracts.
-- [Data Contract Editor](https://editor.datacontract.com) is an editor for Data Contracts, including a live html preview.
+- [Data Contract Editor](https://editor.datacontract.com) is an open-source editor for Data Contracts, including a live html preview.
 
 Code Completion
 ---
