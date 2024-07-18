@@ -821,6 +821,12 @@
                 "items": {
                   "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
                 },
+                "keys": {
+                  "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+                },
+                "values": {
+                  "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+                },
                 "primary": {
                   "type": "boolean",
                   "default": false,
@@ -985,7 +991,7 @@
                       "type": "string",
                       "description": "Specify the physical column type that is used in a SQL Server table, e.g., `DATETIME2`."
                     },
-                    "unityType": {
+                    "databricksType": {
                       "type": "string",
                       "description": "Specify the physical column type that is used in a Databricks Unity Catalog table."
                     },
@@ -1052,6 +1058,22 @@
           },
           "type": {
             "$ref": "#/$defs/FieldType"
+          },
+          "fields": {
+            "description": "The nested fields (e.g. columns) of the object, record, or struct.",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+            }
+          },
+          "items": {
+            "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+          },
+          "keys": {
+            "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+          },
+          "values": {
+            "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
           },
           "minLength": {
             "type": "integer",
@@ -1495,6 +1517,7 @@
         "timestamp_ntz",
         "date",
         "array",
+        "map",
         "object",
         "record",
         "struct",

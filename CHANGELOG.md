@@ -21,6 +21,8 @@ The public API SHOULD NOT be considered stable.
 - AWS Kinesis Data Streams server support
 - field.links attribute
 - Trino support
+- Field `type: map` support with properties `keys` and `values`
+- Definitions: `fields`, for type `object`, `record`, and `struct`
 
 ## [0.9.3] - 2024-03-06
 
