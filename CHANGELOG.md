@@ -10,16 +10,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Please note,  while the major version is zero (0.y.z), Anything MAY change at any time. 
 The public API SHOULD NOT be considered stable.
 
-## [0.9.4] - 2024-05-13
-
 ### Added
 - Data quality attributes on model and field level
+- Support for server-specific data types as config map ([#63](https://github.com/datacontract/datacontract-specification/issues/63))
 - AWS Glue Catalog server support
 - sftp server support
 - info.status field
 - oracle server support
 - field.title attribute
 - model.title attribute
+- AWS Kinesis Data Streams server support
+- field.links attribute
+- Trino support
+- Field `type: map` support with properties `keys` and `values`
+- Definitions: `fields`, for type `object`, `record`, and `struct`
 
 ## [0.9.3] - 2024-03-06
 

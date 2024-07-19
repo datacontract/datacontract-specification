@@ -9,7 +9,8 @@
 Data contracts bring data providers and data consumers together.
 
 A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. 
-A data contract is implemented by a data product's output port or other data technologies. 
+Think of an API, but for data. 
+A data contract is implemented by a data product or other data technologies, even legacy data warehouses. 
 Data contracts can also be used for the input port to specify the expectations of data dependencies and verify given guarantees.
 
 The _data contract specification_ defines a YAML format to describe attributes of provided data sets. 
@@ -25,12 +26,10 @@ Later in development and production, they also serve as the basis for code gener
 
 The specification comes along with the [Data Contract CLI](https://github.com/datacontract/datacontract-cli), an open-source tool to develop, validate, and enforce data contracts.
 
-IntelliJ, VS Code and other common IDEs allow you to use autocompletions without additional configuration.
-
-_Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. 
-The term "contract" may be somewhat misleading, but it is how it is used in practice. 
-The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. 
-Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes._
+> _Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. 
+> The term "contract" may be somewhat misleading, but it is how it is used by the industry. 
+> The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. 
+> Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes._
 
 Version
 ---
@@ -53,15 +52,24 @@ info:
     All orders since 2020-01-01. 
     Orders with their line items are in their current state (no history included).
   owner: Checkout Team
+  slackChannel: "#checkout"
   contact:
     name: John Doe (Data Product Owner)
     url: https://teams.microsoft.com/l/channel/example/checkout
+tags:
+  - checkout
+  - orders
+  - s3
+links:
+  datacontractCli: https://cli.datacontract.com
 servers:
   production:
     type: s3
+    environment: prod
     location: s3://datacontract-example-orders-latest/data/{model}/*.json
     format: json
     delimiter: new_line
+    description: "One folder per model. One file per day."
 terms:
   usage: |
     Data can be used for reports, analytics and machine learning use cases.
@@ -111,6 +119,9 @@ models:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
         required: true
+        config:
+          jsonType: string
+          jsonFormat: date-time
     quality:
       - type: row_count
         must_be_greater_than: 5
@@ -147,6 +158,8 @@ definitions:
     example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
     pii: true
     classification: restricted
+    tags:
+      - orders
   sku:
     domain: inventory
     name: sku
@@ -157,6 +170,10 @@ definitions:
     description: |
       A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
       It is typically associated with an article's barcode, such as the EAN/GTIN.
+    links:
+      wikipedia: https://en.wikipedia.org/wiki/Stock_keeping_unit
+    tags:
+      - inventory
 examples:
   - type: csv # csv, json, yaml, custom
     model: orders
@@ -249,24 +266,6 @@ The Data Contract CLI chooses the appropriate engine, formulates test cases, con
 
 More information and configuration options on [cli.datacontract.com](https://cli.datacontract.com).
 
-IDE Integration
----
-IntelliJ comes with a built-in YAML plugin which will show you autocompletions. For VS Code we recommend to install the [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) plugin. No additional configuration is required. Autocompletion is then enabled for files following these patterns:
-
-```
-datacontract.yaml
-datacontract.yml
-*-datacontract.yaml
-*-datacontract.yml
-*.datacontract.yaml
-*.datacontract.yml
-datacontract-*.yaml
-datacontract-*.yml
-**/datacontract/*.yml
-**/datacontract/*.yaml
-**/datacontracts/*.yml
-**/datacontracts/*.yaml
-```
 
 Specification
 ---
@@ -302,14 +301,16 @@ It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 | dataContractSpecification | `string`                                             | REQUIRED. Specifies the Data Contract Specification being used.                                                      |
 | id                        | `string`                                             | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number             |
 | info                      | [Info Object](#info-object)                          | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                                       |
-| servers                   | Map[string, [Server Object](#server-object)]         | Specifies the servers of the data contract.                                                                          |
+| servers                   | Map[`string`, [Server Object](#server-object)]         | Specifies the servers of the data contract.                                                                          |
 | terms                     | [Terms Object](#terms-object)                        | Specifies the terms and conditions of the data contract.                                                             |
-| models                    | Map[string, [Model Object](#model-object)]           | Specifies the logical data model.                                                                                    |
-| definitions               | Map[string, [Definition Object](#definition-object)] | Specifies definitions.                                                                                               |
+| models                    | Map[`string`, [Model Object](#model-object)]           | Specifies the logical data model.                                                                                    |
+| definitions               | Map[`string`, [Definition Object](#definition-object)] | Specifies definitions.                                                                                               |
 | schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                                   |
 | examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.                  |
 | servicelevels             | [Service Levels Object](#service-levels-object)      | Specifies the service level of the provided data                                                                     |
 | quality                   | [Quality Object](#quality-object)                    | Deprecated on top-level. Use model-level and field-field level quality. Specifies the quality attributes and checks. |
+| links                     | Map[`string`, `string`]                                  | Additional external documentation links.                                                                 |
+| tags             | Array of `string`                            | Custom metadata to provide additional context.    |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -325,7 +326,7 @@ Metadata and life cycle information about the data contract.
 |-------------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | title       | `string`                          | REQUIRED. The title of the data contract.                                                                                                                        |
 | version     | `string`                          | REQUIRED. The version of the data contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
-| status      | `string`                          | The status of the data contract. Can be proposed, in development, active, retired.                                                                               |
+| status      | `string`                          | The status of the data contract. Can be `proposed`, `in development`, `active`, `deprecated`, `retired`.                                                                   |
 | description | `string`                          | A description of the data contract.                                                                                                                              |
 | owner       | `string`                          | The owner or team responsible for managing the data contract and providing the data.                                                                             |
 | contact     | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                       |
@@ -349,10 +350,11 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                                                                                                          |
-|-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `local` |
-| description | `string` | An optional string describing the server.                                                                                                                                                                                                            |
+| Field       | Type     | Description                                                                                                                                                                                                                                                                  |
+|-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
+| description | `string` | An optional string describing the server.                                                                                                                                                                                                                                    |
+| environment | `string` | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                         |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -425,6 +427,18 @@ servers:
 | delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array`                                                                                                                                                                                                         |
 
 
+#### SQL-Server Server Object
+
+| Field    | Type      | Description                                          |
+|----------|-----------|------------------------------------------------------|
+| type     | `string`  | `sqlserver`                                          |
+| host     | `string`  | The host to the database server                      |
+| port     | `integer` | The port to the database server, default: `1433`     |
+| database | `string`  | The name of the database, e.g., `database`.          |
+| schema   | `string`  | The name of the schema in the database, e.g., `dbo`. |
+| driver   | `string`  | The name of the supported driver, e.g., `ODBC Driver 18 for SQL Server`. |
+
+
 #### Snowflake Server Object
 
 | Field    | Type     | Description |
@@ -488,6 +502,25 @@ servers:
 | format    | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
 | delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array` |
 
+#### AWS Kinesis Data Streams Server Object
+
+| Field  | Type     | Description                                                               |
+|--------|----------|---------------------------------------------------------------------------|
+| type   | `string` | `kinesis`                                                                 |
+| stream | `string` | The name of the Kinesis data stream.                                      |
+| region | `string` | AWS region, e.g., `eu-west-1`.                                            |
+| format | `string` | The format of the records. Examples: json, avro, protobuf.                |
+
+#### Trino Server Object
+
+| Field    | Type      | Description                                               |
+|----------|-----------|-----------------------------------------------------------|
+| type     | `string`  | `trino`                                                   |
+| host     | `string`  | The Trino host                                            |
+| port     | `integer` | The Trino port                                            | 
+| catalog  | `string`  | The name of the catalog, e.g., `my_catalog`.              |
+| schema   | `string`  | The name of the schema in the catalog, e.g., `my_schema`. |
+
 #### Local Server Object
 
 | Field  | Type     | Description                                                                         |
@@ -520,6 +553,8 @@ The name of the data model (table name) is defined by the key that refers to thi
 | description | `string`                                     | An optional string describing the data model.                                                                                        |
 | title       | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
 | fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
+| config      | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
+
 | quality     | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on model level.                                                                                     |
 
 
@@ -553,9 +588,14 @@ The Field Objects describes one field (column, property, nested field) of a data
 | pii              | `boolean`                                    | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               | 
 | classification   | `string`                                     | The data class defining the sensitivity level for this field, according to the organization's classification scheme. Examples may be: `sensitive`, `restricted`, `internal`, `public`.                                                                                                                                                                                                                                       |
 | tags             | Array of `string`                            | Custom metadata to provide additional context.                                                                                                                                                                                                                                                                                                                                                                               |
+| links            | Map[`string`,`string`]                       | Additional external documentation links.                                                                                                                                                                                                                                                                                                                                                                                     |
 | $ref             | `string`                                     | A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition.                                                                                                                                                                                                                                                                                            |
-| fields           | Map[`string`, [Field Object](#field-object)] | The nested fields (e.g. columns) of the object, record, or struct. Use only when type is object, record, or struct.                                                                                                                                                                                                                                                                                                          |
-| items            | [Field Object](#field-object)                | The type of the elements in the array. Use only when type is array.                                                                                                                                                                                                                                                                                                                                                          |
+| fields           | Map[`string`, [Field Object](#field-object)] | The nested fields (e.g. columns) of the object, record, or struct. Use only when type is `object`, `record`, or `struct`.                                                                                                                                                                                                                                                                                                    |
+| items            | [Field Object](#field-object)                | The type of the elements in the array. Use only when type is `array`.                                                                                                                                                                                                                                                                                                                                                        |
+| keys             | [Field Object](#field-object)                | Describes the key structure of a map. Defaults to `type: string` if a map is defined as type. Not all server types support different key types. Use only when type is `map`.                                                                                                                                                                                                                                                 |
+| values           | [Field Object](#field-object)                | Describes the value structure of a map. Use only when type is `map`.                                                                                                                                                                                                                                                                                                                                                         |
+| config           | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                                                                                                                                                                                                                                                                                                                     |
+
 | quality          | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on field level.                                                                                                                                                                                                                                                                                                                                                                             |
 
 
@@ -565,28 +605,34 @@ The Definition Object includes a clear and concise explanations of syntax, seman
 It serves as a reference for a common understanding of terminology, ensure consistent usage and to identify join-able fields.
 Models fields can refer to definitions using the `$ref` field to link to existing definitions and avoid duplicate documentations.
 
-| Field            | Type                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                  |
-|------------------|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name             | `string`                 | REQUIRED. The technical name of this definition.                                                                                                                                                                                                                                                                                                                                                                             |
-| type             | [Data Type](#data-types) | REQUIRED. The logical data type                                                                                                                                                                                                                                                                                                                                                                                              |
-| domain           | `string`                 | The domain in which this definition is valid. Default: `global`.                                                                                                                                                                                                                                                                                                                                                             |
-| title            | `string`                 | The business name of this definition.                                                                                                                                                                                                                                                                                                                                                                                        |
-| description      | `string`                 | Clear and concise explanations related to the domain                                                                                                                                                                                                                                                                                                                                                                         |
-| enum             | array of `string`        | A value must be equal to one of the elements in this array value. Only evaluated if the value is not null.                                                                                                                                                                                                                                                                                                                   |
-| format           | `string`                 | `email`: A value must be complaint to [RFC 5321, section 4.1.2](https://www.rfc-editor.org/info/rfc5321).<br>`uri`: A value must be complaint to [RFC 3986](https://www.rfc-editor.org/info/rfc3986).<br>`uuid`: A value must be complaint to [RFC 4122](https://www.rfc-editor.org/info/rfc4122). Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`). |
-| precision        | `number`                 | The maximum number of digits in a number. Only applies to numeric values. Defaults to 38.                                                                                                                                                                                                                                                                                                                                    |
-| scale            | `number`                 | The maximum number of decimal places in a number. Only applies to numeric values. Defaults to 0.                                                                                                                                                                                                                                                                                                                             |
-| minLength        | `number`                 | A value must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                         |
-| maxLength        | `number`                 | A value must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                            |
-| pattern          | `string`                 | A value must be valid according to the [ECMA-262](https://262.ecma-international.org/5.1/) regular expression dialect. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                             |
-| minimum          | `number`                 | A value of a number must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                              |
-| exclusiveMinimum | `number`                 | A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                            |
-| maximum          | `number`                 | A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                 |
-| exclusiveMaximum | `number`                 | A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                               |
-| example          | `string`                 | An example value.                                                                                                                                                                                                                                                                                                                                                                                                            |
-| pii              | `boolean`                | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               |
-| classification   | `string`                 | The data class defining the sensitivity level for this field, according to the organization's classification scheme.                                                                                                                                                                                                                                                                                                         |
-| tags             | Array of `string`        | Custom metadata to provide additional context.                                                                                                                                                                                                                                                                                                                                                                               |
+| Field            | Type                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|------------------|----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name             | `string`                                     | REQUIRED. The technical name of this definition.                                                                                                                                                                                                                                                                                                                                                                             |
+| type             | [Data Type](#data-types)                     | REQUIRED. The logical data type                                                                                                                                                                                                                                                                                                                                                                                              |
+| domain           | `string`                                     | The domain in which this definition is valid. Default: `global`.                                                                                                                                                                                                                                                                                                                                                             |
+| title            | `string`                                     | The business name of this definition.                                                                                                                                                                                                                                                                                                                                                                                        |
+| description      | `string`                                     | Clear and concise explanations related to the domain                                                                                                                                                                                                                                                                                                                                                                         |
+| enum             | array of `string`                            | A value must be equal to one of the elements in this array value. Only evaluated if the value is not null.                                                                                                                                                                                                                                                                                                                   |
+| format           | `string`                                     | `email`: A value must be complaint to [RFC 5321, section 4.1.2](https://www.rfc-editor.org/info/rfc5321).<br>`uri`: A value must be complaint to [RFC 3986](https://www.rfc-editor.org/info/rfc3986).<br>`uuid`: A value must be complaint to [RFC 4122](https://www.rfc-editor.org/info/rfc4122). Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`). |
+| precision        | `number`                                     | The maximum number of digits in a number. Only applies to numeric values. Defaults to 38.                                                                                                                                                                                                                                                                                                                                    |
+| scale            | `number`                                     | The maximum number of decimal places in a number. Only applies to numeric values. Defaults to 0.                                                                                                                                                                                                                                                                                                                             |
+| minLength        | `number`                                     | A value must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                         |
+| maxLength        | `number`                                     | A value must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                                                                                            |
+| pattern          | `string`                                     | A value must be valid according to the [ECMA-262](https://262.ecma-international.org/5.1/) regular expression dialect. Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`).                                                                                                                                                                             |
+| minimum          | `number`                                     | A value of a number must greater than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                              |
+| exclusiveMinimum | `number`                                     | A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                            |
+| maximum          | `number`                                     | A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                 |
+| exclusiveMaximum | `number`                                     | A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                               |
+| example          | `string`                                     | An example value.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| pii              | `boolean`                                    | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               |
+| classification   | `string`                                     | The data class defining the sensitivity level for this field, according to the organization's classification scheme.                                                                                                                                                                                                                                                                                                         |
+| tags             | Array of `string`                            | Custom metadata to provide additional context.                                                                                                                                                                                                                                                                                                                                                                               |
+| links            | Map[`string`, `string`]                      | Additional external documentation links.                                                                                                                                                                                                                                                                                                                                                                                     |
+| fields           | Map[`string`, [Field Object](#field-object)] | The nested fields (e.g. columns) of the object, record, or struct. Use only when type is `object`, `record`, or `struct`.                                                                                                                                                                                                                                                                                                    |
+| items            | [Field Object](#field-object)                | The type of the elements in the array. Use only when type is `array`.                                                                                                                                                                                                                                                                                                                                                        |
+| keys             | [Field Object](#field-object)                | Describes the key structure of a map. Defaults to `type: string` if a map is defined as type. Not all server types support different key types. Use only when type is `map`.                                                                                                                                                                                                                                                 |
+| values           | [Field Object](#field-object)                | Describes the value structure of a map. Use only when type is `map`.                                                                                                                                                                                                                                                                                                                                                         |
+
 
 
 ### Schema Object
@@ -832,7 +878,7 @@ One can either describe each service level informally using the `description` fi
 |--------------|-----------------------------------------------|-------------------------------------------------------------------------|
 | availability | [Availability Object](#availability-object)   | The promised uptime of the system that provides the data                |
 | retention    | [Retention Object](#retention-object)         | The period how long data will be available.                             |
-| latency      | [Latency Object](#latency-object)             | The maximum amount of time from the from the source to its destination. |
+| latency      | [Latency Object](#latency-object)             | The maximum amount of time from the the source to its destination. |
 | freshness    | [Freshness Object](#freshness-object)         | The maximum age of the youngest entry.                                  |
 | frequency    | [Frequency Object](#frequency-object)         | The update frequency.                                                   |
 | support      | [Support Object](#support-object)             | The times when support is provided.                                     |
@@ -1195,6 +1241,73 @@ quality:
             field: order_status
 ```
 
+#### Great Expectations Quality Object
+
+Quality attributes defined as Great Expectations [Expectations](https://greatexpectations.io/expectations/).
+
+The `specification` represents a list of expectations on a specific model. 
+
+Example (string):
+
+```yaml
+quality:
+  type: great-expectations
+  specification:
+    orders: |-
+      [
+          {
+              "expectation_type": "expect_table_row_count_to_be_between",
+              "kwargs": {
+                  "min_value": 10
+              },
+              "meta": {
+      
+              }
+          }
+      ]
+```
+
+### Config Object
+
+The config field can be used to set additional metadata that may be used by tools, e.g. to define a namespace for code generation, specify physical data types, toggle tests, etc.
+
+A config field can be added with any name. The value can be null, a primitive, an array or an object.
+
+For developer experience, a list of well-known field names is maintained here, as these fields are used in the Data Contract CLI:
+
+
+| Field           | Type     | Description                                                                                                    |
+|-----------------|----------|----------------------------------------------------------------------------------------------------------------|
+| avroNamespace   | `string` | (Only on model level) The namespace to use when importing and exporting the data model from / to Apache Avro.  |
+| avroType        | `string` | (Only on field level) Specify the field type to use when exporting the data model to Apache Avro.              |
+| avroLogicalType | `string` | (Only on field level) Specify the logical field type to use when  exporting the data model to Apache Avro.     |
+| bigqueryType    | `string` | (Only on field level) Specify the physical column type that is used in a BigQuery table, e.g., `NUMERIC(5, 2)` |
+| snowflakeType   | `string` | (Only on field level) Specify the physical column type that is used in a Snowflake table, e.g, `TIMESTAMP_LTZ` |
+| redshiftType    | `string` | (Only on field level) Specify the physical column type that is used in a Redshift table, e.g, `SMALLINT`       |
+| sqlserverType   | `string` | (Only on field level) Specify the physical column type that is used in a Snowflake table, e.g, `DATETIME2`     |
+| databricksType  | `string` | (Only on field level) Specify the physical column type that is used in a Databricks table                      |
+| glueType        | `string` | (Only on field level) Specify the physical column type that is used in a AWS Glue Data Catalog table           |
+
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+Example:
+
+```
+models:
+  orders:
+    config:
+      avroNamespace: "my.namespace"
+    fields:
+      my_field_1:
+        description: Example for AVRO with Timestamp (millisecond precision)
+        type: timestamp
+        config:
+          avroType: long
+          avroLogicalType: timestamp-millis
+          snowflakeType: timestamp_tz
+```
+
+
 ### Data Types
 
 The following data types are supported for model fields and definitions:
@@ -1210,6 +1323,7 @@ The following data types are supported for model fields and definitions:
 - Timestamp with no timezone: `timestamp_ntz`
 - Date with no time information: `date`
 - Array: `array`
+- Map: `map` (may not be supported by some server types)
 - Sequence of 8-bit unsigned bytes: `bytes`
 - Complex type: `object`, `record`, `struct`
 - No value: `null`
@@ -1218,32 +1332,40 @@ The following data types are supported for model fields and definitions:
 
 While the Data Contract Specification tries to accommodate most use cases, additional data can be added to extend the specification at certain points.
 
-A custom fields can be added with any name. The value can be null, a primitive, an array or an object. 
+A custom field can be added with any name. The value can be null, a primitive, an array or an object. 
 
-### Design Principles
-
-The Data Contract Specification follows these design principles:
-
-- A free, open, and open-sourced standard
-- Follow OpenAPI and AsyncAPI conventions so that it feels immediately familiar 
-- Support contract-first approaches
-- Support code-first approaches
-- Support tooling by being machine-readable
 
 Tooling
 ---
-- [Data Contract CLI](https://github.com/datacontract/datacontract-cli) is a free CLI tool to help you create, develop, and maintain your data contracts.
-- [Data Mesh Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data products and data contracts. It supports the data contract specification and allows the user to import or export data contracts using this specification.
+- [Data Contract CLI](https://github.com/datacontract/datacontract-cli) is an open-source CLI tool to help you create, develop, and maintain your data contracts.
+- [Data Contract Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data contracts. It includes a data contract catalog, a Web-Editor, and a request and approval workflow to automate access to data products for a full enterprise data marketplace.  
+- [Data Contract GPT](https://gpt.datacontract.com) is a custom GPT that can help you write data contracts.
+- [Data Contract Editor](https://editor.datacontract.com) is an open-source editor for Data Contracts, including a live html preview.
 
-
-Other Data Contract Specifications
+Code Completion
 ---
-- [AIDA User Group's Open Data Contract Standard](https://github.com/AIDAUserGroup/open-data-contract-standard)
-- [PayPal's Data Contract Template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md)
+The [JSON Schema](https://datacontract.com/datacontract.schema.json) of the current data contract specification is registered in [Schema Store](https://www.schemastore.org/), which brings code completion and syntax checks for all major IDEs.
+IntelliJ comes with a built-in YAML plugin which will show you autocompletions. 
+For VS Code we recommend to install the [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) plugin. 
+No additional configuration is required. 
 
-Literature
----
-- [Driving Data Quality with Data Contracts](https://www.amazon.com/dp/B0C37FPH3D) by Andrew Jones
+Autocompletion is then enabled for files following these patterns:
+
+```
+datacontract.yaml
+datacontract.yml
+*-datacontract.yaml
+*-datacontract.yml
+*.datacontract.yaml
+*.datacontract.yml
+datacontract-*.yaml
+datacontract-*.yml
+**/datacontract/*.yml
+**/datacontract/*.yaml
+**/datacontracts/*.yml
+**/datacontracts/*.yaml
+```
+
 
 Authors
 ---

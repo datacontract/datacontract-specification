@@ -638,6 +638,11 @@ video {
   margin-right: auto;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .-ml-0 {
   margin-left: -0px;
 }
@@ -648,6 +653,10 @@ video {
 
 .mb-3 {
   margin-bottom: 0.75rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
 }
 
 .mr-1 {
@@ -749,6 +758,10 @@ video {
   height: 1.5rem;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -763,6 +776,10 @@ video {
 
 .w-10 {
   width: 2.5rem;
+}
+
+.w-2 {
+  width: 0.5rem;
 }
 
 .w-2\/12 {
@@ -785,8 +802,12 @@ video {
   width: 58.333333%;
 }
 
-.w-72 {
-  width: 18rem;
+.w-8 {
+  width: 2rem;
+}
+
+.w-9\/12 {
+  width: 75%;
 }
 
 .w-full {
@@ -841,6 +862,10 @@ video {
   align-items: center;
 }
 
+.items-baseline {
+  align-items: baseline;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -891,6 +916,12 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.5rem * var(--tw-space-x-reverse));
   margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2rem * var(--tw-space-x-reverse));
+  margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
@@ -982,6 +1013,11 @@ video {
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
+.bg-indigo-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 231 255 / var(--tw-bg-opacity));
+}
+
 .bg-indigo-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
@@ -1009,6 +1045,11 @@ video {
   padding: 1.5rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1017,6 +1058,11 @@ video {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
 }
 
 .px-3 {
@@ -1032,6 +1078,16 @@ video {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
 }
 
 .py-1 {
@@ -1185,6 +1241,11 @@ video {
 .text-gray-600 {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .text-gray-900 {
@@ -1381,6 +1442,10 @@ video {
     width: 80%;
   }
 
+  .sm\:w-72 {
+    width: 18rem;
+  }
+
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1401,20 +1466,10 @@ video {
     align-items: center;
   }
 
-  .sm\:items-baseline {
-    align-items: baseline;
-  }
-
   .sm\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.5rem * var(--tw-space-x-reverse));
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .sm\:space-x-8 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(2rem * var(--tw-space-x-reverse));
-    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .sm\:truncate {
@@ -1563,6 +1618,9 @@ video {
             <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
               covid_cases
             </div>
+            <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+              
+            </div>
           </div>
           <div class="mt-5 flex lg:mt-0 lg:ml-4 gap-3 items-center">
             <button
@@ -1580,49 +1638,58 @@ video {
 
       <div>
         <div class="space-y-6 mt-6">
-          <section>
+          <section id="information">
             <div class=" px-4 sm:px-0">
-              <h1 class="text-base font-semibold leading-6 text-gray-900" id="info">Info</h1>
-              <p class="text-sm text-gray-500">Information about the data contract</p>
-            </div>
-            <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
+  <h1 class="text-base font-semibold leading-6 text-gray-900" id="info">Info</h1>
+  <p class="text-sm text-gray-500">Information about the data contract</p>
+</div>
+<div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
 
-              <div class="px-4 py-5 sm:px-6">
+  <div class="px-4 py-5 sm:px-6">
 
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Title</dt>
-                    <dd class="mt-1 text-sm text-gray-900">COVID-19 cases</dd>
-                  </div>
+    
 
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Version</dt>
-                    <dd class="mt-1 text-sm text-gray-900">0.0.1</dd>
-                  </div>
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Title</dt>
+        <dd class="mt-1 text-sm text-gray-900">COVID-19 cases</dd>
+      </div>
 
-                  
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">Version</dt>
+        <dd class="mt-1 text-sm text-gray-900">0.0.1</dd>
+      </div>
 
-                  
-                  <div class="sm:col-span-2">
-                    <dt class="text-sm font-medium text-gray-500">Description</dt>
-                    <dd class="mt-1 text-sm text-gray-900" >
-                      <span class="whitespace-pre-wrap">Johns Hopkins University Consolidated data on COVID-19 cases, sourced from Enigma</span>
-                    </dd>
-                  </div>
-                  
+      
 
-                  
+      
+      <div class="sm:col-span-2">
+        <dt class="text-sm font-medium text-gray-500">Description</dt>
+        <dd class="mt-1 text-sm text-gray-900" >
+          <span class="whitespace-pre-wrap">Johns Hopkins University Consolidated data on COVID-19 cases, sourced from Enigma</span>
+        </dd>
+      </div>
+      
 
-                  
+      
 
-                </dl>
-              </div>
-            </div>
+      
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500">links</dt>
+        <dd class="mt-1 text-sm text-gray-900">{'blog': 'https://aws.amazon.com/blogs/big-data/a-public-data-lake-for-analysis-of-covid-19-data/', 'data-explorer': 'https://dj2taa9i652rf.cloudfront.net/', 'data': 'https://covid19-lake.s3.us-east-2.amazonaws.com/enigma-jhu/json/part-00000-adec1cd2-96df-4c6b-a5f2-780f092951ba-c000.json'}</dd>
+      </div>
+      
+
+      
+
+    </dl>
+  </div>
+</div>
           </section>
 
 
           
-          <section>
+          <section id="servers">
             <div class="px-4 sm:px-0">
               <h1 class="text-base font-semibold leading-6 text-gray-900" id="servers">Servers</h1>
               <p class="text-sm text-gray-500">Servers of the data contract</p>
@@ -1631,73 +1698,89 @@ video {
             <ul role="list" class="mt-2 divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-lg">
 
               
-              <li class="relative flex gap-x-6 px-4 py-5 sm:px-6">
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Server</dt>
-                    <dd class="mt-1 text-sm text-gray-900">s3-json</dd>
-                  </div>
-                </div>
+                <li class="relative flex gap-x-6 px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-x-4">
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Server</dt>
+        <dd class="mt-1 text-sm text-gray-900">s3-json</dd>
+      </div>
+    </div>
+  </div>
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Type</dt>
-                    <dd class="mt-1 text-sm text-gray-900">s3</dd>
-                  </div>
-                </div>
-                
+  
 
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Type</dt>
+        <dd class="mt-1 text-sm text-gray-900">s3</dd>
+      </div>
+    </div>
+  </div>
+  
 
-                
+  
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Location</dt>
-                    <dd class="mt-1 text-sm text-gray-900">s3://covid19-lake/enigma-jhu/json/*.json</dd>
-                  </div>
-                </div>
-                
+  
 
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Location</dt>
+        <dd class="mt-1 text-sm text-gray-900">s3://covid19-lake/enigma-jhu/json/*.json</dd>
+      </div>
+    </div>
+  </div>
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
+  
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Format</dt>
-                    <dd class="mt-1 text-sm text-gray-900">json</dd>
-                  </div>
-                </div>
-                
+  
 
-                
-                <div class="flex items-center gap-x-4">
-                  <div class="hidden sm:flex sm:flex-col">
-                    <dt class="text-sm font-medium text-gray-500">Delimiter</dt>
-                    <dd class="mt-1 text-sm text-gray-900">new_line</dd>
-                  </div>
-                </div>
-                
+  
+  <div class="flex items-center gap-x-4">
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Format</dt>
+        <dd class="mt-1 text-sm text-gray-900">json</dd>
+      </div>
+    </div>
+  </div>
+  
 
-              </li>
+  
+  <div class="flex items-center gap-x-4">
+    <div class="sm:flex sm:flex-col">
+      <div class="flex flex-col">
+        <dt class="text-sm font-medium text-gray-500">Delimiter</dt>
+        <dd class="mt-1 text-sm text-gray-900">new_line</dd>
+      </div>
+    </div>
+  </div>
+  
+
+  
+
+  
+
+</li>
               
 
             </ul>
@@ -1738,396 +1821,412 @@ video {
                       </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-200 bg-white">
+                      
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
+
+    <div class="py-2 text-sm">
+      
+      <span class="font-mono flex">fips</span>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    string
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">state and county two digits code</div>
+    
+
+    
+
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
+
 
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">fips</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          string
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">state and county two digits code</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <span class="font-mono flex">admin2</span>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    string
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">county name</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">admin2</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          string
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">county name</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <span class="font-mono flex">province_state</span>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    string
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">province name or state name</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">province_state</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          string
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">province name or state name</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <span class="font-mono flex">country_region</span>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    string
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">country name or region name</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">country_region</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          string
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">country name or region name</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <span class="font-mono flex">last_update</span>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    timestamp_ntz
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">last update timestamp</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">last_update</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          timestamp_ntz
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">last update timestamp</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <span class="font-mono flex">latitude</span>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    double
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">location (latitude)</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">latitude</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          double
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">location (latitude)</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <span class="font-mono flex">longitude</span>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    double
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">location (longitude)</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">longitude</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          double
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">location (longitude)</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <span class="font-mono flex">confirmed</span>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    int
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">number of confirmed cases</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
+                        
+<tr>
+  <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
 
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">confirmed</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          int
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">number of confirmed cases</div>
-                          
+    <div class="py-2 text-sm">
+      
+      <span class="font-mono flex">combined_key</span>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
+    
+    string
+    
+  </td>
+  <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
+    
+    <div class="text-gray-500">county name+state name+country name</div>
+    
 
-                          
+    
 
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
+    <div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </td>
+</tr>
 
-                        </td>
 
-                      </tr>
                       
-
-                      <tr>
-                        <td class="whitespace-nowrap py-2 pl-4 pr-2 text-sm font-medium text-gray-900 sm:pl-6 w-2/12">
-                          <div class="py-2 text-sm">
-                            
-                            <div class="font-mono">combined_key</div>
-                            
-                          </div>
-                        </td>
-                        <td class="whitespace-nowrap px-1 py-2 text-sm text-gray-500 w-1/12">
-                          
-                          string
-                          
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-500 w-7/12">
-                          
-                          <div class="text-gray-500">county name+state name+country name</div>
-                          
-
-                          
-
-                          <div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          </div>
-
-                        </td>
-
-                      </tr>
-                      
-
                       </tbody>
                     </table>
                   </div>
@@ -2135,8 +2234,9 @@ video {
               </div>
             </div>
             
-
           </section>
+
+          
 
           
 
@@ -2151,8 +2251,6 @@ video {
                 <p class="text-sm text-gray-500">
                   <span>SodaCL</span>
                 </p>
-
-
               </div>
               <div class="mt-2 overflow-hidden shadow sm:rounded-lg bg-white">
                 <div class="px-4 py-5 sm:px-6">
@@ -2168,11 +2266,10 @@ video {
           
 
         </div>
-
       </div>
 
       <div class="mt-6 text-sm text-gray-400">
-        Created at 08 May 2024 18:45:57 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.3
+        Created at 27 Jun 2024 14:50:11 UTC with <a href="https://cli.datacontract.com" class="text-gray-400 hover:text-gray-500">Data Contract CLI</a> v0.10.8
       </div>
 
     </div>
@@ -2204,6 +2301,10 @@ info:
   version: 0.0.1
   description: Johns Hopkins University Consolidated data on COVID-19 cases, sourced
     from Enigma
+  links:
+    blog: https://aws.amazon.com/blogs/big-data/a-public-data-lake-for-analysis-of-covid-19-data/
+    data-explorer: https://dj2taa9i652rf.cloudfront.net/
+    data: https://covid19-lake.s3.us-east-2.amazonaws.com/enigma-jhu/json/part-00000-adec1cd2-96df-4c6b-a5f2-780f092951ba-c000.json
 servers:
   s3-json:
     type: s3

@@ -36,6 +36,7 @@
             "proposed",
             "in development",
             "active",
+            "deprecated",
             "retired"
           ]
         },
@@ -78,6 +79,16 @@
     },
     "servers": {
       "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "An optional string describing the servers."
+        },
+        "environment": {
+          "type": "string",
+          "description": "The environment in which the servers are running. Examples: prod, sit, stg."
+        }
+      },
       "additionalProperties": {
         "oneOf": [
           {
@@ -282,6 +293,55 @@
           },
           {
             "type": "object",
+            "title": "SqlserverServer",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "sqlserver"
+                ],
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "host": {
+                "type": "string",
+                "description": "The host to the database server",
+                "examples": [
+                  "localhost"
+                ]
+              },
+              "port": {
+                "type": "integer",
+                "description": "The port to the database server.",
+                "default": 1433,
+                "examples": [
+                  1433
+                ]
+              },
+              "database": {
+                "type": "string",
+                "description": "The name of the database.",
+                "examples": [
+                  "database"
+                ]
+              },
+              "schema": {
+                "type": "string",
+                "description": "The name of the schema in the database.",
+                "examples": [
+                  "dbo"
+                ]
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "host",
+              "database",
+              "schema"
+            ]
+          },
+          {
+            "type": "object",
             "title": "SnowflakeServer",
             "properties": {
               "type": {
@@ -340,9 +400,23 @@
             "additionalProperties": true,
             "required": [
               "type",
-              "host",
               "catalog",
               "schema"
+            ]
+          },
+          {
+            "type": "object",
+            "title": "DataframeServer",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "dataframe",
+                "description": "The type of the data product technology that implements the data contract."
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type"
             ]
           },
           {
@@ -539,6 +613,89 @@
           },
           {
             "type": "object",
+            "title": "KinesisDataStreamsServer",
+            "description": "Kinesis Data Streams Server",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "kinesis"
+                ],
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "stream": {
+                "type": "string",
+                "description": "The name of the Kinesis data stream."
+              },
+              "region": {
+                "type": "string",
+                "description": "AWS region.",
+                "examples": [
+                  "eu-west-1"
+                ]
+              },
+              "format": {
+                "type": "string",
+                "description": "The format of the record",
+                "examples": [
+                  "json",
+                  "avro",
+                  "protobuf"
+                ]
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "stream"
+            ]
+          },
+          {
+            "type": "object",
+            "title": "TrinoServer",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "trino",
+                "description": "The type of the data product technology that implements the data contract."
+              },
+              "host": {
+                "type": "string",
+                "description": "The host to the database server",
+                "examples": [
+                  "localhost"
+                ]
+              },
+              "port": {
+                "type": "integer",
+                "description": "The port to the database server."
+              },
+              "catalog": {
+                "type": "string",
+                "description": "The name of the catalog.",
+                "examples": [
+                  "hive"
+                ]
+              },
+              "schema": {
+                "type": "string",
+                "description": "The name of the schema in the database.",
+                "examples": [
+                  "my_schema"
+                ]
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "type",
+              "host",
+              "port",
+              "catalog",
+              "schema"
+            ]
+          },
+          {
+            "type": "object",
             "title": "LocalServer",
             "properties": {
               "type": {
@@ -664,6 +821,12 @@
                 "items": {
                   "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
                 },
+                "keys": {
+                  "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+                },
+                "values": {
+                  "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+                },
                 "primary": {
                   "type": "boolean",
                   "default": false,
@@ -769,10 +932,97 @@
                   },
                   "description": "Custom metadata to provide additional context."
                 },
+                "links": {
+                  "type": "object",
+                  "description": "Links to external resources.",
+                  "minProperties": 1,
+                  "propertyNames": {
+                    "pattern": "^[a-zA-Z0-9_-]+$"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "title": "Link",
+                    "description": "A URL to an external resource.",
+                    "format": "uri",
+                    "examples": [
+                      "https://example.com"
+                    ]
+                  }
+                },
                 "$ref": {
                   "type": "string",
                   "description": "A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition."
+                },
+                "config": {
+                  "type": "object",
+                  "description": "Additional metadata for field configuration.",
+                  "additionalProperties": {
+                    "type": [
+                      "string",
+                      "number",
+                      "boolean",
+                      "object",
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "properties": {
+                    "avroType": {
+                      "type": "string",
+                      "description": "Specify the field type to use when exporting the data model to Apache Avro."
+                    },
+                    "avroLogicalType": {
+                      "type": "string",
+                      "description": "Specify the logical field type to use when exporting the data model to Apache Avro."
+                    },
+                    "bigqueryType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a BigQuery table, e.g., `NUMERIC(5, 2)`."
+                    },
+                    "snowflakeType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a Snowflake table, e.g., `TIMESTAMP_LTZ`."
+                    },
+                    "redshiftType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a Redshift table, e.g., `SMALLINT`."
+                    },
+                    "sqlserverType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a SQL Server table, e.g., `DATETIME2`."
+                    },
+                    "databricksType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in a Databricks Unity Catalog table."
+                    },
+                    "glueType": {
+                      "type": "string",
+                      "description": "Specify the physical column type that is used in an AWS Glue Data Catalog table."
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "config": {
+            "type": "object",
+            "description": "Additional metadata for model configuration.",
+            "additionalProperties": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "object",
+                "array",
+                "null"
+
+
+              ]
+            },
+            "properties": {
+              "avroNamespace": {
+                "type": "string",
+                "description": "The namespace to use when importing and exporting the data model from / to Apache Avro."
               }
             }
           }
@@ -808,6 +1058,22 @@
           },
           "type": {
             "$ref": "#/$defs/FieldType"
+          },
+          "fields": {
+            "description": "The nested fields (e.g. columns) of the object, record, or struct.",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+            }
+          },
+          "items": {
+            "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+          },
+          "keys": {
+            "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
+          },
+          "values": {
+            "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
           },
           "minLength": {
             "type": "integer",
@@ -873,6 +1139,23 @@
               "type": "string"
             },
             "description": "Custom metadata to provide additional context."
+          },
+          "links": {
+            "type": "object",
+            "description": "Links to external resources.",
+            "minProperties": 1,
+            "propertyNames": {
+              "pattern": "^[a-zA-Z0-9_-]+$"
+            },
+            "additionalProperties": {
+              "type": "string",
+              "title": "Link",
+              "description": "A URL to an external resource.",
+              "format": "uri",
+              "examples": [
+                "https://example.com"
+              ]
+            }
           }
         },
         "required": [
@@ -1045,7 +1328,7 @@
             },
             "threshold": {
               "type": "string",
-              "description": "An optional maximum age of the youngest entry. Supported formats: Simple duration (e.g., `24 hours`, `5s`) and ISO 8601 duration (e.g, `PT24H`).",
+              "description": "An optional maximum age of the youngest entry. Supported formats: Simple duration (e.g., `24 hours`, `5s`) and ISO 8601 duration (e.g., `PT24H`).",
               "example": "25h"
             },
             "timestampField": {
@@ -1173,6 +1456,36 @@
         "specification"
       ],
       "description": "The quality object contains quality attributes and checks."
+    },
+    "links": {
+      "type": "object",
+      "description": "Links to external resources.",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[a-zA-Z0-9_-]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "title": "Link",
+        "description": "A URL to an external resource.",
+        "format": "uri",
+        "examples": [
+          "https://example.com"
+        ]
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Tags to facilitate searching and filtering.",
+        "examples": [
+          "databricks",
+          "pii",
+          "sensitive"
+        ]
+      },
+      "description": "Tags to facilitate searching and filtering."
     }
   },
   "required": [
@@ -1204,6 +1517,7 @@
         "timestamp_ntz",
         "date",
         "array",
+        "map",
         "object",
         "record",
         "struct",
