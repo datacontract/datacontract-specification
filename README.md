@@ -785,7 +785,7 @@ Quality attributes are checks that can be applied to the data to ensure its qual
 Quality attributes can be:
 - Text: A human-readable text that describes the quality of the data.
 - SQL: An individual SQL query that returns a single value that can be compared.
-- Engine-specific Types: Currently engines `soda` and `great-expectations` are supported.
+- Engine-specific types: Pre-defined quality checks, as defined by data quality libraries. Currently, the engines `soda` and `great-expectations` are supported.
 
 A quality object can be specified on field level, or on model level. 
 The top-level quality object are deprecated.
@@ -809,10 +809,11 @@ Example:
 models:
   my_table:
     fields:
-      iban:
+      account_iban:
         quality:
           - type: text
-            description: Must be a valid IBAN.
+            name: Valid IBAN
+            description: Must be a valid IBAN. Must not be empty.
 ```
 
 
@@ -843,6 +844,7 @@ models:
   my_table:
     quality:
       - type: sql
+        name: Maximum duration between two orders
         description: The maximum duration between two orders should be less that 3600 seconds
         query: |
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
@@ -851,12 +853,15 @@ models:
 ```
 
 
-#### Soda Data Contract Checks
+#### Engine: Soda
 
 Applicable on: [x] model, [x]  field
 
-
 Quality attributes can be defined with the engine `soda` as [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html).
+
+Note: Soda Data contract check reference is experimental and may change in the future.
+
+Note: Currently only supported by types Postgres, Snowflake, and Spark (Databricks)
 
 ##### Duplicate
 
@@ -881,12 +886,12 @@ models:
         type: string
     quality:
       - engine: soda
+        name: A shipment number should be unique for one carrier
         type: duplicate_percent
-        must_be_less_than: 1.0
-        name: A shipment number is unique for one carrier
         columns:
           - carrier
           - shipment_numer
+        must_be_less_than: 1.0
 ```
 
 Freshness
@@ -938,7 +943,7 @@ models:
             valid_sql_regex: '^[A-Z]{2}[0-9]{3}$'
 ```
 
-#### Great Expectations
+#### Engine: Great Expectations
 
 Applicable on: [x] model, [ ]  field
 
