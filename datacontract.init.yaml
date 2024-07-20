@@ -1,4 +1,4 @@
-dataContractSpecification: 0.9.3
+dataContractSpecification: 1.0.1
 id: my-data-contract-id
 info:
   title: My Data Contract
@@ -99,11 +99,3 @@ info:
 #    cron: 0 0 * * 0
 #    recoveryTime: 24 hours
 #    recoveryPoint: 1 week
-
-### quality
-
-#quality:
-#  type: SodaCL
-#  specification:
-#    checks for my_model: |-
-#      - duplicate_count(id) = 0

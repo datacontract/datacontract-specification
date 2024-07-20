@@ -34,7 +34,7 @@ The specification comes along with the [Data Contract CLI](https://github.com/da
 Version
 ---
 
-0.9.4([Changelog](CHANGELOG.md))
+1.0.1([Changelog](CHANGELOG.md))
 
 Example
 ---
@@ -42,7 +42,7 @@ Example
 [![Data Contract Catalog](https://img.shields.io/badge/Data%20Contract-Catalog-blue)](https://datacontract.com/examples/index.html)
 
 ```yaml
-dataContractSpecification: 0.9.3
+dataContractSpecification: 1.0.1
 id: urn:datacontract:checkout:orders-latest
 info:
   title: Orders Latest
@@ -114,7 +114,7 @@ models:
         classification: sensitive
         quality:
           - type: text
-            name: The email address was verified by the system
+            name: The email address was verified by a user
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
@@ -123,14 +123,15 @@ models:
           jsonType: string
           jsonFormat: date-time
     quality:
-      - type: row_count
-        must_be_greater_than: 5
       - type: sql
         description: The maximum duration between two orders should be less that 3600 seconds
         query: |
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
           FROM orders
         must_be_less_than: 3600
+      - type: row_count
+        engine: soda
+        must_be_greater_than: 5
   line_items:
     description: A single article that is part of an order.
     type: table
@@ -296,21 +297,19 @@ This is the root document.
 
 It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 
-| Field                     | Type                                                 | Description                                                                                                          |
-|---------------------------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| dataContractSpecification | `string`                                             | REQUIRED. Specifies the Data Contract Specification being used.                                                      |
-| id                        | `string`                                             | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number             |
-| info                      | [Info Object](#info-object)                          | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                                       |
+| Field                     | Type                                                   | Description                                                                                                          |
+|---------------------------|--------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| dataContractSpecification | `string`                                               | REQUIRED. Specifies the Data Contract Specification being used.                                                      |
+| id                        | `string`                                               | REQUIRED. An organization-wide unique technical identifier, such as a UUID, URN, slug, string, or number             |
+| info                      | [Info Object](#info-object)                            | REQUIRED. Specifies the metadata of the data contract. May be used by tooling.                                       |
 | servers                   | Map[`string`, [Server Object](#server-object)]         | Specifies the servers of the data contract.                                                                          |
-| terms                     | [Terms Object](#terms-object)                        | Specifies the terms and conditions of the data contract.                                                             |
+| terms                     | [Terms Object](#terms-object)                          | Specifies the terms and conditions of the data contract.                                                             |
 | models                    | Map[`string`, [Model Object](#model-object)]           | Specifies the logical data model.                                                                                    |
 | definitions               | Map[`string`, [Definition Object](#definition-object)] | Specifies definitions.                                                                                               |
-| schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                                   |
-| examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.                  |
-| servicelevels             | [Service Levels Object](#service-levels-object)      | Specifies the service level of the provided data                                                                     |
-| quality                   | [Quality Object](#quality-object)                    | Deprecated on top-level. Use model-level and field-field level quality. Specifies the quality attributes and checks. |
-| links                     | Map[`string`, `string`]                                  | Additional external documentation links.                                                                 |
-| tags             | Array of `string`                            | Custom metadata to provide additional context.    |
+| examples                  | Array of [Example Objects](#example-object)            | Specifies example data sets for the data model. The specification supports different example types.                  |
+| servicelevels             | [Service Levels Object](#service-levels-object)        | Specifies the service level of the provided data                                                                     |
+| links                     | Map[`string`, `string`]                                | Additional external documentation links.                                                                             |
+| tags                      | Array of `string`                                      | Custom metadata to provide additional context.                                                                       |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -326,7 +325,7 @@ Metadata and life cycle information about the data contract.
 |-------------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | title       | `string`                          | REQUIRED. The title of the data contract.                                                                                                                        |
 | version     | `string`                          | REQUIRED. The version of the data contract document (which is distinct from the Data Contract Specification version or the Data Product implementation version). |
-| status      | `string`                          | The status of the data contract. Can be `proposed`, `in development`, `active`, `deprecated`, `retired`.                                                                   |
+| status      | `string`                          | The status of the data contract. Can be `proposed`, `in development`, `active`, `deprecated`, `retired`.                                                         |
 | description | `string`                          | A description of the data contract.                                                                                                                              |
 | owner       | `string`                          | The owner or team responsible for managing the data contract and providing the data.                                                                             |
 | contact     | [Contact Object](#contact-object) | Contact information for the data contract.                                                                                                                       |
@@ -429,13 +428,13 @@ servers:
 
 #### SQL-Server Server Object
 
-| Field    | Type      | Description                                          |
-|----------|-----------|------------------------------------------------------|
-| type     | `string`  | `sqlserver`                                          |
-| host     | `string`  | The host to the database server                      |
-| port     | `integer` | The port to the database server, default: `1433`     |
-| database | `string`  | The name of the database, e.g., `database`.          |
-| schema   | `string`  | The name of the schema in the database, e.g., `dbo`. |
+| Field    | Type      | Description                                                              |
+|----------|-----------|--------------------------------------------------------------------------|
+| type     | `string`  | `sqlserver`                                                              |
+| host     | `string`  | The host to the database server                                          |
+| port     | `integer` | The port to the database server, default: `1433`                         |
+| database | `string`  | The name of the database, e.g., `database`.                              |
+| schema   | `string`  | The name of the schema in the database, e.g., `dbo`.                     |
 | driver   | `string`  | The name of the supported driver, e.g., `ODBC Driver 18 for SQL Server`. |
 
 
@@ -635,208 +634,6 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 
 
 
-### Schema Object
-
-The schema of the data contract describes the physical schema. 
-The type of the schema depends on the data platform.
-
-| Field         | Type                                                                                                                                                                                                                                | Description                                                                                                                         |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| type          | `string`                                                                                                                                                                                                                            | REQUIRED. The type of the schema.<br> Typical values are: `dbt`, `bigquery`, `json-schema`, `sql-ddl`, `avro`, `protobuf`, `custom` |
-| specification | [dbt Schema Object](#dbt-schema-object) \|<br> [BigQuery Schema Object](#bigquery-schema-object) \|<br> [JSON Schema Schema Object](#bigquery-schema-object) \|<br> [SQL DDL Schema Object](#sql-ddl-schema-object) \|<br> `string` | REQUIRED. The specification of the schema. The schema specification can be encoded as a string or as inline YAML.                   |
-
-
-#### dbt Schema Object
-
-https://docs.getdbt.com/reference/model-properties
-
-Example (inline YAML):
-
-```yaml
-schema:
-  type: dbt
-  specification:
-    version: 2
-    models:
-      - name: "My Table"
-        description: "My description"
-        columns:
-          - name: "My column"
-            data_type: text
-            description: "My description"
-```
-
-Example (string):
-
-```yaml
-schema:
-  type: dbt
-  specification: |-
-    version: 2
-    models:
-      - name: "My Table"
-        description: "My description"
-        columns:
-          - name: "My column"
-            data_type: text
-            description: "My description"
-```
-
-#### BigQuery Schema Object
-
-The schema structure is defined by the [Google BigQuery Table](https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#resource:-table) object. You can extract such a Table object via the [tables.get](https://cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) endpoint.
-
-Instead of providing a single Table object, you can also provide an array of such objects. Be aware that [tables.list](https://cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) only returns a subset of the full Table object. You need to call every Table object via [tables.get](https://cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) to get the full Table object, including the actual schema.
-
-Learn more: [Google BigQuery REST Reference v2](https://cloud.google.com/bigquery/docs/reference/rest)
-
-
-
-Example:
-
-```yaml
-schema:
-  type: bigquery
-  specification: |-
-    {
-      "tableReference": {
-        "projectId": "my-project",
-        "datasetId": "my_dataset",
-        "tableId": "my_table"
-      },
-      "description": "This is a description",
-      "type": "TABLE",
-      "schema": {
-        "fields": [
-          {
-            "name": "name",
-            "type": "STRING",
-            "mode": "NULLABLE",
-            "description": "This is a description"
-          }
-        ]
-      }
-    }
-```
-
-#### JSON Schema Schema Object
-
-JSON Schema can be defined as JSON or rendered as YAML, following the [OpenAPI Schema Object dialect](https://spec.openapis.org/oas/v3.1.0#properties)
-
-Example (inline YAML):
-
-```yaml
-schema:
-  type: json-schema
-  specification:
-    orders:
-      description: One record per order. Includes cancelled and deleted orders.
-      type: object
-      properties:
-        order_id:
-          type: string
-          description: Primary key of the orders table
-        order_timestamp:
-          type: string
-          format: date-time
-          description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
-        order_total:
-          type: integer
-          description: Total amount of the order in the smallest monetary unit (e.g., cents).
-    line_items:
-      type: object
-      properties:
-        lines_item_id:
-          type: string
-          description: Primary key of the lines_item_id table
-        order_id:
-          type: string
-          description: Foreign key to the orders table
-        sku:
-          type: string
-          description: The purchased article number
-```
-
-Example (string):
-
-```yaml
-schema:
-  type: json-schema
-  specification: |-
-    {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "type": "object",
-      "properties": {
-        "orders": {
-          "type": "object",
-          "description": "One record per order. Includes cancelled and deleted orders.",
-          "properties": {
-            "order_id": {
-              "type": "string",
-              "description": "Primary key of the orders table"
-            },
-            "order_timestamp": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful."
-            },
-            "order_total": {
-              "type": "integer",
-              "description": "Total amount of the order in the smallest monetary unit (e.g., cents)."
-            }
-          },
-          "required": ["order_id", "order_timestamp", "order_total"]
-        },
-        "line_items": {
-          "type": "object",
-          "properties": {
-            "lines_item_id": {
-              "type": "string",
-              "description": "Primary key of the lines_item_id table"
-            },
-            "order_id": {
-              "type": "string",
-              "description": "Foreign key to the orders table"
-            },
-            "sku": {
-              "type": "string",
-              "description": "The purchased article number"
-            }
-          },
-          "required": ["lines_item_id", "order_id", "sku"]
-        }
-      },
-      "required": ["orders", "line_items"]
-    }
-```
-
-#### SQL DDL Schema Object
-
-Classical SQL DDLs can be used to describe the structure.
-
-
-Example (string):
-
-```yaml
-schema:
-  type: sql-ddl
-  specification: |-
-      -- One record per order. Includes cancelled and deleted orders.
-      CREATE TABLE orders (
-        order_id TEXT PRIMARY KEY, -- Primary key of the orders table
-        order_timestamp TIMESTAMPTZ NOT NULL, -- The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
-        order_total INTEGER NOT NULL -- Total amount of the order in the smallest monetary unit (e.g., cents)
-      );
-    
-      -- The items that are part of an order
-      CREATE TABLE line_items (
-        lines_item_id TEXT PRIMARY KEY, -- Primary key of the lines_item_id table
-        order_id TEXT REFERENCES orders(order_id), -- Foreign key to the orders table
-        sku TEXT NOT NULL -- The purchased article number
-      );
-
-```
-
 ### Example Object
 
 | Field       | Type     | Description                                                                                                                             |
@@ -988,18 +785,17 @@ Quality attributes are checks that can be applied to the data to ensure its qual
 Quality attributes can be:
 - Text: A human-readable text that describes the quality of the data.
 - SQL: An individual SQL query that returns a single value that can be compared.
-- Predefined Types: Some commonly-used predefined quality attributes such as `row_count`, `unique`, `freshness`
-- Vendor-specific: Quality attributes that are specific to a vendor, such as Great Expectations, SodaCL or Montecarlo.
+- Engine-specific Types: Currently engines `soda` and `great-expectations` are supported.
 
-A quality object can be specified on field level, or on model level. The top-level quality object are deprecated.
-
-The fields of the quality object depends on the quality `type`.
+A quality object can be specified on field level, or on model level. 
+The top-level quality object are deprecated.
 
 #### Text
 
- Applicable on: [ ] top-level, [x] model, [x] field
+Applicable on: [x] model, [x] field
 
-A human-readable text that describe the quality of the data. Later in the development process, these might be translated into an executable check (such as `sql`), or checked through an AI engine.
+A human-readable text that describes the quality of the data. 
+Later in the development process, these might be translated into an executable check (such as `sql`), or checked through an AI engine.
 
 | Field       | Type     | Description                                                        |
 |-------------|----------|--------------------------------------------------------------------|
@@ -1013,29 +809,34 @@ Example:
 models:
   my_table:
     fields:
-      email:
+      iban:
         quality:
           - type: text
-            description: The email address was verified by the system
+            description: Must be a valid IBAN.
 ```
+
 
 #### SQL
 
-Applicable on: [ ] top-level, [x] model, [x] field
+Applicable on: [x] model, [x] field
 
 An individual SQL query that returns a single number or boolean value that can be compared. The SQL query must be in the SQL dialect of the provided server.
 
-| Field                            | Type                   | Description                                                |
-|----------------------------------|------------------------|------------------------------------------------------------|
-| type                             | `string`               | `sql`                                                      |
-| query                            | `string`               | A SQL query that returns a single number or boolean value. |
-| must_be_equal_to                 | `integer` or `boolean` | The threshold to check the return value of the query       |
-| must_be_greater_than             | `integer`              | The threshold to check the return value of the query       |
-| must_be_greater_than_or_equal_to | `integer`              | The threshold to check the return value of the query       |
-| must_be_less_than                | `integer`              | The threshold to check the return value of the query       |
-| must_be_less_than_or_equal_to    | `integer`              | The threshold to check the return value of the query       |
-| name                             | `string`               | Optional. A human-readable name for this check             |
-| description                      | `string`               | A plain text describing the quality of the data.           |
+| Field                            | Type                  | Description                                                                     |
+|----------------------------------|-----------------------|---------------------------------------------------------------------------------|
+| type                             | `string`              | `sql`                                                                           |
+| name                             | `string`              | Optional. A human-readable name for this check                                  |
+| description                      | `string`              | A plain text describing the quality of the data.                                |
+| query                            | `string`              | A SQL query that returns a single number or a boolean value.                    |
+| must_be                          | `integer`             | The threshold to check the return value of the query                            |
+| must_not_be                      | `integer`             | The threshold to check the return value of the query                            |
+| must_be_greater_than             | `integer`             | The threshold to check the return value of the query                            |
+| must_be_greater_than_or_equal_to | `integer`             | The threshold to check the return value of the query                            |
+| must_be_less_than                | `integer`             | The threshold to check the return value of the query                            |
+| must_be_less_than_or_equal_to    | `integer`             | The threshold to check the return value of the query                            |
+| must_be_between                  | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
+| must_not_be_between              | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
+
 
 ```yaml
 models:
@@ -1050,47 +851,18 @@ models:
 ```
 
 
-#### Row Count
+#### Soda Data Contract Checks
 
-Applicable on: [ ] top-level, [x] model, [ ]  field
-
-
-Counts the number of rows in a model.
-
-| Field                            | Type      | Description                                          |
-|----------------------------------|-----------|------------------------------------------------------|
-| type                             | `string`  | `row_count`                                          |
-| must_be_equal_to                 | `number`  | The threshold to check the return value of the query |
-| must_not_be_equal_to             | `number`  | The threshold to check the return value of the query |
-| must_be_greater_than             | `number` | The threshold to check the return value of the query |
-| must_be_greater_than_or_equal_to | `number` | The threshold to check the return value of the query |
-| must_be_less_than                | `number` | The threshold to check the return value of the query |
-| must_be_less_than_or_equal_to    | `number` | The threshold to check the return value of the query |
-| name                             | `string`  | Optional. A human-readable name for this check       |
-| description                      | `string`  | A plain text describing the quality of the data.     |
+Applicable on: [x] model, [x]  field
 
 
-```yaml
-models:
-  my_table:
-    quality:
-      - type: row_count
-        must_be_greater_than: 500000
-```
+Quality attributes can be defined with the engine `soda` as [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html).
 
+##### Duplicate
 
-#### Unique
-
-Applicable on: [ ] top-level, [x] model, [ ] field
-
-A uniqueness check for multiple fields. (For a single field uniqueness check, use the `unique` field attribute.)
-
-| Field                            | Type              | Description                                                            |
-|----------------------------------|-------------------|------------------------------------------------------------------------|
-| type                             | `string`          | `unique`                                                               |
-| fields                           | Array of `string` | An ordered list of fields that values need to be unique in combination |
-| name                             | `string`          | Optional. A human-readable name for this check                         |
-| description                      | `string`          | A plain text describing the quality of the data.                       |
+- `no_duplicate_values` (equal to the property `unique: true`, but supports also multiple fields)
+- `duplicate_count`
+- `duplicate_percent`
 
 Example:
 
@@ -1100,52 +872,77 @@ models:
     fields:
       order_id:
         type: string
+        quality:
+          - engine: soda
+            type: no_duplicate_values
       country:
+        type: carrier
+      shipment_numer:
         type: string
     quality:
-      - type: unique
-        fields:
-          - country
-          - order_id
+      - engine: soda
+        type: duplicate_percent
+        must_be_less_than: 1.0
+        name: A shipment number is unique for one carrier
+        columns:
+          - carrier
+          - shipment_numer
+```
+
+Freshness
+- `freshness_in_days`
+- `freshness_in_hours`
+- `freshness_in_minutes`
+
+Missing
+- `no_missing_values`  (equal to the property `required: true`)
+- `missing_count`
+- `missing_percent`
+
+Row count
+- `rows_exist` (default)
+- `row_count`
+
+Example:
+```yaml
+models:
+  my_table:
+    quality:
+      - type: row_count
+        must_be_greater_than: 500000
 ```
 
 
-#### Freshness
+SQL aggregation
+- `avg`
+- `sum`
 
+SQL metric query
+- `metric_expression`
 
-Applicable on: [ ] top-level, [ ] model, [x] field
-
-At least one element in the model must have a timestamp value that is less than a certain threshold.
-
-
-| Field                     | Type     | Description                                      |
-|---------------------------|----------|--------------------------------------------------|
-| type                      | `string` | `freshness`                                      |
-| must_be_less_than_seconds | `number` | The threshold in seconds to compare              |
-| name                      | `string` | Optional. A human-readable name for this check   |
-| description               | `string` | A plain text describing the quality of the data. |
-
+Validity
+- `no_invalid_values`
+- `invalid_count`
+- `invalid_percent`
 
 Example: 
-
 ```yaml
 models:
   my_table:
     fields:
-      some_timestamp:
-        type: timestamp
+      warehouse_id:
+        type: string
         quality:
-          - type: freshness
-            must_be_less_than_seconds: 3600
-            description: At least one element in the model must have a timestamp value that is less than 1 hour
+          - engine: soda
+            type: no_invalid_values
+            valid_sql_regex: '^[A-Z]{2}[0-9]{3}$'
 ```
-
 
 #### Great Expectations
 
-Applicable on: [ ] top-level, [x] model, [x]  field
+Applicable on: [x] model, [ ]  field
 
-Quality attributes defined as an Great Expectations [Expectation](https://greatexpectations.io/expectations/).
+Quality attributes defined as Great Expectations [Expectation](https://greatexpectations.io/expectations/).
 
 
 Example:
@@ -1154,118 +951,13 @@ Example:
 models:
   my_table:
     quality:
-    - type: great-expectations
+    - engine: great-expectations
       expectation_type: expect_table_row_count_to_be_between
       kwargs:
         min_value: 10000
         max_value: 50000
 ```
 
-
-
-#### Great Expectations (Expectation Suite)
-
-Applicable on: [ ] top-level, [x] model, [ ]  field
-
-Quality attributes defined as Great Expectations [Expectations](https://greatexpectations.io/expectations/).
-
-The `specification` represents an expectation suite as JSON string.
-
-New with v0.9.4: This quality type is only applicable on model level.
-
-Example:
-
-```yaml
-models:
-  my_table:
-    quality:
-      - type: great-expectations
-        specification: |
-          [
-              {
-                  "expectation_type": "expect_table_row_count_to_be_between",
-                  "kwargs": {
-                      "min_value": 10000,
-                      "max_value": 50000,
-                  },
-                  "meta": {
-          
-                  }
-              }
-          ]
-```
-
-
-#### SodaCL
-
-Applicable on: [x] top-level, [x] model, [ ]  field
-
-Quality attributes in [Soda Checks Language](https://docs.soda.io/soda-cl/soda-cl-overview.html).
-
-The `specification` represents the content of a `checks.yml` file.
-
-Example:
-
-```yaml
-quality:
-  - type: SodaCL
-    specification: |
-      checks for orders:
-        - row_count > 0
-        - duplicate_count(order_id) = 0
-      checks for line_items:
-        - row_count > 0
-```
-
-#### Monte Carlo
-
-Applicable on: [x] top-level, [x] model, [ ]  field
-
-Quality attributes defined as Monte Carlos [Monitors as Code](https://docs.getmontecarlo.com/docs/monitors-as-code).
-
-The `specification` represents the content of a `montecarlo.yml` file.
-
-Example:
-
-```yaml
-quality:
-  - type: montecarlo
-    specification: |
-      montecarlo:
-        field_health:
-          - table: project:dataset.table_name
-            timestamp_field: created
-        dimension_tracking:
-          - table: project:dataset.table_name
-            timestamp_field: created
-            field: order_status
-```
-
-#### Great Expectations Quality Object
-
-Quality attributes defined as Great Expectations [Expectations](https://greatexpectations.io/expectations/).
-
-The `specification` represents a list of expectations on a specific model. 
-
-Example (string):
-
-```yaml
-quality:
-  type: great-expectations
-  specification:
-    orders: |-
-      [
-          {
-              "expectation_type": "expect_table_row_count_to_be_between",
-              "kwargs": {
-                  "min_value": 10
-              },
-              "meta": {
-      
-              }
-          }
-      ]
-```
 
 ### Config Object
 
