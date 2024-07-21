@@ -957,14 +957,14 @@ Applicable on: [x] model, [ ]  field
 
 Quality attributes defined as Great Expectations [Expectation](https://greatexpectations.io/expectations/).
 
-| Field            | Type                    | Description                                                                                |
-|------------------|-------------------------|--------------------------------------------------------------------------------------------|
-| name             | `string`                | Optional. A human-readable name for this check                                             |
-| description      | `string`                | Optional. A plain text describing the quality attribute in natural language.               |
-| engine           | `string`                | `soda`                                                                                     |
-| expectation_type | `string`                | An expectation type as listed in [Expectation](https://greatexpectations.io/expectations/) |
-| kwargs           | Map[`string`, `string`] | The keyword arguments for this expectation type.                                           |
-| meta             | Map[`string`, `string`] | Optional. Additional meta information.                                                     |
+| Field            | Type     | Description                                                                                |
+|------------------|----------|--------------------------------------------------------------------------------------------|
+| name             | `string` | Optional. A human-readable name for this check                                             |
+| description      | `string` | Optional. A plain text describing the quality attribute in natural language.               |
+| engine           | `string` | `soda`                                                                                     |
+| expectation_type | `string` | An expectation type as listed in [Expectation](https://greatexpectations.io/expectations/) |
+| kwargs           | Map      | The keyworded arguments for this expectation type.                                         |
+| meta             | Map      | Optional. Additional meta information.                                                     |
 
 Example:
 
@@ -977,7 +977,10 @@ models:
         kwargs:
           min_value: 10000
           max_value: 50000
+        meta:
+          notes: "This expectation is crucial to avoid processing datasets that are too small or too large."
       - engine: great-expectations
+        description: "Check that passenger_count values are between 1 and 6."
         expectation_type: expect_column_values_to_be_between
         kwargs:
           column: passenger_count
@@ -986,6 +989,10 @@ models:
           mostly: 1.0
           strict_max: false
           strict_min: false
+        meta:
+          tags:
+            - business-critical
+            - range_check
 ```
 
 
