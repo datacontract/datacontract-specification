@@ -894,8 +894,8 @@ models:
             description: This is a check on field level
             engine: soda
             type: no_duplicate_values
-      country:
-        type: carrier
+      carrier:
+        type: string
       shipment_numer:
         type: string
     quality:
