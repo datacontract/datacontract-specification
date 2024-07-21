@@ -113,8 +113,8 @@ models:
         pii: true
         classification: sensitive
         quality:
-          - type: text
-            name: The email address was verified by a user
+          - name: Verified email address
+            description: The email address was verified by a user with double opt-in.
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
@@ -123,14 +123,13 @@ models:
           jsonType: string
           jsonFormat: date-time
     quality:
-      - type: sql
-        description: The maximum duration between two orders should be less that 3600 seconds
-        query: |
+      - description: The maximum duration between two orders should be less that 3600 seconds
+        sql: |
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
           FROM orders
         must_be_less_than: 3600
-      - type: row_count
-        engine: soda
+      - engine: soda
+        type: row_count
         must_be_greater_than: 5
   line_items:
     description: A single article that is part of an order.
@@ -778,21 +777,20 @@ Backup specifies details about data backup procedures.
 
 ### Quality Object
 
-The quality object defined a quality attribute.
+The quality object defines quality attributes.
 
-Quality attributes are checks that can be applied to the data to ensure its quality. Data can be verified by executing these checks through a data quality engine.
+Quality attributes are checks that can be applied to the data to ensure its quality. 
+Data can be verified by executing these checks through a data quality engine.
 
 Quality attributes can be:
-- Text: A human-readable text that describes the quality of the data.
+- Text: A text in natural language that describes the quality of the data.
 - SQL: An individual SQL query that returns a single value that can be compared.
 - Engine-specific types: Pre-defined quality checks, as defined by data quality libraries. Currently, the engines `soda` and `great-expectations` are supported.
 
-A quality object can be specified on field level, or on model level. 
-The top-level quality object are deprecated.
+A quality object can be specified on field level and on model level. 
+The top-level quality object is deprecated.
 
 #### Description Text
-
-Applicable on: [x] model, [x] field
 
 A description in natural language that defines the expected quality of the data. 
 This is useful to express requirements or expectation when discussing the data contract with stakeholders.
@@ -821,13 +819,16 @@ models:
 
 Applicable on: [x] model, [x] field
 
-An individual SQL query that returns a single number or boolean value that can be compared. The SQL query must be in the SQL dialect of the provided server.
+An individual SQL query that returns a single number that can be compared with a threshold. The SQL query must be in the SQL dialect of the provided server.
+
+> __Note:__ Establish a secure development process and use read-only connections, as the misuse of SQL queries can lead to SQL injection attacks.
+
 
 | Field                            | Type                  | Description                                                                     |
 |----------------------------------|-----------------------|---------------------------------------------------------------------------------|
 | name                             | `string`              | Optional. A human-readable name for this check                                  |
 | description                      | `string`              | A plain text describing the quality of the data.                                |
-| sql                              | `string`              | A SQL query that returns a single number to compare with the threshold          |
+| sql                              | `string`              | A SQL query that returns a single number to compare with the threshold.         |
 | must_be                          | `integer`             | The threshold to check the return value of the query                            |
 | must_not_be                      | `integer`             | The threshold to check the return value of the query                            |
 | must_be_greater_than             | `integer`             | The threshold to check the return value of the query                            |
@@ -837,6 +838,7 @@ An individual SQL query that returns a single number or boolean value that can b
 | must_be_between                  | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
 | must_not_be_between              | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
 
+Example:
 
 ```yaml
 models:
@@ -850,16 +852,15 @@ models:
         must_be_less_than: 3600
 ```
 
+SQL queries allow powerful checks. A SQL query should run not longer than 10 minutes.
 
 #### Engine: Soda
 
-Applicable on: [x] model, [x]  field
+Soda has a number of predefined quality [checks](https://docs.soda.io/soda/data-contracts-checks.html) that can be referenced as quality attributes.
 
-Quality attributes can be defined with the engine `soda` as [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html).
+Soda checks can be applied on model and field level.
 
-Note: Soda Data contract check reference is experimental and may change in the future.
-
-Note: Currently only supported by types Postgres, Snowflake, and Spark (Databricks)
+> Note: Soda Data contract check reference is experimental and may change in the future. Currently only supported by Postgres, Snowflake, and Spark (Databricks)
 
 | Field                   | Type     | Description                                                                                                                 |
 |-------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------|
@@ -868,6 +869,9 @@ Note: Currently only supported by types Postgres, Snowflake, and Spark (Databric
 | engine                  | `string` | `soda`                                                                                                                      |
 | type                    | `string` | A check type as defined in the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html)        |
 | _additional properties_ |          | As defined for this check type in the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html) |
+
+
+See the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html) for all possible types and configuration values.
 
 
 
@@ -886,15 +890,18 @@ models:
       order_id:
         type: string
         quality:
-          - engine: soda
+          - name: Order ID must be unique
+            description: This is a check on field level
+            engine: soda
             type: no_duplicate_values
       country:
         type: carrier
       shipment_numer:
         type: string
     quality:
-      - engine: soda
-        name: A shipment number should be unique for one carrier
+      - name: A shipment number should be unique for one carrier
+        description: This is a check on model level
+        engine: soda
         type: duplicate_percent
         columns:
           - carrier
@@ -953,9 +960,10 @@ models:
 
 #### Engine: Great Expectations
 
-Applicable on: [x] model, [ ]  field
-
 Quality attributes defined as Great Expectations [Expectation](https://greatexpectations.io/expectations/).
+
+Expectations are applied on model level.
+
 
 | Field            | Type     | Description                                                                                |
 |------------------|----------|--------------------------------------------------------------------------------------------|
