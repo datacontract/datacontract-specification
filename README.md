@@ -790,16 +790,17 @@ Quality attributes can be:
 A quality object can be specified on field level, or on model level. 
 The top-level quality object are deprecated.
 
-#### Text
+#### Description Text
 
 Applicable on: [x] model, [x] field
 
-A human-readable text that describes the quality of the data. 
-Later in the development process, these might be translated into an executable check (such as `sql`), or checked through an AI engine.
+A description in natural language that defines the expected quality of the data. 
+This is useful to express requirements or expectation when discussing the data contract with stakeholders.
+Later in the development process, these might be translated into an executable check (such as `sql`).
+It can also be used as a prompt to check the data with an AI engine.
 
 | Field       | Type     | Description                                                        |
 |-------------|----------|--------------------------------------------------------------------|
-| type        | `string` | `text`                                                             |
 | name        | `string` | Optional. A human-readable name for this check                     |
 | description | `string` | A plain text describing the quality attribute in natural language. |
 
@@ -811,8 +812,7 @@ models:
     fields:
       account_iban:
         quality:
-          - type: text
-            name: Valid IBAN
+          - name: Valid IBAN
             description: Must be a valid IBAN. Must not be empty.
 ```
 
@@ -825,10 +825,9 @@ An individual SQL query that returns a single number or boolean value that can b
 
 | Field                            | Type                  | Description                                                                     |
 |----------------------------------|-----------------------|---------------------------------------------------------------------------------|
-| type                             | `string`              | `sql`                                                                           |
 | name                             | `string`              | Optional. A human-readable name for this check                                  |
 | description                      | `string`              | A plain text describing the quality of the data.                                |
-| query                            | `string`              | A SQL query that returns a single number or a boolean value.                    |
+| sql                              | `string`              | A SQL query that returns a single number to compare with the threshold          |
 | must_be                          | `integer`             | The threshold to check the return value of the query                            |
 | must_not_be                      | `integer`             | The threshold to check the return value of the query                            |
 | must_be_greater_than             | `integer`             | The threshold to check the return value of the query                            |
@@ -843,10 +842,9 @@ An individual SQL query that returns a single number or boolean value that can b
 models:
   my_table:
     quality:
-      - type: sql
-        name: Maximum duration between two orders
+      - name: Maximum duration between two orders
         description: The maximum duration between two orders should be less that 3600 seconds
-        query: |
+        sql: |
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
           FROM orders
         must_be_less_than: 3600
@@ -862,6 +860,16 @@ Quality attributes can be defined with the engine `soda` as [Data contract check
 Note: Soda Data contract check reference is experimental and may change in the future.
 
 Note: Currently only supported by types Postgres, Snowflake, and Spark (Databricks)
+
+| Field                   | Type     | Description                                                                                                                 |
+|-------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------|
+| name                    | `string` | Optional. A human-readable name for this check                                                                              |
+| description             | `string` | Optional. A plain text describing the quality attribute in natural language.                                                |
+| engine                  | `string` | `soda`                                                                                                                      |
+| type                    | `string` | A check type as defined in the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html)        |
+| _additional properties_ |          | As defined for this check type in the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html) |
+
+
 
 ##### Duplicate
 
@@ -949,6 +957,14 @@ Applicable on: [x] model, [ ]  field
 
 Quality attributes defined as Great Expectations [Expectation](https://greatexpectations.io/expectations/).
 
+| Field            | Type                    | Description                                                                                |
+|------------------|-------------------------|--------------------------------------------------------------------------------------------|
+| name             | `string`                | Optional. A human-readable name for this check                                             |
+| description      | `string`                | Optional. A plain text describing the quality attribute in natural language.               |
+| engine           | `string`                | `soda`                                                                                     |
+| expectation_type | `string`                | An expectation type as listed in [Expectation](https://greatexpectations.io/expectations/) |
+| kwargs           | Map[`string`, `string`] | The keyword arguments for this expectation type.                                           |
+| meta             | Map[`string`, `string`] | Optional. Additional meta information.                                                     |
 
 Example:
 
@@ -956,11 +972,20 @@ Example:
 models:
   my_table:
     quality:
-    - engine: great-expectations
-      expectation_type: expect_table_row_count_to_be_between
-      kwargs:
-        min_value: 10000
-        max_value: 50000
+      - engine: great-expectations
+        expectation_type: expect_table_row_count_to_be_between
+        kwargs:
+          min_value: 10000
+          max_value: 50000
+      - engine: great-expectations
+        expectation_type: expect_column_values_to_be_between
+        kwargs:
+          column: "passenger_count"
+          max_value: 6
+          min_value: 1
+          mostly: 1.0
+          strict_max: false
+          strict_min: false
 ```
 
 
