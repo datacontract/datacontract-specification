@@ -1,4 +1,4 @@
-dataContractSpecification: 0.9.3
+dataContractSpecification: 1.0.1
 id: urn:datacontract:checkout:orders-latest
 info:
   title: Orders Latest
@@ -62,12 +62,15 @@ models:
         minLength: 10
         maxLength: 20
       customer_email_address:
-        description: The email address, as entered by the customer. The email address was not verified.
+        description: The email address, as entered by the customer.
         type: text
         format: email
         required: true
         pii: true
         classification: sensitive
+        quality:
+          - type: text
+            name: The email address was verified by a user
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
@@ -75,6 +78,16 @@ models:
         config:
           jsonType: string
           jsonFormat: date-time
+    quality:
+      - type: sql
+        description: The maximum duration between two orders should be less that 3600 seconds
+        query: |
+          SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
+          FROM orders
+        must_be_less_than: 3600
+      - type: row_count
+        engine: soda
+        must_be_greater_than: 5
   line_items:
     description: A single article that is part of an order.
     type: table
@@ -181,12 +194,3 @@ servicelevels:
     cron: 0 0 * * 0
     recoveryTime: 24 hours
     recoveryPoint: 1 week
-quality:
-  type: SodaCL   # data quality check format: SodaCL, montecarlo, custom
-  specification: # expressed as string or inline yaml or via "$ref: checks.yaml"
-    checks for orders:
-      - row_count >= 5
-      - duplicate_count(order_id) = 0
-    checks for line_items:
-      - values in (order_id) must exist in orders (order_id)
-      - row_count >= 5
