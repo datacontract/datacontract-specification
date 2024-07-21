@@ -980,7 +980,7 @@ models:
       - engine: great-expectations
         expectation_type: expect_column_values_to_be_between
         kwargs:
-          column: "passenger_count"
+          column: passenger_count
           max_value: 6
           min_value: 1
           mostly: 1.0
