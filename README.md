@@ -123,12 +123,14 @@ models:
           jsonType: string
           jsonFormat: date-time
     quality:
-      - description: The maximum duration between two orders should be less that 3600 seconds
+      - name: Completeness check
+        description: If there is a gap of orders longer than one hour, it clearly indicates a problem.
         sql: |
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
           FROM orders
         must_be_less_than: 3600
-      - engine: soda
+      - name: Number of rows
+        engine: soda
         type: row_count
         must_be_greater_than: 5
   line_items:
@@ -816,8 +818,6 @@ models:
 
 
 #### SQL
-
-Applicable on: [x] model, [x] field
 
 An individual SQL query that returns a single number that can be compared with a threshold. The SQL query must be in the SQL dialect of the provided server.
 
