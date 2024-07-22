@@ -628,7 +628,7 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 
 
 
-### Schema Object
+### Schema Object (DEPRECATED)
 
 The schema of the data contract describes the physical schema. 
 The type of the schema depends on the data platform.
