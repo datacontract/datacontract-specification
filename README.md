@@ -389,7 +389,7 @@ servers:
 | type     | `string` | `glue`                                                     |
 | account  | `string` | REQUIRED. The AWS account, e.g., `1234-5678-9012`          |
 | database | `string` | REQUIRED. The AWS Glue Catalog database                    |
-| location | `string` | S3 path, starting with `s3://`                             |
+| location | `string` | URI location of the Glue Database                          |
 | format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv` |
 
 Example:
