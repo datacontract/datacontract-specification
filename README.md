@@ -1160,16 +1160,6 @@ datacontract-*.yml
 **/datacontracts/*.yaml
 ```
 
-```shell
-ajv compile --spec=draft7 --strict=false -s datacontract.schema.json
-```
-
-```shell
-ajv validate --strict=false -s datacontract.schema.json -d examples/covid-cases/datacontract.yaml
-ajv validate --strict=false -s versions/0.9.2/datacontract.schema.json -d examples/orders-latest/datacontract.yaml
-ajv validate --strict=false -s examples/test/blah.json -d examples/test/blah.yaml
-```
-
 Authors
 ---
 The Data Contract Specification was originally created by [Jochen Christ](https://www.linkedin.com/in/jochenchrist/) and [Dr. Simon Harrer](https://www.linkedin.com/in/simonharrer/), and is currently maintained by them.
