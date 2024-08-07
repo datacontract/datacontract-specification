@@ -537,6 +537,8 @@ The terms and conditions of the data contract.
 | billing      | `string` | The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use.                                        |
 | noticePeriod | `string` | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
 
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
 
 ### Model Object
 
@@ -552,7 +554,7 @@ The name of the data model (table name) is defined by the key that refers to thi
 | fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
 | config      | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
 
-
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
 
 ### Field Object
@@ -591,6 +593,8 @@ The Field Objects describes one field (column, property, nested field) of a data
 | values           | [Field Object](#field-object)                | Describes the value structure of a map. Use only when type is `map`.                                                                                                                                                                                                                                                                                                                                                         |
 | config           | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                                                                                                                                                                                                                                                                                                                     |
 
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
 
 ### Definition Object
 
@@ -626,6 +630,7 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 | keys             | [Field Object](#field-object)                | Describes the key structure of a map. Defaults to `type: string` if a map is defined as type. Not all server types support different key types. Use only when type is `map`.                                                                                                                                                                                                                                                 |
 | values           | [Field Object](#field-object)                | Describes the value structure of a map. Use only when type is `map`.                                                                                                                                                                                                                                                                                                                                                         |
 
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
 
 ### Schema Object (DEPRECATED)
