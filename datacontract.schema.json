@@ -32,7 +32,7 @@
         "status": {
           "type": "string",
           "description": "The status of the data contract. Can be proposed, in development, active, retired.",
-          "x-extensible-enum": [
+          "examples": [
             "proposed",
             "in development",
             "active",
@@ -79,661 +79,245 @@
     },
     "servers": {
       "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "An optional string describing the servers."
-        },
-        "environment": {
-          "type": "string",
-          "description": "The environment in which the servers are running. Examples: prod, sit, stg."
-        }
-      },
+      "description": "Information about the servers.",
       "additionalProperties": {
-        "oneOf": [
+        "$ref": "#/$defs/BaseServer",
+        "allOf": [
           {
-            "type": "object",
-            "title": "BigQueryServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "bigquery",
-                  "BigQuery"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
-              },
-              "project": {
-                "type": "string",
-                "description": "An optional string describing the server."
-              },
-              "dataset": {
-                "type": "string",
-                "description": "An optional string describing the server."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "bigquery"
+                }
               }
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "project",
-              "dataset"
-            ]
+            "then": {
+              "$ref": "#/$defs/BigQueryServer"
+            }
           },
           {
-            "type": "object",
-            "title": "S3Server",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "s3"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "postgres"
+                }
               },
-              "location": {
-                "type": "string",
-                "format": "uri",
-                "description": "An optional string describing the server. Must be in the form of a URL.",
-                "examples": [
-                  "s3://datacontract-example-orders-latest/data/{model}/*.json"
-                ]
-              },
-              "endpointUrl": {
-                "type": "string",
-                "format": "uri",
-                "description": "The server endpoint for S3-compatible servers.",
-                "examples": ["https://minio.example.com"]
-              },
-              "format": {
-                "type": "string",
-                "enum": [
-                  "parquet",
-                  "delta",
-                  "json",
-                  "csv"
-                ],
-                "description": "File format."
-              },
-              "delimiter": {
-                "type": "string",
-                "enum": [
-                  "new_line",
-                  "array"
-                ],
-                "description": "Only for format = json. How multiple json documents are delimited within one file"
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "location"
-            ]
+            "then": {
+              "$ref": "#/$defs/PostgresServer"
+            }
           },
           {
-            "type": "object",
-            "title": "SftpServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "sftp"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "s3"
+                }
               },
-              "location": {
-                "type": "string",
-                "format": "uri",
-                "description": "An optional string describing the server. Must be in the form of a sftp URL.",
-                "examples": [
-                  "sftp://123.123.12.123/{model}/*.json"
-                ]
-              },
-              "format": {
-                "type": "string",
-                "enum": [
-                  "parquet",
-                  "delta",
-                  "json",
-                  "csv"
-                ],
-                "description": "File format."
-              },
-              "delimiter": {
-                "type": "string",
-                "enum": [
-                  "new_line",
-                  "array"
-                ],
-                "description": "Only for format = json. How multiple json documents are delimited within one file"
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "location"
-            ]
+            "then": {
+              "$ref": "#/$defs/S3Server"
+            }
           },
           {
-            "type": "object",
-            "title": "RedshiftServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "redshift"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "sftp"
+                }
               },
-              "account": {
-                "type": "string",
-                "description": "An optional string describing the server."
-              },
-              "database": {
-                "type": "string",
-                "description": "An optional string describing the server."
-              },
-              "schema": {
-                "type": "string",
-                "description": "An optional string describing the server."
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "account",
-              "database",
-              "schema"
-            ]
+            "then": {
+              "$ref": "#/$defs/SftpServer"
+            }
           },
           {
-            "type": "object",
-            "title": "AzureServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "azure"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "redshift"
+                }
               },
-              "location": {
-                "type": "string",
-                "format": "uri",
-                "description": "Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs.",
-                "examples": [
-                  "az://my_storage_account_name.blob.core.windows.net/my_container/path/*.parquet",
-                  "abfss://my_storage_account_name.dfs.core.windows.net/my_container_name/path/*.parquet"
-                ]
-              },
-              "format": {
-                "type": "string",
-                "enum": [
-                  "parquet",
-                  "delta",
-                  "json",
-                  "csv"
-                ],
-                "description": "File format."
-              },
-              "delimiter": {
-                "type": "string",
-                "enum": [
-                  "new_line",
-                  "array"
-                ],
-                "description": "Only for format = json. How multiple json documents are delimited within one file"
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "location",
-              "format"
-            ]
+            "then": {
+              "$ref": "#/$defs/RedshiftServer"
+            }
           },
           {
-            "type": "object",
-            "title": "SqlserverServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "sqlserver"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "azure"
+                }
               },
-              "host": {
-                "type": "string",
-                "description": "The host to the database server",
-                "examples": [
-                  "localhost"
-                ]
-              },
-              "port": {
-                "type": "integer",
-                "description": "The port to the database server.",
-                "default": 1433,
-                "examples": [
-                  1433
-                ]
-              },
-              "database": {
-                "type": "string",
-                "description": "The name of the database.",
-                "examples": [
-                  "database"
-                ]
-              },
-              "schema": {
-                "type": "string",
-                "description": "The name of the schema in the database.",
-                "examples": [
-                  "dbo"
-                ]
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "host",
-              "database",
-              "schema"
-            ]
+            "then": {
+              "$ref": "#/$defs/AzureServer"
+            }
           },
           {
-            "type": "object",
-            "title": "SnowflakeServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "snowflake"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "sqlserver"
+                }
               },
-              "account": {
-                "type": "string",
-                "description": "An optional string describing the server."
-              },
-              "database": {
-                "type": "string",
-                "description": "An optional string describing the server."
-              },
-              "schema": {
-                "type": "string",
-                "description": "An optional string describing the server."
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "account",
-              "database",
-              "schema"
-            ]
+            "then": {
+              "$ref": "#/$defs/SqlserverServer"
+            }
           },
           {
-            "type": "object",
-            "title": "DatabricksServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "const": "databricks",
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "snowflake"
+                }
               },
-              "host": {
-                "type": "string",
-                "description": "The Databricks host",
-                "examples": [
-                  "dbc-abcdefgh-1234.cloud.databricks.com"
-                ]
-              },
-              "catalog": {
-                "type": "string",
-                "description": "The name of the Hive or Unity catalog"
-              },
-              "schema": {
-                "type": "string",
-                "description": "The schema name in the catalog"
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "catalog",
-              "schema"
-            ]
+            "then": {
+              "$ref": "#/$defs/SnowflakeServer"
+            }
           },
           {
-            "type": "object",
-            "title": "DataframeServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "const": "dataframe",
-                "description": "The type of the data product technology that implements the data contract."
-              }
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "databricks"
+                }
+              },
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type"
-            ]
+            "then": {
+              "$ref": "#/$defs/DatabricksServer"
+            }
           },
           {
-            "type": "object",
-            "title": "GlueServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "const": "glue",
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "dataframe"
+                }
               },
-              "account": {
-                "type": "string",
-                "description": "The AWS Glue account",
-                "examples": [
-                  "1234-5678-9012"
-                ]
-              },
-              "database": {
-                "type": "string",
-                "description": "The AWS Glue database name",
-                "examples": [
-                  "my_database"
-                ]
-              },
-              "location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The AWS S3 path. Must be in the form of a URL.",
-                "examples": [
-                  "s3://datacontract-example-orders-latest/data/{model}"
-                ]
-              },
-              "format": {
-                "type": "string",
-                "description": "The format of the files",
-                "examples": [
-                  "parquet",
-                  "csv",
-                  "json",
-                  "delta"
-                ]
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "account",
-              "database"
-            ]
+            "then": {
+              "$ref": "#/$defs/DataframeServer"
+            }
           },
           {
-            "type": "object",
-            "title": "PostgresServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "const": "postgres",
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "glue"
+                }
               },
-              "host": {
-                "type": "string",
-                "description": "The host to the database server",
-                "examples": [
-                  "localhost"
-                ]
-              },
-              "port": {
-                "type": "integer",
-                "description": "The port to the database server."
-              },
-              "database": {
-                "type": "string",
-                "description": "The name of the database.",
-                "examples": [
-                  "postgres"
-                ]
-              },
-              "schema": {
-                "type": "string",
-                "description": "The name of the schema in the database.",
-                "examples": [
-                  "public"
-                ]
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "host",
-              "port",
-              "database",
-              "schema"
-            ]
+            "then": {
+              "$ref": "#/$defs/GlueServer"
+            }
           },
           {
-            "type": "object",
-            "title": "OracleServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "const": "oracle",
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "postgres"
+                }
               },
-              "host": {
-                "type": "string",
-                "description": "The host to the oracle server",
-                "examples": [
-                  "localhost"
-                ]
-              },
-              "port": {
-                "type": "integer",
-                "description": "The port to the oracle server.",
-                "examples": [
-                  1523
-                ]
-              },
-              "serviceName": {
-                "type": "string",
-                "description": "The name of the service.",
-                "examples": [
-                  "service"
-                ]
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "host",
-              "port",
-              "serviceName"
-            ]
+            "then": {
+              "$ref": "#/$defs/PostgresServer"
+            }
           },
           {
-            "type": "object",
-            "title": "KafkaServer",
-            "description": "Kafka Server",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "kafka"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "oracle"
+                }
               },
-              "host": {
-                "type": "string",
-                "description": "The bootstrap server of the kafka cluster."
-              },
-              "topic": {
-                "type": "string",
-                "description": "The topic name."
-              },
-              "format": {
-                "type": "string",
-                "description": "The format of the message. Examples: json, avro, protobuf. Default: json.",
-                "default": "json"
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "host",
-              "topic"
-            ]
+            "then": {
+              "$ref": "#/$defs/OracleServer"
+            }
           },
           {
-            "type": "object",
-            "title": "PubSubServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "pubsub"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "kafka"
+                }
               },
-              "project": {
-                "type": "string",
-                "description": "The GCP project name."
-              },
-              "topic": {
-                "type": "string",
-                "description": "The topic name."
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "project",
-              "topic"
-            ]
+            "then": {
+              "$ref": "#/$defs/KafkaServer"
+            }
           },
           {
-            "type": "object",
-            "title": "KinesisDataStreamsServer",
-            "description": "Kinesis Data Streams Server",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "kinesis"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "pubsub"
+                }
               },
-              "stream": {
-                "type": "string",
-                "description": "The name of the Kinesis data stream."
-              },
-              "region": {
-                "type": "string",
-                "description": "AWS region.",
-                "examples": [
-                  "eu-west-1"
-                ]
-              },
-              "format": {
-                "type": "string",
-                "description": "The format of the record",
-                "examples": [
-                  "json",
-                  "avro",
-                  "protobuf"
-                ]
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "stream"
-            ]
+            "then": {
+              "$ref": "#/$defs/PubSubServer"
+            }
           },
           {
-            "type": "object",
-            "title": "TrinoServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "const": "trino",
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "kinesis"
+                }
               },
-              "host": {
-                "type": "string",
-                "description": "The host to the database server",
-                "examples": [
-                  "localhost"
-                ]
-              },
-              "port": {
-                "type": "integer",
-                "description": "The port to the database server."
-              },
-              "catalog": {
-                "type": "string",
-                "description": "The name of the catalog.",
-                "examples": [
-                  "hive"
-                ]
-              },
-              "schema": {
-                "type": "string",
-                "description": "The name of the schema in the database.",
-                "examples": [
-                  "my_schema"
-                ]
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "host",
-              "port",
-              "catalog",
-              "schema"
-            ]
+            "then": {
+              "$ref": "#/$defs/KinesisDataStreamsServer"
+            }
           },
           {
-            "type": "object",
-            "title": "LocalServer",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "local"
-                ],
-                "description": "The type of the data product technology that implements the data contract."
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "trino"
+                }
               },
-              "path": {
-                "type": "string",
-                "description": "The relative or absolute path to the data file(s).",
-                "examples": [
-                  "./folder/data.parquet",
-                  "./folder/*.parquet"
-                ]
-              },
-              "format": {
-                "type": "string",
-                "description": "The format of the file(s)",
-                "examples": [
-                  "json",
-                  "parquet",
-                  "delta",
-                  "csv"
-                ]
-              }
+              "required": ["type"]
             },
-            "additionalProperties": true,
-            "required": [
-              "type",
-              "path",
-              "format"
-            ]
+            "then": {
+              "$ref": "#/$defs/TrinoServer"
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "local"
+                }
+              },
+              "required": ["type"]
+            },
+            "then": {
+              "$ref": "#/$defs/LocalServer"
+            }
           }
         ]
-      },
-      "description": "Information about the servers."
+      }
     },
     "terms": {
       "type": "object",
@@ -888,7 +472,7 @@
                   "type": "string",
                   "description": "A regular expression the value must match. Only applies to string types.",
                   "examples": [
-                      "^[a-zA-Z0-9_-]+$"
+                    "^[a-zA-Z0-9_-]+$"
                   ]
                 },
                 "minimum": {
@@ -1015,8 +599,6 @@
                 "object",
                 "array",
                 "null"
-
-
               ]
             },
             "properties": {
@@ -1523,6 +1105,543 @@
         "struct",
         "bytes",
         "null"
+      ]
+    },
+    "BaseServer": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "An optional string describing the servers."
+        },
+        "environment": {
+          "type": "string",
+          "description": "The environment in which the servers are running. Examples: prod, sit, stg."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the data product technology that implements the data contract.",
+          "enum": [
+            "bigquery",
+            "BigQuery",
+            "s3",
+            "sftp",
+            "redshift",
+            "azure",
+            "sqlserver",
+            "snowflake",
+            "databricks",
+            "dataframe",
+            "glue",
+            "postgres",
+            "oracle",
+            "kafka",
+            "pubsub",
+            "kinesis",
+            "trino",
+            "local"
+          ]
+        }
+      },
+      "additionalProperties": true,
+      "required": ["type"]
+    },
+    "BigQueryServer": {
+      "type": "object",
+      "title": "BigQueryServer",
+      "properties": {
+        "project": {
+          "type": "string",
+          "description": "The GCP project name."
+        },
+        "dataset": {
+          "type": "string",
+          "description": "The GCP dataset name."
+        }
+      },
+      "required": [
+        "project",
+        "dataset"
+      ]
+    },
+    "S3Server": {
+      "type": "object",
+      "title": "S3Server",
+      "properties": {
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "description": "S3 URL, starting with `s3://`",
+          "examples": [
+            "s3://datacontract-example-orders-latest/data/{model}/*.json"
+          ]
+        },
+        "endpointUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The server endpoint for S3-compatible servers.",
+          "examples": ["https://minio.example.com"]
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "parquet",
+            "delta",
+            "json",
+            "csv"
+          ],
+          "description": "File format."
+        },
+        "delimiter": {
+          "type": "string",
+          "enum": [
+            "new_line",
+            "array"
+          ],
+          "description": "Only for format = json. How multiple json documents are delimited within one file"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "SftpServer": {
+      "type": "object",
+      "title": "SftpServer",
+      "properties": {
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^sftp://.*",
+          "description": "SFTP URL, starting with `sftp://`",
+          "examples": [
+            "sftp://123.123.12.123/{model}/*.json"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "parquet",
+            "delta",
+            "json",
+            "csv"
+          ],
+          "description": "File format."
+        },
+        "delimiter": {
+          "type": "string",
+          "enum": [
+            "new_line",
+            "array"
+          ],
+          "description": "Only for format = json. How multiple json documents are delimited within one file"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "RedshiftServer": {
+      "type": "object",
+      "title": "RedshiftServer",
+      "properties": {
+        "account": {
+          "type": "string",
+          "description": "An optional string describing the server."
+        },
+        "database": {
+          "type": "string",
+          "description": "An optional string describing the server."
+        },
+        "schema": {
+          "type": "string",
+          "description": "An optional string describing the server."
+        }
+      },
+      "required": [
+        "account",
+        "database",
+        "schema"
+      ]
+    },
+    "AzureServer": {
+      "type": "object",
+      "title": "AzureServer",
+      "properties": {
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "description": "Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs.",
+          "examples": [
+            "az://my_storage_account_name.blob.core.windows.net/my_container/path/*.parquet",
+            "abfss://my_storage_account_name.dfs.core.windows.net/my_container_name/path/*.parquet"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "parquet",
+            "delta",
+            "json",
+            "csv"
+          ],
+          "description": "File format."
+        },
+        "delimiter": {
+          "type": "string",
+          "enum": [
+            "new_line",
+            "array"
+          ],
+          "description": "Only for format = json. How multiple json documents are delimited within one file"
+        }
+      },
+      "required": [
+        "location",
+        "format"
+      ]
+    },
+    "SqlserverServer": {
+      "type": "object",
+      "title": "SqlserverServer",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The host to the database server",
+          "examples": [
+            "localhost"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port to the database server.",
+          "default": 1433,
+          "examples": [
+            1433
+          ]
+        },
+        "database": {
+          "type": "string",
+          "description": "The name of the database.",
+          "examples": [
+            "database"
+          ]
+        },
+        "schema": {
+          "type": "string",
+          "description": "The name of the schema in the database.",
+          "examples": [
+            "dbo"
+          ]
+        }
+      },
+      "required": [
+        "host",
+        "database",
+        "schema"
+      ]
+    },
+    "SnowflakeServer": {
+      "type": "object",
+      "title": "SnowflakeServer",
+      "properties": {
+        "account": {
+          "type": "string",
+          "description": "An optional string describing the server."
+        },
+        "database": {
+          "type": "string",
+          "description": "An optional string describing the server."
+        },
+        "schema": {
+          "type": "string",
+          "description": "An optional string describing the server."
+        }
+      },
+      "required": [
+        "account",
+        "database",
+        "schema"
+      ]
+    },
+    "DatabricksServer": {
+      "type": "object",
+      "title": "DatabricksServer",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The Databricks host",
+          "examples": [
+            "dbc-abcdefgh-1234.cloud.databricks.com"
+          ]
+        },
+        "catalog": {
+          "type": "string",
+          "description": "The name of the Hive or Unity catalog"
+        },
+        "schema": {
+          "type": "string",
+          "description": "The schema name in the catalog"
+        }
+      },
+      "required": [
+        "catalog",
+        "schema"
+      ]
+    },
+    "DataframeServer": {
+      "type": "object",
+      "title": "DataframeServer",
+      "required": [
+        "type"
+      ]
+    },
+    "GlueServer": {
+      "type": "object",
+      "title": "GlueServer",
+      "properties": {
+        "account": {
+          "type": "string",
+          "description": "The AWS Glue account",
+          "examples": [
+            "1234-5678-9012"
+          ]
+        },
+        "database": {
+          "type": "string",
+          "description": "The AWS Glue database name",
+          "examples": [
+            "my_database"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "description": "The AWS S3 path. Must be in the form of a URL.",
+          "examples": [
+            "s3://datacontract-example-orders-latest/data/{model}"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "description": "The format of the files",
+          "examples": [
+            "parquet",
+            "csv",
+            "json",
+            "delta"
+          ]
+        }
+      },
+      "required": [
+        "account",
+        "database"
+      ]
+    },
+    "PostgresServer": {
+      "type": "object",
+      "title": "PostgresServer",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The host to the database server",
+          "examples": [
+            "localhost"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port to the database server."
+        },
+        "database": {
+          "type": "string",
+          "description": "The name of the database.",
+          "examples": [
+            "postgres"
+          ]
+        },
+        "schema": {
+          "type": "string",
+          "description": "The name of the schema in the database.",
+          "examples": [
+            "public"
+          ]
+        }
+      },
+      "required": [
+        "host",
+        "port",
+        "database",
+        "schema"
+      ]
+    },
+    "OracleServer": {
+      "type": "object",
+      "title": "OracleServer",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The host to the oracle server",
+          "examples": [
+            "localhost"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port to the oracle server.",
+          "examples": [
+            1523
+          ]
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "The name of the service.",
+          "examples": [
+            "service"
+          ]
+        }
+      },
+      "required": [
+        "host",
+        "port",
+        "serviceName"
+      ]
+    },
+    "KafkaServer": {
+      "type": "object",
+      "title": "KafkaServer",
+      "description": "Kafka Server",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The bootstrap server of the kafka cluster."
+        },
+        "topic": {
+          "type": "string",
+          "description": "The topic name."
+        },
+        "format": {
+          "type": "string",
+          "description": "The format of the message. Examples: json, avro, protobuf.",
+          "default": "json"
+        }
+      },
+      "required": [
+        "host",
+        "topic"
+      ]
+    },
+    "PubSubServer": {
+      "type": "object",
+      "title": "PubSubServer",
+      "properties": {
+        "project": {
+          "type": "string",
+          "description": "The GCP project name."
+        },
+        "topic": {
+          "type": "string",
+          "description": "The topic name."
+        }
+      },
+      "required": [
+        "project",
+        "topic"
+      ]
+    },
+    "KinesisDataStreamsServer": {
+      "type": "object",
+      "title": "KinesisDataStreamsServer",
+      "description": "Kinesis Data Streams Server",
+      "properties": {
+        "stream": {
+          "type": "string",
+          "description": "The name of the Kinesis data stream."
+        },
+        "region": {
+          "type": "string",
+          "description": "AWS region.",
+          "examples": [
+            "eu-west-1"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "description": "The format of the record",
+          "examples": [
+            "json",
+            "avro",
+            "protobuf"
+          ]
+        }
+      },
+      "required": [
+        "stream"
+      ]
+    },
+    "TrinoServer": {
+      "type": "object",
+      "title": "TrinoServer",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The Trino host URL.",
+          "examples": [
+            "localhost"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "description": "The Trino port."
+        },
+        "catalog": {
+          "type": "string",
+          "description": "The name of the catalog.",
+          "examples": [
+            "hive"
+          ]
+        },
+        "schema": {
+          "type": "string",
+          "description": "The name of the schema in the database.",
+          "examples": [
+            "my_schema"
+          ]
+        }
+      },
+      "required": [
+        "host",
+        "port",
+        "catalog",
+        "schema"
+      ]
+    },
+    "LocalServer": {
+      "type": "object",
+      "title": "LocalServer",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The relative or absolute path to the data file(s).",
+          "examples": [
+            "./folder/data.parquet",
+            "./folder/*.parquet"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "description": "The format of the file(s)",
+          "examples": [
+            "json",
+            "parquet",
+            "delta",
+            "csv"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "format"
       ]
     }
   }

@@ -361,7 +361,7 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 |---------|----------|-----------------------|
 | type    | `string` | `bigquery`            |
 | project | `string` | The GCP project name. |
-| dataset | `string` |                       |
+| dataset | `string` | The GCP dataset name. |
 
 #### S3 Server Object
 
@@ -495,7 +495,7 @@ servers:
 | Field     | Type     | Description                                                                                                      |
 |-----------|----------|------------------------------------------------------------------------------------------------------------------|
 | type      | `string` | `sftp`                                                                                                           |
-| location  | `string` | S3 URL, starting with `sftp://`                                                                                  |
+| location  | `string` | SFTP URL, starting with `sftp://`                                                                                |
 | format    | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
 | delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array` |
 
@@ -513,7 +513,7 @@ servers:
 | Field    | Type      | Description                                               |
 |----------|-----------|-----------------------------------------------------------|
 | type     | `string`  | `trino`                                                   |
-| host     | `string`  | The Trino host                                            |
+| host     | `string`  | The Trino host URL                                        |
 | port     | `integer` | The Trino port                                            | 
 | catalog  | `string`  | The name of the catalog, e.g., `my_catalog`.              |
 | schema   | `string`  | The name of the schema in the catalog, e.g., `my_schema`. |
@@ -1164,7 +1164,6 @@ datacontract-*.yml
 **/datacontracts/*.yml
 **/datacontracts/*.yaml
 ```
-
 
 Authors
 ---
