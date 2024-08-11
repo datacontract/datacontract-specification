@@ -373,34 +373,36 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 | format      | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
 | delimiter   | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array` |
 
-Example:
+Example (AWS S3):
 
 ```yaml
 servers:
   production:
     type: s3
     location: s3://acme-orders-prod/orders/
+    format: json
+    delimiter: new_line
 ```
 
-#### AWS Glue Server Object
-
-| Field    | Type     | Description                                                |
-|----------|----------|------------------------------------------------------------|
-| type     | `string` | `glue`                                                     |
-| account  | `string` | REQUIRED. The AWS account, e.g., `1234-5678-9012`          |
-| database | `string` | REQUIRED. The AWS Glue Catalog database                    |
-| location | `string` | URI location of the Glue Database                          |
-| format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv` |
-
-Example:
+Example (MinIO):
 
 ```yaml
 servers:
-  production:
-    type: glue
-    account: "1234-5678-9012"
-    database: acme-orders
-    location: s3://acme-orders-prod/orders/
+  minio:
+    type: s3
+    endpointUrl: http://localhost:9000
+    location: s3://my-bucket/path/
+    format: delta
+```
+
+Example (Google Cloud Storage):
+
+```yaml
+servers:
+  gcs:
+    type: s3
+    endpointUrl: https://storage.googleapis.com
+    location: s3://my-bucket/path/*/*/*/*/*.parquet
     format: parquet
 ```
 
