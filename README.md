@@ -2,7 +2,7 @@
 
 <a href="https://github.com/datacontract/datacontract-specification">
     <img alt="Stars" src="https://img.shields.io/github/stars/datacontract/datacontract-specification" /></a>
-<a href="https://datacontract.com/slack" rel="nofollow"><img src="https://camo.githubusercontent.com/5ade1fd1e76a6ab860802cdd2941fe2501e2ca2cb534e5d8968dbf864c13d33d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f736c61636b2d6a6f696e5f636861742d77686974652e7376673f6c6f676f3d736c61636b267374796c653d736f6369616c" alt="Slack Status" data-canonical-src="https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&amp;style=social" style="max-width: 100%;"></a>
+<a href="https://datacontract.com/slack" rel="nofollow"><img src="https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&amp;style=social" alt="Slack Status" data-canonical-src="https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&amp;style=social" style="max-width: 100%;"></a>
 
 ![datacontract.png](images/datacontract.png)
 
@@ -34,7 +34,7 @@ The specification comes along with the [Data Contract CLI](https://github.com/da
 Version
 ---
 
-1.0.1([Changelog](CHANGELOG.md))
+1.1.0([Changelog](CHANGELOG.md))
 
 Example
 ---
@@ -42,7 +42,7 @@ Example
 [![Data Contract Catalog](https://img.shields.io/badge/Data%20Contract-Catalog-blue)](https://datacontract.com/examples/index.html)
 
 ```yaml
-dataContractSpecification: 1.0.1
+dataContractSpecification: 1.1.0
 id: urn:datacontract:checkout:orders-latest
 info:
   title: Orders Latest
@@ -368,42 +368,44 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 #### S3 Server Object
 
-| Field       | Type     | Description                                                                                                      |
-|-------------|----------|------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | `s3`                                                                                                             |
-| location    | `string` | S3 URL, starting with `s3://`                                                                                    |
-| endpointUrl | `string` | The server endpoint for S3-compatible servers, such as `https://minio.example.com`                               |
-| format      | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
-| delimiter   | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array` |
+| Field       | Type     | Description                                                                                                             |
+|-------------|----------|-------------------------------------------------------------------------------------------------------------------------|
+| type        | `string` | `s3`                                                                                                                    |
+| location    | `string` | S3 URL, starting with `s3://`                                                                                           |
+| endpointUrl | `string` | The server endpoint for S3-compatible servers, such as MioIO or Google Cloud Storage, e.g., `https://minio.example.com` |
+| format      | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                              |
+| delimiter   | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array`        |
 
-Example:
+Example (AWS S3):
 
 ```yaml
 servers:
   production:
     type: s3
     location: s3://acme-orders-prod/orders/
+    format: json
+    delimiter: new_line
 ```
 
-#### AWS Glue Server Object
-
-| Field    | Type     | Description                                                |
-|----------|----------|------------------------------------------------------------|
-| type     | `string` | `glue`                                                     |
-| account  | `string` | REQUIRED. The AWS account, e.g., `1234-5678-9012`          |
-| database | `string` | REQUIRED. The AWS Glue Catalog database                    |
-| location | `string` | S3 path, starting with `s3://`                             |
-| format   | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv` |
-
-Example:
+Example (MinIO):
 
 ```yaml
 servers:
-  production:
-    type: glue
-    account: "1234-5678-9012"
-    database: acme-orders
-    location: s3://acme-orders-prod/orders/
+  minio:
+    type: s3
+    endpointUrl: http://localhost:9000
+    location: s3://my-bucket/path/
+    format: delta
+```
+
+Example (Google Cloud Storage):
+
+```yaml
+servers:
+  gcs:
+    type: s3
+    endpointUrl: https://storage.googleapis.com
+    location: s3://my-bucket/path/*/*/*/*/*.parquet
     format: parquet
 ```
 
@@ -540,6 +542,8 @@ The terms and conditions of the data contract.
 | billing      | `string` | The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use.                                        |
 | noticePeriod | `string` | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
 
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
 
 ### Model Object
 
@@ -558,6 +562,7 @@ The name of the data model (table name) is defined by the key that refers to thi
 | quality     | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on model level.                                                                                     |
 
 
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
 
 ### Field Object
@@ -598,6 +603,8 @@ The Field Objects describes one field (column, property, nested field) of a data
 
 | quality          | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on field level.                                                                                                                                                                                                                                                                                                                                                                             |
 
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
 
 ### Definition Object
 
@@ -633,6 +640,7 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 | keys             | [Field Object](#field-object)                | Describes the key structure of a map. Defaults to `type: string` if a map is defined as type. Not all server types support different key types. Use only when type is `map`.                                                                                                                                                                                                                                                 |
 | values           | [Field Object](#field-object)                | Describes the value structure of a map. Use only when type is `map`.                                                                                                                                                                                                                                                                                                                                                         |
 
+This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
 
 ### Example Object
