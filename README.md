@@ -282,7 +282,6 @@ Specification
 - [Model Object](#model-object)
 - [Field Object](#field-object)
 - [Definition Object](#definition-object)
-- [Schema Object](#schema-object)
 - [Example Object](#example-object)
 - [Service Level Object](#service-levels-object)
 - [Quality Object](#quality-object)
