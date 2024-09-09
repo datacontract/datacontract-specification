@@ -1110,6 +1110,22 @@
               "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
             }
           },
+          "filter": {
+            "description": "Specifies any filters to apply to the data.",
+            "type": "object",
+            "properties": {
+              "expression": {
+                "type": "string",
+                "description": "The filter expression to apply to the model.",
+                "examples": [
+                    "order_id > 10 AND order_id < 20",
+                    "order_id = '1000'",
+                    "country_code in ('DE', 'AT', NULL)",
+                    "country_code ILIKE '%D%'"
+                ]
+              }
+            }
+          },
           "items": {
             "$ref": "#/properties/models/additionalProperties/properties/fields/additionalProperties"
           },
