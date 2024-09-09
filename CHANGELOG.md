@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2024-09-09
 
 ### Added
-- Data quality on model and field level
+- Data quality on model and field level ([#55](https://github.com/datacontract/datacontract-specification/issues/55))
 - Support for server-specific data types as config map ([#63](https://github.com/datacontract/datacontract-specification/issues/63))
 - AWS Glue Catalog server support
 - sftp server support
@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - `quality` on top-level removed
-- `schema` removed
+- `schema` removed in favor of encoding any physical schema configuration in the `model` using the `config` map at the field level and supporting import/export ([#21](https://github.com/datacontract/datacontract-specification/issues/21)).
 
 
 ## [0.9.3] - 2024-03-06
