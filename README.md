@@ -607,9 +607,9 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The filter object describes the filter expression to be applied to the data set.
 
-| Field      | Type     | Description                                                                                                        |
-|------------|----------|--------------------------------------------------------------------------------------------------------------------|
-| expression | `string` | The filter expression to be applied to the data set. Example: order_id = 10 AND country_code in ('DE', 'AT', NULL) |
+| Field      | Type     | Description                                                                                                          |
+|------------|----------|----------------------------------------------------------------------------------------------------------------------|
+| expression | `string` | The filter expression to be applied to the data set. Example: `order_id = 10 AND country_code in ('DE', 'AT', NULL)` |
 
 ### Definition Object
 
