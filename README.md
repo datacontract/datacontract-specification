@@ -119,6 +119,8 @@ models:
         config:
           jsonType: string
           jsonFormat: date-time
+    filter:
+      expression: order_timestamp >= '2020-01-01T00:00:00Z'
   line_items:
     description: A single article that is part of an order.
     type: table
