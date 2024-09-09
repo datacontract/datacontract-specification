@@ -1143,6 +1143,26 @@
             "trino",
             "local"
           ]
+        },
+        "roles": {
+          "description": " An optional array of roles that are available and can be requested to access the server for role-based access control. E.g. separate roles for different regions or sensitive data.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the role."
+              },
+              "description": {
+                "type": "string",
+                "description": "A description of the role and what access the role provides."
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
         }
       },
       "additionalProperties": true,

@@ -349,11 +349,12 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type     | Description                                                                                                                                                                                                                                                                  |
-|-------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
-| description | `string` | An optional string describing the server.                                                                                                                                                                                                                                    |
-| environment | `string` | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                         |
+| Field       | Type                          | Description                                                                                                                                                                                                                                                                           |
+|-------------|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string`                      | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
+| description | `string`                      | An optional string describing the server.                                                                                                                                                                                                                                             |
+| environment | `string`                      | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                                  |
+| roles       | Array of `Server Role Object` | An optional array of roles that are available and can be requested to access the server for role-based access control. E.g. separate roles for different regions or sensitive data.                                                                                                   |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -529,6 +530,13 @@ servers:
 | type   | `string` | `local`                                                                             |
 | path   | `string` | The relative or absolute path to the data file(s), such as `./folder/data.parquet`. |
 | format | `string` | The format of the file(s), such as `parquet`, `delta`, `csv`, or `json`.            |
+
+#### Server Role Object
+
+| Field       | Type     | Description                                                  |
+|-------------|----------|--------------------------------------------------------------|
+| name        | `string` | Name of the role                                             |
+| description | `string` | A description of the role and what access the role provides. |
 
 ### Terms Object
 
