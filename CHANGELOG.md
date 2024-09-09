@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Data quality on model and field level ([#55](https://github.com/datacontract/datacontract-specification/issues/55))
+- Field and definition `examples` as array of any type, instead of `example` as a single value
 - Support for server-specific data types as config map ([#63](https://github.com/datacontract/datacontract-specification/issues/63))
 - AWS Glue Catalog server support
 - sftp server support

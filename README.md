@@ -94,12 +94,14 @@ models:
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
         type: timestamp
         required: true
-        example: "2024-09-09T08:30:00Z"
+        examples:
+          - "2024-09-09T08:30:00Z"
       order_total:
         description: Total amount the smallest monetary unit (e.g., cents).
         type: long
         required: true
-        example: "9999"
+        examples:
+          - "9999"
       customer_id:
         description: Unique identifier for the customer.
         type: text
@@ -113,8 +115,8 @@ models:
         pii: true
         classification: sensitive
         quality:
-          - name: Verified email address
-            description: The email address was verified by a user with double opt-in.
+          - type: text
+            name: The email address was verified by a user
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
@@ -123,16 +125,28 @@ models:
           jsonType: string
           jsonFormat: date-time
     quality:
-      - name: Completeness check
-        description: If there is a gap of orders longer than one hour, it clearly indicates a problem.
-        sql: |
+      - type: sql
+        description: The maximum duration between two orders should be less that 3600 seconds
+        query: |
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
-          FROM {orders}
+          FROM orders
         must_be_less_than: 3600
-      - name: Number of rows
+      - type: row_count
         engine: soda
-        type: row_count
         must_be_greater_than: 5
+    examples:
+      - |
+        order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
+        "1001","2030-09-09T08:30:00Z",2500,"1000000001","mary.taylor82@example.com","2030-09-09T08:31:00Z"
+        "1002","2030-09-08T15:45:00Z",1800,"1000000002","michael.miller83@example.com","2030-09-09T08:31:00Z"
+        "1003","2030-09-07T12:15:00Z",3200,"1000000003","michael.smith5@example.com","2030-09-09T08:31:00Z"
+        "1004","2030-09-06T19:20:00Z",1500,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
+        "1005","2030-09-05T10:10:00Z",4200,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
+        "1006","2030-09-04T14:55:00Z",2800,"1000000005","john.davis28@example.com","2030-09-09T08:31:00Z"
+        "1007","2030-09-03T21:05:00Z",1900,"1000000006","linda.brown67@example.com","2030-09-09T08:31:00Z"
+        "1008","2030-09-02T17:40:00Z",3600,"1000000007","patricia.smith40@example.com","2030-09-09T08:31:00Z"
+        "1009","2030-09-01T09:25:00Z",3100,"1000000008","linda.wilson43@example.com","2030-09-09T08:31:00Z"
+        "1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
   line_items:
     description: A single article that is part of an order.
     type: table
@@ -149,6 +163,19 @@ models:
       sku:
         description: The purchased article number
         $ref: '#/definitions/sku'
+    examples:
+      - |
+        lines_item_id,order_id,sku
+        "LI-1","1001","5901234123457"
+        "LI-2","1001","4001234567890"
+        "LI-3","1002","5901234123457"
+        "LI-4","1002","2001234567893"
+        "LI-5","1003","4001234567890"
+        "LI-6","1003","5001234567892"
+        "LI-7","1004","5901234123457"
+        "LI-8","1005","2001234567893"
+        "LI-9","1005","5001234567892"
+        "LI-10","1005","6001234567891"
 definitions:
   order_id:
     domain: checkout
@@ -157,7 +184,8 @@ definitions:
     type: text
     format: uuid
     description: An internal ID that identifies an order in the online shop.
-    example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
+    examples:
+      - 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
     pii: true
     classification: restricted
     tags:
@@ -168,7 +196,8 @@ definitions:
     title: Stock Keeping Unit
     type: text
     pattern: ^[A-Za-z0-9]{8,14}$
-    example: "96385074"
+    examples:
+      - "96385074"
     description: |
       A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
       It is typically associated with an article's barcode, such as the EAN/GTIN.
@@ -176,37 +205,6 @@ definitions:
       wikipedia: https://en.wikipedia.org/wiki/Stock_keeping_unit
     tags:
       - inventory
-examples:
-  - type: csv # csv, json, yaml, custom
-    model: orders
-    description: An example list of order records.
-    data: | # expressed as string or inline yaml or via "$ref: data.csv"
-      order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
-      "1001","2030-09-09T08:30:00Z",2500,"1000000001","mary.taylor82@example.com","2030-09-09T08:31:00Z"
-      "1002","2030-09-08T15:45:00Z",1800,"1000000002","michael.miller83@example.com","2030-09-09T08:31:00Z"
-      "1003","2030-09-07T12:15:00Z",3200,"1000000003","michael.smith5@example.com","2030-09-09T08:31:00Z"
-      "1004","2030-09-06T19:20:00Z",1500,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
-      "1005","2030-09-05T10:10:00Z",4200,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
-      "1006","2030-09-04T14:55:00Z",2800,"1000000005","john.davis28@example.com","2030-09-09T08:31:00Z"
-      "1007","2030-09-03T21:05:00Z",1900,"1000000006","linda.brown67@example.com","2030-09-09T08:31:00Z"
-      "1008","2030-09-02T17:40:00Z",3600,"1000000007","patricia.smith40@example.com","2030-09-09T08:31:00Z"
-      "1009","2030-09-01T09:25:00Z",3100,"1000000008","linda.wilson43@example.com","2030-09-09T08:31:00Z"
-      "1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
-  - type: csv
-    model: line_items
-    description: An example list of line items.
-    data: |
-      lines_item_id,order_id,sku
-      "LI-1","1001","5901234123457"
-      "LI-2","1001","4001234567890"
-      "LI-3","1002","5901234123457"
-      "LI-4","1002","2001234567893"
-      "LI-5","1003","4001234567890"
-      "LI-6","1003","5001234567892"
-      "LI-7","1004","5901234123457"
-      "LI-8","1005","2001234567893"
-      "LI-9","1005","5001234567892"
-      "LI-10","1005","6001234567891"
 servicelevels:
   availability:
     description: The server is available during support hours
@@ -282,7 +280,6 @@ Specification
 - [Model Object](#model-object)
 - [Field Object](#field-object)
 - [Definition Object](#definition-object)
-- [Example Object](#example-object)
 - [Service Level Object](#service-levels-object)
 - [Quality Object](#quality-object)
 - [Data Types](#data-types)
@@ -306,7 +303,6 @@ It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 | terms                     | [Terms Object](#terms-object)                          | Specifies the terms and conditions of the data contract.                                                             |
 | models                    | Map[`string`, [Model Object](#model-object)]           | Specifies the logical data model.                                                                                    |
 | definitions               | Map[`string`, [Definition Object](#definition-object)] | Specifies definitions.                                                                                               |
-| examples                  | Array of [Example Objects](#example-object)            | Specifies example data sets for the data model. The specification supports different example types.                  |
 | servicelevels             | [Service Levels Object](#service-levels-object)        | Specifies the service level of the provided data                                                                     |
 | links                     | Map[`string`, `string`]                                | Additional external documentation links.                                                                             |
 | tags                      | Array of `string`                                      | Custom metadata to provide additional context.                                                                       |
@@ -559,6 +555,7 @@ The name of the data model (table name) is defined by the key that refers to thi
 | config      | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
 
 | quality     | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on model level.                                                                                     |
+| examples                  | Array of `string`            | Specifies example data sets for the model. Typical in CSV or JSON format.                  |
 
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
@@ -588,7 +585,8 @@ The Field Objects describes one field (column, property, nested field) of a data
 | exclusiveMinimum | `number`                                     | A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                            |
 | maximum          | `number`                                     | A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                 |
 | exclusiveMaximum | `number`                                     | A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                               |
-| example          | `string`                                     | An example value.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| example          | `string`                                     | DEPRECATED, use examples. An example value.                                                                                                                                                                                                                                                                                                                                                                                  |
+| examples         | Array of Any                                 | A list of example values.                                                                                                                                                                                                                                                                                                                                                                                                    |
 | pii              | `boolean`                                    | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               | 
 | classification   | `string`                                     | The data class defining the sensitivity level for this field, according to the organization's classification scheme. Examples may be: `sensitive`, `restricted`, `internal`, `public`.                                                                                                                                                                                                                                       |
 | tags             | Array of `string`                            | Custom metadata to provide additional context.                                                                                                                                                                                                                                                                                                                                                                               |
@@ -642,34 +640,6 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
 
-### Example Object
-
-| Field       | Type     | Description                                                                                                                             |
-|-------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string` | The type of the data product technology that implements the data contract. Well-known server types are: `csv`, `json`, `yaml`, `custom` |
-| description | `string` | An optional string describing the example.                                                                                              |
-| model       | `string` | The reference to the model in the schema, e.g. a table name.                                                                            |                                                                                        
-| data        | `string` | Example data for this model.                                                                                                            |
-
-Example:
-
-```yaml
-examples:
-- type: csv
-  model: orders
-  data: |-
-    order_id,order_timestamp,order_total
-    "1001","2023-09-09T08:30:00Z",2500
-    "1002","2023-09-08T15:45:00Z",1800
-    "1003","2023-09-07T12:15:00Z",3200
-    "1004","2023-09-06T19:20:00Z",1500
-    "1005","2023-09-05T10:10:00Z",4200
-    "1006","2023-09-04T14:55:00Z",2800
-    "1007","2023-09-03T21:05:00Z",1900
-    "1008","2023-09-02T17:40:00Z",3600
-    "1009","2023-09-01T09:25:00Z",3100
-    "1010","2023-08-31T22:50:00Z",2700
-```
 
 ### Service Levels Object
 
