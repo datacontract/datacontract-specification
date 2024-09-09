@@ -560,6 +560,7 @@ The name of the data model (table name) is defined by the key that refers to thi
 | description | `string`                                     | An optional string describing the data model.                                                                                        |
 | title       | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
 | fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
+| filter      | [Filter Object](#filter-object)              | Filter expression to be applied to the data set.                                                                                     |
 | config      | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
