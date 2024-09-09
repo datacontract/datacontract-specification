@@ -127,7 +127,7 @@ models:
         description: If there is a gap of orders longer than one hour, it clearly indicates a problem.
         sql: |
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
-          FROM orders
+          FROM {orders}
         must_be_less_than: 3600
       - name: Number of rows
         engine: soda
@@ -793,8 +793,8 @@ Quality attributes are checks that can be applied to the data to ensure its qual
 Data can be verified by executing these checks through a data quality engine.
 
 Quality attributes can be:
-- Text: A text in natural language that describes the quality of the data.
-- SQL: An individual SQL query that returns a single value that can be compared.
+- A text in natural language that describes the quality of the data.
+- An individual SQL query that returns a single value that can be compared.
 - Engine-specific types: Pre-defined quality checks, as defined by data quality libraries. Currently, the engines `soda` and `great-expectations` are supported.
 
 A quality object can be specified on field level and on model level. 
@@ -809,7 +809,7 @@ It can also be used as a prompt to check the data with an AI engine.
 
 | Field       | Type     | Description                                                        |
 |-------------|----------|--------------------------------------------------------------------|
-| name        | `string` | Optional. A human-readable name for this check                     |
+| type        | `string` | `text`                                                   |
 | description | `string` | A plain text describing the quality attribute in natural language. |
 
 Example:
@@ -820,10 +820,9 @@ models:
     fields:
       account_iban:
         quality:
-          - name: Valid IBAN
+          - type: text
             description: Must be a valid IBAN. Must not be empty.
 ```
-
 
 #### SQL
 
@@ -832,37 +831,51 @@ An individual SQL query that returns a single number that can be compared with a
 > __Note:__ Establish a secure development process and use read-only connections, as the misuse of SQL queries can lead to SQL injection attacks.
 
 
-| Field                            | Type                  | Description                                                                     |
-|----------------------------------|-----------------------|---------------------------------------------------------------------------------|
-| name                             | `string`              | Optional. A human-readable name for this check                                  |
-| description                      | `string`              | A plain text describing the quality of the data.                                |
-| sql                              | `string`              | A SQL query that returns a single number to compare with the threshold.         |
-| must_be                          | `integer`             | The threshold to check the return value of the query                            |
-| must_not_be                      | `integer`             | The threshold to check the return value of the query                            |
-| must_be_greater_than             | `integer`             | The threshold to check the return value of the query                            |
-| must_be_greater_than_or_equal_to | `integer`             | The threshold to check the return value of the query                            |
-| must_be_less_than                | `integer`             | The threshold to check the return value of the query                            |
-| must_be_less_than_or_equal_to    | `integer`             | The threshold to check the return value of the query                            |
-| must_be_between                  | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
-| must_not_be_between              | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
+| Field                      | Type                  | Description                                                                     |
+|----------------------------|-----------------------|---------------------------------------------------------------------------------|
+| type                       | `string`              | `sql`                                                                           |
+| description                | `string`              | A plain text describing the quality of the data.                                |
+| query                      | `string`              | A SQL query that returns a single number to compare with the threshold.         |
+| mustBe                     | `integer`             | The threshold to check the return value of the query                            |
+| mustNotBe                  | `integer`             | The threshold to check the return value of the query                            |
+| mustBeGreaterThan          | `integer`             | The threshold to check the return value of the query                            |
+| mustBeGreaterThanOrEqualTo | `integer`             | The threshold to check the return value of the query                            |
+| mustBeLessThan             | `integer`             | The threshold to check the return value of the query                            |
+| mustBeLessThanOrEqualTo    | `integer`             | The threshold to check the return value of the query                            |
+| mustBeBetween              | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
+| mustBeNotBetween           | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
+
+In the query the following placeholders can be used:
+
+| Placeholder | Description                                                                            |
+|-------------|----------------------------------------------------------------------------------------|
+| `{model}`  | The name of the model that is checked.                                                 |
+| `{table}`  | Alias for `{model}`.                                                                  |
+| `{field}`  | The name of the field that is checked (only if the quality is defined on field-level). |
+| `{column}` | Alias for `{field}`.                                                                  |
 
 Example:
 
 ```yaml
 models:
-  my_table:
+  orders:
     quality:
-      - name: Maximum duration between two orders
-        description: The maximum duration between two orders should be less that 3600 seconds
-        sql: |
+      - type: sql
+        description: The maximum duration between two orders must be less that 3600 seconds
+        query: |
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
-          FROM orders
-        must_be_less_than: 3600
+          FROM {model}
+        mustBeLessThan: 3600
 ```
 
-SQL queries allow powerful checks. A SQL query should run not longer than 10 minutes.
+SQL queries allow powerful checks for custom business logic. 
+A SQL query should run not longer than 10 minutes.
 
-#### Engine: Soda
+#### Custom
+
+You can define custom quality attributes that are specific to a data quality engine.
+
+#### Custom (Engine: Soda)
 
 Soda has a number of predefined quality [checks](https://docs.soda.io/soda/data-contracts-checks.html) that can be referenced as quality attributes.
 
@@ -870,24 +883,16 @@ Soda checks can be applied on model and field level.
 
 > Note: Soda Data contract check reference is experimental and may change in the future. Currently only supported by Postgres, Snowflake, and Spark (Databricks)
 
-| Field                   | Type     | Description                                                                                                                 |
-|-------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------|
-| name                    | `string` | Optional. A human-readable name for this check                                                                              |
-| description             | `string` | Optional. A plain text describing the quality attribute in natural language.                                                |
-| engine                  | `string` | `soda`                                                                                                                      |
-| type                    | `string` | A check type as defined in the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html)        |
-| _additional properties_ |          | As defined for this check type in the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html) |
+| Field         | Type     | Description                                                                                                                 |
+|---------------|----------|-----------------------------------------------------------------------------------------------------------------------------|
+| type          | `string` | `custom`                                                                                                                    |
+| description   | `string` | Optional. A plain text describing the quality attribute in natural language.                                                |
+| engine        | `string` | `soda`                                                                                                                      |
+| specification | `object` | A check type as defined in the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html)        |
 
 
 See the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html) for all possible types and configuration values.
 
-
-
-##### Duplicate
-
-- `no_duplicate_values` (equal to the property `unique: true`, but supports also multiple fields)
-- `duplicate_count`
-- `duplicate_percent`
 
 Example:
 
@@ -898,89 +903,44 @@ models:
       order_id:
         type: string
         quality:
-          - name: Order ID must be unique
+          - type: custom
             description: This is a check on field level
             engine: soda
-            type: no_duplicate_values
+            specification:
+              type: no_duplicate_values
       carrier:
         type: string
       shipment_numer:
         type: string
     quality:
-      - name: A shipment number should be unique for one carrier
+      - type: custom
         description: This is a check on model level
         engine: soda
-        type: duplicate_percent
-        columns:
-          - carrier
-          - shipment_numer
-        must_be_less_than: 1.0
+        specification:
+          type: duplicate_percent
+          columns:
+            - carrier
+            - shipment_numer
+          must_be_less_than: 1.0
+      - type: custom
+        description: This is a check on model level
+        engine: soda
+        specification:
+          type: row_count
+          must_be_greater_than: 500000
 ```
 
-Freshness
-- `freshness_in_days`
-- `freshness_in_hours`
-- `freshness_in_minutes`
-
-Missing
-- `no_missing_values`  (equal to the property `required: true`)
-- `missing_count`
-- `missing_percent`
-
-Row count
-- `rows_exist` (default)
-- `row_count`
-
-Example:
-```yaml
-models:
-  my_table:
-    quality:
-      - type: row_count
-        must_be_greater_than: 500000
-```
-
-
-SQL aggregation
-- `avg`
-- `sum`
-
-SQL metric query
-- `metric_expression`
-
-Validity
-- `no_invalid_values`
-- `invalid_count`
-- `invalid_percent`
-
-Example: 
-```yaml
-models:
-  my_table:
-    fields:
-      warehouse_id:
-        type: string
-        quality:
-          - engine: soda
-            type: no_invalid_values
-            valid_sql_regex: '^[A-Z]{2}[0-9]{3}$'
-```
-
-#### Engine: Great Expectations
+#### Custom (Engine: Great Expectations)
 
 Quality attributes defined as Great Expectations [Expectation](https://greatexpectations.io/expectations/).
 
 Expectations are applied on model level.
 
-
-| Field            | Type     | Description                                                                                |
-|------------------|----------|--------------------------------------------------------------------------------------------|
-| name             | `string` | Optional. A human-readable name for this check                                             |
-| description      | `string` | Optional. A plain text describing the quality attribute in natural language.               |
-| engine           | `string` | `soda`                                                                                     |
-| expectation_type | `string` | An expectation type as listed in [Expectation](https://greatexpectations.io/expectations/) |
-| kwargs           | Map      | The keyworded arguments for this expectation type.                                         |
-| meta             | Map      | Optional. Additional meta information.                                                     |
+| Field         | Type     | Description                                                                                         |
+|---------------|----------|-----------------------------------------------------------------------------------------------------|
+| description   | `string` | Optional. A plain text describing the quality attribute in natural language.                        |
+| engine        | `string` | `great-expectations`                                                                                |
+| specification | `object` | An expectation type as listed in [Expectation](https://greatexpectations.io/expectations/) as YAML. |
 
 Example:
 
@@ -988,27 +948,31 @@ Example:
 models:
   my_table:
     quality:
-      - engine: great-expectations
-        expectation_type: expect_table_row_count_to_be_between
-        kwargs:
-          min_value: 10000
-          max_value: 50000
-        meta:
-          notes: "This expectation is crucial to avoid processing datasets that are too small or too large."
-      - engine: great-expectations
+      - type: custom
+        engine: great-expectations
+        specification:
+          expectation_type: expect_table_row_count_to_be_between
+          kwargs:
+            min_value: 10000
+            max_value: 50000
+          meta:
+            notes: "This expectation is crucial to avoid processing datasets that are too small or too large."
+      - type: custom
+        engine: great-expectations
         description: "Check that passenger_count values are between 1 and 6."
-        expectation_type: expect_column_values_to_be_between
-        kwargs:
-          column: passenger_count
-          max_value: 6
-          min_value: 1
-          mostly: 1.0
-          strict_max: false
-          strict_min: false
-        meta:
-          tags:
-            - business-critical
-            - range_check
+        specification:
+          expectation_type: expect_column_values_to_be_between
+          kwargs:
+            column: passenger_count
+            max_value: 6
+            min_value: 1
+            mostly: 1.0
+            strict_max: false
+            strict_min: false
+          meta:
+            tags:
+              - business-critical
+              - range_check
 ```
 
 
