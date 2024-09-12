@@ -1086,7 +1086,8 @@
           "domain": {
             "type": "string",
             "description": "The domain in which this definition is valid.",
-            "default": "global"
+            "default": "global",
+            "deprecationMessage": "This field is deprecated. Encode the domain into the ID using slashes."
           },
           "name": {
             "type": "string",
