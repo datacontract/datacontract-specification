@@ -56,12 +56,6 @@ info:
   contact:
     name: John Doe (Data Product Owner)
     url: https://teams.microsoft.com/l/channel/example/checkout
-tags:
-  - checkout
-  - orders
-  - s3
-links:
-  datacontractCli: https://cli.datacontract.com
 servers:
   production:
     type: s3
@@ -130,10 +124,10 @@ models:
         query: |
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
           FROM orders
-        must_be_less_than: 3600
+        mustBeLessThan: 3600
       - type: row_count
         engine: soda
-        must_be_greater_than: 5
+        mustBeGreaterThan: 5
     examples:
       - |
         order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
@@ -237,6 +231,12 @@ servicelevels:
     cron: 0 0 * * 0
     recoveryTime: 24 hours
     recoveryPoint: 1 week
+tags:
+  - checkout
+  - orders
+  - s3
+links:
+  datacontractCli: https://cli.datacontract.com
 ```
 
 Data Contract CLI
