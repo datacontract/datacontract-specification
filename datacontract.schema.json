@@ -653,7 +653,7 @@
       "description": "Clear and concise explanations of syntax, semantic, and classification of business objects in a given domain.",
       "type": "object",
       "propertyNames": {
-        "pattern": "^[a-zA-Z0-9_-]+$"
+        "pattern": "^[a-zA-Z0-9/_-]+$"
       },
       "additionalProperties": {
         "type": "object",

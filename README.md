@@ -52,7 +52,6 @@ info:
     All orders since 2020-01-01. 
     Orders with their line items are in their current state (no history included).
   owner: Checkout Team
-  slackChannel: "#checkout"
   contact:
     name: John Doe (Data Product Owner)
     url: https://teams.microsoft.com/l/channel/example/checkout
@@ -90,12 +89,20 @@ models:
         required: true
         examples:
           - "2024-09-09T08:30:00Z"
+        tags: ["business-timestamp"]
       order_total:
         description: Total amount the smallest monetary unit (e.g., cents).
         type: long
         required: true
         examples:
           - "9999"
+        quality:
+          - type: sql
+            description: 95% of all order total values are expected to be between 10 and 499 EUR.
+            query: |
+              SELECT quantile_cont(order_total, 0.95) AS percentile_95
+              FROM orders
+            mustBeBetween: [1000, 49900]
       customer_id:
         description: Unique identifier for the customer.
         type: text
@@ -125,22 +132,25 @@ models:
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
           FROM orders
         mustBeLessThan: 3600
-      - type: row_count
-        engine: soda
+      - type: sql
+        description: Row Count
+        query: |
+          SELECT count(*) as row_count
+          FROM orders
         mustBeGreaterThan: 5
     examples:
       - |
-        order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
-        "1001","2030-09-09T08:30:00Z",2500,"1000000001","mary.taylor82@example.com","2030-09-09T08:31:00Z"
-        "1002","2030-09-08T15:45:00Z",1800,"1000000002","michael.miller83@example.com","2030-09-09T08:31:00Z"
-        "1003","2030-09-07T12:15:00Z",3200,"1000000003","michael.smith5@example.com","2030-09-09T08:31:00Z"
-        "1004","2030-09-06T19:20:00Z",1500,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
-        "1005","2030-09-05T10:10:00Z",4200,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
-        "1006","2030-09-04T14:55:00Z",2800,"1000000005","john.davis28@example.com","2030-09-09T08:31:00Z"
-        "1007","2030-09-03T21:05:00Z",1900,"1000000006","linda.brown67@example.com","2030-09-09T08:31:00Z"
-        "1008","2030-09-02T17:40:00Z",3600,"1000000007","patricia.smith40@example.com","2030-09-09T08:31:00Z"
-        "1009","2030-09-01T09:25:00Z",3100,"1000000008","linda.wilson43@example.com","2030-09-09T08:31:00Z"
-        "1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
+          order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
+          "1001","2030-09-09T08:30:00Z",2500,"1000000001","mary.taylor82@example.com","2030-09-09T08:31:00Z"
+          "1002","2030-09-08T15:45:00Z",1800,"1000000002","michael.miller83@example.com","2030-09-09T08:31:00Z"
+          "1003","2030-09-07T12:15:00Z",3200,"1000000003","michael.smith5@example.com","2030-09-09T08:31:00Z"
+          "1004","2030-09-06T19:20:00Z",1500,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
+          "1005","2030-09-05T10:10:00Z",4200,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
+          "1006","2030-09-04T14:55:00Z",2800,"1000000005","john.davis28@example.com","2030-09-09T08:31:00Z"
+          "1007","2030-09-03T21:05:00Z",1900,"1000000006","linda.brown67@example.com","2030-09-09T08:31:00Z"
+          "1008","2030-09-02T17:40:00Z",3600,"1000000007","patricia.smith40@example.com","2030-09-09T08:31:00Z"
+          "1009","2030-09-01T09:25:00Z",3100,"1000000008","linda.wilson43@example.com","2030-09-09T08:31:00Z"
+          "1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
   line_items:
     description: A single article that is part of an order.
     type: table
@@ -152,27 +162,26 @@ models:
         unique: true
         primary: true
       order_id:
-        $ref: '#/definitions/order_id'
+        $ref: '#/definitions/checkout/order_id'
         references: orders.order_id
       sku:
         description: The purchased article number
-        $ref: '#/definitions/sku'
+        $ref: '#/definitions/checkout/sku'
     examples:
-      - |
-        lines_item_id,order_id,sku
-        "LI-1","1001","5901234123457"
-        "LI-2","1001","4001234567890"
-        "LI-3","1002","5901234123457"
-        "LI-4","1002","2001234567893"
-        "LI-5","1003","4001234567890"
-        "LI-6","1003","5001234567892"
-        "LI-7","1004","5901234123457"
-        "LI-8","1005","2001234567893"
-        "LI-9","1005","5001234567892"
-        "LI-10","1005","6001234567891"
+    - |
+      lines_item_id,order_id,sku
+      "LI-1","1001","5901234123457"
+      "LI-2","1001","4001234567890"
+      "LI-3","1002","5901234123457"
+      "LI-4","1002","2001234567893"
+      "LI-5","1003","4001234567890"
+      "LI-6","1003","5001234567892"
+      "LI-7","1004","5901234123457"
+      "LI-8","1005","2001234567893"
+      "LI-9","1005","5001234567892"
+      "LI-10","1005","6001234567891"
 definitions:
-  order_id:
-    domain: checkout
+  checkout/order_id:
     name: order_id
     title: Order ID
     type: text
@@ -184,7 +193,7 @@ definitions:
     classification: restricted
     tags:
       - orders
-  sku:
+  checkout/sku:
     domain: inventory
     name: sku
     title: Stock Keeping Unit

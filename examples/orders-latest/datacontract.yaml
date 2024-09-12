@@ -8,7 +8,6 @@ info:
     All orders since 2020-01-01. 
     Orders with their line items are in their current state (no history included).
   owner: Checkout Team
-  slackChannel: "#checkout"
   contact:
     name: John Doe (Data Product Owner)
     url: https://teams.microsoft.com/l/channel/example/checkout
@@ -46,12 +45,20 @@ models:
         required: true
         examples:
           - "2024-09-09T08:30:00Z"
+        tags: ["business-timestamp"]
       order_total:
         description: Total amount the smallest monetary unit (e.g., cents).
         type: long
         required: true
         examples:
           - "9999"
+        quality:
+          - type: sql
+            description: 95% of all order total values are expected to be between 10 and 499 EUR.
+            query: |
+              SELECT quantile_cont(order_total, 0.95) AS percentile_95
+              FROM orders
+            mustBeBetween: [1000, 49900]
       customer_id:
         description: Unique identifier for the customer.
         type: text
@@ -81,8 +88,11 @@ models:
           SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
           FROM orders
         mustBeLessThan: 3600
-      - type: row_count
-        engine: soda
+      - type: sql
+        description: Row Count
+        query: |
+          SELECT count(*) as row_count
+          FROM orders
         mustBeGreaterThan: 5
     examples:
       - |
@@ -108,11 +118,11 @@ models:
         unique: true
         primary: true
       order_id:
-        $ref: '#/definitions/order_id'
+        $ref: '#/definitions/checkout/order_id'
         references: orders.order_id
       sku:
         description: The purchased article number
-        $ref: '#/definitions/sku'
+        $ref: '#/definitions/checkout/sku'
     examples:
     - |
       lines_item_id,order_id,sku
@@ -127,8 +137,7 @@ models:
       "LI-9","1005","5001234567892"
       "LI-10","1005","6001234567891"
 definitions:
-  order_id:
-    domain: checkout
+  checkout/order_id:
     name: order_id
     title: Order ID
     type: text
@@ -140,7 +149,7 @@ definitions:
     classification: restricted
     tags:
       - orders
-  sku:
+  checkout/sku:
     domain: inventory
     name: sku
     title: Stock Keeping Unit
