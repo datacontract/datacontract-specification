@@ -953,7 +953,12 @@
                 },
                 "example": {
                   "type": "string",
+                  "deprecationMessage": "DEPRECATED. Use 'examples' instead.",
                   "description": "An example value for this field."
+                },
+                "examples": {
+                  "type": "array",
+                  "description": "Example values for this field."
                 },
                 "pii": {
                   "type": "boolean",
@@ -1167,7 +1172,12 @@
           },
           "example": {
             "type": "string",
-            "description": "An example value."
+            "description": "An example value.",
+            "deprecationMessage": "DEPRECATED. Use 'examples' instead."
+          },
+          "examples": {
+              "type": "array",
+              "description": "Example values."
           },
           "pii": {
             "type": "boolean",

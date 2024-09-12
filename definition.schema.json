@@ -56,7 +56,12 @@
     },
     "example": {
       "type": "string",
-      "description": "An example value."
+      "description": "An example value.",
+      "deprecationMessage": "Use 'examples' instead."
+    },
+    "examples": {
+      "type": "array",
+      "description": "Example values."
     },
     "pii": {
       "type": "boolean",

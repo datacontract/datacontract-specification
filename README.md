@@ -94,12 +94,14 @@ models:
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
         type: timestamp
         required: true
-        example: "2024-09-09T08:30:00Z"
+        examples: 
+        - "2024-09-09T08:30:00Z"
       order_total:
         description: Total amount the smallest monetary unit (e.g., cents).
         type: long
         required: true
-        example: "9999"
+        example: 
+          - 9999
       customer_id:
         description: Unique identifier for the customer.
         type: text
@@ -143,7 +145,8 @@ definitions:
     type: text
     format: uuid
     description: An internal ID that identifies an order in the online shop.
-    example: 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
+    examples: 
+    - 243c25e5-a081-43a9-aeab-6d5d5b6cb5e2
     pii: true
     classification: restricted
     tags:
@@ -154,7 +157,8 @@ definitions:
     title: Stock Keeping Unit
     type: text
     pattern: ^[A-Za-z0-9]{8,14}$
-    example: "96385074"
+    example: 
+     - "96385074"
     description: |
       A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
       It is typically associated with an article's barcode, such as the EAN/GTIN.
@@ -583,7 +587,8 @@ The Field Objects describes one field (column, property, nested field) of a data
 | exclusiveMinimum | `number`                                     | A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                            |
 | maximum          | `number`                                     | A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                 |
 | exclusiveMaximum | `number`                                     | A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                               |
-| example          | `string`                                     | An example value.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| example          | `string`                                     | DEPRECATED. Use `examples` instead. An example value.                                                                                                                                                                                                                                                                                                                                                                        |
+| examples         | `array`                                      | Example values.                                                                                                                                                                                                                                                                                                                                                                                                              |
 | pii              | `boolean`                                    | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               | 
 | classification   | `string`                                     | The data class defining the sensitivity level for this field, according to the organization's classification scheme. Examples may be: `sensitive`, `restricted`, `internal`, `public`.                                                                                                                                                                                                                                       |
 | tags             | Array of `string`                            | Custom metadata to provide additional context.                                                                                                                                                                                                                                                                                                                                                                               |
@@ -622,7 +627,8 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 | exclusiveMinimum | `number`                                     | A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                            |
 | maximum          | `number`                                     | A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                 |
 | exclusiveMaximum | `number`                                     | A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                               |
-| example          | `string`                                     | An example value.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| example          | `string`                                     | DEPRECATED. Use `examples` instead. An example value.                                                                                                                                                                                                                                                                                                                                                                        |
+| examples         | `array`                                      | Example values.                                                                                                                                                                                                                                                                                                                                                                                                              |
 | pii              | `boolean`                                    | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               |
 | classification   | `string`                                     | The data class defining the sensitivity level for this field, according to the organization's classification scheme.                                                                                                                                                                                                                                                                                                         |
 | tags             | Array of `string`                            | Custom metadata to provide additional context.                                                                                                                                                                                                                                                                                                                                                                               |
