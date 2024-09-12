@@ -100,8 +100,8 @@ models:
         description: Total amount the smallest monetary unit (e.g., cents).
         type: long
         required: true
-        example: 
-          - 9999
+        examples: 
+        - 9999
       customer_id:
         description: Unique identifier for the customer.
         type: text
@@ -157,8 +157,8 @@ definitions:
     title: Stock Keeping Unit
     type: text
     pattern: ^[A-Za-z0-9]{8,14}$
-    example: 
-     - "96385074"
+    examples: 
+    - "96385074"
     description: |
       A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
       It is typically associated with an article's barcode, such as the EAN/GTIN.
