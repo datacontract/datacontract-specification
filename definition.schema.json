@@ -6,7 +6,15 @@
     "domain": {
       "type": "string",
       "description": "The domain in which this definition is valid.",
-      "default": "global"
+      "default": "global",
+      "deprecationMessage": "This field is deprecated. Encode the domain into the ID."
+    },
+    "id": {
+      "type": "string",
+      "description": "A unique identifier for this definition. Encode the domain into the ID, separated by slashes.",
+      "examples": [
+        "checkout/order_id"
+      ]
     },
     "name": {
       "type": "string",
