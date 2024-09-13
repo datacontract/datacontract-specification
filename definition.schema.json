@@ -3,22 +3,12 @@
   "type": "object",
   "description": "Clear and concise explanations of syntax, semantic, and classification of business objects in a given domain.",
   "properties": {
-    "domain": {
-      "type": "string",
-      "description": "The domain in which this definition is valid.",
-      "default": "global",
-      "deprecationMessage": "This field is deprecated. Encode the domain into the ID."
-    },
     "id": {
       "type": "string",
       "description": "A unique identifier for this definition. Encode the domain into the ID, separated by slashes.",
       "examples": [
         "checkout/order_id"
       ]
-    },
-    "name": {
-      "type": "string",
-      "description": "The technical name of this definition."
     },
     "title": {
       "type": "string",
@@ -64,7 +54,12 @@
     },
     "example": {
       "type": "string",
-      "description": "An example value."
+      "description": "An example value for this field.",
+      "deprecationMessage": "Use the examples field instead."
+    },
+    "examples": {
+      "type": "array",
+      "description": "A examples value for this field."
     },
     "pii": {
       "type": "boolean",
@@ -100,7 +95,6 @@
     }
   },
   "required": [
-    "name",
     "type"
   ]
 }

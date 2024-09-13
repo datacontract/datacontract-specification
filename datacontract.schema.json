@@ -33,7 +33,7 @@
         "status": {
           "type": "string",
           "description": "The status of the data contract. Can be proposed, in development, active, retired.",
-          "x-extensible-enum": [
+          "examples": [
             "proposed",
             "in development",
             "active",
@@ -366,6 +366,35 @@
           "type": "string",
           "description": "The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may not be used for."
         },
+        "policies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of the policy.",
+                "examples": [
+                  "privacy",
+                  "security",
+                  "retention",
+                  "compliance"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "description": "A description of the policy."
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "A URL to the policy document."
+              }
+            },
+            "additionalProperties": true
+          },
+          "description": "The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may not be used for."
+        },
         "billing": {
           "type": "string",
           "description": "The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use."
@@ -451,6 +480,10 @@
                 },
                 "primary": {
                   "type": "boolean",
+                  "deprecationMessage": "Use the primaryKey field instead."
+                },
+                "primaryKey": {
+                  "type": "boolean",
                   "default": false,
                   "description": "If this field is a primary key."
                 },
@@ -531,7 +564,12 @@
                 },
                 "example": {
                   "type": "string",
-                  "description": "An example value for this field."
+                  "description": "An example value for this field.",
+                  "deprecationMessage": "Use the examples field instead."
+                },
+                "examples": {
+                  "type": "array",
+                  "description": "A examples value for this field."
                 },
                 "pii": {
                   "type": "boolean",
@@ -574,6 +612,15 @@
                 "$ref": {
                   "type": "string",
                   "description": "A reference URI to a definition in the specification, internally or externally. Properties will be inherited from the definition."
+                },
+                "quality": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/Quality"
+                  }
+                },
+                "lineage": {
+                  "$ref": "#/$defs/Lineage"
                 },
                 "config": {
                   "type": "object",
@@ -626,6 +673,16 @@
               }
             }
           },
+          "primaryKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The compound primary key of the model."
+          },
+          "examples": {
+            "type": "array"
+          },
           "config": {
             "type": "object",
             "description": "Additional metadata for model configuration.",
@@ -667,7 +724,8 @@
           },
           "name": {
             "type": "string",
-            "description": "The technical name of this definition."
+            "description": "The technical name of this definition.",
+            "deprecationMessage": "This field is deprecated. Encode the name into the ID using slashes."
           },
           "title": {
             "type": "string",
@@ -744,7 +802,12 @@
           },
           "example": {
             "type": "string",
-            "description": "An example value."
+            "description": "An example value.",
+            "deprecationMessage": "Use the examples field instead."
+          },
+          "examples": {
+            "type": "array",
+            "description": "Example value."
           },
           "pii": {
             "type": "boolean",
@@ -780,54 +843,9 @@
           }
         },
         "required": [
-          "name",
           "type"
         ]
       }
-    },
-    "examples": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "title": "ExampleType",
-            "enum": [
-              "csv",
-              "json",
-              "yaml",
-              "custom"
-            ],
-            "description": "The type of the example data. Well-known types are csv, json, yaml, custom."
-          },
-          "description": {
-            "type": "string",
-            "description": "An optional string describing the example."
-          },
-          "model": {
-            "type": "string",
-            "description": "The reference to the model in the schema, e.g., a table name."
-          },
-          "data": {
-            "oneOf": [
-              {
-                "type": "string",
-                "description": "Example data for this model."
-              },
-              {
-                "type": "array",
-                "description": "Example data for this model in a structured format. Use this for type json or yaml."
-              }
-            ]
-          }
-        },
-        "required": [
-          "type",
-          "data"
-        ]
-      },
-      "description": "The Examples Object is an array of Example Objects."
     },
     "servicelevels": {
       "type": "object",
@@ -1008,39 +1026,6 @@
           }
         }
       }
-    },
-    "quality": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "title": "QualityType",
-          "enum": [
-            "SodaCL",
-            "montecarlo",
-            "great-expectations",
-            "custom"
-          ],
-          "description": "The type of the quality check. Typical values are SodaCL, montecarlo, great-expectations, custom."
-        },
-        "specification": {
-          "oneOf": [
-            {
-              "type": "string",
-              "description": "The specification of the quality attributes as a string."
-            },
-            {
-              "type": "object",
-              "description": "The specification of the quality attributes as an object."
-            }
-          ]
-        }
-      },
-      "required": [
-        "type",
-        "specification"
-      ],
-      "description": "The quality object contains quality attributes and checks."
     },
     "links": {
       "type": "object",
@@ -1669,6 +1654,194 @@
       "required": [
         "path",
         "format"
+      ]
+    },
+    "Quality": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The type of quality check",
+              "enum": [
+                "text",
+                "sql",
+                "custom"
+              ]
+            },
+            "description": {
+              "type": "string",
+              "description": "A plain text describing the quality attribute in natural language."
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "sql"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "query": {
+                "type": "string",
+                "description": "A SQL query that returns a single number to compare with the threshold."
+              },
+              "mustBe": {
+                "type": "integer"
+              },
+              "mustNotBe": {
+                "type": "integer"
+              },
+              "mustBeGreaterThan": {
+                "type": "integer"
+              },
+              "mustBeGreaterThanOrEqualTo": {
+                "type": "integer"
+              },
+              "mustBeLessThan": {
+                "type": "integer"
+              },
+              "mustBeLessThanOrEqualTo": {
+                "type": "integer"
+              },
+              "mustBeBetween": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "mustNotBeBetween": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "required": [
+              "query"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "custom"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "A plain text describing the quality attribute in natural language."
+              },
+              "engine": {
+                "type": "string",
+                "examples": [
+                  "soda",
+                  "great-expectations"
+                ],
+                "description": "The engine used for custom quality checks."
+              },
+              "specification": {
+                "type": [
+                  "object",
+                  "array",
+                  "string"
+                ],
+                "description": "Engine-specific quality checks and expectations."
+              }
+            },
+            "required": [
+              "engine"
+            ]
+          }
+        }
+      ]
+    },
+    "Lineage": {
+      "type": "object",
+      "properties": {
+        "inputFields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "description": "The input dataset namespace"
+              },
+              "name": {
+                "type": "string",
+                "description": "The input dataset name"
+              },
+              "field": {
+                "type": "string",
+                "description": "The input field"
+              },
+              "transformations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "description": "The type of the transformation. Allowed values are: DIRECT, INDIRECT",
+                      "type": "string"
+                    },
+                    "subtype": {
+                      "type": "string",
+                      "description": "The subtype of the transformation"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "a string representation of the transformation applied"
+                    },
+                    "masking": {
+                      "type": "boolean",
+                      "description": "is transformation masking the data or not"
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "additionalProperties": true
+                }
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "namespace",
+              "name",
+              "field"
+            ]
+          }
+        },
+        "transformationDescription": {
+          "type": "string",
+          "description": "a string representation of the transformation applied",
+          "deprecated": true
+        },
+        "transformationType": {
+          "type": "string",
+          "description": "IDENTITY|MASKED reflects a clearly defined behavior. IDENTITY: exact same as input; MASKED: no original data available (like a hash of PII for example)",
+          "deprecated": true
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "inputFields"
       ]
     }
   }

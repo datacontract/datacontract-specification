@@ -39,7 +39,7 @@ Version
 Example
 ---
 
-[![Data Contract Catalog](https://img.shields.io/badge/Data%20Contract-Catalog-blue)](https://datacontract.com/examples/index.html)
+View in [Data Contract Catalog](https://datacontract.com/examples/index.html)
 
 ```yaml
 dataContractSpecification: 1.1.0
@@ -63,6 +63,11 @@ servers:
     format: json
     delimiter: new_line
     description: "One folder per model. One file per day."
+    roles:
+      - name: analyst_us
+        description: Access to the data for US region
+      - name: analyst_cn
+        description: Access to the data for China region
 terms:
   usage: |
     Data can be used for reports, analytics and machine learning use cases.
@@ -71,6 +76,12 @@ terms:
     Not suitable for real-time use cases.
     Data may not be used to identify individual customers.
     Max data processing per day: 10 TiB
+  policies:
+    - name: privacy-policy
+      url: https://example.com/privacy-policy
+    - name: license
+      description: External data is licensed under agreement 1234.
+      url: https://example.com/license/1234
   billing: 5000 USD per month
   noticePeriod: P3M
 models:
@@ -79,10 +90,10 @@ models:
     type: table
     fields:
       order_id:
-        $ref: '#/definitions/order_id'
+        $ref: '#/definitions/checkout/order_id'
         required: true
         unique: true
-        primary: true
+        primaryKey: true
       order_timestamp:
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
         type: timestamp
@@ -95,7 +106,7 @@ models:
         type: long
         required: true
         examples:
-          - "9999"
+          - 9999
         quality:
           - type: sql
             description: 95% of all order total values are expected to be between 10 and 499 EUR.
@@ -117,7 +128,12 @@ models:
         classification: sensitive
         quality:
           - type: text
-            name: The email address was verified by a user
+            description: The email address is not verified and may be invalid.
+        lineage:
+          inputFields:
+            - namespace: com.example.service.checkout
+              name: checkout_db.orders
+              field: email_address
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
@@ -140,49 +156,47 @@ models:
         mustBeGreaterThan: 5
     examples:
       - |
-          order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
-          "1001","2030-09-09T08:30:00Z",2500,"1000000001","mary.taylor82@example.com","2030-09-09T08:31:00Z"
-          "1002","2030-09-08T15:45:00Z",1800,"1000000002","michael.miller83@example.com","2030-09-09T08:31:00Z"
-          "1003","2030-09-07T12:15:00Z",3200,"1000000003","michael.smith5@example.com","2030-09-09T08:31:00Z"
-          "1004","2030-09-06T19:20:00Z",1500,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
-          "1005","2030-09-05T10:10:00Z",4200,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
-          "1006","2030-09-04T14:55:00Z",2800,"1000000005","john.davis28@example.com","2030-09-09T08:31:00Z"
-          "1007","2030-09-03T21:05:00Z",1900,"1000000006","linda.brown67@example.com","2030-09-09T08:31:00Z"
-          "1008","2030-09-02T17:40:00Z",3600,"1000000007","patricia.smith40@example.com","2030-09-09T08:31:00Z"
-          "1009","2030-09-01T09:25:00Z",3100,"1000000008","linda.wilson43@example.com","2030-09-09T08:31:00Z"
-          "1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
+        order_id,order_timestamp,order_total,customer_id,customer_email_address,processed_timestamp
+        "1001","2030-09-09T08:30:00Z",2500,"1000000001","mary.taylor82@example.com","2030-09-09T08:31:00Z"
+        "1002","2030-09-08T15:45:00Z",1800,"1000000002","michael.miller83@example.com","2030-09-09T08:31:00Z"
+        "1003","2030-09-07T12:15:00Z",3200,"1000000003","michael.smith5@example.com","2030-09-09T08:31:00Z"
+        "1004","2030-09-06T19:20:00Z",1500,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
+        "1005","2030-09-05T10:10:00Z",4200,"1000000004","elizabeth.moore80@example.com","2030-09-09T08:31:00Z"
+        "1006","2030-09-04T14:55:00Z",2800,"1000000005","john.davis28@example.com","2030-09-09T08:31:00Z"
+        "1007","2030-09-03T21:05:00Z",1900,"1000000006","linda.brown67@example.com","2030-09-09T08:31:00Z"
+        "1008","2030-09-02T17:40:00Z",3600,"1000000007","patricia.smith40@example.com","2030-09-09T08:31:00Z"
+        "1009","2030-09-01T09:25:00Z",3100,"1000000008","linda.wilson43@example.com","2030-09-09T08:31:00Z"
+        "1010","2030-08-31T22:50:00Z",2700,"1000000009","mary.smith98@example.com","2030-09-09T08:31:00Z"
   line_items:
     description: A single article that is part of an order.
     type: table
     fields:
-      lines_item_id:
+      line_item_id:
         type: text
         description: Primary key of the lines_item_id table
         required: true
-        unique: true
-        primary: true
       order_id:
         $ref: '#/definitions/checkout/order_id'
         references: orders.order_id
       sku:
         description: The purchased article number
-        $ref: '#/definitions/checkout/sku'
+        $ref: '#/definitions/inventory/sku'
+    primaryKey: ["order_id", "line_item_id"]
     examples:
-    - |
-      lines_item_id,order_id,sku
-      "LI-1","1001","5901234123457"
-      "LI-2","1001","4001234567890"
-      "LI-3","1002","5901234123457"
-      "LI-4","1002","2001234567893"
-      "LI-5","1003","4001234567890"
-      "LI-6","1003","5001234567892"
-      "LI-7","1004","5901234123457"
-      "LI-8","1005","2001234567893"
-      "LI-9","1005","5001234567892"
-      "LI-10","1005","6001234567891"
+      - |
+        line_item_id,order_id,sku
+        "LI-1","1001","5901234123457"
+        "LI-2","1001","4001234567890"
+        "LI-3","1002","5901234123457"
+        "LI-4","1002","2001234567893"
+        "LI-5","1003","4001234567890"
+        "LI-6","1003","5001234567892"
+        "LI-7","1004","5901234123457"
+        "LI-8","1005","2001234567893"
+        "LI-9","1005","5001234567892"
+        "LI-10","1005","6001234567891"
 definitions:
   checkout/order_id:
-    name: order_id
     title: Order ID
     type: text
     format: uuid
@@ -193,9 +207,7 @@ definitions:
     classification: restricted
     tags:
       - orders
-  checkout/sku:
-    domain: inventory
-    name: sku
+  inventory/sku:
     title: Stock Keeping Unit
     type: text
     pattern: ^[A-Za-z0-9]{8,14}$
@@ -291,6 +303,7 @@ Specification
 - [Definition Object](#definition-object)
 - [Service Level Object](#service-levels-object)
 - [Quality Object](#quality-object)
+- [Lineage Object](#lineage-object)
 - [Data Types](#data-types)
 - [Specification Extensions](#specification-extensions)
 
@@ -354,12 +367,12 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type                          | Description                                                                                                                                                                                                                                                                           |
-|-------------|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string`                      | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
-| description | `string`                      | An optional string describing the server.                                                                                                                                                                                                                                             |
-| environment | `string`                      | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                                  |
-| roles       | Array of `Server Role Object` | An optional array of roles that are available and can be requested to access the server for role-based access control. E.g. separate roles for different regions or sensitive data.                                                                                                   |
+| Field       | Type                                               | Description                                                                                                                                                                                                                                                                           |
+|-------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string`                                           | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
+| description | `string`                                           | An optional string describing the server.                                                                                                                                                                                                                                             |
+| environment | `string`                                           | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                                  |
+| roles       | Array of [Server Role Object](#server-role-object) | An optional array of roles that are available and can be requested to access the server for role-based access control. E.g. separate roles for different regions or sensitive data.                                                                                                   |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -547,14 +560,23 @@ servers:
 
 The terms and conditions of the data contract.
 
-| Field        | Type     | Description                                                                                                                                                                 |
-|--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| usage        | `string` | The usage describes the way the data is expected to be used. Can contain business and technical information.                                                                |
-| limitations  | `string` | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may not be used for.                               |
-| billing      | `string` | The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use.                                        |
-| noticePeriod | `string` | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
+| Field        | Type                                     | Description                                                                                                                                                                 |
+|--------------|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| usage        | `string`                                 | The usage describes the way the data is expected to be used. Can contain business and technical information.                                                                |
+| limitations  | `string`                                 | The limitations describe the restrictions on how the data can be used, can be technical or restrictions on what the data may not be used for.                               |
+| policies     | Array of [Policy Object](#policy-object) | A list of policies, licenses, standards, that are applicable for this data contract and that must be acknowledged by data consumers.                                        |
+| billing      | `string`                                 | The billing describes the pricing model for using the data, such as whether it's free, having a monthly fee, or metered pay-per-use.                                        |
+| noticePeriod | `string`                                 | The period of time that must be given by either party to terminate or modify a data usage agreement. Uses ISO-8601 period format, e.g., `P3M` for a period of three months. |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
+
+#### Policy Object
+
+| Field       | Type     | Description                       |
+|-------------|----------|-----------------------------------|
+| name        | `string` | Name of the policy.               |
+| description | `string` | A description of the policy.      |
+| url         | `string` | An URL that refers to the policy. |
 
 
 ### Model Object
@@ -569,10 +591,10 @@ The name of the data model (table name) is defined by the key that refers to thi
 | description | `string`                                     | An optional string describing the data model.                                                                                        |
 | title       | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
 | fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
-| config      | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
-
+| primaryKey  | Array of `string`                            | If the primary key is a compound key, list the field names that constitute the primary key. Alternative to field-level `primaryKey`. |
 | quality     | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on model level.                                                                                     |
-| examples                  | Array of `string`            | Specifies example data sets for the model. Typical in CSV or JSON format.                  |
+| examples    | Array of `Any`                               | Specifies example data sets for the model.                                                                                           |
+| config      | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
 
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
@@ -589,7 +611,7 @@ The Field Objects describes one field (column, property, nested field) of a data
 | title            | `string`                                     | An optional string providing a human readable name for the field. Especially useful if the field name is cryptic or contains abbreviations.                                                                                                                                                                                                                                                                                  |
 | enum             | array of `string`                            | A value must be equal to one of the elements in this array value. Only evaluated if the value is not null.                                                                                                                                                                                                                                                                                                                   |
 | required         | `boolean`                                    | An indication, if this field must contain a value and may not be null. Default: `false`                                                                                                                                                                                                                                                                                                                                      |
-| primary          | `boolean`                                    | If this field is a primary key. Default: `false`                                                                                                                                                                                                                                                                                                                                                                             |
+| primaryKey       | `boolean`                                    | If this field is a primary key. Default: `false`                                                                                                                                                                                                                                                                                                                                                                             |
 | references       | `string`                                     | The reference to a field in another model. E.g. use 'orders.order_id' to reference the order_id field of the model orders. Think of defining a foreign key relationship.                                                                                                                                                                                                                                                     |
 | unique           | `boolean`                                    | An indication, if the value must be unique within the model. Default: `false`                                                                                                                                                                                                                                                                                                                                                |
 | format           | `string`                                     | `email`: A value must be complaint to [RFC 5321, section 4.1.2](https://www.rfc-editor.org/info/rfc5321).<br>`uri`: A value must be complaint to [RFC 3986](https://www.rfc-editor.org/info/rfc3986).<br>`uuid`: A value must be complaint to [RFC 4122](https://www.rfc-editor.org/info/rfc4122). Only evaluated if the value is not null. Only applies to unicode character sequences types (`string`, `text`, `varchar`). |
@@ -602,7 +624,7 @@ The Field Objects describes one field (column, property, nested field) of a data
 | exclusiveMinimum | `number`                                     | A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                            |
 | maximum          | `number`                                     | A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                 |
 | exclusiveMaximum | `number`                                     | A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                               |
-| example          | `string`                                     | DEPRECATED, use examples. An example value.                                                                                                                                                                                                                                                                                                                                                                                  |
+| ~~example~~      | `string`                                     | DEPRECATED, use examples. An example value.                                                                                                                                                                                                                                                                                                                                                                                  |
 | examples         | Array of Any                                 | A list of example values.                                                                                                                                                                                                                                                                                                                                                                                                    |
 | pii              | `boolean`                                    | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               | 
 | classification   | `string`                                     | The data class defining the sensitivity level for this field, according to the organization's classification scheme. Examples may be: `sensitive`, `restricted`, `internal`, `public`.                                                                                                                                                                                                                                       |
@@ -613,9 +635,9 @@ The Field Objects describes one field (column, property, nested field) of a data
 | items            | [Field Object](#field-object)                | The type of the elements in the array. Use only when type is `array`.                                                                                                                                                                                                                                                                                                                                                        |
 | keys             | [Field Object](#field-object)                | Describes the key structure of a map. Defaults to `type: string` if a map is defined as type. Not all server types support different key types. Use only when type is `map`.                                                                                                                                                                                                                                                 |
 | values           | [Field Object](#field-object)                | Describes the value structure of a map. Use only when type is `map`.                                                                                                                                                                                                                                                                                                                                                         |
-| config           | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                                                                                                                                                                                                                                                                                                                     |
-
 | quality          | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on field level.                                                                                                                                                                                                                                                                                                                                                                             |
+| lineage          | [Lineage Object](#lineage-object)            | Provides information where the data comes from.                                                                                                                                                                                                                                                                                                                                                                              |
+| config           | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                                                                                                                                                                                                                                                                                                                     |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -628,9 +650,7 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 
 | Field            | Type                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                  |
 |------------------|----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name             | `string`                                     | REQUIRED. The technical name of this definition.                                                                                                                                                                                                                                                                                                                                                                             |
 | type             | [Data Type](#data-types)                     | REQUIRED. The logical data type                                                                                                                                                                                                                                                                                                                                                                                              |
-| domain           | `string`                                     | DEPRECATED. Use definition id instead. The domain in which this definition is valid. Default: `global`.                                                                                                                                                                                                                                                                                                                      |
 | title            | `string`                                     | The business name of this definition.                                                                                                                                                                                                                                                                                                                                                                                        |
 | description      | `string`                                     | Clear and concise explanations related to the domain                                                                                                                                                                                                                                                                                                                                                                         |
 | enum             | array of `string`                            | A value must be equal to one of the elements in this array value. Only evaluated if the value is not null.                                                                                                                                                                                                                                                                                                                   |
@@ -644,7 +664,7 @@ Models fields can refer to definitions using the `$ref` field to link to existin
 | exclusiveMinimum | `number`                                     | A value of a number must greater than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                            |
 | maximum          | `number`                                     | A value of a number must less than, or equal to, the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                 |
 | exclusiveMaximum | `number`                                     | A value of a number must less than the value of this. Only evaluated if the value is not null. Only applies to numeric values.                                                                                                                                                                                                                                                                                               |
-| example          | `string`                                     | An example value.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| examples         | Array of Any                                 | A list of example values.                                                                                                                                                                                                                                                                                                                                                                                                    |
 | pii              | `boolean`                                    | An indication, if this field contains Personal Identifiable Information (PII).                                                                                                                                                                                                                                                                                                                                               |
 | classification   | `string`                                     | The data class defining the sensitivity level for this field, according to the organization's classification scheme.                                                                                                                                                                                                                                                                                                         |
 | tags             | Array of `string`                            | Custom metadata to provide additional context.                                                                                                                                                                                                                                                                                                                                                                               |
@@ -829,7 +849,7 @@ An individual SQL query that returns a single number that can be compared with a
 | mustBeLessThan             | `integer`             | The threshold to check the return value of the query                            |
 | mustBeLessThanOrEqualTo    | `integer`             | The threshold to check the return value of the query                            |
 | mustBeBetween              | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
-| mustBeNotBetween           | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
+| mustNotBeBetween           | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
 
 In the query the following placeholders can be used:
 
@@ -960,6 +980,77 @@ models:
               - business-critical
               - range_check
 ```
+
+
+### Lineage Object
+
+Field level lineage provides optional fine-grained information where the data comes from and how it was transformed.
+
+The lineage object is based on the OpenLinage [Column Level Lineage Dataset Facet](https://openlineage.io/docs/spec/facets/dataset-facets/column_lineage_facet) to describe the input fields.
+
+
+
+| Field       | Type                                              | Description                                                                                                                                                                              |
+|-------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| inputFields | Array of [InputField Object](#inputfield-object) | The input fields refer to specific fields, columns, or data points from source systems or other data contracts that feed into a particular transformation, calculation, or final result. |
+
+
+#### InputField Object
+
+| Field           | Type                                                     | Description                                                                                                                                                                                                                                                                   |
+|-----------------|----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| namespace       | `string`                                                 | The input dataset namespace, such as the name of the source system or the domain of another data contract. Examples: `com.example.crm`, `checkout`, snowflake://{account name}. [More on namespace](https://openlineage.io/blog/whats-in-a-namespace/#namespaces-in-the-spec) |
+| name            | `string`                                                 | The input dataset name, such as a reference to a data contract, a fully qualified table name, a Kafka topic.                                                                                                                                                                  |
+| field           | `string`                                                 | The input field name, such as the field in an upstream data contract, a table column or a JSON Path.                                                                                                                                                                          |
+| transformations | Array of [Transformation Object](#transformation-object) | Optional. This describes how the input field data was used to generate the final result.                                                                                                                                                                                      |
+
+#### Transformation Object
+
+| Field       | Type      | Description                                                                                                                                                                                                                                                    |
+|-------------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string`  | Indicates how direct is the relationship e.g. in query. Allows values are: `DIRECT` and `INDIRECT`.                                                                                                                                                            |
+| subtype     | `string`  | Optional. Contains more specific information about the transformation.<br>Allowed values for type `DIRECT`: `IDENTITY`, `TRANSFORMATION`, `AGGREGATION`.<br>Allowed values for type `INDIRECT`: `JOIN`, `GROUP_BY`, `FILTER`, `SORT`, `WINDOW`, `CONDITIONAL`. |
+| description | `string`  | Optional. A string representation of the transformation applied.                                                                                                                                                                                               |
+| masking     | `boolean` | Optional. Boolean value indicating if the input value was obfuscated during the transformation.                                                                                                                                                                |
+
+
+Example:
+
+```yaml
+models:
+  orders:
+    fields:
+      order_id:
+        type: string
+        lineage:
+          inputFields:
+            - namespace: com.example.service.checkout
+              name: checkout_db.orders
+              field: order_id
+              transformations:
+                - type: DIRECT
+                  subtype: IDENTITY
+                  description: The order ID from the checkout order
+            - namespace: com.example.service.checkout
+              name: checkout_db.orders
+              field: order_timestamp
+                - type: INDIRECT
+                  subtype: SORT
+      customer_email_address_hash:
+        type: string
+        lineage:
+          inputFields:
+            - namespace: com.example.service.checkout
+              name: checkout_db.orders
+              field: email_address
+              transformations:
+                - type: DIRECT
+                  subtype: Transformation
+                  description: The email address from the checkout order, hashed with SHA-256
+                  masking: true
+
+```
+
 
 
 ### Config Object

@@ -19,6 +19,11 @@ servers:
     format: json
     delimiter: new_line
     description: "One folder per model. One file per day."
+    roles:
+      - name: analyst_us
+        description: Access to the data for US region
+      - name: analyst_cn
+        description: Access to the data for China region
 terms:
   usage: |
     Data can be used for reports, analytics and machine learning use cases.
@@ -27,6 +32,12 @@ terms:
     Not suitable for real-time use cases.
     Data may not be used to identify individual customers.
     Max data processing per day: 10 TiB
+  policies:
+    - name: privacy-policy
+      url: https://example.com/privacy-policy
+    - name: license
+      description: External data is licensed under agreement 1234.
+      url: https://example.com/license/1234
   billing: 5000 USD per month
   noticePeriod: P3M
 models:
@@ -35,10 +46,10 @@ models:
     type: table
     fields:
       order_id:
-        $ref: '#/definitions/order_id'
+        $ref: '#/definitions/checkout/order_id'
         required: true
         unique: true
-        primary: true
+        primaryKey: true
       order_timestamp:
         description: The business timestamp in UTC when the order was successfully registered in the source system and the payment was successful.
         type: timestamp
@@ -51,7 +62,7 @@ models:
         type: long
         required: true
         examples:
-          - "9999"
+          - 9999
         quality:
           - type: sql
             description: 95% of all order total values are expected to be between 10 and 499 EUR.
@@ -73,7 +84,12 @@ models:
         classification: sensitive
         quality:
           - type: text
-            name: The email address was verified by a user
+            description: The email address is not verified and may be invalid.
+        lineage:
+          inputFields:
+            - namespace: com.example.service.checkout
+              name: checkout_db.orders
+              field: email_address
       processed_timestamp:
         description: The timestamp when the record was processed by the data platform.
         type: timestamp
@@ -111,21 +127,20 @@ models:
     description: A single article that is part of an order.
     type: table
     fields:
-      lines_item_id:
+      line_item_id:
         type: text
         description: Primary key of the lines_item_id table
         required: true
-        unique: true
-        primary: true
       order_id:
         $ref: '#/definitions/checkout/order_id'
         references: orders.order_id
       sku:
         description: The purchased article number
-        $ref: '#/definitions/checkout/sku'
+        $ref: '#/definitions/inventory/sku'
+    primaryKey: ["order_id", "line_item_id"]
     examples:
     - |
-      lines_item_id,order_id,sku
+      line_item_id,order_id,sku
       "LI-1","1001","5901234123457"
       "LI-2","1001","4001234567890"
       "LI-3","1002","5901234123457"
@@ -138,7 +153,6 @@ models:
       "LI-10","1005","6001234567891"
 definitions:
   checkout/order_id:
-    name: order_id
     title: Order ID
     type: text
     format: uuid
@@ -149,9 +163,7 @@ definitions:
     classification: restricted
     tags:
       - orders
-  checkout/sku:
-    domain: inventory
-    name: sku
+  inventory/sku:
     title: Stock Keeping Unit
     type: text
     pattern: ^[A-Za-z0-9]{8,14}$
