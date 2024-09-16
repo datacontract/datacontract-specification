@@ -46,7 +46,7 @@ dataContractSpecification: 1.1.0
 id: urn:datacontract:checkout:orders-latest
 info:
   title: Orders Latest
-  version: 1.0.0
+  version: 2.0.0
   description: |
     Successful customer orders in the webshop. 
     All orders since 2020-01-01. 
@@ -59,7 +59,7 @@ servers:
   production:
     type: s3
     environment: prod
-    location: s3://datacontract-example-orders-latest/data/{model}/*.json
+    location: s3://datacontract-example-orders-latest/v2/{model}/*.json
     format: json
     delimiter: new_line
     description: "One folder per model. One file per day."
