@@ -1,4 +1,4 @@
-dataContractSpecification: 1.1.0
+dataContractSpecification: 0.9.3
 id: my-data-contract-id
 info:
   title: My Data Contract
@@ -55,6 +55,16 @@ info:
 #     classification:
 
 
+### examples
+
+#examples:
+#  - type: csv
+#    model: my_model
+#    data: |-
+#      id,timestamp,amount
+#      "1001","2023-09-09T08:30:00Z",2500
+#      "1002","2023-09-08T15:45:00Z",1800
+
 ### servicelevels
 
 #servicelevels:
@@ -89,3 +99,11 @@ info:
 #    cron: 0 0 * * 0
 #    recoveryTime: 24 hours
 #    recoveryPoint: 1 week
+
+### quality
+
+#quality:
+#  type: SodaCL
+#  specification:
+#    checks for my_model: |-
+#      - duplicate_count(id) = 0
