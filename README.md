@@ -90,7 +90,7 @@ models:
     type: table
     fields:
       order_id:
-        $ref: '#/definitions/checkout/order_id'
+        $ref: '#/definitions/order_id'
         required: true
         unique: true
         primaryKey: true
@@ -176,11 +176,11 @@ models:
         description: Primary key of the lines_item_id table
         required: true
       order_id:
-        $ref: '#/definitions/checkout/order_id'
+        $ref: '#/definitions/order_id'
         references: orders.order_id
       sku:
         description: The purchased article number
-        $ref: '#/definitions/inventory/sku'
+        $ref: '#/definitions/sku'
     primaryKey: ["order_id", "line_item_id"]
     examples:
       - |
@@ -196,7 +196,7 @@ models:
         "LI-9","1005","5001234567892"
         "LI-10","1005","6001234567891"
 definitions:
-  checkout/order_id:
+  order_id:
     title: Order ID
     type: text
     format: uuid
@@ -207,7 +207,7 @@ definitions:
     classification: restricted
     tags:
       - orders
-  inventory/sku:
+  sku:
     title: Stock Keeping Unit
     type: text
     pattern: ^[A-Za-z0-9]{8,14}$
