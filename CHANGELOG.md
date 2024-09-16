@@ -25,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Trino support
 - Field `type: map` support with properties `keys` and `values`
 - Definitions: `fields`, for type `object`, `record`, and `struct`
+- Field `field.primaryKey` (Replaces `field.primary`)
+- Field `model.primaryKey` to describe a composite primary key
+
 
 ### Removed
 
@@ -33,6 +36,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `quality` on top-level removed
 - `examples` on top-level removed
 - `schema` removed in favor of encoding any physical schema configuration in the `model` using the `config` map at the field level and supporting import/export ([#21](https://github.com/datacontract/datacontract-specification/issues/21)).
+
+### Deprecated
+
+- `field.primary` (use `field.primaryKey` instead)
 
 
 ## [0.9.3] - 2024-03-06
