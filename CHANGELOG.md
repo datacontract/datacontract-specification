@@ -23,6 +23,7 @@ The public API SHOULD NOT be considered stable.
 - Trino support
 - Field `type: map` support with properties `keys` and `values`
 - Definitions: `fields`, for type `object`, `record`, and `struct`
+- Add Redshift server properties `clusterIdentifier`, `endpoint`, `host` and `port`.
 
 ## [0.9.3] - 2024-03-06
 

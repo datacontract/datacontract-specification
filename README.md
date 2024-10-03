@@ -409,12 +409,51 @@ servers:
 
 #### Redshift Server Object
 
-| Field    | Type     | Description |
-|----------|----------|-------------|
-| type     | `string` | `redshift`  |
-| account  | `string` |             |
-| database | `string` |             |
-| schema   | `string` |             |
+| Field             | Type     | Description                                                                                                         |
+|-------------------|----------|---------------------------------------------------------------------------------------------------------------------|
+| type              | `string` | `redshift`                                                                                                          |
+| account           | `string` |                                                                                                                     |
+| database          | `string` |                                                                                                                     |
+| schema            | `string` |                                                                                                                     |
+| clusterIdentifier | `string` | Identifier of the cluster. <br /> Example: `analytics-cluster`                                                      |
+| host              | `string` | Host of the cluster. <br /> Example: `analytics-cluster.example.eu-west-1.redshift.amazonaws.com`                   |
+| port              | `number` | Port of the cluster. <br /> Example: `5439`                                                                         |
+| endpoint          | `string` | Endpoint of the cluster <br /> Example: `analytics-cluster.example.eu-west-1.redshift.amazonaws.com:5439/analytics` |
+
+Example, specifying an endpoint:
+
+```yaml
+servers:
+  analytics:
+    type: redshift
+    schema: analytics
+    endpoint: analytics-cluster.example.eu-west-1.redshift.amazonaws.com:5439/analytics
+```
+
+Example, specifying the cluster identifier:
+
+```yaml
+servers:
+  analytics:
+    type: redshift
+    account: '123456789012'
+    clusterIdentifier: analytics-cluster
+    database: analytics
+    port: 5439
+    schema: analytics
+```
+
+Example, specifying the cluster host:
+
+```yaml
+servers:
+  analytics:
+    type: redshift
+    host: analytics-cluster.example.eu-west-1.redshift.amazonaws.com
+    database: analytics
+    port: 5439
+    schema: analytics
+```
 
 #### Azure Server Object
 
