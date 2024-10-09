@@ -272,6 +272,10 @@
                 "type": "string",
                 "description": "An optional string describing the server."
               },
+              "host": {
+                "type": "string",
+                "description": "An optional string describing the host name."
+              },
               "database": {
                 "type": "string",
                 "description": "An optional string describing the server."
@@ -279,6 +283,28 @@
               "schema": {
                 "type": "string",
                 "description": "An optional string describing the server."
+              },
+              "clusterIdentifier": {
+                "type": "string",
+                "description": "An optional string describing the cluster's identifier.",
+                "examples": [
+                  "redshift-prod-eu",
+                  "analytics-cluster"
+                ]
+              },
+              "port": {
+                "type": "integer",
+                "description": "An optional string describing the cluster's port.",
+                "examples": [
+                  5439
+                ]
+              },
+              "endpoint": {
+                "type": "string",
+                "description": "An optional string describing the cluster's endpoint.",
+                "examples": [
+                  "analytics-cluster.example.eu-west-1.redshift.amazonaws.com:5439/analytics"
+                ]
               }
             },
             "additionalProperties": true,
