@@ -426,6 +426,8 @@ Example, specifying an endpoint:
 servers:
   analytics:
     type: redshift
+    account: '123456789012'
+    database: analytics
     schema: analytics
     endpoint: analytics-cluster.example.eu-west-1.redshift.amazonaws.com:5439/analytics
 ```
@@ -437,10 +439,9 @@ servers:
   analytics:
     type: redshift
     account: '123456789012'
-    clusterIdentifier: analytics-cluster
     database: analytics
-    port: 5439
     schema: analytics
+    clusterIdentifier: analytics-cluster
 ```
 
 Example, specifying the cluster host:
@@ -449,10 +450,11 @@ Example, specifying the cluster host:
 servers:
   analytics:
     type: redshift
-    host: analytics-cluster.example.eu-west-1.redshift.amazonaws.com
+    account: '123456789012'
     database: analytics
-    port: 5439
     schema: analytics
+    host: analytics-cluster.example.eu-west-1.redshift.amazonaws.com
+    port: 5439
 ```
 
 #### Azure Server Object

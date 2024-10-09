@@ -311,12 +311,8 @@
             "required": [
               "type",
               "account",
-              "host",
               "database",
-              "schema",
-              "clusterIdentifier",
-              "port",
-              "endpoint"
+              "schema"
             ]
           },
           {
