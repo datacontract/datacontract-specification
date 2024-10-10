@@ -277,7 +277,7 @@ Specification
 - [Model Object](#model-object)
 - [Field Object](#field-object)
 - [Definition Object](#definition-object)
-- [Schema Object](#schema-object)
+- [Schema Object (DEPRECATED)](#schema-object-deprecated)
 - [Example Object](#example-object)
 - [Service Level Object](#service-levels-object)
 - [Quality Object](#quality-object)
@@ -302,7 +302,7 @@ It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 | terms                     | [Terms Object](#terms-object)                        | Specifies the terms and conditions of the data contract.                                                 |
 | models                    | Map[`string`, [Model Object](#model-object)]           | Specifies the logical data model.                                                                        |
 | definitions               | Map[`string`, [Definition Object](#definition-object)] | Specifies definitions.                                                                                   |
-| schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                       |
+| schema                    | [Schema Object (DEPRECATED)](#schema-object-deprecated) | Specifies the physical schema. The specification supports different schema format.                       |
 | examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.      |
 | servicelevels             | [Service Levels Object](#service-levels-object)      | Specifies the service level of the provided data                                                         |
 | quality                   | [Quality Object](#quality-object)                    | Specifies the quality attributes and checks. The specification supports different quality check DSLs.    |
