@@ -894,7 +894,7 @@ Soda checks can be applied on model and field level.
 | type          | `string` | `custom`                                                                                                                    |
 | description   | `string` | Optional. A plain text describing the quality attribute in natural language.                                                |
 | engine        | `string` | `soda`                                                                                                                      |
-| specification | `object` | A check type as defined in the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html)        |
+| implementation | `object` | A check type as defined in the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html)        |
 
 
 See the [Data contract check reference](https://docs.soda.io/soda/data-contracts-checks.html) for all possible types and configuration values.
@@ -912,7 +912,7 @@ models:
           - type: custom
             description: This is a check on field level
             engine: soda
-            specification:
+            implementation:
               type: no_duplicate_values
       carrier:
         type: string
@@ -922,7 +922,7 @@ models:
       - type: custom
         description: This is a check on model level
         engine: soda
-        specification:
+        implementation:
           type: duplicate_percent
           columns:
             - carrier
@@ -931,7 +931,7 @@ models:
       - type: custom
         description: This is a check on model level
         engine: soda
-        specification:
+        implementation:
           type: row_count
           must_be_greater_than: 500000
 ```
@@ -946,7 +946,7 @@ Expectations are applied on model level.
 |---------------|----------|-----------------------------------------------------------------------------------------------------|
 | description   | `string` | Optional. A plain text describing the quality attribute in natural language.                        |
 | engine        | `string` | `great-expectations`                                                                                |
-| specification | `object` | An expectation type as listed in [Expectation](https://greatexpectations.io/expectations/) as YAML. |
+| implementation | `object` | An expectation type as listed in [Expectation](https://greatexpectations.io/expectations/) as YAML. |
 
 Example:
 
@@ -956,7 +956,7 @@ models:
     quality:
       - type: custom
         engine: great-expectations
-        specification:
+        implementation:
           expectation_type: expect_table_row_count_to_be_between
           kwargs:
             min_value: 10000
@@ -966,7 +966,7 @@ models:
       - type: custom
         engine: great-expectations
         description: "Check that passenger_count values are between 1 and 6."
-        specification:
+        implementation:
           expectation_type: expect_column_values_to_be_between
           kwargs:
             column: passenger_count
