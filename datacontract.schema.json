@@ -1666,6 +1666,7 @@
               "description": "The type of quality check",
               "enum": [
                 "text",
+                "library",
                 "sql",
                 "custom"
               ]
@@ -1674,10 +1675,7 @@
               "type": "string",
               "description": "A plain text describing the quality attribute in natural language."
             }
-          },
-          "required": [
-            "type"
-          ]
+          }
         },
         {
           "if": {
@@ -1730,6 +1728,69 @@
             },
             "required": [
               "query"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "library"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "rule": {
+                "type": "string",
+                "description": "Define a data quality check based on the predefined rules as per ODCS.",
+                "examples": ["duplicateCount", "validValues", "rowCount"]
+              },
+              "mustBe": {
+                "description": "Must be equal to the value to be valid. When using numbers, it is equivalent to '='."
+              },
+              "mustNotBe": {
+                "description": "Must not be equal to the value to be valid. When using numbers, it is equivalent to '!='."
+              },
+              "mustBeGreaterThan": {
+                "type": "number",
+                "description": "Must be greater than the value to be valid. It is equivalent to '>'."
+              },
+              "mustBeGreaterOrEqualTo": {
+                "type": "number",
+                "description": "Must be greater than or equal to the value to be valid. It is equivalent to '>='."
+              },
+              "mustBeLessThan": {
+                "type": "number",
+                "description": "Must be less than the value to be valid. It is equivalent to '<'."
+              },
+              "mustBeLessOrEqualTo": {
+                "type": "number",
+                "description": "Must be less than or equal to the value to be valid. It is equivalent to '<='."
+              },
+              "mustBeBetween": {
+                "type": "array",
+                "description": "Must be between the two numbers to be valid. Smallest number first in the array.",
+                "minItems": 2,
+                "maxItems": 2,
+                "uniqueItems": true,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "mustNotBeBetween": {
+                "type": "array",
+                "description": "Must not be between the two numbers to be valid. Smallest number first in the array.",
+                "minItems": 2,
+                "maxItems": 2,
+                "uniqueItems": true,
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "rule"
             ]
           }
         },
