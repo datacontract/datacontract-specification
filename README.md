@@ -878,19 +878,20 @@ An individual SQL query that returns a single number that can be compared with a
 > __Note:__ Establish a secure development process and use read-only connections, as the misuse of SQL queries can lead to SQL injection attacks.
 
 
-| Field                      | Type                  | Description                                                                     |
-|----------------------------|-----------------------|---------------------------------------------------------------------------------|
-| type                       | `string`              | `sql`                                                                           |
-| description                | `string`              | A plain text describing the quality of the data.                                |
-| query                      | `string`              | A SQL query that returns a single number to compare with the threshold.         |
-| mustBe                     | `integer`             | The threshold to check the return value of the query                            |
-| mustNotBe                  | `integer`             | The threshold to check the return value of the query                            |
-| mustBeGreaterThan          | `integer`             | The threshold to check the return value of the query                            |
-| mustBeGreaterThanOrEqualTo | `integer`             | The threshold to check the return value of the query                            |
-| mustBeLessThan             | `integer`             | The threshold to check the return value of the query                            |
-| mustBeLessThanOrEqualTo    | `integer`             | The threshold to check the return value of the query                            |
-| mustBeBetween              | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
-| mustNotBeBetween           | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive. |
+| Field                      | Type                  | Description                                                                                                                                                |
+|----------------------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type                       | `string`              | `sql`                                                                                                                                                      |
+| description                | `string`              | A plain text describing the quality of the data.                                                                                                           |
+| query                      | `string`              | A SQL query that returns a single number to compare with the threshold.                                                                                    |
+| dialect                    | `string`              | The SQL dialect that is used for the query. Should be compatible to the server type. Examples: `postgres`, `spark`, `bigquery`, `snowflake`, `duckdb`, ... |
+| mustBe                     | `integer`             | The threshold to check the return value of the query                                                                                                       |
+| mustNotBe                  | `integer`             | The threshold to check the return value of the query                                                                                                       |
+| mustBeGreaterThan          | `integer`             | The threshold to check the return value of the query                                                                                                       |
+| mustBeGreaterThanOrEqualTo | `integer`             | The threshold to check the return value of the query                                                                                                       |
+| mustBeLessThan             | `integer`             | The threshold to check the return value of the query                                                                                                       |
+| mustBeLessThanOrEqualTo    | `integer`             | The threshold to check the return value of the query                                                                                                       |
+| mustBeBetween              | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive.                                                                            |
+| mustNotBeBetween           | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive.                                                                            |
 
 In the query the following placeholders can be used:
 

@@ -1718,6 +1718,19 @@
                 "type": "string",
                 "description": "A SQL query that returns a single number to compare with the threshold."
               },
+              "dialect": {
+                "type": "string",
+                "description": "The SQL dialect that is used for the query. Should be compatible to the server.type.",
+                "examples": [
+                  "athena",
+                  "bigquery",
+                  "redshift",
+                  "snowflake",
+                  "trino",
+                  "postgres",
+                  "oracle"
+                ]
+              },
               "mustBe": {
                 "type": "integer"
               },
