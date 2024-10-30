@@ -430,12 +430,53 @@ servers:
 
 #### Redshift Server Object
 
-| Field    | Type     | Description |
-|----------|----------|-------------|
-| type     | `string` | `redshift`  |
-| account  | `string` |             |
-| database | `string` |             |
-| schema   | `string` |             |
+| Field             | Type     | Description                                                                                                         |
+|-------------------|----------|---------------------------------------------------------------------------------------------------------------------|
+| type              | `string` | `redshift`                                                                                                          |
+| account           | `string` |                                                                                                                     |
+| database          | `string` |                                                                                                                     |
+| schema            | `string` |                                                                                                                     |
+| clusterIdentifier | `string` | Identifier of the cluster. <br /> Example: `analytics-cluster`                                                      |
+| host              | `string` | Host of the cluster. <br /> Example: `analytics-cluster.example.eu-west-1.redshift.amazonaws.com`                   |
+| port              | `number` | Port of the cluster. <br /> Example: `5439`                                                                         |
+| endpoint          | `string` | Endpoint of the cluster <br /> Example: `analytics-cluster.example.eu-west-1.redshift.amazonaws.com:5439/analytics` |
+
+Example, specifying an endpoint:
+
+```yaml
+servers:
+  analytics:
+    type: redshift
+    account: '123456789012'
+    database: analytics
+    schema: analytics
+    endpoint: analytics-cluster.example.eu-west-1.redshift.amazonaws.com:5439/analytics
+```
+
+Example, specifying the cluster identifier:
+
+```yaml
+servers:
+  analytics:
+    type: redshift
+    account: '123456789012'
+    database: analytics
+    schema: analytics
+    clusterIdentifier: analytics-cluster
+```
+
+Example, specifying the cluster host:
+
+```yaml
+servers:
+  analytics:
+    type: redshift
+    account: '123456789012'
+    database: analytics
+    schema: analytics
+    host: analytics-cluster.example.eu-west-1.redshift.amazonaws.com
+    port: 5439
+```
 
 #### Azure Server Object
 
@@ -690,7 +731,7 @@ One can either describe each service level informally using the `description` fi
 |--------------|-----------------------------------------------|-------------------------------------------------------------------------|
 | availability | [Availability Object](#availability-object)   | The promised uptime of the system that provides the data                |
 | retention    | [Retention Object](#retention-object)         | The period how long data will be available.                             |
-| latency      | [Latency Object](#latency-object)             | The maximum amount of time from the the source to its destination. |
+| latency      | [Latency Object](#latency-object)             | The maximum amount of time from the source to its destination. |
 | freshness    | [Freshness Object](#freshness-object)         | The maximum age of the youngest entry.                                  |
 | frequency    | [Frequency Object](#frequency-object)         | The update frequency.                                                   |
 | support      | [Support Object](#support-object)             | The times when support is provided.                                     |

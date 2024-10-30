@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Definitions: `fields`, for type `object`, `record`, and `struct`
 - Field `field.primaryKey` (Replaces `field.primary`)
 - Field `model.primaryKey` to describe a composite primary key
-
+- Add Redshift server properties `clusterIdentifier`, `endpoint`, `host` and `port`.
 
 ### Removed
 
