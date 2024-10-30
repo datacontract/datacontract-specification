@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Please note,  while the major version is zero (0.y.z), Anything MAY change at any time. 
-The public API SHOULD NOT be considered stable.
+## [1.1.0] - 2024-09-09
 
 ### Added
+- Data quality on model and field level ([#55](https://github.com/datacontract/datacontract-specification/issues/55))
+- Lineage support ([#90](https://github.com/datacontract/datacontract-specification/issues/90))
+- Field and definition `examples` as array of any type, instead of `example` as a single value ([#29](https://github.com/datacontract/datacontract-specification/issues/29)
 - Support for server-specific data types as config map ([#63](https://github.com/datacontract/datacontract-specification/issues/63))
 - AWS Glue Catalog server support
 - sftp server support
@@ -23,7 +25,22 @@ The public API SHOULD NOT be considered stable.
 - Trino support
 - Field `type: map` support with properties `keys` and `values`
 - Definitions: `fields`, for type `object`, `record`, and `struct`
+- Field `field.primaryKey` (Replaces `field.primary`)
+- Field `model.primaryKey` to describe a composite primary key
 - Add Redshift server properties `clusterIdentifier`, `endpoint`, `host` and `port`.
+
+### Removed
+
+- `definitions.domain` removed (use a hierarchical structure instead)
+- `definitions.name` removed (use a hierarchical structure instead)
+- `quality` on top-level removed
+- `examples` on top-level removed
+- `schema` removed in favor of encoding any physical schema configuration in the `model` using the `config` map at the field level and supporting import/export ([#21](https://github.com/datacontract/datacontract-specification/issues/21)).
+
+### Deprecated
+
+- `field.primary` (use `field.primaryKey` instead)
+
 
 ## [0.9.3] - 2024-03-06
 
