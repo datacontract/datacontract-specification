@@ -277,7 +277,7 @@ Specification
 - [Model Object](#model-object)
 - [Field Object](#field-object)
 - [Definition Object](#definition-object)
-- [Schema Object](#schema-object)
+- [Schema Object (DEPRECATED)](#schema-object-deprecated)
 - [Example Object](#example-object)
 - [Service Level Object](#service-levels-object)
 - [Quality Object](#quality-object)
@@ -302,7 +302,7 @@ It is _RECOMMENDED_ that the root document be named: `datacontract.yaml`.
 | terms                     | [Terms Object](#terms-object)                        | Specifies the terms and conditions of the data contract.                                                 |
 | models                    | Map[`string`, [Model Object](#model-object)]           | Specifies the logical data model.                                                                        |
 | definitions               | Map[`string`, [Definition Object](#definition-object)] | Specifies definitions.                                                                                   |
-| schema                    | [Schema Object](#schema-object)                      | Specifies the physical schema. The specification supports different schema format.                       |
+| schema                    | [Schema Object (DEPRECATED)](#schema-object-deprecated) | Specifies the physical schema. The specification supports different schema format.                       |
 | examples                  | Array of [Example Objects](#example-object)          | Specifies example data sets for the data model. The specification supports different example types.      |
 | servicelevels             | [Service Levels Object](#service-levels-object)      | Specifies the service level of the provided data                                                         |
 | quality                   | [Quality Object](#quality-object)                    | Specifies the quality attributes and checks. The specification supports different quality check DSLs.    |
@@ -409,12 +409,53 @@ servers:
 
 #### Redshift Server Object
 
-| Field    | Type     | Description |
-|----------|----------|-------------|
-| type     | `string` | `redshift`  |
-| account  | `string` |             |
-| database | `string` |             |
-| schema   | `string` |             |
+| Field             | Type     | Description                                                                                                         |
+|-------------------|----------|---------------------------------------------------------------------------------------------------------------------|
+| type              | `string` | `redshift`                                                                                                          |
+| account           | `string` |                                                                                                                     |
+| database          | `string` |                                                                                                                     |
+| schema            | `string` |                                                                                                                     |
+| clusterIdentifier | `string` | Identifier of the cluster. <br /> Example: `analytics-cluster`                                                      |
+| host              | `string` | Host of the cluster. <br /> Example: `analytics-cluster.example.eu-west-1.redshift.amazonaws.com`                   |
+| port              | `number` | Port of the cluster. <br /> Example: `5439`                                                                         |
+| endpoint          | `string` | Endpoint of the cluster <br /> Example: `analytics-cluster.example.eu-west-1.redshift.amazonaws.com:5439/analytics` |
+
+Example, specifying an endpoint:
+
+```yaml
+servers:
+  analytics:
+    type: redshift
+    account: '123456789012'
+    database: analytics
+    schema: analytics
+    endpoint: analytics-cluster.example.eu-west-1.redshift.amazonaws.com:5439/analytics
+```
+
+Example, specifying the cluster identifier:
+
+```yaml
+servers:
+  analytics:
+    type: redshift
+    account: '123456789012'
+    database: analytics
+    schema: analytics
+    clusterIdentifier: analytics-cluster
+```
+
+Example, specifying the cluster host:
+
+```yaml
+servers:
+  analytics:
+    type: redshift
+    account: '123456789012'
+    database: analytics
+    schema: analytics
+    host: analytics-cluster.example.eu-west-1.redshift.amazonaws.com
+    port: 5439
+```
 
 #### Azure Server Object
 
@@ -878,7 +919,7 @@ One can either describe each service level informally using the `description` fi
 |--------------|-----------------------------------------------|-------------------------------------------------------------------------|
 | availability | [Availability Object](#availability-object)   | The promised uptime of the system that provides the data                |
 | retention    | [Retention Object](#retention-object)         | The period how long data will be available.                             |
-| latency      | [Latency Object](#latency-object)             | The maximum amount of time from the the source to its destination. |
+| latency      | [Latency Object](#latency-object)             | The maximum amount of time from the source to its destination. |
 | freshness    | [Freshness Object](#freshness-object)         | The maximum age of the youngest entry.                                  |
 | frequency    | [Frequency Object](#frequency-object)         | The update frequency.                                                   |
 | support      | [Support Object](#support-object)             | The times when support is provided.                                     |
