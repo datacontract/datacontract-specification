@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.1.0] - 2024-09-09
+## [1.1.0] - 2024-10-30
 
 ### Added
 - Data quality on model and field level ([#55](https://github.com/datacontract/datacontract-specification/issues/55))
