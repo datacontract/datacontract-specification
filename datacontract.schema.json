@@ -680,6 +680,12 @@
             },
             "description": "The compound primary key of the model."
           },
+          "quality": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/Quality"
+            }
+          },
           "examples": {
             "type": "array"
           },
@@ -1702,6 +1708,20 @@
               "type": "string",
               "description": "A plain text describing the quality attribute in natural language."
             }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "text"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "description"
+            ]
           }
         },
         {
