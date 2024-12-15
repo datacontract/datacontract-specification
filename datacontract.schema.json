@@ -1876,7 +1876,7 @@
                 ],
                 "description": "The engine used for custom quality checks."
               },
-              "specification": {
+              "implementation": {
                 "type": [
                   "object",
                   "array",
