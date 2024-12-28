@@ -48,8 +48,8 @@ info:
   title: Orders Latest
   version: 2.0.0
   description: |
-    Successful customer orders in the webshop. 
-    All orders since 2020-01-01. 
+    Successful customer orders in the webshop.
+    All orders since 2020-01-01.
     Orders with their line items are in their current state (no history included).
   owner: Checkout Team
   contact:
@@ -145,8 +145,11 @@ models:
       - type: sql
         description: The maximum duration between two orders should be less that 3600 seconds
         query: |
-          SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
-          FROM orders
+          SELECT MAX(duration) AS max_duration 
+          FROM (
+            SELECT EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp))) AS duration 
+            FROM orders
+          )
         mustBeLessThan: 3600
       - type: sql
         description: Row Count
@@ -214,7 +217,7 @@ definitions:
     examples:
       - "96385074"
     description: |
-      A Stock Keeping Unit (SKU) is an internal unique identifier for an article. 
+      A Stock Keeping Unit (SKU) is an internal unique identifier for an article.
       It is typically associated with an article's barcode, such as the EAN/GTIN.
     links:
       wikipedia: https://en.wikipedia.org/wiki/Stock_keeping_unit
@@ -911,8 +914,11 @@ models:
       - type: sql
         description: The maximum duration between two orders must be less that 3600 seconds
         query: |
-          SELECT MAX(EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp)))) AS max_duration
-          FROM {model}
+          SELECT MAX(duration) AS max_duration 
+          FROM (
+            SELECT EXTRACT(EPOCH FROM (order_timestamp - LAG(order_timestamp) OVER (ORDER BY order_timestamp))) AS duration 
+            FROM {model}
+          )
         mustBeLessThan: 3600
 ```
 
