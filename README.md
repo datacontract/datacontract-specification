@@ -1118,7 +1118,7 @@ For developer experience, a list of well-known field names is maintained here, a
 | bigqueryType    | `string` | (Only on field level) Specify the physical column type that is used in a BigQuery table, e.g., `NUMERIC(5, 2)` |
 | snowflakeType   | `string` | (Only on field level) Specify the physical column type that is used in a Snowflake table, e.g, `TIMESTAMP_LTZ` |
 | redshiftType    | `string` | (Only on field level) Specify the physical column type that is used in a Redshift table, e.g, `SMALLINT`       |
-| sqlserverType   | `string` | (Only on field level) Specify the physical column type that is used in a Snowflake table, e.g, `DATETIME2`     |
+| sqlserverType   | `string` | (Only on field level) Specify the physical column type that is used in a SQL Server table, e.g, `DATETIME2`     |
 | databricksType  | `string` | (Only on field level) Specify the physical column type that is used in a Databricks table                      |
 | glueType        | `string` | (Only on field level) Specify the physical column type that is used in a AWS Glue Data Catalog table           |
 
