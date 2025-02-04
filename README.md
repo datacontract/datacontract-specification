@@ -370,12 +370,12 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type                                               | Description                                                                                                                                                                                                                                                                           |
-|-------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string`                                           | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
-| description | `string`                                           | An optional string describing the server.                                                                                                                                                                                                                                             |
-| environment | `string`                                           | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                                  |
-| roles       | Array of [Server Role Object](#server-role-object) | An optional array of roles that are available and can be requested to access the server for role-based access control. E.g. separate roles for different regions or sensitive data.                                                                                                   |
+| Field       | Type                                               | Description                                                                                                                                                                                                                                                                                         |
+|-------------|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string`                                           | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `clickhouse`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
+| description | `string`                                           | An optional string describing the server.                                                                                                                                                                                                                                                           |
+| environment | `string`                                           | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                                                |
+| roles       | Array of [Server Role Object](#server-role-object) | An optional array of roles that are available and can be requested to access the server for role-based access control. E.g. separate roles for different regions or sensitive data.                                                                                                                 |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -630,16 +630,17 @@ The Model Object describes the structure and semantics of a data model, such as 
 
 The name of the data model (table name) is defined by the key that refers to this Model Object.
 
-| Field       | Type                                         | Description                                                                                                                          |
-|-------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string`                                     | The type of the model. Examples: `table`, `view`, `object`. Default: `table`.                                                        |
-| description | `string`                                     | An optional string describing the data model.                                                                                        |
-| title       | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
-| fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
-| primaryKey  | Array of `string`                            | If the primary key is a compound key, list the field names that constitute the primary key. Alternative to field-level `primaryKey`. |
-| quality     | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on model level.                                                                                     |
-| examples    | Array of `Any`                               | Specifies example data sets for the model.                                                                                           |
-| config      | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
+| Field            | Type                                         | Description                                                                                                                          |
+|------------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| type             | `string`                                     | The type of the model. Examples: `table`, `view`, `object`. Default: `table`.                                                        |
+| description      | `string`                                     | An optional string describing the data model.                                                                                        |
+| title            | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
+| fields           | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
+| primaryKey       | Array of `string`                            | If the primary key is a compound key, list the field names that constitute the primary key. Alternative to field-level `primaryKey`. |
+| quality          | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on model level.                                                                                     |
+| examples         | Array of `Any`                               | Specifies example data sets for the model.                                                                                           |
+| additionalFields | `Boolean`                                    | Specify, if the model can have additional fields that are not defined in the contract. Default: `false`.                            |
+| config           | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
 
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
