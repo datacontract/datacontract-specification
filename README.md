@@ -271,7 +271,7 @@ The [Data Contract CLI](https://cli.datacontract.com) is a command line tool and
 Here is short example how to verify that your actual dataset matches the data contract: 
 
 ```bash
-pip3 install datacontract-cli
+pip3 install "datacontract-cli[all]"
 datacontract test https://datacontract.com/examples/orders-latest/datacontract.yaml
 ```
 
