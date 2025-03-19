@@ -52,6 +52,7 @@ info:
     All orders since 2020-01-01.
     Orders with their line items are in their current state (no history included).
   owner: Checkout Team
+  status: active
   contact:
     name: John Doe (Data Product Owner)
     url: https://teams.microsoft.com/l/channel/example/checkout
