@@ -1084,6 +1084,7 @@ models:
             - namespace: com.example.service.checkout
               name: checkout_db.orders
               field: order_timestamp
+              transformations:
                 - type: INDIRECT
                   subtype: SORT
       customer_email_address_hash:
