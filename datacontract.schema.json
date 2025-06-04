@@ -7,6 +7,7 @@
       "type": "string",
       "title": "DataContractSpecificationVersion",
       "enum": [
+        "1.2.0",
         "1.1.0",
         "0.9.3",
         "0.9.2",
@@ -334,6 +335,21 @@
             },
             "then": {
               "$ref": "#/$defs/TrinoServer"
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "clickhouse"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            },
+            "then": {
+              "$ref": "#/$defs/ClickhouseServer"
             }
           },
           {
@@ -688,6 +704,11 @@
           },
           "examples": {
             "type": "array"
+          },
+          "additionalFields": {
+            "type": "boolean",
+            "description": " Specify, if the model can have additional fields that are not defined in the contract.                            ",
+            "default": false
           },
           "config": {
             "type": "object",
@@ -1115,25 +1136,26 @@
         "type": {
           "type": "string",
           "description": "The type of the data product technology that implements the data contract.",
-          "enum": [
+          "examples": [
+            "azure",
             "bigquery",
             "BigQuery",
-            "s3",
-            "sftp",
-            "redshift",
-            "azure",
-            "sqlserver",
-            "snowflake",
+            "clickhouse",
             "databricks",
             "dataframe",
             "glue",
-            "postgres",
-            "oracle",
             "kafka",
-            "pubsub",
             "kinesis",
-            "trino",
-            "local"
+            "local",
+            "oracle",
+            "postgres",
+            "pubsub",
+            "redshift",
+            "sftp",
+            "sqlserver",
+            "snowflake",
+            "s3",
+            "trino"
           ]
         },
         "roles": {
@@ -1661,6 +1683,35 @@
         "port",
         "catalog",
         "schema"
+      ]
+    },
+    "ClickhouseServer": {
+      "type": "object",
+      "title": "ClickhouseServer",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The host to the database server",
+          "examples": [
+            "localhost"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port to the database server."
+        },
+        "database": {
+          "type": "string",
+          "description": "The name of the database.",
+          "examples": [
+            "postgres"
+          ]
+        }
+      },
+      "required": [
+        "host",
+        "port",
+        "database"
       ]
     },
     "LocalServer": {
