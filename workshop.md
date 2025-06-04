@@ -59,21 +59,21 @@ We recommend to use the [Excel template](https://github.com/datacontract/open-da
 ### Recommended Order of Completion (ODCS)
 
 1. Fundamentals (get the context)
-   - [Fill in the fundamentals][fundamentals](https://bitol-io.github.io/open-data-contract-standard/latest/#fundamentals) consisting of id, name, version, status, and description.
+   - **[Fill in the fundamentals](https://bitol-io.github.io/open-data-contract-standard/latest/#fundamentals)** consisting of id, name, version, status, and description.
 2. Schema (you will spend most of your time here)
-   - [Fill in the schemas](https://bitol-io.github.io/open-data-contract-standard/latest/#schema) (tables) and their properties (columns) along with their name and logicalType as a start in the schema part. 
+   - **[Fill in the schemas](https://bitol-io.github.io/open-data-contract-standard/latest/#schema)** (tables) and their properties (columns) along with their name and logicalType as a start in the schema part. 
    - After that, add information like `description`, `classification`, ...
    - Use tags or customProperties add additional metadata where there is no direct support by ODCS
 3. Quality
-   - [Add quality checks](https://bitol-io.github.io/open-data-contract-standard/latest/#data-quality) at the schema or the property level. Start with quality checks of type text first to capture the requirements.
+   - **[Add quality checks](https://bitol-io.github.io/open-data-contract-standard/latest/#data-quality)** at the schema or the property level. Start with quality checks of type text first to capture the requirements.
    - OPTIONAL Conver the text-based requirements into automated sql-based quality checks
 4. SLAs
-   - [Add SLAs](https://bitol-io.github.io/open-data-contract-standard/latest/#service-level-agreement-sla) that the data provider guarantees towards all data consumers.
+   - **[Add SLAs](https://bitol-io.github.io/open-data-contract-standard/latest/#service-level-agreement-sla)** that the data provider guarantees towards all data consumers.
 5. Team & Support
-   - Add the [team members](https://bitol-io.github.io/open-data-contract-standard/latest/#team) so that the data consumer knows who is part of the team that owns the data protected by the data contracts.
-   - Add a [support channel](https://bitol-io.github.io/open-data-contract-standard/latest/#support-and-communication-channels) so (potential) data consumers know how to get support and reach the data owners.
+   - **[Add the team members](https://bitol-io.github.io/open-data-contract-standard/latest/#team)** so that the data consumer knows who is part of the team that owns the data protected by the data contracts.
+   - **[Add a support channel](https://bitol-io.github.io/open-data-contract-standard/latest/#support-and-communication-channels)** so (potential) data consumers know how to get support and reach the data owners.
 6. Servers (if already applicable)
-   - [Add the server information](https://bitol-io.github.io/open-data-contract-standard/latest/#infrastructure-and-servers) on where the data is available
+   - **[Add the server information](https://bitol-io.github.io/open-data-contract-standard/latest/#infrastructure-and-servers)** on where the data is available
    - Use the [Data Contract CLI](https://cli.datacontract.com) to test the schema against the actual data on a specific server:\\
     `datacontract test datacontract.yaml`
 
