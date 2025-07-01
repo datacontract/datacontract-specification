@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Data Type Example - Data Contract Specification v1.2.0</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        .field {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        .field-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .field-type {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .field-description {
+            color: #7f8c8d;
+            margin: 5px 0;
+        }
+        .examples {
+            background: #ecf0f1;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .example-item {
+            background: white;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 3px;
+            font-family: monospace;
+            border-left: 3px solid #27ae60;
+        }
+        .version-badge {
+            background: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .info-section {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .use-case {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+        .model-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="version-badge">Data Contract Specification v1.2.0</div>
+        <h1>Time Data Type Example</h1>
+        
+        <div class="info-section">
+            <h2>Overview</h2>
+            <p>This example demonstrates the usage of the new <strong>time</strong> data type introduced in Data Contract Specification v1.2.0. The time data type is specifically designed for storing time values without date information, making it perfect for business hours, schedules, and time-based data.</p>
+        </div>
+
+        <div class="warning">
+            <strong>Note:</strong> The <code>time</code> data type may not be supported by all server types. Please check your specific data platform's documentation for compatibility.
+        </div>
+
+        <h2>Data Contract Details</h2>
+        <ul>
+            <li><strong>ID:</strong> urn:datacontract:example:time-demo</li>
+            <li><strong>Title:</strong> Time Data Type Example</li>
+            <li><strong>Version:</strong> 1.0.0</li>
+            <li><strong>Owner:</strong> Data Contract Team</li>
+        </ul>
+
+        <div class="model-section">
+            <h2>Model: business_hours</h2>
+            <p>This model demonstrates how to use the time data type for business hours and schedules.</p>
+
+            <div class="field">
+                <div class="field-name">location_id</div>
+                <div class="field-type">type: string</div>
+                <div class="field-description">Unique identifier for the business location</div>
+                <div class="examples">
+                    <strong>Examples:</strong>
+                    <div class="example-item">"loc_001"</div>
+                    <div class="example-item">"loc_002"</div>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-name">opening_time</div>
+                <div class="field-type">type: time</div>
+                <div class="field-description">Daily opening time for the business</div>
+                <div class="examples">
+                    <strong>Examples:</strong>
+                    <div class="example-item">"09:00:00"</div>
+                    <div class="example-item">"08:30:00"</div>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-name">closing_time</div>
+                <div class="field-type">type: time</div>
+                <div class="field-description">Daily closing time for the business</div>
+                <div class="examples">
+                    <strong>Examples:</strong>
+                    <div class="example-item">"17:00:00"</div>
+                    <div class="example-item">"21:00:00"</div>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-name">lunch_start</div>
+                <div class="field-type">type: time</div>
+                <div class="field-description">Start time of lunch break</div>
+                <div class="examples">
+                    <strong>Examples:</strong>
+                    <div class="example-item">"12:00:00"</div>
+                    <div class="example-item">"12:30:00"</div>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-name">lunch_end</div>
+                <div class="field-type">type: time</div>
+                <div class="field-description">End time of lunch break</div>
+                <div class="examples">
+                    <strong>Examples:</strong>
+                    <div class="example-item">"13:00:00"</div>
+                    <div class="example-item">"13:30:00"</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="model-section">
+            <h2>Model: shift_schedules</h2>
+            <p>This model demonstrates time data type usage for employee shift schedules.</p>
+
+            <div class="field">
+                <div class="field-name">shift_start</div>
+                <div class="field-type">type: time</div>
+                <div class="field-description">Start time of the employee's shift</div>
+                <div class="examples">
+                    <strong>Examples:</strong>
+                    <div class="example-item">"08:00:00"</div>
+                    <div class="example-item">"16:00:00"</div>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-name">shift_end</div>
+                <div class="field-type">type: time</div>
+                <div class="field-description">End time of the employee's shift</div>
+                <div class="examples">
+                    <strong>Examples:</strong>
+                    <div class="example-item">"16:00:00"</div>
+                    <div class="example-item">"00:00:00"</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Sample Data</h2>
+        <div class="examples">
+            <strong>Business Hours CSV Example:</strong>
+            <div class="example-item">location_id,location_name,opening_time,closing_time,lunch_start,lunch_end</div>
+            <div class="example-item">"loc_001","Downtown Store","09:00:00","17:00:00","12:00:00","13:00:00"</div>
+            <div class="example-item">"loc_002","Mall Branch","08:30:00","21:00:00","12:30:00","13:30:00"</div>
+            <div class="example-item">"loc_003","24/7 Store","00:00:00","23:59:59",,</div>
+        </div>
+
+        <div class="examples">
+            <strong>Shift Schedules CSV Example:</strong>
+            <div class="example-item">employee_id,shift_start,shift_end,break_start,break_end</div>
+            <div class="example-item">"emp_001","08:00:00","16:00:00","12:00:00","13:00:00"</div>
+            <div class="example-item">"emp_002","16:00:00","00:00:00","20:00:00","21:00:00"</div>
+            <div class="example-item">"emp_003","00:00:00","08:00:00",,</div>
+        </div>
+
+        <h2>Time Data Type Characteristics</h2>
+        <ul>
+            <li><strong>Format:</strong> Typically follows ISO 8601 time format (HH:MM:SS)</li>
+            <li><strong>No Date Information:</strong> Contains only time components, no date</li>
+            <li><strong>24-hour Format:</strong> Uses 24-hour clock format</li>
+            <li><strong>Optional Seconds:</strong> Can include or exclude seconds based on precision needs</li>
+        </ul>
+
+        <h2>Use Cases</h2>
+        <div class="use-case">
+            <h3>Business Operations</h3>
+            <ul>
+                <li>Store opening and closing hours</li>
+                <li>Service availability times</li>
+                <li>Break and lunch schedules</li>
+                <li>Operating hours for different days</li>
+            </ul>
+        </div>
+
+        <div class="use-case">
+            <h3>Employee Management</h3>
+            <ul>
+                <li>Shift start and end times</li>
+                <li>Break periods</li>
+                <li>Work schedule definitions</li>
+                <li>Time tracking data</li>
+            </ul>
+        </div>
+
+        <div class="use-case">
+            <h3>Event Scheduling</h3>
+            <ul>
+                <li>Meeting start and end times</li>
+                <li>Event schedules</li>
+                <li>Appointment times</li>
+                <li>Class schedules</li>
+            </ul>
+        </div>
+
+        <div class="use-case">
+            <h3>Transportation</h3>
+            <ul>
+                <li>Departure and arrival times</li>
+                <li>Bus and train schedules</li>
+                <li>Flight times</li>
+                <li>Delivery time windows</li>
+            </ul>
+        </div>
+
+        <h2>Comparison with Other Time-Related Types</h2>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background: #f8f9fa;">
+                    <th style="border: 1px solid #dee2e6; padding: 10px; text-align: left;">Data Type</th>
+                    <th style="border: 1px solid #dee2e6; padding: 10px; text-align: left;">Description</th>
+                    <th style="border: 1px solid #dee2e6; padding: 10px; text-align: left;">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;"><code>time</code></td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">Time only, no date</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">"09:00:00"</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;"><code>date</code></td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">Date only, no time</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">"2024-01-15"</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;"><code>timestamp</code></td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">Date and time with timezone</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">"2024-01-15T09:00:00Z"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-section">
+            <h2>Testing</h2>
+            <p>You can test this data contract using the Data Contract CLI:</p>
+            <div class="example-item">datacontract test examples/time-example/datacontract.yaml</div>
+        </div>
+
+        <div class="warning">
+            <strong>Important:</strong> When using the time data type, ensure your data processing tools and pipelines are compatible with time-only data. Some data platforms may require specific configurations or have limitations when working with time data types.
+        </div>
+    </div>
+</body>
+</html> 

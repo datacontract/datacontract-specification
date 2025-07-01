@@ -1,4 +1,22 @@
-# Data Contract Specification 
+# Data Contract Specification v1.2.0
+
+## Changes in v1.2.0
+
+### Added Data Types
+
+- **`variant`**: Semi-structured data type for storing variant/semi-structured data (may not be supported by some server types)
+- **`json`**: JSON data type for storing JSON-formatted data (may not be supported by some server types)
+- **`time`**: Time data type for specifying time values without date information
+
+### Issues Addressed
+
+- [#113](https://github.com/datacontract/datacontract-specification/issues/113): Add VARIANT data type
+- [#112](https://github.com/datacontract/datacontract-specification/issues/112): Add JSON data type
+- [#123](https://github.com/datacontract/datacontract-specification/issues/123): Add TIME data type
+
+### Documentation
+
+The complete specification documentation is available in the main [README.md](../README.md) file.
 
 <a href="https://github.com/datacontract/datacontract-specification">
     <img alt="Stars" src="https://img.shields.io/github/stars/datacontract/datacontract-specification" /></a>

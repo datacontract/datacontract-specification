@@ -1,0 +1,75 @@
+dataContractSpecification: 1.2.0
+id: urn:datacontract:example:variant-json-demo
+info:
+  title: Variant and JSON Data Types Example
+  version: 1.0.0
+  description: |
+    Example demonstrating the usage of variant and json data types
+    introduced in Data Contract Specification v1.2.0.
+  owner: Data Contract Team
+  contact:
+    name: Data Contract Team
+    url: https://github.com/datacontract/datacontract-specification
+servers:
+  production:
+    type: s3
+    environment: prod
+    location: s3://example-variant-json-demo/{model}/*.json
+    format: json
+    delimiter: new_line
+    description: "Example data with variant and json fields"
+terms:
+  usage: |
+    This is an example demonstrating the new variant and json data types.
+    Data can be used for testing and educational purposes.
+  limitations: |
+    This is example data only and should not be used in production.
+models:
+  user_profiles:
+    description: User profiles with variant and JSON data fields
+    type: table
+    fields:
+      user_id:
+        type: string
+        description: Unique identifier for the user
+        required: true
+        primaryKey: true
+        examples:
+          - "user_123"
+          - "user_456"
+      profile_data:
+        type: variant
+        description: Semi-structured profile data that can contain various types of information
+        required: false
+        examples:
+          - "John Doe"
+          - 25
+          - true
+          - {"preferences": {"theme": "dark", "language": "en"}}
+      metadata:
+        type: json
+        description: JSON-formatted metadata about the user profile
+        required: false
+        examples:
+          - '{"created_at": "2024-01-15T10:30:00Z", "source": "web_form", "version": 1}'
+          - '{"tags": ["premium", "verified"], "settings": {"notifications": true}}'
+      preferences:
+        type: json
+        description: User preferences stored as JSON
+        required: false
+        examples:
+          - '{"theme": "dark", "language": "en", "timezone": "UTC"}'
+          - '{"notifications": {"email": true, "sms": false, "push": true}}'
+    examples:
+      - |
+        user_id,profile_data,metadata,preferences
+        "user_123","John Doe",'{"created_at": "2024-01-15T10:30:00Z", "source": "web_form"}','{"theme": "dark", "language": "en"}'
+        "user_456",25,'{"tags": ["premium"], "version": 2}','{"notifications": {"email": true, "sms": false}}'
+        "user_789",true,'{"source": "api", "verified": true}','{"theme": "light", "timezone": "EST"}'
+tags:
+  - example
+  - variant
+  - json
+  - v1.2.0
+links:
+  datacontractCli: https://cli.datacontract.com 
