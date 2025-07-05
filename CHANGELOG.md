@@ -5,13 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.0] - 2024-01-22
+## [1.2.0] - 2024-07-05
 
 ### Added
-- Support for models.additionalFields (#99)
+- Support for `models.additionalFields` to define if additional fields (columns) are allowed or not in the physical server ([#99](https://github.com/datacontract/datacontract-specification/pull/99))
+- Add `time` data type ([#123](https://github.com/datacontract/datacontract-specification/issues/123))
+- Added `variant` data type ([#113](https://github.com/datacontract/datacontract-specification/issues/113))
+- Added `json` data types ([#112](https://github.com/datacontract/datacontract-specification/issues/112))
 
 ### Changed
-- server.type changed from enum to simple string to support custom types (#107)
+- `server.type` changed from enum to simple string to support custom types ([#107](https://github.com/datacontract/datacontract-specification/pull/107))
 
 ## [1.1.0] - 2024-10-30
 

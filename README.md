@@ -34,7 +34,7 @@ The specification comes along with the [Data Contract CLI](https://github.com/da
 Version
 ---
 
-1.1.0([Changelog](CHANGELOG.md))
+1.2.0([Changelog](CHANGELOG.md))
 
 Example
 ---
@@ -42,7 +42,7 @@ Example
 View in [Data Contract Catalog](https://datacontract.com/examples/index.html)
 
 ```yaml
-dataContractSpecification: 1.1.0
+dataContractSpecification: 1.2.0
 id: urn:datacontract:checkout:orders-latest
 info:
   title: Orders Latest
