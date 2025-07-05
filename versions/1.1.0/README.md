@@ -1,22 +1,4 @@
-# Data Contract Specification v1.2.0
-
-## Changes in v1.2.0
-
-### Added Data Types
-
-- **`variant`**: Semi-structured data type for storing variant/semi-structured data (may not be supported by some server types)
-- **`json`**: JSON data type for storing JSON-formatted data (may not be supported by some server types)
-- **`time`**: Time data type for specifying time values without date information
-
-### Issues Addressed
-
-- [#113](https://github.com/datacontract/datacontract-specification/issues/113): Add VARIANT data type
-- [#112](https://github.com/datacontract/datacontract-specification/issues/112): Add JSON data type
-- [#123](https://github.com/datacontract/datacontract-specification/issues/123): Add TIME data type
-
-### Documentation
-
-The complete specification documentation is available in the main [README.md](../README.md) file.
+# Data Contract Specification
 
 <a href="https://github.com/datacontract/datacontract-specification">
     <img alt="Stars" src="https://img.shields.io/github/stars/datacontract/datacontract-specification" /></a>
@@ -26,27 +8,27 @@ The complete specification documentation is available in the main [README.md](..
 
 Data contracts bring data providers and data consumers together.
 
-A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers. 
-Think of an API, but for data. 
-A data contract is implemented by a data product or other data technologies, even legacy data warehouses. 
+A _data contract_ is a document that defines the structure, format, semantics, quality, and terms of use for exchanging data between a data provider and their consumers.
+Think of an API, but for data.
+A data contract is implemented by a data product or other data technologies, even legacy data warehouses.
 Data contracts can also be used for the input port to specify the expectations of data dependencies and verify given guarantees.
 
-The _data contract specification_ defines a YAML format to describe attributes of provided data sets. 
-It is data platform neutral and can be used with any data platform, such as AWS S3, Google BigQuery, Azure, Databricks, and Snowflake. 
-The data contract specification is an open initiative to define a common data contract format. 
+The _data contract specification_ defines a YAML format to describe attributes of provided data sets.
+It is data platform neutral and can be used with any data platform, such as AWS S3, Google BigQuery, Azure, Databricks, and Snowflake.
+The data contract specification is an open initiative to define a common data contract format.
 It follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) conventions.
 
-Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). 
-First, and foremost, data contracts are a communication tool to express a common understanding of how data should be structured and interpreted. 
-They make semantic and quality expectations explicit. 
-They are often created collaboratively in [workshops](./workshop.md) together with data providers and data consumers. 
+Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/).
+First, and foremost, data contracts are a communication tool to express a common understanding of how data should be structured and interpreted.
+They make semantic and quality expectations explicit.
+They are often created collaboratively in [workshops](./workshop.md) together with data providers and data consumers.
 Later in development and production, they also serve as the basis for code generation, testing, schema validations, quality checks, monitoring, access control, and computational governance policies.
 
 The specification comes along with the [Data Contract CLI](https://github.com/datacontract/datacontract-cli), an open-source tool to develop, validate, and enforce data contracts.
 
-> _Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties. 
-> The term "contract" may be somewhat misleading, but it is how it is used by the industry. 
-> The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract. 
+> _Note: The term "data contract" refers to a specification that is usually owned by the data provider and thus does not align with a "contract" in a legal sense as a mutual agreement between two parties.
+> The term "contract" may be somewhat misleading, but it is how it is used by the industry.
+> The mutual agreement between one data provider and one data consumer is the "data usage agreement" that refers to a data contract.
 > Data usage agreements have a defined lifecycle, start/end date, and help the data provider to track who accesses their data and for which purposes._
 
 Version
@@ -70,6 +52,7 @@ info:
     All orders since 2020-01-01.
     Orders with their line items are in their current state (no history included).
   owner: Checkout Team
+  status: active
   contact:
     name: John Doe (Data Product Owner)
     url: https://teams.microsoft.com/l/channel/example/checkout
@@ -286,10 +269,10 @@ Data Contract CLI
 
 The [Data Contract CLI](https://cli.datacontract.com) is a command line tool and Python library to lint, test, import and export data contracts.
 
-Here is short example how to verify that your actual dataset matches the data contract: 
+Here is short example how to verify that your actual dataset matches the data contract:
 
 ```bash
-pip3 install datacontract-cli
+pip3 install "datacontract-cli[all]"
 datacontract test https://datacontract.com/examples/orders-latest/datacontract.yaml
 ```
 
@@ -298,10 +281,10 @@ or, if you prefer Docker:
 docker run datacontract/cli test https://datacontract.com/examples/orders-latest/datacontract.yaml
 ```
 
-The Data Contract contains all required information to verify data: 
+The Data Contract contains all required information to verify data:
 
 - The _servers_ block has the connection details to the actual data set.
-- The _models_ define the syntax, formats, and constraints. 
+- The _models_ define the syntax, formats, and constraints.
 - The _quality_ defined further quality checks.
 
 The Data Contract CLI chooses the appropriate engine, formulates test cases, connects to the server, and executes the tests, based on the server type.
@@ -388,12 +371,12 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 
 The fields are dependent on the defined type.
 
-| Field       | Type                                               | Description                                                                                                                                                                                                                                                                                         |
-|-------------|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type        | `string`                                           | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `clickhouse`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
-| description | `string`                                           | An optional string describing the server.                                                                                                                                                                                                                                                           |
-| environment | `string`                                           | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                                                |
-| roles       | Array of [Server Role Object](#server-role-object) | An optional array of roles that are available and can be requested to access the server for role-based access control. E.g. separate roles for different regions or sensitive data.                                                                                                                 |
+| Field       | Type                                               | Description                                                                                                                                                                                                                                                                           |
+|-------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string`                                           | REQUIRED. The type of the data product technology that implements the data contract. Well-known server types are: `bigquery`, `s3`, `glue`, `redshift`, `azure`, `sqlserver`, `snowflake`, `databricks`, `postgres`, `oracle`, `kafka`, `pubsub`, `sftp`, `kinesis`, `trino`, `local` |
+| description | `string`                                           | An optional string describing the server.                                                                                                                                                                                                                                             |
+| environment | `string`                                           | An optional string describing the environment, e.g., prod, sit, stg.                                                                                                                                                                                                                  |
+| roles       | Array of [Server Role Object](#server-role-object) | An optional array of roles that are available and can be requested to access the server for role-based access control. E.g. separate roles for different regions or sensitive data.                                                                                                   |
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -648,17 +631,16 @@ The Model Object describes the structure and semantics of a data model, such as 
 
 The name of the data model (table name) is defined by the key that refers to this Model Object.
 
-| Field            | Type                                         | Description                                                                                                                          |
-|------------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| type             | `string`                                     | The type of the model. Examples: `table`, `view`, `object`. Default: `table`.                                                        |
-| description      | `string`                                     | An optional string describing the data model.                                                                                        |
-| title            | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
-| fields           | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
-| primaryKey       | Array of `string`                            | If the primary key is a compound key, list the field names that constitute the primary key. Alternative to field-level `primaryKey`. |
-| quality          | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on model level.                                                                                     |
-| examples         | Array of `Any`                               | Specifies example data sets for the model.                                                                                           |
-| additionalFields | `Boolean`                                    | Specify, if the model can have additional fields that are not defined in the contract. Default: `false`.                            |
-| config           | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
+| Field       | Type                                         | Description                                                                                                                          |
+|-------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| type        | `string`                                     | The type of the model. Examples: `table`, `view`, `object`. Default: `table`.                                                        |
+| description | `string`                                     | An optional string describing the data model.                                                                                        |
+| title       | `string`                                     | An optional string for the title of the data model. Especially useful if the name of the model is cryptic or contains abbreviations. |
+| fields      | Map[`string`, [Field Object](#field-object)] | The fields (e.g. columns) of the data model.                                                                                         |
+| primaryKey  | Array of `string`                            | If the primary key is a compound key, list the field names that constitute the primary key. Alternative to field-level `primaryKey`. |
+| quality     | Array of [Quality Object](#quality-object)   | Specifies the quality attributes on model level.                                                                                     |
+| examples    | Array of `Any`                               | Specifies example data sets for the model.                                                                                           |
+| config      | [Config Object](#config-object)              | Any additional key-value pairs that might be useful for further tooling.                                                             |
 
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
@@ -745,7 +727,7 @@ This object _MAY_ be extended with [Specification Extensions](#specification-ext
 ### Service Levels Object
 
 A service level is defined as an agreed-upon, measurable level of performance for provided the data.
-Data Contract Specification defines well-known service levels. 
+Data Contract Specification defines well-known service levels.
 This list can be extended with custom service levels.
 
 One can either describe each service level informally using the `description` field, or make use of the predefined fields for automation support, e.g., via the [Data Contract CLI](https://cli.datacontract.com).
@@ -836,7 +818,7 @@ Support describes the times when support will be available for contact.
 | description  | `string` | An optional string describing the support service level.                                                                                                                                                                                    |
 | time         | `string` | An optional string describing the times when support will be available for contact such as `24/7` or `business hours only`.                                                                                                                 |
 | responseTime | `string` | An optional string describing the time it takes for the support team to acknowledge a request. This does not mean the issue will be resolved immediately, but it assures users that their request has been received and will be dealt with. |
-                                                                                                                                          
+
 
 This object _MAY_ be extended with [Specification Extensions](#specification-extensions).
 
@@ -859,7 +841,7 @@ Backup specifies details about data backup procedures.
 
 The quality object defines quality attributes.
 
-Quality attributes are checks that can be applied to the data to ensure its quality. 
+Quality attributes are checks that can be applied to the data to ensure its quality.
 Data can be verified by executing these checks through a data quality engine.
 
 Quality attributes can be:
@@ -867,12 +849,12 @@ Quality attributes can be:
 - An individual SQL query that returns a single value that can be compared.
 - Engine-specific types: Pre-defined quality checks, as defined by data quality libraries. Currently, the engines `soda` and `great-expectations` are supported.
 
-A quality object can be specified on field level and on model level. 
+A quality object can be specified on field level and on model level.
 The top-level quality object is deprecated.
 
 #### Description Text
 
-A description in natural language that defines the expected quality of the data. 
+A description in natural language that defines the expected quality of the data.
 This is useful to express requirements or expectation when discussing the data contract with stakeholders.
 Later in the development process, these might be translated into an executable check (such as `sql`).
 It can also be used as a prompt to check the data with an AI engine.
@@ -942,7 +924,7 @@ models:
         mustBeLessThan: 3600
 ```
 
-SQL queries allow powerful checks for custom business logic. 
+SQL queries allow powerful checks for custom business logic.
 A SQL query should run not longer than 10 minutes.
 
 #### Custom
@@ -1102,6 +1084,7 @@ models:
             - namespace: com.example.service.checkout
               name: checkout_db.orders
               field: order_timestamp
+              transformations:
                 - type: INDIRECT
                   subtype: SORT
       customer_email_address_hash:
@@ -1176,35 +1159,32 @@ The following data types are supported for model fields and definitions:
 - Timestamp with timezone: `timestamp`, `timestamp_tz`
 - Timestamp with no timezone: `timestamp_ntz`
 - Date with no time information: `date`
-- Time with no date information: `time`
 - Array: `array`
 - Map: `map` (may not be supported by some server types)
 - Sequence of 8-bit unsigned bytes: `bytes`
 - Complex type: `object`, `record`, `struct`
-- Semi-structured data: `variant` (may not be supported by some server types)
-- JSON data: `json` (may not be supported by some server types)
 - No value: `null`
 
 ### Specification Extensions
 
 While the Data Contract Specification tries to accommodate most use cases, additional data can be added to extend the specification at certain points.
 
-A custom field can be added with any name. The value can be null, a primitive, an array or an object. 
+A custom field can be added with any name. The value can be null, a primitive, an array or an object.
 
 
 Tooling
 ---
 - [Data Contract CLI](https://github.com/datacontract/datacontract-cli) is an open-source CLI tool to help you create, develop, and maintain your data contracts.
-- [Data Contract Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data contracts. It includes a data contract catalog, a Web-Editor, and a request and approval workflow to automate access to data products for a full enterprise data marketplace.  
+- [Data Contract Manager](https://www.datamesh-manager.com/) is a commercial tool to manage data contracts. It includes a data contract catalog, a Web-Editor, and a request and approval workflow to automate access to data products for a full enterprise data marketplace.
 - [Data Contract GPT](https://gpt.datacontract.com) is a custom GPT that can help you write data contracts.
 - [Data Contract Editor](https://editor.datacontract.com) is an open-source editor for Data Contracts, including a live html preview.
 
 Code Completion
 ---
 The [JSON Schema](https://datacontract.com/datacontract.schema.json) of the current data contract specification is registered in [Schema Store](https://www.schemastore.org/), which brings code completion and syntax checks for all major IDEs.
-IntelliJ comes with a built-in YAML plugin which will show you autocompletions. 
-For VS Code we recommend to install the [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) plugin. 
-No additional configuration is required. 
+IntelliJ comes with a built-in YAML plugin which will show you autocompletions.
+For VS Code we recommend to install the [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) plugin.
+No additional configuration is required.
 
 Autocompletion is then enabled for files following these patterns:
 
