@@ -1808,27 +1808,27 @@
                 ]
               },
               "mustBe": {
-                "type": "number"
+                "type": "integer"
               },
               "mustNotBe": {
-                "type": "number"
+                "type": "integer"
               },
               "mustBeGreaterThan": {
-                "type": "number"
+                "type": "integer"
               },
               "mustBeGreaterThanOrEqualTo": {
-                "type": "number"
+                "type": "integer"
               },
               "mustBeLessThan": {
-                "type": "number"
+                "type": "integer"
               },
               "mustBeLessThanOrEqualTo": {
-                "type": "number"
+                "type": "integer"
               },
               "mustBeBetween": {
                 "type": "array",
                 "items": {
-                  "type": "number"
+                  "type": "integer"
                 },
                 "minItems": 2,
                 "maxItems": 2
@@ -1836,7 +1836,7 @@
               "mustNotBeBetween": {
                 "type": "array",
                 "items": {
-                  "type": "number"
+                  "type": "integer"
                 },
                 "minItems": 2,
                 "maxItems": 2

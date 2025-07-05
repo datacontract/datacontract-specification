@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Clear and concise explanations of syntax, semantic, and classification of business objects in a given domain.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A unique identifier for this definition. Encode the domain into the ID, separated by slashes.",
+      "examples": [
+        "checkout/order_id"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "The business name of this definition."
+    },
+    "description": {
+      "type": "string",
+      "description": "Clear and concise explanations related to the domain."
+    },
+    "type": {
+      "type": "string",
+      "description": "The logical data type."
+    },
+    "minLength": {
+      "type": "integer",
+      "description": "A value must be greater than or equal to this value. Applies only to string types."
+    },
+    "maxLength": {
+      "type": "integer",
+      "description": "A value must be less than or equal to this value. Applies only to string types."
+    },
+    "format": {
+      "type": "string",
+      "description": "Specific format requirements for the value (e.g., 'email', 'uri', 'uuid')."
+    },
+    "precision": {
+      "type": "integer",
+      "examples": [
+        38
+      ],
+      "description": "The maximum number of digits in a number. Only applies to numeric values. Defaults to 38."
+    },
+    "scale": {
+      "type": "integer",
+      "examples": [
+        0
+      ],
+      "description": "The maximum number of decimal places in a number. Only applies to numeric values. Defaults to 0."
+    },
+    "pattern": {
+      "type": "string",
+      "description": "A regular expression pattern the value must match. Applies only to string types."
+    },
+    "example": {
+      "type": "string",
+      "description": "An example value for this field.",
+      "deprecationMessage": "Use the examples field instead."
+    },
+    "examples": {
+      "type": "array",
+      "description": "A examples value for this field."
+    },
+    "pii": {
+      "type": "boolean",
+      "description": "Indicates if the field contains Personal Identifiable Information (PII)."
+    },
+    "classification": {
+      "type": "string",
+      "description": "The data class defining the sensitivity level for this field."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom metadata to provide additional context."
+    },
+    "links": {
+      "type": "object",
+      "description": "Links to external resources.",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[a-zA-Z0-9_-]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "title": "Link",
+        "description": "A URL to an external resource.",
+        "format": "uri",
+        "examples": [
+          "https://example.com"
+        ]
+      }
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

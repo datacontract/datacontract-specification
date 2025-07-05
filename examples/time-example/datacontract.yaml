@@ -1,0 +1,132 @@
+dataContractSpecification: 1.2.0
+id: urn:datacontract:example:time-demo
+info:
+  title: Time Data Type Example
+  version: 1.0.0
+  description: |
+    Example demonstrating the usage of the time data type
+    introduced in Data Contract Specification v1.2.0.
+  owner: Data Contract Team
+  contact:
+    name: Data Contract Team
+    url: https://github.com/datacontract/datacontract-specification
+servers:
+  production:
+    type: s3
+    environment: prod
+    location: s3://example-time-demo/{model}/*.json
+    format: json
+    delimiter: new_line
+    description: "Example data with time fields"
+terms:
+  usage: |
+    This is an example demonstrating the new time data type.
+    Data can be used for testing and educational purposes.
+  limitations: |
+    This is example data only and should not be used in production.
+models:
+  business_hours:
+    description: Business hours for different locations
+    type: table
+    fields:
+      location_id:
+        type: string
+        description: Unique identifier for the business location
+        required: true
+        primaryKey: true
+        examples:
+          - "loc_001"
+          - "loc_002"
+      location_name:
+        type: string
+        description: Name of the business location
+        required: true
+        examples:
+          - "Downtown Store"
+          - "Mall Branch"
+      opening_time:
+        type: time
+        description: Daily opening time for the business
+        required: true
+        examples:
+          - "09:00:00"
+          - "08:30:00"
+      closing_time:
+        type: time
+        description: Daily closing time for the business
+        required: true
+        examples:
+          - "17:00:00"
+          - "21:00:00"
+      lunch_start:
+        type: time
+        description: Start time of lunch break
+        required: false
+        examples:
+          - "12:00:00"
+          - "12:30:00"
+      lunch_end:
+        type: time
+        description: End time of lunch break
+        required: false
+        examples:
+          - "13:00:00"
+          - "13:30:00"
+    examples:
+      - |
+        location_id,location_name,opening_time,closing_time,lunch_start,lunch_end
+        "loc_001","Downtown Store","09:00:00","17:00:00","12:00:00","13:00:00"
+        "loc_002","Mall Branch","08:30:00","21:00:00","12:30:00","13:30:00"
+        "loc_003","24/7 Store","00:00:00","23:59:59",,
+  shift_schedules:
+    description: Employee shift schedules
+    type: table
+    fields:
+      employee_id:
+        type: string
+        description: Unique identifier for the employee
+        required: true
+        primaryKey: true
+        examples:
+          - "emp_001"
+          - "emp_002"
+      shift_start:
+        type: time
+        description: Start time of the employee's shift
+        required: true
+        examples:
+          - "08:00:00"
+          - "16:00:00"
+      shift_end:
+        type: time
+        description: End time of the employee's shift
+        required: true
+        examples:
+          - "16:00:00"
+          - "00:00:00"
+      break_start:
+        type: time
+        description: Start time of the break period
+        required: false
+        examples:
+          - "12:00:00"
+          - "20:00:00"
+      break_end:
+        type: time
+        description: End time of the break period
+        required: false
+        examples:
+          - "13:00:00"
+          - "21:00:00"
+    examples:
+      - |
+        employee_id,shift_start,shift_end,break_start,break_end
+        "emp_001","08:00:00","16:00:00","12:00:00","13:00:00"
+        "emp_002","16:00:00","00:00:00","20:00:00","21:00:00"
+        "emp_003","00:00:00","08:00:00",,
+tags:
+  - example
+  - time
+  - v1.2.0
+links:
+  datacontractCli: https://cli.datacontract.com 
