@@ -1,5 +1,5 @@
 dataContractSpecification: 1.2.0
-id: urn:datacontract:example:time-demo
+id: time-demo
 info:
   title: Time Data Type Example
   version: 1.0.0

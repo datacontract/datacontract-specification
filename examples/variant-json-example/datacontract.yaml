@@ -1,5 +1,5 @@
 dataContractSpecification: 1.2.0
-id: urn:datacontract:example:variant-json-demo
+id: variant-json-demo
 info:
   title: Variant and JSON Data Types Example
   version: 1.0.0

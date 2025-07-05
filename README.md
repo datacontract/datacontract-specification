@@ -43,7 +43,7 @@ View in [Data Contract Catalog](https://datacontract.com/examples/index.html)
 
 ```yaml
 dataContractSpecification: 1.2.0
-id: urn:datacontract:checkout:orders-latest
+id: orders-latest
 info:
   title: Orders Latest
   version: 2.0.0

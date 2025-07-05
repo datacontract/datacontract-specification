@@ -1,5 +1,5 @@
 dataContractSpecification: 0.9.3
-id: urn:datacontract:checkout:orders-latest-nested
+id: urn:orders-latest-nested
 info:
   title: Orders Latest (Nested)
   version: 1.0.0
