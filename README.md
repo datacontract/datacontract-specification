@@ -17,6 +17,7 @@ The _data contract specification_ defines a YAML format to describe attributes o
 It is data platform neutral and can be used with any data platform, such as AWS S3, Google BigQuery, Azure, Databricks, and Snowflake. 
 The data contract specification is an open initiative to define a common data contract format. 
 It follows [OpenAPI](https://www.openapis.org/) and [AsyncAPI](https://www.asyncapi.com/) conventions.
+If you haven't adopted a YAML format yet, we recommend to start directly with the [Open Data Contract Standard](https://github.com/bitol-io/open-data-contract-standard). It’s considered the conceptual successor and comes highly recommended.
 
 Data contracts come into play when data is exchanged between different teams or organizational units, such as in a [data mesh architecture](https://www.datamesh-architecture.com/). 
 First, and foremost, data contracts are a communication tool to express a common understanding of how data should be structured and interpreted. 
