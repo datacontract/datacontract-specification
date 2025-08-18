@@ -565,7 +565,7 @@ servers:
 | Field     | Type     | Description                                                                                                      |
 |-----------|----------|------------------------------------------------------------------------------------------------------------------|
 | type      | `string` | `sftp`                                                                                                           |
-| location  | `string` | S3 URL, starting with `sftp://`                                                                                  |
+| location  | `string` | SFTP URL, starting with `sftp://`                                                                                  |
 | format    | `string` | Format of files, such as `parquet`, `delta`, `json`, `csv`                                                       |
 | delimiter | `string` | (Only for format = `json`), how multiple json documents are delimited within one file, e.g., `new_line`, `array` |
 
