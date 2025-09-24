@@ -1818,11 +1818,11 @@
                 "type": "number"
               },
               "mustBeGreaterOrEqualTo": {
-                "type": "number",
-                "deprecated": true
+                "type": "number"
               },
               "mustBeGreaterThanOrEqualTo": {
-                "type": "number"
+                "type": "number",
+                "deprecated": true
               },
               "mustBeLessThan": {
                 "type": "number"
