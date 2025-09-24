@@ -848,16 +848,17 @@ Data can be verified by executing these checks through a data quality engine.
 
 Quality attributes can be:
 - A text in natural language that describes the quality of the data.
+- A predefined metric from the library of commonly used metrics
 - An individual SQL query that returns a single value that can be compared.
 - Engine-specific types: Pre-defined quality checks, as defined by data quality libraries. Currently, the engines `soda` and `great-expectations` are supported.
 
-A quality object can be specified on field level and on model level. 
+A quality object can be specified on the field level and on the model level. 
 The top-level quality object is deprecated.
 
 #### Description Text
 
 A description in natural language that defines the expected quality of the data. 
-This is useful to express requirements or expectation when discussing the data contract with stakeholders.
+This is useful to express requirements or expectations when discussing the data contract with stakeholders.
 Later in the development process, these might be translated into an executable check (such as `sql`).
 It can also be used as a prompt to check the data with an AI engine.
 
@@ -928,6 +929,54 @@ models:
 
 SQL queries allow powerful checks for custom business logic. 
 A SQL query should run not longer than 10 minutes.
+
+#### Library / Metrics
+
+A set of predefined metrics commonly used in data quality checks, designed to be compatible with all major data quality engines. This simplifies the work for data engineers by eliminating the need to manually write SQL queries.
+These metrics are aligned with ODCS 3.1.
+
+| Field                  | Type                  | Description                                                                      |
+|------------------------|-----------------------|----------------------------------------------------------------------------------|
+| type                   | `string`              | `library` (can be omitted, if `metric` is defined)                               |
+| metric                 | `string`              | `nullValues`, `missingValues`, `invalidValues`, `duplicateValues`, or `rowCount` |
+| arguments              | `object`              | Some metrics require additional arguments                                        |
+| description            | `string`              | A plain text describing the quality of the data.                                 |
+| mustBe                 | `integer`             | The threshold to check the return value of the query                             |
+| mustNotBe              | `integer`             | The threshold to check the return value of the query                             |
+| mustBeGreaterThan      | `integer`             | The threshold to check the return value of the query                             |
+| mustBeGreaterOrEqualTo | `integer`             | The threshold to check the return value of the query                             |
+| mustBeLessThan         | `integer`             | The threshold to check the return value of the query                             |
+| mustBeLessOrEqualTo    | `integer`             | The threshold to check the return value of the query                             |
+| mustBeBetween          | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive.  |
+| mustNotBeBetween       | array of two integers | The threshold to check the return value of the query. Boundaries are inclusive.  |
+| unit                   | `string`              | `rows` (default) or `percent`                                                    |
+
+
+Metrics:
+
+| Metric | Level | Description                                                    | Arguments                                                        | Arguments Example                                                    |
+|--------|--------|----------------------------------------------------------------|------------------------------------------------------------------|----------------------------------------------------------------------|
+| `nullValues` | Property | Counts null values in a column/field                           | None                                                             |                                                                      |
+| `missingValues` | Property | Counts values considered as missing (empty strings, N/A, etc.) | `missingValues`: Array of values considered missing              | `missingValues: [null, '', 'N/A']`                                   |
+| `invalidValues` | Property | Counts values that don't match valid criteria                  | `validValues`: Array of valid values<br>`pattern`: Regex pattern | `validValues: ['pounds', 'kg']`<br>`pattern: '^[A-Z]{2}[0-9]{2}...'` |
+| `duplicateValues` | Property | Counts duplicate values in a column                            | None                                                             |                                                                      |
+| `duplicateValues` | Schema | Counts duplicate values across multiple columns                | `properties`: Array of property names                            | `properties: ['tenant_id', 'order_id']`                              |
+| `rowCount` | Schema | Counts total number of rows in a table/object store            | None                                                             |                                                                      |
+
+
+Example:
+
+```yaml
+properties:
+  - name: email_address
+    quality:
+      - metric: missingValues
+        arguments:
+          missingValues: [null, '', 'N/A', 'n/a']
+        mustBeLessThan: 5
+        unit: percent # rows (default) or percent
+```
+
 
 #### Custom
 
