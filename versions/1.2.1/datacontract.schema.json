@@ -1817,21 +1817,13 @@
               "mustBeGreaterThan": {
                 "type": "number"
               },
-              "mustBeGreaterOrEqualTo": {
-                "type": "number"
-              },
               "mustBeGreaterThanOrEqualTo": {
-                "type": "number",
-                "deprecated": true
+                "type": "number"
               },
               "mustBeLessThan": {
                 "type": "number"
               },
               "mustBeLessThanOrEqualTo": {
-                "type": "number",
-                "deprecated": true
-              },
-              "mustBeLessOrEqualTo": {
                 "type": "number"
               },
               "mustBeBetween": {

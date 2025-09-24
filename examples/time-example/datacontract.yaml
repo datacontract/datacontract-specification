@@ -1,11 +1,11 @@
-dataContractSpecification: 1.2.0
+dataContractSpecification: 1.2.1
 id: time-demo
 info:
   title: Time Data Type Example
   version: 1.0.0
   description: |
     Example demonstrating the usage of the time data type
-    introduced in Data Contract Specification v1.2.0.
+    introduced in Data Contract Specification v1.2.1.
   owner: Data Contract Team
   contact:
     name: Data Contract Team
@@ -127,6 +127,6 @@ models:
 tags:
   - example
   - time
-  - v1.2.0
+  - v1.2.1
 links:
   datacontractCli: https://cli.datacontract.com 
