@@ -7,6 +7,7 @@
       "type": "string",
       "title": "DataContractSpecificationVersion",
       "enum": [
+        "1.2.1",
         "1.2.0",
         "1.1.0",
         "0.9.3",
@@ -1849,18 +1850,42 @@
         },
         {
           "if": {
-            "properties": {
-              "type": {
-                "const": "library"
+            "anyOf": [
+              {
+                "properties": {
+                  "type": {
+                    "const": "library"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "metric": {
+                    "type": "string"
+                  }
+                },
+                "required": ["metric"]
               }
-            }
+            ]
           },
           "then": {
             "properties": {
+              "metric": {
+                "type": "string",
+                "description": "The DataQualityLibrary metric to use for the quality check.",
+                "enum": ["nullValues", "missingValues", "invalidValues", "duplicateValues", "rowCount"]
+              },
               "rule": {
                 "type": "string",
-                "description": "Define a data quality check based on the predefined rules as per ODCS.",
-                "examples": ["duplicateCount", "validValues", "rowCount"]
+                "deprecated": true,
+                "description": "Deprecated. Use metric instead"
+              },
+              "arguments": {
+                "type": "object",
+                "description": "Additional metric-specific parameters for the quality check.",
+                "additionalProperties": {
+                  "type": ["string", "number", "boolean", "array", "object"]
+                }
               },
               "mustBe": {
                 "description": "Must be equal to the value to be valid. When using numbers, it is equivalent to '='."
@@ -1906,7 +1931,7 @@
               }
             },
             "required": [
-              "rule"
+              "metric"
             ]
           }
         },
