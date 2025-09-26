@@ -1858,30 +1858,18 @@
         },
         {
           "if": {
-            "anyOf": [
-              {
-                "properties": {
-                  "type": {
-                    "const": "library"
-                  }
-                }
-              },
-              {
-                "properties": {
-                  "metric": {
-                    "type": "string"
-                  }
-                },
-                "required": ["metric"]
+            "properties": {
+              "type": {
+                "const": "library"
               }
-            ]
+            }
           },
           "then": {
             "properties": {
               "metric": {
                 "type": "string",
                 "description": "The DataQualityLibrary metric to use for the quality check.",
-                "enum": ["nullValues", "missingValues", "invalidValues", "duplicateValues", "rowCount"]
+                "examples": ["nullValues", "missingValues", "invalidValues", "duplicateValues", "rowCount"]
               },
               "rule": {
                 "type": "string",
