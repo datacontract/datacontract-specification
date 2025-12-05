@@ -4,6 +4,11 @@
     <img alt="Stars" src="https://img.shields.io/github/stars/datacontract/datacontract-specification" /></a>
 <a href="https://datacontract.com/slack" rel="nofollow"><img src="https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&amp;style=social" alt="Slack Status" data-canonical-src="https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&amp;style=social" style="max-width: 100%;"></a>
 
+
+> **Deprecation Notice**  
+> With the release of the [Open Data Contract Standard v3.1.0](https://github.com/bitol-io/open-data-contract-standard), we deprecate the Data Contract Specification in line with our commitment to focus on a single industry standard for data contracts. We have actively contributed to the Open Data Contract Standard in the TSC and will continue to support it.<br><br>
+> If you are using Data Contract Specification, we recommend [migrating to the Open Data Contract Standard](#migration) within the next few months.
+
 ![datacontract.png](images/datacontract.png)
 
 Data contracts bring data providers and data consumers together.
@@ -265,12 +270,27 @@ links:
   datacontractCli: https://cli.datacontract.com
 ```
 
+Migration
+---
+
+To migrate from Data Contract Specification to the Open Data Contract Specification, you can use the [Data Contract CLI](https://github.com/datacontract/datacontract-cli):
+
+```
+uv tool install --python python3.11 --upgrade 'datacontract-cli[all]'
+datacontract export --format odcs --output odcs.yaml datacontract.yaml
+```
+
+You can now continue to work with _odcs.yaml_ file.
+
+
+
+
 Data Contract CLI
 ---
 
-The [Data Contract CLI](https://cli.datacontract.com) is a command line tool and Python library to lint, test, import and export data contracts.
+The [Data Contract CLI](https://cli.datacontract.com) is a command line tool and Python library to lint, test, import and export data contracts (supporting Data Contract Specification and ODCS).
 
-Here is short example how to verify that your actual dataset matches the data contract: 
+Here is a short example of how to verify that your actual dataset matches the data contract: 
 
 ```bash
 pip3 install "datacontract-cli[all]"
@@ -291,6 +311,7 @@ The Data Contract contains all required information to verify data:
 The Data Contract CLI chooses the appropriate engine, formulates test cases, connects to the server, and executes the tests, based on the server type.
 
 More information and configuration options on [cli.datacontract.com](https://cli.datacontract.com).
+
 
 
 Specification
