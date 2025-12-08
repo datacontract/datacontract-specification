@@ -7,7 +7,8 @@
 
 > **Deprecation Notice**  
 > With the release of the [Open Data Contract Standard v3.1.0](https://github.com/bitol-io/open-data-contract-standard), we deprecate the Data Contract Specification in line with our commitment to focus on a single industry standard for data contracts. We have actively contributed to the Open Data Contract Standard in the TSC and will continue to support it.<br><br>
-> If you are using Data Contract Specification, we recommend [migrating to the Open Data Contract Standard](#migration) within the next few months.
+> If you are using Data Contract Specification, we recommend [migrating to the Open Data Contract Standard](#migration) within the next few months.<br>
+> The Data Contract Specification will be supported in Data Contract CLI and Entropy Data until the end of 2026.
 
 ![datacontract.png](images/datacontract.png)
 
